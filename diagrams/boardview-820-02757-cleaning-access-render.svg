@@ -1,0 +1,372 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="1000" height="700">
+  <defs>
+    <!-- Board gradient -->
+    <linearGradient id="boardGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a3a1a"/>
+      <stop offset="100%" stop-color="#0f2e0f"/>
+    </linearGradient>
+    <!-- SoC heat spreader -->
+    <linearGradient id="socGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="50%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#3a3a3a"/>
+    </linearGradient>
+    <!-- Highlight glow -->
+    <filter id="glowGreen">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#44cc44" flood-opacity="0.4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowBlue">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#4488cc" flood-opacity="0.4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowAmber">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#ccaa44" flood-opacity="0.3"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowW" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#e0e0e0"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#44cc44"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: 'SF Mono','Menlo','Consolas',monospace; fill: #e0e0e0; }
+    .title { font-size: 14px; font-weight: bold; fill: #ffffff; }
+    .subtitle { font-size: 10px; fill: #aabbcc; }
+    .section { font-size: 10px; font-weight: bold; }
+    .label { font-size: 8px; }
+    .small { font-size: 7px; fill: #999; }
+    .step-num { font-size: 14px; font-weight: bold; fill: #ffffff; }
+    .step-txt { font-size: 8px; fill: #ccddee; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1000" height="700" fill="#1a1a2e" rx="4"/>
+
+  <!-- Title -->
+  <text x="500" y="24" text-anchor="middle" class="title">820-02757 — CLEANING ACCESS &amp; SERVICEABILITY OVERVIEW</text>
+  <text x="500" y="40" text-anchor="middle" class="subtitle">MacBook Pro Bottom View (Case Removed) · Connector Zone Assessment · Repair Workflow</text>
+  <line x1="20" y1="48" x2="980" y2="48" stroke="#334455" stroke-width="1"/>
+
+  <!-- ==================== LOGIC BOARD (bottom view) ==================== -->
+  <g>
+    <!-- Board outline -->
+    <rect x="40" y="60" width="580" height="430" rx="8" fill="url(#boardGrad)" stroke="#3a6a3a" stroke-width="2"/>
+
+    <!-- PCB texture grid -->
+    <g opacity="0.04" stroke="#44aa44" stroke-width="0.5">
+      <line x1="40" y1="100" x2="620" y2="100"/>
+      <line x1="40" y1="140" x2="620" y2="140"/>
+      <line x1="40" y1="180" x2="620" y2="180"/>
+      <line x1="40" y1="220" x2="620" y2="220"/>
+      <line x1="40" y1="260" x2="620" y2="260"/>
+      <line x1="40" y1="300" x2="620" y2="300"/>
+      <line x1="40" y1="340" x2="620" y2="340"/>
+      <line x1="40" y1="380" x2="620" y2="380"/>
+      <line x1="40" y1="420" x2="620" y2="420"/>
+      <line x1="40" y1="460" x2="620" y2="460"/>
+      <line x1="100" y1="60" x2="100" y2="490"/>
+      <line x1="160" y1="60" x2="160" y2="490"/>
+      <line x1="220" y1="60" x2="220" y2="490"/>
+      <line x1="280" y1="60" x2="280" y2="490"/>
+      <line x1="340" y1="60" x2="340" y2="490"/>
+      <line x1="400" y1="60" x2="400" y2="490"/>
+      <line x1="460" y1="60" x2="460" y2="490"/>
+      <line x1="520" y1="60" x2="520" y2="490"/>
+      <line x1="580" y1="60" x2="580" y2="490"/>
+    </g>
+
+    <!-- Board label -->
+    <text x="330" y="80" text-anchor="middle" font-size="9" fill="#3a6a3a" font-family="'SF Mono','Menlo','Consolas',monospace">820-02757-06 LOGIC BOARD (BOTTOM VIEW)</text>
+
+    <!-- ==================== U0600 M3 Pro SoC (center) ==================== -->
+    <g>
+      <rect x="260" y="155" width="200" height="175" rx="4" fill="url(#socGrad)" stroke="#666" stroke-width="1.5"/>
+      <!-- Die outline -->
+      <rect x="285" y="180" width="150" height="125" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <!-- BGA dots pattern -->
+      <g fill="#444" opacity="0.6">
+        <circle cx="300" cy="200" r="3"/><circle cx="315" cy="200" r="3"/><circle cx="330" cy="200" r="3"/>
+        <circle cx="345" cy="200" r="3"/><circle cx="360" cy="200" r="3"/><circle cx="375" cy="200" r="3"/>
+        <circle cx="390" cy="200" r="3"/><circle cx="405" cy="200" r="3"/><circle cx="420" cy="200" r="3"/>
+        <circle cx="300" cy="215" r="3"/><circle cx="315" cy="215" r="3"/><circle cx="330" cy="215" r="3"/>
+        <circle cx="345" cy="215" r="3"/><circle cx="360" cy="215" r="3"/><circle cx="375" cy="215" r="3"/>
+        <circle cx="390" cy="215" r="3"/><circle cx="405" cy="215" r="3"/><circle cx="420" cy="215" r="3"/>
+        <circle cx="300" cy="230" r="3"/><circle cx="315" cy="230" r="3"/><circle cx="330" cy="230" r="3"/>
+        <circle cx="345" cy="230" r="3"/><circle cx="360" cy="230" r="3"/><circle cx="375" cy="230" r="3"/>
+        <circle cx="390" cy="230" r="3"/><circle cx="405" cy="230" r="3"/><circle cx="420" cy="230" r="3"/>
+        <circle cx="300" cy="245" r="3"/><circle cx="315" cy="245" r="3"/><circle cx="330" cy="245" r="3"/>
+        <circle cx="345" cy="245" r="3"/><circle cx="360" cy="245" r="3"/><circle cx="375" cy="245" r="3"/>
+        <circle cx="390" cy="245" r="3"/><circle cx="405" cy="245" r="3"/><circle cx="420" cy="245" r="3"/>
+        <circle cx="300" cy="260" r="3"/><circle cx="315" cy="260" r="3"/><circle cx="330" cy="260" r="3"/>
+        <circle cx="345" cy="260" r="3"/><circle cx="360" cy="260" r="3"/><circle cx="375" cy="260" r="3"/>
+        <circle cx="390" cy="260" r="3"/><circle cx="405" cy="260" r="3"/><circle cx="420" cy="260" r="3"/>
+        <circle cx="300" cy="275" r="3"/><circle cx="315" cy="275" r="3"/><circle cx="330" cy="275" r="3"/>
+        <circle cx="345" cy="275" r="3"/><circle cx="360" cy="275" r="3"/><circle cx="375" cy="275" r="3"/>
+        <circle cx="390" cy="275" r="3"/><circle cx="405" cy="275" r="3"/><circle cx="420" cy="275" r="3"/>
+        <circle cx="300" cy="290" r="3"/><circle cx="315" cy="290" r="3"/><circle cx="330" cy="290" r="3"/>
+        <circle cx="345" cy="290" r="3"/><circle cx="360" cy="290" r="3"/><circle cx="375" cy="290" r="3"/>
+        <circle cx="390" cy="290" r="3"/><circle cx="405" cy="290" r="3"/><circle cx="420" cy="290" r="3"/>
+      </g>
+      <text x="360" y="170" text-anchor="middle" font-size="9" fill="#aaa" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">U0600 · M3 Pro SoC</text>
+      <text x="360" y="318" text-anchor="middle" font-size="7" fill="#777" font-family="'SF Mono','Menlo','Consolas',monospace">X=4400–6200 · Y=2800–4400</text>
+      <!-- Pin 1 marker -->
+      <circle cx="268" cy="163" r="4" fill="none" stroke="#888" stroke-width="0.8"/>
+    </g>
+
+    <!-- ==================== Misc board components ==================== -->
+    <!-- RAM (near SoC) -->
+    <rect x="475" y="180" width="80" height="50" rx="3" fill="#2a2a2a" stroke="#444" stroke-width="0.8"/>
+    <text x="515" y="208" text-anchor="middle" font-size="7" fill="#777" font-family="'SF Mono','Menlo','Consolas',monospace">LPDDR5</text>
+    <text x="515" y="218" text-anchor="middle" font-size="6" fill="#555" font-family="'SF Mono','Menlo','Consolas',monospace">Unified Memory</text>
+
+    <!-- NAND -->
+    <rect x="475" y="240" width="80" height="40" rx="3" fill="#2a2a2a" stroke="#444" stroke-width="0.8"/>
+    <text x="515" y="264" text-anchor="middle" font-size="7" fill="#777" font-family="'SF Mono','Menlo','Consolas',monospace">NAND Flash</text>
+
+    <!-- Power management area -->
+    <rect x="75" y="160" width="60" height="40" rx="2" fill="#222" stroke="#444" stroke-width="0.5"/>
+    <text x="105" y="183" text-anchor="middle" font-size="6" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">PMU</text>
+
+    <!-- USB-C ports (left side) -->
+    <rect x="42" y="200" width="20" height="35" rx="3" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="75" y="220" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">USB-C</text>
+    <rect x="42" y="245" width="20" height="35" rx="3" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="75" y="265" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">USB-C</text>
+    <rect x="42" y="290" width="20" height="35" rx="3" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="75" y="310" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">USB-C</text>
+
+    <!-- MagSafe -->
+    <rect x="42" y="100" width="20" height="30" rx="3" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="75" y="118" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">MagSafe</text>
+
+    <!-- HDMI -->
+    <rect x="598" y="200" width="20" height="28" rx="2" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="585" y="218" text-anchor="end" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">HDMI</text>
+
+    <!-- SD card slot -->
+    <rect x="598" y="250" width="20" height="35" rx="2" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="585" y="270" text-anchor="end" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">SD</text>
+
+    <!-- Audio jack -->
+    <rect x="598" y="300" width="20" height="20" rx="10" fill="#333" stroke="#555" stroke-width="0.8"/>
+    <text x="585" y="313" text-anchor="end" font-size="5.5" fill="#666" font-family="'SF Mono','Menlo','Consolas',monospace">3.5mm</text>
+
+    <!-- Battery outline (large bottom area) -->
+    <rect x="80" y="340" width="500" height="80" rx="5" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="330" y="385" text-anchor="middle" font-size="9" fill="#2a5a2a" font-family="'SF Mono','Menlo','Consolas',monospace">BATTERY (6-cell · 70 Wh)</text>
+
+    <!-- ==================== JT400 (IPD Connector) — BLUE ZONE ==================== -->
+    <g filter="url(#glowBlue)">
+      <rect x="200" y="388" width="30" height="55" rx="2" fill="#1a2a4a" stroke="#4488cc" stroke-width="1.5"/>
+    </g>
+    <rect x="204" y="392" width="22" height="47" rx="1" fill="#2a2a2a" stroke="#3366aa" stroke-width="0.5"/>
+    <text x="215" y="408" text-anchor="middle" font-size="5" fill="#4488cc" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">JT</text>
+    <text x="215" y="416" text-anchor="middle" font-size="5" fill="#4488cc" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">400</text>
+    <!-- Status indicator -->
+    <circle cx="215" cy="428" r="4" fill="#4488cc" opacity="0.3"/>
+    <circle cx="215" cy="428" r="2" fill="#4488cc"/>
+    <text x="238" y="402" font-size="6" fill="#4488cc" font-family="'SF Mono','Menlo','Consolas',monospace">IPD · 50-pin</text>
+    <text x="238" y="411" font-size="6" fill="#4488cc" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">NOT AFFECTED ○</text>
+    <text x="238" y="420" font-size="5.5" fill="#668899" font-family="'SF Mono','Menlo','Consolas',monospace">X=4104–4225</text>
+    <text x="238" y="428" font-size="5.5" fill="#668899" font-family="'SF Mono','Menlo','Consolas',monospace">Y=5571–5949</text>
+
+    <!-- ==================== JT200 (Keyboard FPC) — GREEN ZONE (primary target) ==================== -->
+    <g filter="url(#glowGreen)">
+      <rect x="200" y="445" width="30" height="80" rx="2" fill="#1a3a1a" stroke="#44cc44" stroke-width="2"/>
+    </g>
+    <rect x="204" y="449" width="22" height="72" rx="1" fill="#2a2a2a" stroke="#33aa33" stroke-width="0.5"/>
+    <!-- Pin dots -->
+    <g fill="#44cc44" opacity="0.5">
+      <circle cx="210" cy="456" r="1.2"/>
+      <circle cx="210" cy="462" r="1.2"/>
+      <circle cx="210" cy="468" r="1.2"/>
+      <circle cx="210" cy="474" r="1.2"/>
+      <circle cx="210" cy="480" r="1.2"/>
+      <circle cx="210" cy="486" r="1.2"/>
+      <circle cx="210" cy="492" r="1.2"/>
+      <circle cx="210" cy="498" r="1.2"/>
+      <circle cx="210" cy="504" r="1.2"/>
+      <circle cx="210" cy="510" r="1.2"/>
+    </g>
+    <text x="215" y="470" text-anchor="middle" font-size="5" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">JT</text>
+    <text x="215" y="478" text-anchor="middle" font-size="5" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">200</text>
+    <!-- Status indicator -->
+    <circle cx="215" cy="500" r="5" fill="#44cc44" opacity="0.2"/>
+    <circle cx="215" cy="500" r="3" fill="#44cc44" opacity="0.5"/>
+    <circle cx="215" cy="500" r="1.5" fill="#44cc44"/>
+    <text x="238" y="456" font-size="6" fill="#44cc44" font-family="'SF Mono','Menlo','Consolas',monospace">KEYBOARD FPC · 36-pin ZIF</text>
+    <text x="238" y="466" font-size="7" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">★ PRIMARY CLEAN TARGET</text>
+    <text x="238" y="476" font-size="5.5" fill="#339933" font-family="'SF Mono','Menlo','Consolas',monospace">X=4119–4253 · Y=6111–6806</text>
+
+    <!-- ==================== JT220 (Backlight) — GREEN ZONE (working) ==================== -->
+    <g filter="url(#glowGreen)">
+      <rect x="200" y="528" width="30" height="35" rx="2" fill="#1a3a1a" stroke="#44cc44" stroke-width="1.5"/>
+    </g>
+    <rect x="204" y="532" width="22" height="27" rx="1" fill="#2a2a2a" stroke="#33aa33" stroke-width="0.5"/>
+    <text x="215" y="545" text-anchor="middle" font-size="5" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">JT</text>
+    <text x="215" y="553" text-anchor="middle" font-size="5" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">220</text>
+    <circle cx="215" cy="527" r="3" fill="#44cc44" opacity="0.3"/>
+    <text x="238" y="540" font-size="6" fill="#44cc44" font-family="'SF Mono','Menlo','Consolas',monospace">BACKLIGHT · 12-pin</text>
+    <text x="238" y="549" font-size="6" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">WORKING ✓</text>
+    <text x="238" y="558" font-size="5.5" fill="#339933" font-family="'SF Mono','Menlo','Consolas',monospace">X=4119–4253 · Y=6899–7121</text>
+
+    <!-- ==================== IPA SWAB TOOL at JT200 ==================== -->
+    <g>
+      <!-- Swab handle -->
+      <line x1="130" y1="420" x2="195" y2="475" stroke="#e0e0e0" stroke-width="4" stroke-linecap="round"/>
+      <line x1="130" y1="420" x2="195" y2="475" stroke="#cccccc" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Swab tip (cotton) -->
+      <ellipse cx="126" cy="416" rx="10" ry="7" fill="#f5f5f5" opacity="0.8" transform="rotate(-40,126,416)"/>
+      <ellipse cx="126" cy="416" rx="7" ry="5" fill="#ffffff" opacity="0.5" transform="rotate(-40,126,416)"/>
+      <!-- IPA droplet indication -->
+      <circle cx="120" cy="408" r="2" fill="#aaddff" opacity="0.5"/>
+      <circle cx="132" cy="412" r="1.5" fill="#aaddff" opacity="0.4"/>
+      <!-- Label -->
+      <rect x="68" y="390" width="55" height="20" rx="3" fill="#1a2e1a" stroke="#44cc44" stroke-width="1"/>
+      <text x="95" y="403" text-anchor="middle" font-size="7" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">IPA SWAB</text>
+      <!-- Dashed line to connector -->
+      <line x1="195" y1="475" x2="200" y2="478" stroke="#44cc44" stroke-width="1" stroke-dasharray="2,1"/>
+    </g>
+
+    <!-- Connector spacing annotations -->
+    <g opacity="0.5">
+      <line x1="195" y1="443" x2="195" y2="445" stroke="#888" stroke-width="0.5"/>
+      <text x="186" y="444" text-anchor="end" font-size="5" fill="#888" font-family="'SF Mono','Menlo','Consolas',monospace">162 units</text>
+      <line x1="195" y1="525" x2="195" y2="528" stroke="#888" stroke-width="0.5"/>
+      <text x="186" y="527" text-anchor="end" font-size="5" fill="#888" font-family="'SF Mono','Menlo','Consolas',monospace">93 units (~2mm)</text>
+    </g>
+  </g>
+
+  <!-- ==================== CLEANING WORKFLOW (right panel) ==================== -->
+  <g>
+    <rect x="640" y="60" width="345" height="280" rx="6" fill="#111122" stroke="#334455" stroke-width="1"/>
+    <text x="812" y="82" text-anchor="middle" class="section" fill="#ffffff" font-size="11">CLEANING WORKFLOW — JT200</text>
+    <line x1="655" y1="88" x2="970" y2="88" stroke="#334455" stroke-width="0.5"/>
+
+    <!-- Step 1 -->
+    <g>
+      <circle cx="670" cy="112" r="12" fill="#44cc44" opacity="0.15" stroke="#44cc44" stroke-width="1.5"/>
+      <text x="670" y="117" text-anchor="middle" class="step-num" fill="#44cc44">1</text>
+      <text x="690" y="108" class="step-txt" font-weight="bold">Open ZIF latch</text>
+      <text x="690" y="120" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Use spudger to lift latch tab gently.</text>
+      <text x="690" y="130" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Hinge rotates ~90° upward.</text>
+    </g>
+    <!-- Arrow 1→2 -->
+    <line x1="670" y1="126" x2="670" y2="142" stroke="#334455" stroke-width="1" stroke-dasharray="2,2"/>
+
+    <!-- Step 2 -->
+    <g>
+      <circle cx="670" cy="155" r="12" fill="#44cc44" opacity="0.15" stroke="#44cc44" stroke-width="1.5"/>
+      <text x="670" y="160" text-anchor="middle" class="step-num" fill="#44cc44">2</text>
+      <text x="690" y="151" class="step-txt" font-weight="bold">Remove FPC cable</text>
+      <text x="690" y="163" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Slide cable straight out of connector.</text>
+      <text x="690" y="173" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Inspect pads for corrosion/residue.</text>
+    </g>
+    <!-- Arrow 2→3 -->
+    <line x1="670" y1="169" x2="670" y2="185" stroke="#334455" stroke-width="1" stroke-dasharray="2,2"/>
+
+    <!-- Step 3 -->
+    <g>
+      <circle cx="670" cy="198" r="12" fill="#ccaa44" opacity="0.15" stroke="#ccaa44" stroke-width="1.5"/>
+      <text x="670" y="203" text-anchor="middle" class="step-num" fill="#ccaa44">3</text>
+      <text x="690" y="194" class="step-txt" font-weight="bold">Clean pads with IPA</text>
+      <text x="690" y="206" font-size="7" fill="#aa9944" font-family="'SF Mono','Menlo','Consolas',monospace">99% isopropyl on lint-free swab.</text>
+      <text x="690" y="216" font-size="7" fill="#aa9944" font-family="'SF Mono','Menlo','Consolas',monospace">Brush along pin row direction.</text>
+      <text x="690" y="226" font-size="7" fill="#aa9944" font-family="'SF Mono','Menlo','Consolas',monospace">Allow 30s to evaporate fully.</text>
+    </g>
+    <!-- Arrow 3→4 -->
+    <line x1="670" y1="216" x2="670" y2="238" stroke="#334455" stroke-width="1" stroke-dasharray="2,2"/>
+
+    <!-- Step 4 -->
+    <g>
+      <circle cx="670" cy="252" r="12" fill="#44cc44" opacity="0.15" stroke="#44cc44" stroke-width="1.5"/>
+      <text x="670" y="257" text-anchor="middle" class="step-num" fill="#44cc44">4</text>
+      <text x="690" y="248" class="step-txt" font-weight="bold">Reseat FPC cable</text>
+      <text x="690" y="260" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Slide cable fully into connector.</text>
+      <text x="690" y="270" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Close ZIF latch. Verify keyboard.</text>
+    </g>
+
+    <!-- Estimated time -->
+    <rect x="655" y="290" width="315" height="20" rx="3" fill="#1a2e1a" stroke="#339933" stroke-width="0.5"/>
+    <text x="812" y="304" text-anchor="middle" font-size="8" fill="#44cc44" font-family="'SF Mono','Menlo','Consolas',monospace">⏱ Estimated time: 10–15 minutes (manual clean)</text>
+
+    <!-- Separator -->
+    <rect x="655" y="316" width="315" height="1" fill="#334455"/>
+
+    <!-- Tool icon -->
+    <text x="670" y="332" font-size="7" fill="#aaa" font-family="'SF Mono','Menlo','Consolas',monospace">Required: Spudger, 99% IPA, lint-free swabs, magnification</text>
+  </g>
+
+  <!-- ==================== ZONE ACCESS METHODS ==================== -->
+  <g>
+    <rect x="640" y="350" width="345" height="95" rx="6" fill="#111122" stroke="#334455" stroke-width="1"/>
+    <text x="812" y="370" text-anchor="middle" class="section" fill="#ffffff" font-size="10">ZONE ACCESS METHODS</text>
+    <line x1="655" y1="376" x2="970" y2="376" stroke="#334455" stroke-width="0.5"/>
+
+    <!-- JT200 zone -->
+    <circle cx="670" cy="395" r="5" fill="#44cc44" opacity="0.3"/>
+    <circle cx="670" cy="395" r="3" fill="#44cc44"/>
+    <text x="682" y="392" font-size="8" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">JT200 Connector Pads</text>
+    <text x="682" y="403" font-size="7" fill="#88aa88" font-family="'SF Mono','Menlo','Consolas',monospace">Manual clean (10–15 min) · IPA swab + brush</text>
+
+    <!-- FPC cable zone -->
+    <circle cx="670" cy="422" r="5" fill="#ccaa44" opacity="0.3"/>
+    <circle cx="670" cy="422" r="3" fill="#ccaa44"/>
+    <text x="682" y="419" font-size="8" fill="#ccaa44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">FPC Cable (internal traces)</text>
+    <text x="682" y="430" font-size="7" fill="#aa9944" font-family="'SF Mono','Menlo','Consolas',monospace">Ultrasonic bath needed · 40 kHz, 5–10 min cycle</text>
+  </g>
+
+  <!-- ==================== "REACHABLE = CLEANABLE" CALLOUT ==================== -->
+  <g>
+    <rect x="640" y="455" width="345" height="100" rx="6" fill="#0a1a0a" stroke="#44cc44" stroke-width="2"/>
+    <!-- Accent bar -->
+    <rect x="640" y="455" width="6" height="100" rx="3" fill="#44cc44"/>
+
+    <text x="660" y="476" font-size="12" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">REACHABLE = CLEANABLE</text>
+    <line x1="660" y1="482" x2="960" y2="482" stroke="#44cc44" stroke-width="0.5" opacity="0.3"/>
+
+    <text x="660" y="498" font-size="8" fill="#88cc88" font-family="'SF Mono','Menlo','Consolas',monospace">ZIF connectors are designed for disconnect/reconnect</text>
+    <text x="660" y="512" font-size="8" fill="#88cc88" font-family="'SF Mono','Menlo','Consolas',monospace">cycles. The FPC cable slides out cleanly, exposing</text>
+    <text x="660" y="526" font-size="8" fill="#88cc88" font-family="'SF Mono','Menlo','Consolas',monospace">all 36 pads for direct IPA cleaning. No soldering</text>
+    <text x="660" y="540" font-size="8" fill="#88cc88" font-family="'SF Mono','Menlo','Consolas',monospace">or microsoldering required for this repair step.</text>
+  </g>
+
+  <!-- ==================== COMPONENT LEGEND ==================== -->
+  <g>
+    <rect x="640" y="565" width="345" height="80" rx="6" fill="#111122" stroke="#334455" stroke-width="1"/>
+    <text x="812" y="583" text-anchor="middle" class="section" fill="#ffffff" font-size="10">ZONE STATUS LEGEND</text>
+    <line x1="655" y1="589" x2="970" y2="589" stroke="#334455" stroke-width="0.5"/>
+
+    <rect x="660" y="598" width="14" height="8" rx="2" fill="#44cc44" opacity="0.6" stroke="#44cc44" stroke-width="0.5"/>
+    <text x="680" y="606" font-size="8" fill="#44cc44" font-family="'SF Mono','Menlo','Consolas',monospace">GO — Accessible, cleanable (JT200, JT220)</text>
+
+    <rect x="660" y="612" width="14" height="8" rx="2" fill="#4488cc" opacity="0.6" stroke="#4488cc" stroke-width="0.5"/>
+    <text x="680" y="620" font-size="8" fill="#4488cc" font-family="'SF Mono','Menlo','Consolas',monospace">NOT AFFECTED — No contamination (JT400)</text>
+
+    <rect x="660" y="626" width="14" height="8" rx="2" fill="#ccaa44" opacity="0.6" stroke="#ccaa44" stroke-width="0.5"/>
+    <text x="680" y="634" font-size="8" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">CAUTION — Requires ultrasonic (FPC internal)</text>
+  </g>
+
+  <!-- ==================== BOARD COORDINATE REFS ==================== -->
+  <g opacity="0.5">
+    <text x="45" y="495" font-size="6" fill="#3a6a3a" font-family="'SF Mono','Menlo','Consolas',monospace">X=0</text>
+    <text x="605" y="495" text-anchor="end" font-size="6" fill="#3a6a3a" font-family="'SF Mono','Menlo','Consolas',monospace">X≈8800</text>
+    <text x="625" y="67" font-size="6" fill="#3a6a3a" font-family="'SF Mono','Menlo','Consolas',monospace">Y=0</text>
+    <text x="625" y="490" font-size="6" fill="#3a6a3a" font-family="'SF Mono','Menlo','Consolas',monospace">Y≈8800</text>
+  </g>
+
+  <!-- Footer -->
+  <line x1="20" y1="660" x2="980" y2="660" stroke="#334455" stroke-width="1"/>
+  <text x="500" y="676" text-anchor="middle" font-size="8" fill="#556677" font-family="'SF Mono','Menlo','Consolas',monospace">820-02757-06 Logic Board · Cleaning Access Render · Cola Spill Incident Documentation</text>
+  <text x="500" y="690" text-anchor="middle" font-size="7" fill="#445566" font-family="'SF Mono','Menlo','Consolas',monospace">Component positions approximate from decoded boardview · Bottom-up view orientation</text>
+</svg>

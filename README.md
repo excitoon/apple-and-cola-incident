@@ -418,7 +418,7 @@ For the MacBook Pro 14" A2918 (board **820-02757**, design **051-07754**), the f
 | LogiWiki board number index | https://logi.wiki/index.php/Board_Number_by_A_Number | Cross-reference A-number → board number |
 | iFixit teardown (14" M3) | https://www.ifixit.com/Teardown/MacBook+Pro+14-Inch+2023+Teardown/169486 | High-res teardown photos of A2918 internals |
 
-**Note:** The BRD boardview files require a viewer such as **OpenBoardView** (free, open-source) or **FlexBV** to navigate the component layout interactively. The PDF schematics show the full circuit including the keyboard controller IC (typically labeled as a "U"-prefixed component near the keyboard ZIF connector), SPI bus connections to the M3 Pro SoC, and individual column/row signal names.
+**Note:** The committed `.brd` file is a **boardview/layout** file, so it is useful for interactive placement lookup, connector neighborhoods, and reference-designator context in a viewer such as **OpenBoardView** (free, open-source) or **FlexBV**. A separate **PDF schematic** is still needed for a directly readable full circuit narrative with named nets, keyboard matrix signal names, and explicit controller-to-SoC connectivity.
 
 ### 8. Diagrams (uploaded as files)
 
@@ -443,6 +443,7 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Boardview 820-02757 — capture 1 | | [PNG](diagrams/boardview-820-02757-capture1.png) | Original PCSchematics screenshot from archive |
 | Boardview 820-02757 — capture 2 | | [PNG](diagrams/boardview-820-02757-capture2.png) | Original PCSchematics screenshot from archive |
 | Board 820-02757 — high-quality render | [SVG](diagrams/boardview-820-02757-render.svg) | | Clean vector board render for presentation/annotation use, derived from the boardview overview |
+| Board 820-02757 — illustration zones | [SVG](diagrams/boardview-820-02757-illustration-zones.svg) | | Annotated boardview-derived map of the major board neighborhoods that can be illustrated reliably from the committed board data |
 | Boardview 820-02757 data file | | [BRD](diagrams/820-02757-06-boardview.brd) | OpenBoardView-compatible boardview data file for board 820-02757-06 |
 
 ### 9. Boardview Screenshots (Board 820-02757)
@@ -455,9 +456,15 @@ It also does **not materially change the hypothesis ranking / chance estimates**
 
 Likewise, the boardview does **not by itself explain the unidirectional key-mapping behavior**. That one-way behavior is still better explained by a **near-threshold resistive bridge** in the keyboard matrix / FPC path together with **scan timing** and **asymmetric residue geometry**, not by anything visible in the logic-board overview alone. To change that conclusion, we would need more specific keyboard-matrix or top-case trace data, not just the main logic-board boardview.
 
+From the committed `.brd` boardview file, we **can** reliably derive **layout-based illustrations** (board outline, major packages, connector neighborhoods, and incident-relevant regions). We **cannot** treat the `.brd` file alone as a clean human-readable schematic source for the full signal story; that still requires the corresponding PDF schematic or explicit netlist data.
+
 This repository now also includes a **high-quality vector board render** derived from the boardview material for documentation and future annotation work:
 
 ![Board 820-02757 — high-quality vector render](diagrams/boardview-820-02757-render.svg)
+
+And an additional **boardview-derived illustration map** showing the main zones that can be expanded into further diagrams:
+
+![Board 820-02757 — illustration zones](diagrams/boardview-820-02757-illustration-zones.svg)
 
 ![Board 820-02757 — full board overview](diagrams/boardview-820-02757-overview.png)
 

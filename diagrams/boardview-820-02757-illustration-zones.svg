@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 920" font-family="monospace" font-size="12">
+  <title>Board 820-02757 — Illustration Zones Derived from Boardview</title>
+  <rect width="1400" height="920" fill="#fafafa" stroke="#ccc"/>
+
+  <text x="700" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Board 820-02757 — Illustration Zones Derived from Boardview</text>
+  <text x="700" y="48" text-anchor="middle" font-size="11" fill="#666">What the committed boardview data lets us illustrate reliably vs. what still needs the separate PDF schematic</text>
+
+  <!-- Main board panel -->
+  <rect x="40" y="80" width="980" height="560" rx="10" fill="#111" stroke="#2b2b2b" stroke-width="2"/>
+
+  <!-- Board outline -->
+  <path d="M78 118
+           Q60 118 60 136
+           L60 174
+           L72 174
+           L72 582
+           L60 582
+           L60 618
+           Q60 636 78 636
+           L120 636
+           L140 622
+           L140 430
+           Q140 402 166 402
+           L188 402
+           Q132 340 170 266
+           Q220 176 324 176
+           L342 176
+           Q372 176 390 198
+           Q432 250 458 346
+           L458 564
+           L842 564
+           L842 546
+           L930 546
+           L930 522
+           L986 522
+           L986 602
+           L1122 602
+           L1122 632
+           L1244 632
+           Q1266 632 1280 620
+           L1330 620
+           Q1346 620 1346 604
+           L1346 150
+           Q1346 122 1318 122
+           L1238 122
+           L1238 154
+           L1124 154
+           L1124 122
+           L830 122
+           L830 136
+           L700 136
+           L700 124
+           L552 124
+           L552 136
+           L440 136
+           Q430 126 420 126
+           L404 126
+           Q394 126 388 136
+           L78 136
+           Z"
+        fill="none" stroke="#00c853" stroke-width="3"/>
+
+  <!-- Simplified packages -->
+  <rect x="602" y="316" width="118" height="118" fill="#8e8e8e" stroke="#cfcfcf" stroke-width="2"/>
+  <text x="661" y="378" text-anchor="middle" font-size="24" fill="#e8e8e8">U0600</text>
+  <rect x="826" y="360" width="54" height="54" fill="#9d9d9d" stroke="#d0d0d0"/>
+  <rect x="792" y="334" width="28" height="28" fill="#7d7d7d" stroke="#d0d0d0"/>
+  <rect x="936" y="448" width="48" height="70" fill="#8e8e8e" stroke="#d0d0d0"/>
+  <rect x="1004" y="448" width="48" height="70" fill="#8e8e8e" stroke="#d0d0d0"/>
+  <rect x="424" y="254" width="58" height="58" fill="#8a8a8a" stroke="#d0d0d0"/>
+  <rect x="98" y="434" width="42" height="42" fill="#8a8a8a" stroke="#d0d0d0"/>
+  <rect x="1138" y="482" width="42" height="42" fill="#8a8a8a" stroke="#d0d0d0"/>
+
+  <g fill="#d8d8d8">
+    <rect x="468" y="272" width="12" height="4"/>
+    <rect x="468" y="280" width="12" height="4"/>
+    <rect x="468" y="288" width="12" height="4"/>
+    <rect x="488" y="298" width="14" height="4"/>
+    <rect x="514" y="298" width="14" height="4"/>
+    <rect x="548" y="322" width="16" height="5"/>
+    <rect x="548" y="334" width="16" height="5"/>
+    <rect x="548" y="346" width="16" height="5"/>
+    <rect x="744" y="304" width="18" height="5"/>
+    <rect x="744" y="316" width="18" height="5"/>
+    <rect x="744" y="328" width="18" height="5"/>
+    <rect x="900" y="334" width="20" height="5"/>
+    <rect x="900" y="348" width="20" height="5"/>
+    <rect x="900" y="362" width="20" height="5"/>
+    <rect x="1082" y="286" width="20" height="5"/>
+    <rect x="1082" y="300" width="20" height="5"/>
+    <rect x="1082" y="314" width="20" height="5"/>
+    <rect x="1178" y="218" width="18" height="5"/>
+    <rect x="1178" y="232" width="18" height="5"/>
+    <rect x="1178" y="246" width="18" height="5"/>
+  </g>
+
+  <text x="1198" y="420" transform="rotate(90 1198 420)" font-size="20" fill="#79c879" opacity="0.8">JX600</text>
+  <text x="624" y="126" font-size="18" fill="#dfdfdf">J1200</text>
+  <text x="101" y="548" font-size="16" fill="#dfdfdf">JP600</text>
+  <text x="826" y="602" font-size="14" fill="#dfdfdf">JP9000</text>
+
+  <!-- Highlight zones -->
+  <rect x="560" y="284" width="202" height="182" rx="10" fill="#ffb74d" opacity="0.22" stroke="#ef6c00" stroke-width="2.5"/>
+  <rect x="900" y="430" width="180" height="116" rx="10" fill="#64b5f6" opacity="0.22" stroke="#1565c0" stroke-width="2.5"/>
+  <rect x="1098" y="146" width="178" height="430" rx="10" fill="#ba68c8" opacity="0.18" stroke="#6a1b9a" stroke-width="2.5"/>
+  <rect x="72" y="394" width="120" height="152" rx="10" fill="#ef5350" opacity="0.2" stroke="#c62828" stroke-width="2.5"/>
+  <rect x="390" y="222" width="130" height="112" rx="10" fill="#81c784" opacity="0.2" stroke="#2e7d32" stroke-width="2.5"/>
+
+  <!-- Callouts -->
+  <rect x="1048" y="98" width="304" height="98" rx="6" fill="#fff8e1" stroke="#ef6c00" stroke-width="2"/>
+  <text x="1066" y="120" font-size="11" font-weight="bold" fill="#e65100">1. Central SoC / support cluster</text>
+  <text x="1066" y="138" font-size="10" fill="#bf360c">The boardview clearly gives package placement and</text>
+  <text x="1066" y="154" font-size="10" fill="#bf360c">nearby component neighborhoods around U0600.</text>
+  <text x="1066" y="170" font-size="10" fill="#bf360c">Good for clean overview, power-region, and signal-path illustrations.</text>
+  <line x1="1048" y1="148" x2="762" y2="360" stroke="#ef6c00" stroke-width="1.8"/>
+
+  <rect x="1048" y="218" width="304" height="82" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="1066" y="240" font-size="11" font-weight="bold" fill="#0d47a1">2. Storage / regulator neighborhood</text>
+  <text x="1066" y="258" font-size="10" fill="#1565c0">Another clean boardview-derived region for component</text>
+  <text x="1066" y="274" font-size="10" fill="#1565c0">placement callouts and future fault-localisation diagrams.</text>
+  <line x1="1048" y1="260" x2="1078" y2="488" stroke="#1565c0" stroke-width="1.8"/>
+
+  <rect x="1048" y="320" width="304" height="96" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2"/>
+  <text x="1066" y="342" font-size="11" font-weight="bold" fill="#4a148c">3. Connector-rich right edge</text>
+  <text x="1066" y="360" font-size="10" fill="#6a1b9a">Useful for future connector maps: keyboard, trackpad,</text>
+  <text x="1066" y="376" font-size="10" fill="#6a1b9a">display, and other flex-neighborhood illustrations.</text>
+  <text x="1066" y="392" font-size="10" fill="#6a1b9a">Boardview helps with placement, not full net semantics.</text>
+  <line x1="1048" y1="368" x2="1276" y2="420" stroke="#6a1b9a" stroke-width="1.8"/>
+
+  <rect x="1048" y="438" width="304" height="98" rx="6" fill="#ffebee" stroke="#c62828" stroke-width="2"/>
+  <text x="1066" y="460" font-size="11" font-weight="bold" fill="#b71c1c">4. Incident-relevant low-side connector area</text>
+  <text x="1066" y="478" font-size="10" fill="#c62828">This is where boardview context helps us draw better</text>
+  <text x="1066" y="494" font-size="10" fill="#c62828">connector/FPC relationship diagrams for the spill discussion.</text>
+  <text x="1066" y="510" font-size="10" fill="#c62828">But the actual keyboard membrane path still sits off-board.</text>
+  <line x1="1048" y1="492" x2="192" y2="470" stroke="#c62828" stroke-width="1.8"/>
+
+  <rect x="1048" y="556" width="304" height="98" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1066" y="578" font-size="11" font-weight="bold" fill="#1b5e20">5. Boardview ≠ full schematic</text>
+  <text x="1066" y="596" font-size="10" fill="#2e7d32">The committed `.brd` gives board outline, refdes, and</text>
+  <text x="1066" y="612" font-size="10" fill="#2e7d32">placement neighborhoods. For named nets, matrix lines,</text>
+  <text x="1066" y="628" font-size="10" fill="#2e7d32">and exact circuit logic, we still need the separate PDF schematic.</text>
+  <line x1="1048" y1="604" x2="520" y2="278" stroke="#2e7d32" stroke-width="1.8"/>
+
+  <!-- Footer panel -->
+  <rect x="70" y="680" width="1280" height="180" rx="8" fill="#fff" stroke="#bdbdbd"/>
+  <text x="710" y="708" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">What this extra illustration adds</text>
+  <text x="96" y="734" font-size="10" fill="#333">1. It answers the practical question "what more can we illustrate from the board file?" by marking the main board neighborhoods that are stable enough for documentation.</text>
+  <text x="96" y="754" font-size="10" fill="#333">2. It is boardview-derived: package positions, edge connector regions, and major cluster relationships are taken from the committed boardview material, not invented from scratch.</text>
+  <text x="96" y="774" font-size="10" fill="#333">3. It does not claim that the `.brd` alone exposes the full keyboard matrix or the exact unidirectional bridge mechanism; those require keyboard/top-case path data and schematic-level net naming.</text>
+  <text x="96" y="794" font-size="10" fill="#333">4. It gives a clean base for future diagrams covering connector routing, controller neighborhoods, power islands, and incident-specific callouts without depending on raster screenshots.</text>
+  <text x="96" y="822" font-size="10" fill="#333">5. In short: yes, we can add more illustrations from the board data — especially board-level maps and annotated zones — but not pretend the boardview is a complete readable schematic by itself.</text>
+  <text x="96" y="848" font-size="9" fill="#777">Not to scale. Derived from the committed boardview material for board 820-02757 and intended as a documentation/annotation aid, not as a manufacturing drawing.</text>
+</svg>

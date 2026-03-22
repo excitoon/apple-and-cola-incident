@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="monospace" font-size="12">
+  <title>Board 820-02757 — High-Quality Board Render (schematic/boardview overview)</title>
+  <rect width="1400" height="900" fill="#fafafa" stroke="#ccc"/>
+
+  <text x="700" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Board 820-02757 — High-Quality Board Render</text>
+  <text x="700" y="48" text-anchor="middle" font-size="11" fill="#666">MacBook Pro 14-inch A2918 / M3 Pro • clean vector overview derived from the committed boardview material</text>
+
+  <!-- Main board panel -->
+  <rect x="40" y="80" width="980" height="560" rx="10" fill="#111" stroke="#2b2b2b" stroke-width="2"/>
+
+  <!-- Board outline -->
+  <path d="M78 118
+           Q60 118 60 136
+           L60 174
+           L72 174
+           L72 582
+           L60 582
+           L60 618
+           Q60 636 78 636
+           L120 636
+           L140 622
+           L140 430
+           Q140 402 166 402
+           L188 402
+           Q132 340 170 266
+           Q220 176 324 176
+           L342 176
+           Q372 176 390 198
+           Q432 250 458 346
+           L458 564
+           L842 564
+           L842 546
+           L930 546
+           L930 522
+           L986 522
+           L986 602
+           L1122 602
+           L1122 632
+           L1244 632
+           Q1266 632 1280 620
+           L1330 620
+           Q1346 620 1346 604
+           L1346 150
+           Q1346 122 1318 122
+           L1238 122
+           L1238 154
+           L1124 154
+           L1124 122
+           L830 122
+           L830 136
+           L700 136
+           L700 124
+           L552 124
+           L552 136
+           L440 136
+           Q430 126 420 126
+           L404 126
+           Q394 126 388 136
+           L78 136
+           Z"
+        fill="none" stroke="#00c853" stroke-width="3"/>
+
+  <!-- Major packages / clusters -->
+  <rect x="602" y="316" width="118" height="118" fill="#8e8e8e" stroke="#cfcfcf" stroke-width="2"/>
+  <text x="661" y="378" text-anchor="middle" font-size="24" fill="#e8e8e8">U0600</text>
+  <line x1="661" y1="294" x2="661" y2="456" stroke="#ff8a80" stroke-width="1.5" opacity="0.55"/>
+  <line x1="580" y1="375" x2="742" y2="375" stroke="#ff8a80" stroke-width="1.5" opacity="0.55"/>
+
+  <rect x="826" y="360" width="54" height="54" fill="#9d9d9d" stroke="#d0d0d0"/>
+  <rect x="792" y="334" width="28" height="28" fill="#7d7d7d" stroke="#d0d0d0"/>
+  <rect x="936" y="448" width="48" height="70" fill="#8e8e8e" stroke="#d0d0d0"/>
+  <rect x="1004" y="448" width="48" height="70" fill="#8e8e8e" stroke="#d0d0d0"/>
+  <rect x="424" y="254" width="58" height="58" fill="#8a8a8a" stroke="#d0d0d0"/>
+  <rect x="98" y="434" width="42" height="42" fill="#8a8a8a" stroke="#d0d0d0"/>
+  <rect x="1138" y="482" width="42" height="42" fill="#8a8a8a" stroke="#d0d0d0"/>
+
+  <!-- Dense support parts -->
+  <g fill="#d8d8d8">
+    <rect x="468" y="272" width="12" height="4"/>
+    <rect x="468" y="280" width="12" height="4"/>
+    <rect x="468" y="288" width="12" height="4"/>
+    <rect x="488" y="298" width="14" height="4"/>
+    <rect x="514" y="298" width="14" height="4"/>
+    <rect x="548" y="322" width="16" height="5"/>
+    <rect x="548" y="334" width="16" height="5"/>
+    <rect x="548" y="346" width="16" height="5"/>
+    <rect x="744" y="304" width="18" height="5"/>
+    <rect x="744" y="316" width="18" height="5"/>
+    <rect x="744" y="328" width="18" height="5"/>
+    <rect x="900" y="334" width="20" height="5"/>
+    <rect x="900" y="348" width="20" height="5"/>
+    <rect x="900" y="362" width="20" height="5"/>
+    <rect x="1082" y="286" width="20" height="5"/>
+    <rect x="1082" y="300" width="20" height="5"/>
+    <rect x="1082" y="314" width="20" height="5"/>
+    <rect x="1178" y="218" width="18" height="5"/>
+    <rect x="1178" y="232" width="18" height="5"/>
+    <rect x="1178" y="246" width="18" height="5"/>
+  </g>
+
+  <g fill="#00bcd4" opacity="0.85">
+    <circle cx="440" cy="242" r="2"/>
+    <circle cx="448" cy="242" r="2"/>
+    <circle cx="456" cy="242" r="2"/>
+    <circle cx="603" cy="462" r="2"/>
+    <circle cx="615" cy="462" r="2"/>
+    <circle cx="627" cy="462" r="2"/>
+    <circle cx="639" cy="462" r="2"/>
+    <circle cx="808" cy="392" r="2"/>
+    <circle cx="808" cy="402" r="2"/>
+    <circle cx="808" cy="412" r="2"/>
+    <circle cx="1192" cy="196" r="2"/>
+    <circle cx="1200" cy="196" r="2"/>
+    <circle cx="1208" cy="196" r="2"/>
+  </g>
+
+  <!-- Board text markers -->
+  <text x="1198" y="420" transform="rotate(90 1198 420)" font-size="20" fill="#79c879" opacity="0.8">JX600</text>
+  <text x="624" y="126" font-size="18" fill="#dfdfdf">J1200</text>
+  <text x="101" y="548" font-size="16" fill="#dfdfdf">JP600</text>
+  <text x="826" y="602" font-size="14" fill="#dfdfdf">JP9000</text>
+
+  <!-- Callout boxes -->
+  <rect x="1050" y="110" width="300" height="84" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1066" y="132" font-size="11" font-weight="bold" fill="#1b5e20">What exact boardview / schematics change</text>
+  <text x="1066" y="150" font-size="10" fill="#2e7d32">• Better confidence about component placement</text>
+  <text x="1066" y="166" font-size="10" fill="#2e7d32">• Better future annotations and signal-path drawings</text>
+  <text x="1066" y="182" font-size="10" fill="#2e7d32">• Not, by themselves, proof of the liquid path or fault site</text>
+
+  <rect x="1050" y="228" width="300" height="86" rx="6" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="1066" y="250" font-size="11" font-weight="bold" fill="#e65100">U0600 — Apple M3 Pro SoC</text>
+  <text x="1066" y="268" font-size="10" fill="#bf360c">Large central package visible in the boardview overview.</text>
+  <text x="1066" y="284" font-size="10" fill="#bf360c">Schematics help map nearby support rails, buses,</text>
+  <text x="1066" y="300" font-size="10" fill="#bf360c">and the surrounding logic/power clusters more reliably.</text>
+  <line x1="1050" y1="272" x2="736" y2="376" stroke="#ef6c00" stroke-width="1.8"/>
+
+  <rect x="1050" y="350" width="300" height="78" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="1066" y="372" font-size="11" font-weight="bold" fill="#0d47a1">Storage / support packages</text>
+  <text x="1066" y="390" font-size="10" fill="#1565c0">Two large rectangular packages in the right-lower region</text>
+  <text x="1066" y="406" font-size="10" fill="#1565c0">plus adjacent regulators / interface ICs.</text>
+  <line x1="1050" y1="392" x2="988" y2="474" stroke="#1565c0" stroke-width="1.8"/>
+
+  <rect x="1050" y="464" width="300" height="78" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2"/>
+  <text x="1066" y="486" font-size="11" font-weight="bold" fill="#4a148c">Dense connector / low-speed I/O edge</text>
+  <text x="1066" y="504" font-size="10" fill="#6a1b9a">Useful for future illustrations that annotate keyboard,</text>
+  <text x="1066" y="520" font-size="10" fill="#6a1b9a">trackpad, and other flex-connector neighborhoods.</text>
+  <line x1="1050" y1="502" x2="1180" y2="506" stroke="#6a1b9a" stroke-width="1.8"/>
+
+  <rect x="1050" y="578" width="300" height="76" rx="6" fill="#ffebee" stroke="#c62828" stroke-width="2"/>
+  <text x="1066" y="600" font-size="11" font-weight="bold" fill="#b71c1c">Practical takeaway for this incident</text>
+  <text x="1066" y="618" font-size="10" fill="#c62828">The schematics improve illustration quality and location</text>
+  <text x="1066" y="634" font-size="10" fill="#c62828">confidence, but microscope inspection still decides whether</text>
+  <text x="1066" y="650" font-size="10" fill="#c62828">the actual spill damage sits at a connector, flex, or IC area.</text>
+
+  <rect x="70" y="680" width="1280" height="160" rx="8" fill="#fff" stroke="#bdbdbd"/>
+  <text x="710" y="708" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Interpretation Notes</text>
+  <text x="96" y="734" font-size="10" fill="#333">1. This is a presentation-quality vector render meant for README use; it is cleaner and more zoom-friendly than the raw screenshot.</text>
+  <text x="96" y="754" font-size="10" fill="#333">2. It does not replace the original boardview PNGs or the interactive `.brd` file in OpenBoardView; those remain the authoritative layout references.</text>
+  <text x="96" y="774" font-size="10" fill="#333">3. The new boardview/schematic data mainly improves confidence when drawing future connector, controller, and signal-path illustrations.</text>
+  <text x="96" y="794" font-size="10" fill="#333">4. The spill diagnosis itself still depends on direct physical evidence: residue location, corrosion, continuity changes, and microscope inspection.</text>
+  <text x="96" y="822" font-size="9" fill="#777">Not to scale. Derived from the committed boardview material for board 820-02757 and intended as a documentation overview, not as a manufacturing drawing.</text>
+</svg>

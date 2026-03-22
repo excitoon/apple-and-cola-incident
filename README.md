@@ -442,11 +442,18 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Boardview 820-02757 — detail 2 | | [PNG](diagrams/boardview-820-02757-detail-2.png) | PCSchematics boardview: zoomed detail view of board area |
 | Boardview 820-02757 — capture 1 | | [PNG](diagrams/boardview-820-02757-capture1.png) | Original PCSchematics screenshot from archive |
 | Boardview 820-02757 — capture 2 | | [PNG](diagrams/boardview-820-02757-capture2.png) | Original PCSchematics screenshot from archive |
+| Board 820-02757 — high-quality render | [SVG](diagrams/boardview-820-02757-render.svg) | | Clean vector board render for presentation/annotation use, derived from the boardview overview |
 | Boardview 820-02757 data file | | [BRD](diagrams/820-02757-06-boardview.brd) | OpenBoardView-compatible boardview data file for board 820-02757-06 |
 
 ### 9. Boardview Screenshots (Board 820-02757)
 
 The following screenshots were captured from the **PCSchematics** boardview for board **820-02757** (MacBook Pro 14" A2918, M3 Pro). They show the component layout as rendered in the boardview viewer:
+
+Knowing the exact boardview / schematic set **does help**, but mostly by improving **placement confidence** and enabling **better illustrations**. It does **not automatically change the root-cause conclusion** for this incident on its own: the actual failure site still has to be confirmed by physical evidence such as residue location, corrosion, and continuity/microscope inspection.
+
+This repository now also includes a **high-quality vector board render** derived from the boardview material for documentation and future annotation work:
+
+![Board 820-02757 — high-quality vector render](diagrams/boardview-820-02757-render.svg)
 
 ![Board 820-02757 — full board overview](diagrams/boardview-820-02757-overview.png)
 

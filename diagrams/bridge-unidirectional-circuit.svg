@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-auto">
+      <path d="M0,0 L10,3.5 L0,7 z" fill="#333"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-auto">
+      <path d="M0,0 L10,3.5 L0,7 z" fill="#2a7a2a"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-auto">
+      <path d="M0,0 L10,3.5 L0,7 z" fill="#c00"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">Why Dried Cola Residue Appears Unidirectional</text>
+  <text x="450" y="52" text-anchor="middle" font-size="13" fill="#555">Not a diode — current flows both ways through the residue (Ohm's law holds).</text>
+  <text x="450" y="68" text-anchor="middle" font-size="13" fill="#555">Only one direction produces enough voltage to cross the controller's detection threshold.</text>
+
+  <!-- ===== LEFT SIDE: Forward direction (Cx → Cy) ===== -->
+  <rect x="20" y="85" width="420" height="280" rx="10" fill="#eaf7ea" stroke="#2a7a2a" stroke-width="2"/>
+  <text x="230" y="108" text-anchor="middle" font-size="15" font-weight="bold" fill="#2a7a2a">FORWARD: Key pressed in Cx column</text>
+  <text x="230" y="124" text-anchor="middle" font-size="12" fill="#2a7a2a">(e.g., pressing "6" → also triggers "9" and "0")</text>
+
+  <!-- ROW driver -->
+  <rect x="40" y="145" width="90" height="32" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="85" y="165" text-anchor="middle" font-size="11" fill="#333">ROW driver</text>
+  <text x="85" y="178" text-anchor="middle" font-size="10" fill="#666">3.3 V</text>
+
+  <!-- Key switch -->
+  <line x1="130" y1="161" x2="168" y2="161" stroke="#333" stroke-width="1.5"/>
+  <rect x="168" y="149" width="52" height="24" rx="3" fill="#dfd" stroke="#333" stroke-width="1"/>
+  <text x="194" y="165" text-anchor="middle" font-size="9" fill="#333">switch ~1Ω</text>
+  <text x="194" y="143" text-anchor="middle" font-size="9" font-weight="bold" fill="#2a7a2a">CLOSED</text>
+  <line x1="220" y1="161" x2="255" y2="161" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Cx node -->
+  <circle cx="255" cy="161" r="4" fill="#333"/>
+  <text x="255" y="152" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Cx</text>
+  <text x="255" y="195" text-anchor="middle" font-size="10" fill="#2a7a2a">≈ 3.3 V</text>
+
+  <!-- R_pull_x to GND -->
+  <line x1="255" y1="165" x2="255" y2="205" stroke="#333" stroke-width="1"/>
+  <rect x="243" y="205" width="24" height="36" rx="2" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="255" y="227" text-anchor="middle" font-size="8" fill="#333">47kΩ</text>
+  <line x1="255" y1="241" x2="255" y2="260" stroke="#333" stroke-width="1"/>
+  <text x="255" y="272" text-anchor="middle" font-size="9" fill="#666">GND</text>
+
+  <!-- R_bridge (forward = low R) -->
+  <line x1="259" y1="161" x2="310" y2="161" stroke="#2a7a2a" stroke-width="2.5"/>
+  <rect x="310" y="149" width="56" height="24" rx="3" fill="#ffe0b0" stroke="#c70" stroke-width="1.5"/>
+  <text x="338" y="164" text-anchor="middle" font-size="9" font-weight="bold" fill="#8a4500">30 kΩ</text>
+  <line x1="366" y1="161" x2="400" y2="161" stroke="#2a7a2a" stroke-width="2.5"/>
+  <text x="338" y="143" text-anchor="middle" font-size="9" fill="#8a4500">R_bridge (fwd)</text>
+
+  <!-- Cy node -->
+  <circle cx="400" cy="161" r="4" fill="#333"/>
+  <text x="400" y="152" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Cy</text>
+
+  <!-- R_pull_y to GND -->
+  <line x1="400" y1="165" x2="400" y2="205" stroke="#333" stroke-width="1"/>
+  <rect x="388" y="205" width="24" height="36" rx="2" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="400" y="227" text-anchor="middle" font-size="8" fill="#333">47kΩ</text>
+  <line x1="400" y1="241" x2="400" y2="260" stroke="#333" stroke-width="1"/>
+  <text x="400" y="272" text-anchor="middle" font-size="9" fill="#666">GND</text>
+
+  <!-- Sense input on Cy -->
+  <line x1="400" y1="165" x2="400" y2="290" stroke="#2a7a2a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="350" y="290" width="100" height="28" rx="4" fill="#fff" stroke="#2a7a2a" stroke-width="1.5"/>
+  <text x="400" y="308" text-anchor="middle" font-size="10" fill="#2a7a2a">sense input</text>
+
+  <!-- Voltage calculation -->
+  <text x="230" y="335" text-anchor="middle" font-size="11" fill="#333">V_Cy = 3.3 × 47k / (30k + 47k) = <tspan font-weight="bold" fill="#2a7a2a">2.0 V</tspan></text>
+  <text x="230" y="353" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a7a2a">✓ 2.0 V &gt; 1.2 V threshold → GHOST KEY DETECTED</text>
+
+  <!-- ===== RIGHT SIDE: Reverse direction (Cy → Cx) ===== -->
+  <rect x="460" y="85" width="420" height="280" rx="10" fill="#fde8e8" stroke="#c00" stroke-width="2"/>
+  <text x="670" y="108" text-anchor="middle" font-size="15" font-weight="bold" fill="#c00">REVERSE: Key pressed in Cy column</text>
+  <text x="670" y="124" text-anchor="middle" font-size="12" fill="#c00">(e.g., pressing "9" → does "6" also appear? NO)</text>
+
+  <!-- ROW driver -->
+  <rect x="480" y="145" width="90" height="32" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="525" y="165" text-anchor="middle" font-size="11" fill="#333">ROW driver</text>
+  <text x="525" y="178" text-anchor="middle" font-size="10" fill="#666">3.3 V</text>
+
+  <!-- Key switch -->
+  <line x1="570" y1="161" x2="608" y2="161" stroke="#333" stroke-width="1.5"/>
+  <rect x="608" y="149" width="52" height="24" rx="3" fill="#dfd" stroke="#333" stroke-width="1"/>
+  <text x="634" y="165" text-anchor="middle" font-size="9" fill="#333">switch ~1Ω</text>
+  <text x="634" y="143" text-anchor="middle" font-size="9" font-weight="bold" fill="#2a7a2a">CLOSED</text>
+  <line x1="660" y1="161" x2="695" y2="161" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Cy node -->
+  <circle cx="695" cy="161" r="4" fill="#333"/>
+  <text x="695" y="152" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Cy</text>
+  <text x="695" y="195" text-anchor="middle" font-size="10" fill="#c00">≈ 3.3 V</text>
+
+  <!-- R_pull_y to GND -->
+  <line x1="695" y1="165" x2="695" y2="205" stroke="#333" stroke-width="1"/>
+  <rect x="683" y="205" width="24" height="36" rx="2" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="695" y="227" text-anchor="middle" font-size="8" fill="#333">47kΩ</text>
+  <line x1="695" y1="241" x2="695" y2="260" stroke="#333" stroke-width="1"/>
+  <text x="695" y="272" text-anchor="middle" font-size="9" fill="#666">GND</text>
+
+  <!-- R_bridge (reverse = high R) -->
+  <line x1="699" y1="161" x2="750" y2="161" stroke="#c00" stroke-width="2.5"/>
+  <rect x="750" y="149" width="56" height="24" rx="3" fill="#ffe0b0" stroke="#c70" stroke-width="1.5"/>
+  <text x="778" y="164" text-anchor="middle" font-size="9" font-weight="bold" fill="#8a4500">70 kΩ</text>
+  <line x1="806" y1="161" x2="840" y2="161" stroke="#c00" stroke-width="2.5"/>
+  <text x="778" y="143" text-anchor="middle" font-size="9" fill="#8a4500">R_bridge (rev)</text>
+
+  <!-- Cx node -->
+  <circle cx="840" cy="161" r="4" fill="#333"/>
+  <text x="840" y="152" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Cx</text>
+
+  <!-- R_pull_x to GND -->
+  <line x1="840" y1="165" x2="840" y2="205" stroke="#333" stroke-width="1"/>
+  <rect x="828" y="205" width="24" height="36" rx="2" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="840" y="227" text-anchor="middle" font-size="8" fill="#333">47kΩ</text>
+  <line x1="840" y1="241" x2="840" y2="260" stroke="#333" stroke-width="1"/>
+  <text x="840" y="272" text-anchor="middle" font-size="9" fill="#666">GND</text>
+
+  <!-- Sense input on Cx -->
+  <line x1="840" y1="165" x2="840" y2="290" stroke="#c00" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="790" y="290" width="100" height="28" rx="4" fill="#fff" stroke="#c00" stroke-width="1.5"/>
+  <text x="840" y="308" text-anchor="middle" font-size="10" fill="#c00">sense input</text>
+
+  <!-- Voltage calculation -->
+  <text x="670" y="335" text-anchor="middle" font-size="11" fill="#333">V_Cx = 3.3 × 47k / (70k + 47k) = <tspan font-weight="bold" fill="#c00">1.3 V</tspan></text>
+  <text x="670" y="353" text-anchor="middle" font-size="12" font-weight="bold" fill="#c00">✗ 1.3 V ≈ 1.2 V threshold → NOT DETECTED (marginal)</text>
+
+  <!-- ===== BOTTOM: Key insight ===== -->
+  <rect x="50" y="385" width="800" height="120" rx="10" fill="#fff8e0" stroke="#c70" stroke-width="2"/>
+  <text x="450" y="410" text-anchor="middle" font-size="15" font-weight="bold" fill="#8a4500">Key Insight: NOT a Diode — Pure Ohm's Law + Threshold Detection</text>
+
+  <text x="450" y="435" text-anchor="middle" font-size="12" fill="#333">The residue is a passive resistor. Current flows in both directions through it (Ohm's law: I = V/R).</text>
+  <text x="450" y="455" text-anchor="middle" font-size="12" fill="#333">But the residue dried unevenly — thicker near Cx (30 kΩ path) vs thinner toward Cy (70 kΩ path).</text>
+  <text x="450" y="475" text-anchor="middle" font-size="12" fill="#333">The keyboard controller has a digital threshold (≈1.2 V): above = key detected, below = ignored.</text>
+  <text x="450" y="495" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Forward: 2.0 V &gt; 1.2 V → detected. Reverse: 1.3 V ≈ 1.2 V → not detected. Same resistor, different direction.</text>
+
+  <!-- ===== BOTTOM: FPC cross-section showing residue taper ===== -->
+  <rect x="50" y="520" width="800" height="150" rx="10" fill="#f0f4ff" stroke="#446" stroke-width="2"/>
+  <text x="450" y="543" text-anchor="middle" font-size="14" font-weight="bold" fill="#335">FPC/ZIF Connector Pin Cross-Section — Residue Thickness Gradient</text>
+
+  <!-- FPC base -->
+  <rect x="150" y="575" width="600" height="12" rx="2" fill="#c8b070" stroke="#8a7040" stroke-width="1"/>
+  <text x="450" y="605" text-anchor="middle" font-size="10" fill="#666">FPC polyimide substrate</text>
+
+  <!-- Pins -->
+  <rect x="220" y="555" width="40" height="20" rx="2" fill="#daa520" stroke="#8a6500" stroke-width="1.5"/>
+  <text x="240" y="569" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Cx</text>
+  <rect x="350" y="555" width="40" height="20" rx="2" fill="#daa520" stroke="#8a6500" stroke-width="1.5"/>
+  <text x="370" y="569" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Cy</text>
+  <rect x="480" y="555" width="40" height="20" rx="2" fill="#daa520" stroke="#8a6500" stroke-width="1.5"/>
+  <text x="500" y="569" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Cz</text>
+
+  <!-- Residue blob with taper -->
+  <path d="M218,555 Q220,520 260,525 Q310,530 350,540 Q410,545 480,550 Q510,553 522,555" fill="rgba(101,67,33,0.5)" stroke="#654321" stroke-width="1.5"/>
+  <text x="300" y="520" text-anchor="middle" font-size="10" font-weight="bold" fill="#654321">thick residue</text>
+  <text x="300" y="532" text-anchor="middle" font-size="9" fill="#654321">(low R ≈ 30 kΩ)</text>
+  <text x="470" y="538" text-anchor="middle" font-size="10" fill="#654321">thin film</text>
+  <text x="470" y="550" text-anchor="middle" font-size="9" fill="#654321">(high R ≈ 70 kΩ)</text>
+
+  <!-- Direction arrow -->
+  <line x1="240" y1="645" x2="500" y2="645" stroke="#654321" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="370" y="660" text-anchor="middle" font-size="10" fill="#654321">Cola flowed this direction → dried with taper</text>
+</svg>

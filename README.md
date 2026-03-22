@@ -33,6 +33,95 @@ Upon receiving the device back from the service center:
 - Over the following days the picture evolved: **N** now produces 3 different symbols (including `N` itself), and similar multi-character behavior is present for the other keys in the affected column.
 - **Ghost keypresses subsequently disappeared** — spontaneous phantom key events stopped after the residue dried and stabilised.
 - **Partial improvement after rest period** (updated March 22): after 2 days of non-use (internal keyboard disabled via Karabiner Elements while using an external keyboard), the affected keys now produce **correct symbols plus two incorrect ones** (previously, correct symbols were intermittent or absent). This suggests the contamination may be partially dissipating or redistributing during periods without thermal cycling from laptop use.
+- **Space bar also affected** — the Space key produces a space character followed by an apostrophe (`'`), confirming contamination extends beyond the original 6/Y/H/N column.
+
+### Keyboard Diagnostic Output (raw `cat` test, March 22)
+
+Each affected key was pressed twice using `cat` to capture the raw output. The results below show the exact characters produced per keypress:
+
+| Key pressed | Expected | Actual output (per press) | Extra characters |
+|---|---|---|---|
+| **6** | `6` | `690` | `9`, `0` |
+| **Y** | `y` | `yop` | `o`, `p` |
+| **H** | `h` | `hl;` | `l`, `;` |
+| **N** | `n` | `n./` | `.`, `/` |
+| **Space** | ` ` | ` '` | `'` |
+
+Raw `cat` transcript (each key pressed twice):
+```
+690
+690
+yop
+yop
+hl;
+hl;
+n./
+n./
+```
+
+Space:
+```
+ '
+ '
+```
+
+#### Pattern Analysis
+
+Mapping the affected keys and their extra characters onto the physical keyboard layout reveals a consistent pattern — the two extra characters come from keys that are **3 and 4 physical positions to the right** in the same row:
+
+```
+  Physical keyboard (affected keys in [brackets], extra outputs in {braces})
+  ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+  │  5  │ [6] │  7  │  8  │ {9} │ {0} │  -  │  =  │  ← 6 → 690
+  ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+  │  T  │ [Y] │  U  │  I  │ {O} │ {P} │  [  │  ]  │  ← Y → yop
+  ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+  │  G  │ [H] │  J  │  K  │ {L} │ {;} │ {'}*│Enter│  ← H → hl;
+  ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+  │  B  │ [N] │  M  │  ,  │ {.} │ {/} │     │     │  ← N → n./
+  └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
+                          Space → ' (apostrophe)
+                          * ' is in the same column as 0, P, /
+```
+
+This means the affected column C7 (6/Y/H/N) is bridging to **two specific matrix columns**, not to the immediately adjacent columns C6/C8 as initially hypothesized. The bridged columns contain:
+- **Bridged column A**: keys 9, O, L, `.` (period)
+- **Bridged column B**: keys 0, P, `;`, `/`
+
+The Space → `'` output is also consistent: the apostrophe `'` sits in the same physical column as `0`, `P`, and `/` — the same "bridged column B" identified above. This strongly suggests the **Space bar's matrix trace** also crosses or runs near the contamination site and is picking up a bridge to the same column B trace.
+
+#### Revised Matrix Column Bridge Map
+
+```
+  FPC cross-section (schematic, updated with diagnostic data)
+
+  ┌────────────────────────────────────────────────────────────────────┐
+  │  Polyimide substrate                                               │
+  ├──────────┬──── ··· ────┬──────────┬──────────┬──── ··· ────────────┤
+  │  COL_7   │             │  COL_A   │  COL_B   │                     │
+  │ (6,Y,H,N)│  ...cols... │ (9,O,L,.)│ (0,P,;,/)│                    │
+  └──────────┼═════════════┼══════════┼══════════┤────────────────────-┘
+             ║ dried cola  ║          ║          ║
+             ║ residue     ╠══════════╣          ║
+             ║ bridges     ║  bridge 1║          ║
+             ╠═════════════╝          ║          ║
+             ║            bridge 2    ║          ║
+             ╚════════════════════════╝          ║
+                                                 ║
+                       ┌─────────────────────────╝
+                       │ Space bar trace also bridges to COL_B
+                       │ (produces ' in addition to space)
+                       └──────────────────────────
+```
+
+**Key finding:** The conductive bridge spans **multiple columns**, not just one adjacent column. This indicates either:
+1. The contamination site is at the **ZIF connector** where pins are packed at ~0.5 mm pitch — a large enough residue deposit could bridge across several pins simultaneously.
+2. There is a **dendritic growth** (electrochemical migration) that has extended from the initial contamination point to reach non-adjacent pins, forming conductive "fingers" of tin/copper oxide.
+3. The FPC trace routing is **non-sequential** — matrix columns C7, the column carrying 9/O/L/., and the column carrying 0/P/;/' may actually be routed on **adjacent or nearby FPC traces** even though they correspond to non-adjacent physical keyboard columns. This is common in keyboard FPC design where traces are reordered for routing efficiency.
+
+Option 3 is the most likely explanation: the keyboard FPC does not route matrix columns in physical left-to-right order. The column traces for 6/Y/H/N, 9/O/L/., and 0/P/;/' are probably **physically adjacent on the FPC ribbon** even though they appear far apart on the keyboard surface. A single residue bridge at the connector or along the FPC can therefore affect non-adjacent physical columns.
+
+This also explains why Space picks up `'` — the Space bar's matrix column trace likely runs near the same group on the FPC.
 
 ## Keyboard Mechanisms: Butterfly vs Scissor
 
@@ -196,32 +285,36 @@ The following diagrams show what the physical connector looks like — both the 
 
 ### 4. How Liquid Damage Causes the Observed Symptoms
 
-The following diagram illustrates where cola can bridge traces and produce the observed multi-character and ghost-key behavior:
+The following diagram illustrates where cola can bridge traces and produce the observed multi-character and ghost-key behavior. Based on diagnostic data (see [Keyboard Diagnostic Output](#keyboard-diagnostic-output-raw-cat-test-march-22) above), pressing keys in the affected column produces characters from **two additional matrix columns** — the columns carrying keys 9/O/L/. and 0/P/;/'. These matrix columns are most likely routed on **physically adjacent FPC traces** despite corresponding to non-adjacent physical keyboard positions (a common FPC routing optimisation):
 
 ```
-  FPC cross-section (schematic, not to scale)
+  FPC cross-section (schematic, updated with diagnostic data)
 
-  ┌─────────────────────────────────────────────────────┐
-  │  Polyimide substrate (insulating base layer)         │
-  ├────────────┬────────────────────┬────────────────────┤
-  │  COL_D     │      COL_E         │      COL_F          │  ← copper traces
-  │  (6,Y,H,N) │    (adjacent col)  │    (adjacent col)   │
-  └────────────┴────────────────────┴────────────────────┘
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │  Polyimide substrate (insulating base layer)                             │
+  ├──────────────┬──────────────────┬──────────────────┬─────────── ··· ─────┤
+  │  COL_C7      │   COL_Ca         │   COL_Cb         │   other cols       │
+  │  (6,Y,H,N)   │  (9,O,L,.)       │  (0,P,;,/,')     │                   │  ← copper traces
+  └──────────────┴──────────────────┴──────────────────┴─────────── ··· ─────┘
+                   (physically adjacent on FPC despite being non-adjacent on keyboard)
 
   After cola spill and drying:
 
-  ┌─────────────────────────────────────────────────────┐
-  │  Polyimide substrate                                 │
-  ├────────────┬═══════════════════ ┬────────────────────┤
-  │  COL_D     ║   dried cola +    ║      COL_F          │
-  │  (6,Y,H,N) ║   corrosion       ║                     │
-  └────────────╩═══════════════════╩────────────────────┘
-               ▲
-               Conductive bridge between COL_D and COL_E
-               → pressing any key in COL_D also activates
-                 a COL_E signal → wrong extra character output
-               → residual conductivity even when no key is
-                 pressed → spontaneous ghost keypresses
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │  Polyimide substrate                                                     │
+  ├──────────────╬══════════════════╬══════════════════┬─────────── ··· ─────┤
+  │  COL_C7      ║  dried cola +    ║   COL_Cb         │   other cols       │
+  │  (6,Y,H,N)   ║  corrosion       ║  (0,P,;,/,')     │                   │
+  │              ║  COL_Ca          ║                  │                    │
+  │              ║  (9,O,L,.)       ║                  │                    │
+  └──────────────╩══════════════════╩══════════════════┴─────────── ··· ─────┘
+                 ▲                  ▲
+                 Bridge 1: C7↔Ca    Bridge 2: C7↔Cb (or Ca↔Cb)
+                 → pressing 6 also activates 9 and 0
+                 → pressing Y also activates O and P
+                 → pressing H also activates L and ;
+                 → pressing N also activates . and /
+                 → Space trace also bridges to Cb → produces '
 ```
 
 ### 5. Physical Location of the Connector on an M3 Pro MacBook
@@ -287,34 +380,37 @@ The following diagrams show the specific signal blocks affected in this incident
   └─────────────────────────────────────────────────────────────────────┘
 ```
 
-#### 6b. FPC Connector Pinout — Affected Column Highlighted
+#### 6b. FPC Connector Pinout — Affected Columns Highlighted
 
-The keyboard FPC carries all row and column signals to the controller IC. The affected column (C7, carrying keys 6/Y/H/N) is a single pin on the FPC/ZIF connector. Contamination at this pin or along the C7 trace causes all four keys to malfunction simultaneously:
+The keyboard FPC carries all row and column signals to the controller IC. The affected column (C7, carrying keys 6/Y/H/N) is a single pin on the FPC/ZIF connector. Diagnostic data (March 22) confirms that C7 is bridged to **two** other column pins — the columns carrying 9/O/L/. and 0/P/;/'. FPC trace routing is non-sequential (matrix columns are reordered for routing efficiency), so these three columns occupy **adjacent pins** on the FPC even though their keys are 3–4 positions apart on the physical keyboard:
 
 ```
   FPC pinout (simplified 34-pin model, viewed from below)
+  Actual pin assignments are illustrative — exact positions depend on board 820-02757 routing
 
   Pin:  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
        ┌──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┐
-       │R1│R2│R3│R4│R5│R6│C1│C2│C3│C4│C5│C6│C7│C8│C9│..│Gnd│
+       │R1│R2│R3│R4│R5│R6│C1│C2│..│Ca│C7│Cb│..│Cx│..│..│Gnd│
        └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
-                                              ▲▲▲
-                                              │││
-       Affected pin C7 ───────────────────────┘││
-       Adjacent pin C6 (bridged by residue) ───┘│
-       Adjacent pin C8 (possibly bridged) ──────┘
+                                          ▲▲▲▲
+                                          ││││
+       Col carrying 9,O,L,.  (Ca) ─────┘│││
+       Affected col 6,Y,H,N  (C7) ─────┘││
+       Col carrying 0,P,;,/' (Cb) ──────┘│
+       Space bar col trace    (Cx) ──────┘ (also bridges to Cb → outputs ')
 
-       When dried cola bridges C7 to C6 (or C8):
-       → pressing any key in column 7 (6,Y,H,N) also activates
-         column 6 (or 8) → extra characters appear
-       → residual conductivity between C7 and adjacent pins
-         without a keypress → ghost keypresses (now resolved)
+       Dried cola bridges Ca ↔ C7 ↔ Cb:
+       → pressing 6 also activates Ca (→ 9) and Cb (→ 0) → output "690"
+       → pressing Y also activates Ca (→ O) and Cb (→ P) → output "yop"
+       → pressing H also activates Ca (→ L) and Cb (→ ;) → output "hl;"
+       → pressing N also activates Ca (→ .) and Cb (→ /) → output "n./"
+       → Space bar trace bridges to Cb → outputs " '"
 ```
 
 #### 6c. Signal Path from Affected Keys to SoC
 
 ```
-  Affected key "N" pressed:
+  Affected key "N" pressed (diagnostic output: "n./"):
   ═══════════════════════════════════════════════════════════
 
   [N key]  (physical keypress)
@@ -324,40 +420,37 @@ The keyboard FPC carries all row and column signals to the controller IC. The af
       │
       ▼
   [FPC contact pad closes ROW_4 × COL_7 intersection]
-      │                              │
-      │                              │ ← dried cola residue
-      │                              │   bridges COL_7 to COL_6
-      │                              │
-      ▼                              ▼
-  COL_7 signal active           COL_6 signal ALSO active
-      │                              │
-      │        ┌─────────────────────┤
-      ▼        ▼                     │
-  [FPC trace → ZIF connector pin 13] │
-      │        │                     │
-      │   [ZIF connector pin 12] ◄───┘  (contamination here or
-      │        │                         along the FPC trace)
-      ▼        ▼
+      │                    │                    │
+      │                    │ dried cola residue  │
+      │                    │ bridges C7↔Ca↔Cb   │
+      │                    │                    │
+      ▼                    ▼                    ▼
+  COL_7 active         COL_Ca active       COL_Cb active
+  (6,Y,H,N)            (9,O,L,.)           (0,P,;,/)
+      │                    │                    │
+      ▼                    ▼                    ▼
+  [FPC traces → adjacent ZIF connector pins]
+  (Ca, C7, Cb are adjacent on FPC despite non-adjacent physical keys)
+      │                    │                    │
+      ▼                    ▼                    ▼
   ┌──────────────────────────────────────────────────┐
   │   Keyboard Controller IC                         │
   │                                                  │
-  │   Scans ROW_4 → reads COL_7 ──► reports "N"     │
-  │                   reads COL_6 ──► reports extra   │
-  │                   reads COL_8? ─► reports extra   │
+  │   Scans ROW_4 → reads COL_7  ──► reports "N"    │
+  │                   reads COL_Ca ──► reports "."    │
+  │                   reads COL_Cb ──► reports "/"    │
   │                                                  │
-  │   Result: controller sends                       │
-  │   multiple keycodes for one                      │
-  │   physical keypress                              │
+  │   Result: controller sends three keycodes        │
+  │   for one physical keypress → "n./"              │
   └──────────────────────┬───────────────────────────┘
              │ SPI bus
              ▼
-  ┌──────────────────────────────────┐
-  │   Apple M3 Pro SoC               │
-  │   → macOS receives "N" + "/" + ? │
-  │   → all three appear on screen   │
-  └──────────────────────────────────┘
+  ┌──────────────────────────────────────────────────┐
+  │   Apple M3 Pro SoC                               │
+  │   → macOS receives "N" + "." + "/"               │
+  │   → all three appear on screen: "n./"            │
+  └──────────────────────────────────────────────────┘
 ```
-
 #### 6d. Logic Board Keyboard Area Layout (Board 820-02757)
 
 ```
@@ -698,8 +791,9 @@ Based on the symptom pattern and electrical analysis, the contamination can be p
 
     CONTAMINATION SITE #2: Along the FPC ribbon cable itself,
     where cola wicked between the column C7 trace and adjacent
-    traces C6/C8 via capillary action in the ~0.1 mm gap between
-    polyimide substrate layers.
+    traces Ca (9/O/L/.) and Cb (0/P/;/') via capillary action
+    in the ~0.1 mm gap between polyimide substrate layers.
+    Space bar trace also runs near this group.
 
     CONTAMINATION SITE #3: Under the sealed scissor-switch key
     bodies for 6, Y, H, N — where cola entered through < 0.3 mm
@@ -708,9 +802,9 @@ Based on the symptom pattern and electrical analysis, the contamination can be p
 
 ### Three specific contamination zones
 
-1. **ZIF connector area** (most accessible) — dried cola residue on or around pin C7 and bridging to adjacent pins C6/C8. This is the most likely primary site because: (a) the connector is an open junction point where liquid pools, (b) it explains the clean column pattern, and (c) it is the first component the service center would have accessed during cleaning (and may not have cleaned thoroughly enough).
+1. **ZIF connector area** (most accessible) — dried cola residue bridging three adjacent FPC pins: C7 (6/Y/H/N), Ca (9/O/L/.), and Cb (0/P/;/'). The Space bar trace also appears to bridge to Cb at this location. This is the most likely primary site because: (a) the connector is an open junction point where liquid pools, (b) it explains the clean column pattern, and (c) it is the first component the service center would have accessed during cleaning (and may not have cleaned thoroughly enough).
 
-2. **FPC ribbon cable traces** (moderately accessible) — residue wicked along the column C7 trace where it runs parallel to C6/C8 within the ribbon. The ~0.1 mm gap between traces inside the FPC acts as a capillary channel that draws liquid in and is very difficult to clean without ultrasonic treatment.
+2. **FPC ribbon cable traces** (moderately accessible) — residue wicked along the column C7 trace where it runs parallel to Ca and Cb within the ribbon. The ~0.1 mm gap between traces inside the FPC acts as a capillary channel that draws liquid in and is very difficult to clean without ultrasonic treatment.
 
 3. **Under sealed key switch bodies** (non-serviceable) — the scissor-switch assemblies for 6, Y, H, N. The service center is correct that these cannot be manually opened or cleaned without breaking the mechanism. However, this is likely a **secondary** contamination site rather than the primary one, because contamination only inside individual key bodies would not explain the entire column being affected simultaneously.
 
@@ -743,10 +837,12 @@ The connector misalignment (Hypothesis 2) may have introduced additional artifac
 
 ## Recommended Next Steps
 
-1. **Ultrasonic cleaning (recommended first step)** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. With ghost presses already resolved and symptoms stabilized, the window for effective cleaning is still open.
-2. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges — ideally performed as part of or after the ultrasonic process.
-3. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is still present after cleaning.
-4. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
+1. **Test remaining keys** — Before cleaning, run `cat` (or similar raw-input capture) on **every key** to map which additional keys may be affected and confirm the full extent of the bridging. This creates a baseline for verifying cleaning success. In particular, test keys in the bridged columns (9, O, L, `.` and 0, P, `;`, `/`, `'`) to see if pressing them also produces phantom characters from C7.
+2. **Ultrasonic cleaning (recommended first step)** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. The diagnostic data confirms three matrix columns are bridged (C7, Ca, Cb) plus the Space bar trace, so the cleaning lab should focus on the cluster of adjacent FPC pins carrying these columns.
+3. **Visual inspection under magnification** of the FPC traces in the affected area for corrosion, dendritic growth, or residue bridges — ideally performed as part of or after the ultrasonic process.
+4. **Resistance measurement** between pin C7 and adjacent pins (Ca, Cb) on the ZIF connector to confirm whether the conductive bridges have been removed after cleaning. Also measure the Space bar column pin.
+5. **Post-cleaning verification** — Re-run the same `cat` test on all affected keys (6, Y, H, N, Space, and any others identified in step 1) to confirm each key produces only its intended character.
+6. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
 
 ## Note for the Ultrasonic Cleaning Lab
 
@@ -761,11 +857,20 @@ This section summarises the key technical details for the technicians performing
 
 ### What to look for
 
-The contamination is localised to **keyboard matrix column C7**, which is the shared electrical trace for keys **6, Y, H, N**. The most probable contamination sites, in order of priority:
+Diagnostic testing (March 22) has precisely mapped the contamination. **Three matrix columns** are bridged by dried cola residue, plus the Space bar trace:
 
-1. **ZIF connector area** — dried cola residue on or around pin C7 and bridging to adjacent pins C6/C8. This is an open junction point where liquid pools and is the most likely primary site.
-2. **FPC ribbon cable** — residue wicked along the column C7 trace where it runs parallel and close (~0.1 mm) to C6/C8. Capillary action draws liquid into this gap.
-3. **Under the sealed key switch bodies** for 6, Y, H, N — cola entered through sub-0.3 mm capillary gaps between the keycap, scissor arms, rubber dome, and FPC membrane.
+| Affected column | Keys | Diagnostic output (per keypress) |
+|---|---|---|
+| **C7** (primary) | 6, Y, H, N | `690`, `yop`, `hl;`, `n./` |
+| **Ca** (bridged) | 9, O, L, `.` | (activated when C7 keys pressed) |
+| **Cb** (bridged) | 0, P, `;`, `/`, `'` | (activated when C7 keys pressed) |
+| **Space bar trace** | Space | ` '` (space + apostrophe from Cb bridge) |
+
+These three matrix columns (C7, Ca, Cb) are routed on **physically adjacent FPC traces** despite corresponding to non-adjacent physical keyboard positions. The most probable contamination sites, in order of priority:
+
+1. **ZIF connector area** — dried cola residue bridging the cluster of adjacent pins carrying C7, Ca, and Cb. The Space bar column pin also runs near this group. This is an open junction point where liquid pools and is the most likely primary site.
+2. **FPC ribbon cable** — residue wicked along the C7 trace where it runs parallel and close (~0.1 mm) to Ca and Cb. Capillary action draws liquid into this gap.
+3. **Under the sealed key switch bodies** for 6, Y, H, N (and potentially Space) — cola entered through sub-0.3 mm capillary gaps between the keycap, scissor arms, rubber dome, and FPC membrane.
 
 ### Why the "non-serviceable key blocks" diagnosis is incomplete
 
@@ -779,9 +884,10 @@ The service center correctly notes that individual scissor-switch key bodies are
 
 ### Suggested cleaning focus areas
 
-- Thoroughly clean the **ZIF connector** and the corresponding section of the **FPC ribbon cable** — this is where the column trace C7 connects and is most accessible.
+- Thoroughly clean the **ZIF connector** and the corresponding section of the **FPC ribbon cable** — this is where the column traces C7, Ca, and Cb connect and are most accessible. The Space bar column pin is also in this area.
 - Ensure ultrasonic bath exposure is sufficient to reach the **FPC trace gaps** (~0.1 mm between polyimide layers) and the **sealed key switch bodies** (sub-0.3 mm capillary spaces).
-- After cleaning, a **resistance measurement** between pin C7 and adjacent pins C6/C8 on the ZIF connector would confirm whether the conductive bridge has been removed.
+- After cleaning, a **resistance measurement** between pins C7, Ca, and Cb on the ZIF connector would confirm whether the conductive bridges have been removed. Also check the Space bar column pin isolation.
+- **Verification test:** press each of 6, Y, H, N, and Space in a `cat` session — each should produce exactly one character with no extras.
 
 ### Diagrams
 
@@ -795,8 +901,10 @@ See the [`diagrams/`](diagrams/) directory for technical illustrations (availabl
 
 ## Summary
 
-A Coca-Cola Zero spill on a MacBook Pro 14" M3 Pro (serial MWJPXQ4VC4, model A2918, board 820-02757) resulted in keyboard column C7 (keys 6, Y, H, N) producing multiple incorrect characters per keypress, initial ghost keypresses (since resolved), and progressive symptom worsening over days.
+A Coca-Cola Zero spill on a MacBook Pro 14" M3 Pro (serial MWJPXQ4VC4, model A2918, board 820-02757) resulted in keyboard column C7 (keys 6, Y, H, N) plus the Space bar producing multiple incorrect characters per keypress, initial ghost keypresses (since resolved), and progressive symptom worsening over days.
 
-The root cause is **dried conductive cola residue** shorting the shared column C7 trace on the keyboard FPC ribbon cable and/or ZIF connector, combined with **ongoing phosphoric acid corrosion** accelerated by thermal cycling during use. The service center's characterisation of this as a "mechanical issue" is **inaccurate** — the symptoms are electrical/chemical in nature, and the whole-column pattern points to shared trace contamination rather than individual key mechanism failures.
+Diagnostic testing (March 22) precisely mapped the fault: each affected key produces its correct character plus two extras from specific other columns. Key 6 outputs `690`, Y outputs `yop`, H outputs `hl;`, N outputs `n./`, and Space outputs ` '`. This reveals that **three matrix columns** (C7, Ca carrying 9/O/L/., and Cb carrying 0/P/;/') are bridged by a single contamination zone on the FPC, where these columns are routed on physically adjacent traces despite being non-adjacent on the keyboard surface.
 
-**Recommended action:** Ultrasonic cleaning (already offered by the service center at 1/3 the cost of replacement, 3–7 days). The partial improvement observed during a 2-day rest period confirms the contamination is still predominantly reversible conductive residue rather than permanent trace damage, making cleaning the correct first step before considering keyboard/top-case replacement.
+The root cause is **dried conductive cola residue** bridging the adjacent FPC traces for columns C7, Ca, and Cb (plus the Space bar trace) at the ZIF connector area and/or along the FPC ribbon, combined with **ongoing phosphoric acid corrosion** accelerated by thermal cycling during use. The service center's characterisation of this as a "mechanical issue" is **inaccurate** — the symptoms are electrical/chemical in nature, and the multi-column bridging pattern points to shared trace contamination rather than individual key mechanism failures.
+
+**Recommended action:** First, test all remaining keys with `cat` to establish a complete baseline. Then proceed with ultrasonic cleaning (already offered by the service center at 1/3 the cost of replacement, 3–7 days), focusing on the cluster of adjacent FPC pins carrying C7/Ca/Cb and the Space bar trace. The partial improvement observed during a 2-day rest period confirms the contamination is still predominantly reversible conductive residue rather than permanent trace damage, making cleaning the correct first step before considering keyboard/top-case replacement.

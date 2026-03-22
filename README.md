@@ -72,6 +72,8 @@ MacBook keyboards use a **row/column matrix** to detect keypresses. Each key sit
 - One **row** trace is shared by all keys in the same horizontal row.
 - A keypress is detected when a specific (row, column) pair is simultaneously active.
 
+**From the board 820-02757 boardview data** (decoded from `820-02757-06-boardview.brd`): the keyboard matrix on this MacBook Pro is **12 rows × 13 columns**, with signal names `KBD_DRIVE_Y0`–`KBD_DRIVE_Y11` (rows) and `KBD_SENSE_X0`–`KBD_SENSE_X12` (columns). Three additional modifier keys (`KBD_CONTROL_KEY`, `KBD_LEFT_OPTION_KEY`, `KBD_RIGHT_SHIFT_KEY`) have dedicated lines outside the matrix.
+
 ```
           COL_A   COL_B   COL_C   COL_D   COL_E   COL_F
            |       |       |       |       |       |

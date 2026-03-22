@@ -299,7 +299,7 @@ The disappearance of ghost presses suggests the residue has settled into a stabl
 
 ### Hypothesis 1: Residual liquid causing short circuits (most likely)
 
-Cola contains water, sugar, acids, and other conductive impurities. Even after the initial drying period, residual moisture or dried sugar residue can remain in tight spaces — especially under the butterfly/scissor key mechanism or on the underlying flex-cable connector pads. When the keyboard is in use and the device warms up, residual conductivity between adjacent key traces can cause:
+Cola contains water, sugar, acids, and other conductive impurities. Even after the initial drying period, residual moisture or dried sugar residue can remain in tight spaces — especially under the scissor-switch key mechanism or on the underlying flex-cable connector pads. When the keyboard is in use and the device warms up, residual conductivity between adjacent key traces can cause:
 
 - A single key contact to trigger multiple key signals (explaining the 3-symbol behavior on **N**).
 - Adjacent keys in the same matrix column (H, Y, 6, N) to be affected together, since they share a common column trace on the keyboard matrix PCB/flex cable.

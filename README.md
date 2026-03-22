@@ -11,7 +11,7 @@ After waiting, the MacBook did not turn on, so it was taken to a service center.
 Upon receiving the device back from the service center:
 
 - Key **N** did not work.
-- The service center indicated keyboard replacement would be required, citing a mechanical issue.
+- The service center indicated keyboard replacement would be required, citing a "mechanical issue" — later clarified to mean that the individual key switch blocks are sealed units that cannot be manually cleaned; residue trapped inside them cannot be reached by conventional methods.
 - After returning home, the entire column containing **H**, **Y**, **6**, and **N** was affected.
 - **N** was producing incorrect characters (a **/** symbol and other unintended characters) instead of or in addition to `N`.
 - Extra symbols were appearing spontaneously from the keyboard without any keys being pressed.
@@ -147,7 +147,24 @@ The following diagram illustrates where cola can bridge traces and produce the o
 
 On the MacBook Pro M3, the keyboard FPC runs from the key area down to the **lower portion of the top-case**, where it connects to the logic board via a ZIF socket located roughly in the center-bottom of the top-case interior. Liquid spilled on the keyboard travels downward by gravity and capillary action, meaning the **connector and the lower portion of the FPC** are among the most likely sites for residue accumulation — consistent with all affected keys being in a single vertical column rather than a single horizontal row.
 
-## Hypotheses
+## Service Center's Position: "Non-Serviceable Key Blocks"
+
+The service center has clarified what they mean by "mechanical issue": the individual key switch assemblies on modern MacBook keyboards are sealed units. Once liquid wicks into the tiny capillary space between the keycap, scissor-switch mechanism, and underlying membrane substrate, it cannot be removed by manual cleaning (swabbing, compressed air, or partial disassembly). This is technically accurate — the scissor-switch mechanism sits over a rubber dome on top of the FPC, and the tolerances are so tight that manual access is impossible without destroying the switch.
+
+However, this framing has an important nuance:
+
+- **The root cause of the observed symptoms** (entire column affected, multi-character output, ghost keypresses) points to contamination on the **FPC column trace or connector**, not inside individual key switch bodies. A faulty individual key mechanism would typically affect only that one key, not all four keys sharing a column.
+- **Ultrasonic cleaning** uses high-frequency sound waves in a liquid bath (often isopropyl alcohol or a dedicated electronics solvent) to cause cavitation — microscopic bubbles that implode and dislodge residue from surfaces unreachable by any manual method, including inside sealed key switch bodies and under FPC traces. This is the correct treatment for this type of contamination.
+
+The service center offers ultrasonic cleaning at approximately **1/3 the cost of keyboard replacement**, with a turnaround of **3–7 days**. Given that:
+
+1. Ghost keypresses have already resolved (the residue has stabilized and is no longer migrating).
+2. The column symptoms remain consistent and localized, suggesting a single contamination site.
+3. Replacement would still be an option if cleaning fails.
+
+**Ultrasonic cleaning is the recommended first step** — it addresses the actual likely root cause (FPC trace contamination), costs significantly less than replacement, and carries low risk of worsening the situation.
+
+
 
 ### Hypothesis 1: Residual liquid causing short circuits (most likely)
 
@@ -194,7 +211,7 @@ The connector misalignment (Hypothesis 2) may have introduced additional artifac
 
 ## Recommended Next Steps
 
-1. **Thorough ultrasonic cleaning** of the keyboard assembly and/or top case using isopropyl alcohol or a specialized electronics cleaner, with particular attention to the keyboard flex cable and the column traces for H, Y, 6, and N.
-2. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges.
-3. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is present.
-4. If cleaning does not resolve the issue, **keyboard/top-case replacement** will likely be necessary, as corrosion damage to flex-cable traces is generally not repairable without specialized equipment.
+1. **Ultrasonic cleaning (recommended first step)** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. With ghost presses already resolved and symptoms stabilized, the window for effective cleaning is still open.
+2. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges — ideally performed as part of or after the ultrasonic process.
+3. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is still present after cleaning.
+4. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.

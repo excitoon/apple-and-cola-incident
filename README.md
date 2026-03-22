@@ -308,17 +308,17 @@ The keyboard FPC carries all row and column signals to the controller IC. The af
       │   [ZIF connector pin 12] ◄───┘  (contamination here or
       │        │                         along the FPC trace)
       ▼        ▼
-  ┌──────────────────────────────────┐
-  │   Keyboard Controller IC         │
-  │                                  │
-  │   Scans ROW_4 → reads COL_7 ──► reports "N"        │
-  │                   reads COL_6 ──► reports extra char │
-  │                   reads COL_8? ─► reports extra char │
-  │                                  │
-  │   Result: controller sends       │
-  │   multiple keycodes for one      │
-  │   physical keypress              │
-  └──────────┬───────────────────────┘
+  ┌──────────────────────────────────────────────────┐
+  │   Keyboard Controller IC                         │
+  │                                                  │
+  │   Scans ROW_4 → reads COL_7 ──► reports "N"     │
+  │                   reads COL_6 ──► reports extra   │
+  │                   reads COL_8? ─► reports extra   │
+  │                                                  │
+  │   Result: controller sends                       │
+  │   multiple keycodes for one                      │
+  │   physical keypress                              │
+  └──────────────────────┬───────────────────────────┘
              │ SPI bus
              ▼
   ┌──────────────────────────────────┐

@@ -510,6 +510,42 @@ The service center offers ultrasonic cleaning at approximately **1/3 the cost of
 
 **Ultrasonic cleaning is the recommended first step** — it addresses the actual likely root cause (FPC trace contamination), costs significantly less than replacement, and carries low risk of worsening the situation.
 
+## Chemical Analysis of Coca-Cola Zero Residue
+
+The spill chemistry matters here because **Coca-Cola Zero is still chemically damaging to electronic circuits even without sugar**. A typical Coca-Cola Zero / Coke Zero Sugar formulation contains:
+
+- **Water + dissolved CO₂** — the bulk liquid that quickly spreads by gravity and capillary action.
+- **Phosphoric acid** — lowers pH and drives copper/tin corrosion.
+- **Potassium/sodium salts** (such as potassium benzoate or citrate, depending on market formula) — create an ionic electrolyte that increases conductivity.
+- **Artificial sweeteners** (such as aspartame and acesulfame K) — not the main conductor, but part of the organic residue left behind after drying.
+- **Caramel color / flavor residues** — sticky organics that help the dried film adhere to pads, connector fingers, and membrane surfaces.
+
+In other words, the dangerous part is **acidic electrolyte + hygroscopic residue**, not sucrose. Zero-sugar cola can still short adjacent conductors while wet and then leave behind a film that continues to attract moisture from the air and support leakage current after the visible liquid is gone.
+
+### What Coca-Cola Zero does electrically and chemically
+
+1. **While wet, it forms a conductive bridge** between adjacent keyboard-matrix traces or connector pins. That explains the initial ghost keypresses and multi-character output.
+2. **As it dries, the liquid shrinks into a thinner, more localised film**. This often stops the random ghost presses but leaves a stable leakage path between one column trace and its neighbour.
+3. **The acidic residue keeps attacking exposed metal** — especially copper, ENIG pads, tin finishes, and spring contacts — so the fault can worsen over hours or days even after the keyboard seems "dry."
+4. **The residue is hygroscopic** enough to reabsorb a small amount of ambient moisture, so conductivity can vary with temperature, humidity, and usage.
+
+This matches the observed progression: first unstable ghost presses, then a more repeatable "correct key plus extra keys" failure on a single column.
+
+### Are the traces protected by any chemical cover?
+
+**Partly — but not at the critical contact points.**
+
+- **Most FPC copper traces are protected** by the flex-cable stack-up itself: the copper is laminated between **polyimide base film and polyimide coverlay**. This provides a protective barrier against casual abrasion and some chemical exposure.
+- **However, the connector fingers, dome-switch contact lands, and mating pads are intentionally exposed** (often with nickel/gold or similar plating) so the keyboard can make electrical contact. Those exposed areas do **not** have a chemical cover over the active contact surface.
+- **The scissor-switch assembly is mechanically sealed but not hermetic.** Liquid can still wick through sub-millimeter gaps and reach the exposed membrane contact area underneath.
+
+So the accurate answer is:
+
+- **Buried traces:** yes, they are somewhat protected by polyimide coverlay.
+- **ZIF connector pads and switch contact points:** no, they must remain exposed, so they are vulnerable to cola residue and corrosion.
+
+That is why a spill can leave the majority of the flex cable visually intact yet still produce a severe electrical fault at one connector pin or one membrane-contact region.
+
 ## Discussion
 
 ### Does "mechanical issue" accurately describe the problem?
@@ -526,7 +562,7 @@ The service center later clarified they mean "mechanical" in the sense that the 
 
 Yes — but drying does **not** resolve the problem; it transforms it into a potentially worse one.
 
-When cola dries, water evaporates but leaves behind a concentrated residue of sugars, phosphoric acid, and mineral salts. That residue:
+When Coca-Cola Zero dries, water evaporates but leaves behind a concentrated residue of acids, ionic salts/preservatives, sweeteners, and caramel-color organics. That residue:
 
 1. **Concentrates the conductivity** — a dried film can produce a more stable and persistent short than the original liquid, because liquid may shift around while a dried film stays exactly where it is, bridging the same traces consistently.
 2. **Continues to corrode** — phosphoric acid keeps attacking copper traces even after drying, progressing over days. This explains why symptoms *worsened* rather than stabilised: corrosion is an ongoing electrochemical process that does not stop when the liquid evaporates.
@@ -554,7 +590,7 @@ This observation is diagnostically significant for several reasons:
 1. **Reduced thermal cycling** — with the laptop still being used (so the SoC and battery were generating heat), but the keyboard controller not actively scanning the matrix, the thermal profile around the keyboard area would have been slightly lower. This may have slowed ongoing corrosion somewhat.
 2. **No mechanical actuation** — without keys being pressed for 2 days, the physical pressure on the rubber dome → FPC membrane contact points was absent. This means no repeated compression of the contaminated contact area, which could otherwise spread or redistribute residue.
 3. **Continued drying** — the 2-day rest period allowed further evaporation of any remaining moisture in the FPC/connector area. As moisture decreases, the conductive path weakens — consistent with the improvement from "no correct character" to "correct character plus extras."
-4. **Positive signal for cleaning** — this improvement suggests the contamination is conductive residue (dried sugar/acid) rather than irreversible copper corrosion through the trace. If the traces were physically etched through by phosphoric acid, a rest period would not improve the symptoms. The fact that it did improve suggests **ultrasonic cleaning has a good chance of resolving the problem**.
+4. **Positive signal for cleaning** — this improvement suggests the contamination is conductive residue (dried acid/salt/organic film) rather than irreversible copper corrosion through the trace. If the traces were physically etched through by phosphoric acid, a rest period would not improve the symptoms. The fact that it did improve suggests **ultrasonic cleaning has a good chance of resolving the problem**.
 
 This supports the recommendation to pursue ultrasonic cleaning as the first step before considering top-case replacement.
 
@@ -562,7 +598,7 @@ This supports the recommendation to pursue ultrasonic cleaning as the first step
 
 ### Hypothesis 1: Residual liquid causing short circuits (most likely)
 
-Cola contains water, sugar, acids, and other conductive impurities. Even after the initial drying period, residual moisture or dried sugar residue can remain in tight spaces — especially under the scissor-switch key mechanism or on the underlying flex-cable connector pads. When the keyboard is in use and the device warms up, residual conductivity between adjacent key traces can cause:
+Coca-Cola Zero contains water, acids, ionic salts/preservatives, sweeteners, and other residues. Even after the initial drying period, residual moisture or dried conductive film can remain in tight spaces — especially under the scissor-switch key mechanism or on the underlying flex-cable connector pads. When the keyboard is in use and the device warms up, residual conductivity between adjacent key traces can cause:
 
 - A single key contact to trigger multiple key signals (explaining the 3-symbol behavior on **N**).
 - Adjacent keys in the same matrix column (H, Y, 6, N) to be affected together, since they share a common column trace on the keyboard matrix PCB/flex cable.
@@ -586,7 +622,7 @@ If the liquid caused corrosion or a physical break on the flexible printed circu
 - Open (broken): key produces no output.
 - Shorted to an adjacent trace: key produces multiple outputs or triggers neighboring keys.
 
-Corrosion on flex-cable traces is a known consequence of cola spills due to the acidic and sugary composition of the liquid. This damage can worsen over time as oxidation progresses, which aligns with the observation that symptoms evolved and worsened over several days.
+Corrosion on flex-cable traces is a known consequence of cola spills due to the acidic, ionic composition of the liquid. This damage can worsen over time as oxidation progresses, which aligns with the observation that symptoms evolved and worsened over several days.
 
 ### Hypothesis 4: Damage to the keyboard controller IC
 
@@ -721,7 +757,7 @@ This section summarises the key technical details for the technicians performing
 - **MacBook Pro 14" (M3 Pro, November 2023)**, model A2918, serial MWJPXQ4VC4
 - **Logic board:** 820-02757
 - **Keyboard type:** Scissor-switch (Magic Keyboard), integrated into top-case assembly
-- **Spill substance:** Coca-Cola Zero (contains phosphoric acid, sugars, mineral salts)
+- **Spill substance:** Coca-Cola Zero (contains phosphoric acid, ionic salts/preservatives, artificial sweeteners, caramel-color residue)
 
 ### What to look for
 
@@ -739,7 +775,7 @@ The service center correctly notes that individual scissor-switch key bodies are
 
 - **Ghost keypresses have stopped** — this means the residue has dried and stabilised, no longer actively migrating. Contamination is localised.
 - **Partial symptom improvement after a 2-day rest period** — correct characters returned alongside incorrect ones when the keyboard was left unused for 2 days (powered off, internal keyboard disabled via Karabiner Elements). If traces were irreversibly corroded through, rest would not improve symptoms. This strongly suggests the primary mechanism is still **reversible conductive residue** rather than permanent copper trace damage.
-- **Coca-Cola Zero residue** (dried sugar/acid film) is soluble in water and isopropyl alcohol — ultrasonic cavitation in an appropriate solvent should be able to dissolve and remove it even from sub-0.3 mm capillary spaces.
+- **Coca-Cola Zero residue** (dried acid/salt/organic film) is sufficiently soluble in water and isopropyl alcohol. Ultrasonic cavitation in an appropriate solvent should be able to dislodge and remove it even from sub-0.3 mm capillary spaces.
 
 ### Suggested cleaning focus areas
 

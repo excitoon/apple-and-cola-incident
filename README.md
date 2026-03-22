@@ -868,7 +868,7 @@ The extra characters form **two complete, consistent columns** on the keyboard:
               dried cola residue bridging
               3 adjacent FPC/ZIF pins
 
-  Nearby: Space bar column pin is also adjacent to the '  key's
+  Nearby: Space bar column pin is also adjacent to the ' key's
   column pin, with residue bridging those two as well.
 ```
 
@@ -913,7 +913,7 @@ The following additional tests would further refine the contamination model:
 1. **Complete the remaining tests** listed in [Recommended Follow-Up Tests](#recommended-follow-up-tests) — the reverse bridge test and Shift modifier test will confirm the bridge directionality and rule out controller-level issues.
 2. **Ultrasonic cleaning** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. The test results confirm the contamination is a stable, localised residue bridge at a single cluster of adjacent FPC/ZIF pins — ideal conditions for cleaning.
 3. **Re-run the same keyboard tests after cleaning** — compare against the pre-cleaning baseline documented above to objectively measure improvement. All Group A keys should produce only their correct single character; Space should produce only a space.
-4. **Visual inspection under magnification** of the FPC traces and ZIF connector pins — the contamination site is the cluster of pins carrying columns Cx/Cy/Cz (6/Y/H/N column and the 9/O/L/. and 0/P/;// columns). Look for visible dried residue bridging these adjacent pins.
+4. **Visual inspection under magnification** of the FPC traces and ZIF connector pins — the contamination site is the cluster of pins carrying columns Cx/Cy/Cz (6/Y/H/N column and the 9/O/L/. and 0/P/;/ columns). Look for visible dried residue bridging these adjacent pins.
 5. **Resistance measurement** between the three identified column pins (Cx, Cy, Cz) and the Space/`'` pin pair on the ZIF connector to confirm whether the conductive bridges have been removed after cleaning.
 6. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
 
@@ -935,7 +935,7 @@ Pre-cleaning keyboard testing (March 22) has confirmed the exact contamination l
 The contamination sites, in order of priority:
 
 1. **ZIF connector area** — dried cola residue bridging **three adjacent column pins** (Cx, Cy, Cz) on the FPC/ZIF connector. These pins carry the columns for 6/Y/H/N, 9/O/L/., and 0/P/;/​/ respectively. The Space bar column pin nearby is also bridged to the `'` column pin. This is the most likely primary site because it is an open junction point where liquid pools.
-2. **FPC ribbon cable** — residue wicked along the three column traces where they run parallel within the ribbon. The ~0.1 mm gap between traces acts as a capillary channel.
+2. **FPC ribbon cable** — residue wicked along the three column traces (Cx, Cy, Cz) where they run parallel within the ribbon. The ~0.1 mm gap between traces acts as a capillary channel.
 3. **Under the sealed key switch bodies** for 6, Y, H, N — cola entered through sub-0.3 mm capillary gaps between the keycap, scissor arms, rubber dome, and FPC membrane.
 
 ### Why the "non-serviceable key blocks" diagnosis is incomplete

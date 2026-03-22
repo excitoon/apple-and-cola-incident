@@ -451,6 +451,10 @@ The following screenshots were captured from the **PCSchematics** boardview for 
 
 Knowing the exact boardview / schematic set **does help**, but mostly by improving **placement confidence** and enabling **better illustrations**. It does **not automatically change the root-cause conclusion** for this incident on its own: the actual failure site still has to be confirmed by physical evidence such as residue location, corrosion, and continuity/microscope inspection.
 
+It also does **not materially change the hypothesis ranking / chance estimates** yet. At most, it gives a **small confidence boost** to a shared-trace / connector-path explanation over a random controller-IC fault, because the boardview supports cleaner physical localisation of the keyboard signal path. The dominant evidence is still the symptom pattern itself: one affected matrix column, multi-character output, progression over time, and partial improvement after rest.
+
+Likewise, the boardview does **not by itself explain the unidirectional key-mapping behavior**. That one-way behavior is still better explained by a **near-threshold resistive bridge** in the keyboard matrix / FPC path together with **scan timing** and **asymmetric residue geometry**, not by anything visible in the logic-board overview alone. To change that conclusion, we would need more specific keyboard-matrix or top-case trace data, not just the main logic-board boardview.
+
 This repository now also includes a **high-quality vector board render** derived from the boardview material for documentation and future annotation work:
 
 ![Board 820-02757 — high-quality vector render](diagrams/boardview-820-02757-render.svg)

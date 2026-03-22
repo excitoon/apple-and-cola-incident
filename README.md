@@ -17,6 +17,136 @@ Upon receiving the device back from the service center:
 - Extra symbols were appearing spontaneously from the keyboard without any keys being pressed.
 - Over the following days the picture evolved: **N** now produces 3 different symbols (including `N` itself), and similar multi-character behavior is present for the other keys in the affected column.
 
+## Keyboard Electronics: Schematics and Layout
+
+### 1. Keyboard Matrix Principle
+
+MacBook keyboards use a **row/column matrix** to detect keypresses. Each key sits at the intersection of one row wire and one column wire. The keyboard controller scans all rows one at a time and reads which column lines are active. This means:
+
+- One **column** trace is shared by all keys in the same vertical column on the keyboard.
+- One **row** trace is shared by all keys in the same horizontal row.
+- A keypress is detected when a specific (row, column) pair is simultaneously active.
+
+```
+          COL_A   COL_B   COL_C   COL_D   COL_E   COL_F
+           |       |       |       |       |       |
+ROW_1 ---[Tab]---[Q]-----[W]-----[E]-----[R]-----[T]--- ...
+           |       |       |       |       |       |
+ROW_2 ---[CpsLk]-[A]-----[S]-----[D]-----[F]-----[G]--- ...
+           |       |       |       |       |       |
+ROW_3 ---[Shift]-[Z]-----[X]-----[C]-----[V]-----[B]--- ...
+           |       |       |       |       |       |
+          ...     ...     ...     ...     ...     ...
+```
+
+Each intersection square `[KEY]` contains a tiny rubber dome or scissor-switch membrane that, when pressed, electrically connects the row wire to the column wire at that point.
+
+### 2. Affected Column in the Keyboard Matrix
+
+The keys **6**, **Y**, **H**, and **N** all sit in the **same column** on the physical MacBook keyboard layout. They are connected to a single column trace that runs vertically through the keyboard membrane/FPC from top to bottom:
+
+```
+  Physical keyboard (excerpt of the affected area)
+  ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+  │  5  │ [6] │  7  │  8  │  9  │  0  │  -  │  =  │  ← number row
+  ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+  │  T  │ [Y] │  U  │  I  │  O  │  P  │  [  │  ]  │  ← top letter row
+  ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+  │  G  │ [H] │  J  │  K  │  L  │  ;  │  '  │Enter│  ← home row
+  ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+  │  B  │ [N] │  M  │  ,  │  .  │  /  │     │     │  ← bottom row
+  └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
+           ▲
+           │
+     Affected column trace (shared by 6, Y, H, N)
+```
+
+A single conductive contamination or corrosion point anywhere along this column trace (or at the connector pin that carries it) will affect all four keys simultaneously.
+
+### 3. Keyboard Flex Cable (FPC) and Connector
+
+The MacBook keyboard is built into a large **Flexible Printed Circuit (FPC)** — a thin, ribbon-like PCB that carries all the row and column traces from the key matrix down to a connector at the bottom of the top-case assembly.
+
+```
+  Top-case assembly (schematic side view)
+  ┌──────────────────────────────────────────────────┐
+  │          K E Y B O A R D   K E Y S               │
+  │   [key][key][key][key][key][key][key][key][key]   │
+  │   [key][key][key][key][key][key][key][key][key]   │
+  │   [key][key][key][key][key][key][key][key][key]   │
+  │   [key][key][key][key][key][key][key][key][key]   │
+  └────────────────────┬─────────────────────────────┘
+                       │  FPC ribbon cable
+                       │  (carries ~30–34 row/col traces)
+                       │
+              ┌────────┴────────┐
+              │  ZIF Connector  │  ← Zero Insertion Force socket
+              │  on logic board │    on top-case or directly on
+              └────────┬────────┘    the logic board ribbon
+                       │
+              ┌────────┴────────┐
+              │  Keyboard       │
+              │  Controller IC  │  ← scans matrix, reports
+              └─────────────────┘    keypresses over SPI/I2C
+                                     to the Apple Silicon SoC
+```
+
+#### ZIF Connector Detail
+
+A ZIF (Zero Insertion Force) connector has a row of gold-plated pads on the FPC that line up with spring contacts inside the socket. A locking latch clamps the cable in place. If the FPC is:
+
+- **Inserted at a slight offset**: one or more pins shift, and a column or row trace connects to the wrong controller input pin — causing wrong characters.
+- **Not fully inserted**: contact resistance is high or intermittent, causing missing or unreliable keypresses.
+- **Inserted upside-down** (some cables are not keyed): the pin order is completely reversed, producing systematic wrong-character output across many keys.
+
+```
+  FPC edge (viewed from below, 34-pin example — simplified)
+
+  ┌──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┐
+  │R1│R2│R3│R4│R5│R6│C1│C2│C3│C4│C5│C6│C7│C8│C9│..│Gnd│
+  └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
+   ▲                       ▲
+   Row traces               Column traces
+   (one per keyboard row)   (one per keyboard column)
+
+  Each pad is ~0.5 mm wide with ~0.5 mm pitch — very easy to
+  misalign by one position during re-insertion.
+```
+
+### 4. How Liquid Damage Causes the Observed Symptoms
+
+The following diagram illustrates where cola can bridge traces and produce the observed multi-character and ghost-key behavior:
+
+```
+  FPC cross-section (schematic, not to scale)
+
+  ┌─────────────────────────────────────────────────────┐
+  │  Polyimide substrate (insulating base layer)         │
+  ├────────────┬────────────────────┬────────────────────┤
+  │  COL_D     │      COL_E         │      COL_F          │  ← copper traces
+  │  (6,Y,H,N) │    (adjacent col)  │    (adjacent col)   │
+  └────────────┴────────────────────┴────────────────────┘
+
+  After cola spill and drying:
+
+  ┌─────────────────────────────────────────────────────┐
+  │  Polyimide substrate                                 │
+  ├────────────┬═══════════════════ ┬────────────────────┤
+  │  COL_D     ║   dried cola +    ║      COL_F          │
+  │  (6,Y,H,N) ║   corrosion       ║                     │
+  └────────────╩═══════════════════╩────────────────────┘
+               ▲
+               Conductive bridge between COL_D and COL_E
+               → pressing any key in COL_D also activates
+                 a COL_E signal → wrong extra character output
+               → residual conductivity even when no key is
+                 pressed → spontaneous ghost keypresses
+```
+
+### 5. Physical Location of the Connector on an M3 Pro MacBook
+
+On the MacBook Pro M3, the keyboard FPC runs from the key area down to the **lower portion of the top-case**, where it connects to the logic board via a ZIF socket located roughly in the center-bottom of the top-case interior. Liquid spilled on the keyboard travels downward by gravity and capillary action, meaning the **connector and the lower portion of the FPC** are among the most likely sites for residue accumulation — consistent with all affected keys being in a single vertical column rather than a single horizontal row.
+
 ## Hypotheses
 
 ### Hypothesis 1: Residual liquid causing short circuits (most likely)

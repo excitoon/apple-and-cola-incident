@@ -715,7 +715,7 @@ Before sending the device for ultrasonic cleaning, recording the exact keyboard 
 
 ### Test Setup
 
-1. Open **Terminal.app** and run `cat` (which echoes typed characters to the screen with no buffering or interpretation). Alternatively, open **TextEdit** in plain-text mode (`Format → Make Plain Text`) with autocorrect, smart quotes, and text replacement all disabled (`Edit → Substitutions → uncheck all`).
+1. Open **Terminal.app** and run `cat` — the terminal driver's local echo will display each character on screen immediately as the keyboard produces it, making extra characters from a single keypress visible. Alternatively, open **TextEdit** in plain-text mode (`Format → Make Plain Text`) with autocorrect, smart quotes, and text replacement all disabled (`Edit → Substitutions → uncheck all`).
 2. Disable **Karabiner Elements** or any other key-remapping software so that the raw hardware output is captured.
 3. Ensure the **internal keyboard** is the active input device (disconnect any external keyboard).
 4. Set the input source to **U.S.** (or another simple ASCII layout) to avoid locale-specific key mappings.
@@ -798,7 +798,7 @@ The test results map directly to the existing hypotheses:
 
 ### Identifying the Bridged Column from Extra Characters
 
-If the extra characters are consistent across all Group A keys, they reveal exactly which adjacent column is bridged. Use this lookup table (based on the standard MacBook keyboard matrix — column assignments are approximate and may vary slightly by firmware version):
+If the extra characters are consistent across all Group A keys, they reveal exactly which adjacent column is bridged. Use this lookup table (based on the standard MacBook keyboard matrix for the A2918 — column assignments are hardware-defined and fixed for this model):
 
 | Extra character produced alongside Group A key | Likely bridged column | Bridged to |
 |---|---|---|

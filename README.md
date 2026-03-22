@@ -436,7 +436,17 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Dendrite / electrochemical migration | [SVG](diagrams/dendrite-electrochemical-migration.svg) | | Three-step process: Cu dissolution at anode → ion migration → Cu deposition and dendrite growth at cathode, leading to permanent trace bridge |
 | Connector chemical vulnerability | [SVG](diagrams/connector-chemical-vulnerability.svg) | | ZIF connector cross-section annotated with all six overlapping chemical vulnerability factors |
 
-### 9. Reference Photos of Real Hardware (external links)
+### 9. Boardview Screenshots (Board 820-02757)
+
+The following screenshots were captured from the **PCSchematics** boardview for board **820-02757** (MacBook Pro 14" A2918, M3 Pro). They show the component layout as rendered in the boardview viewer:
+
+![Board 820-02757 — full board overview](https://github.com/user-attachments/assets/a4393b7b-9703-4844-8695-8f8eaec4c43f)
+
+![Board 820-02757 — boardview detail 1](https://github.com/user-attachments/assets/f5637097-df05-4889-8ef5-3726f87df715)
+
+![Board 820-02757 — boardview detail 2](https://github.com/user-attachments/assets/b28191cb-e765-4b87-a74f-664b93dace63)
+
+### 10. Reference Photos of Real Hardware (external links)
 
 The following links show actual teardown photos of MacBook Pro hardware similar to the M3 Pro model. These illustrate the real-world appearance of the components described in the ASCII schematics above:
 

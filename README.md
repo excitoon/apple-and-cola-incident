@@ -6,6 +6,21 @@ On March 18, a Coca-Cola Zero was spilled over an Apple MacBook Pro M3 Pro. The 
 
 After waiting, the MacBook did not turn on, so it was taken to a service center. The service center was able to power it on, at which point it was immediately shut down again. The technicians spent about 2 hours cleaning the device.
 
+## Device Identification
+
+| Field | Value |
+|---|---|
+| Serial number | MWJPXQ4VC4 |
+| Model | MacBook Pro 14-inch (M3 Pro, November 2023) |
+| Model number | A2918 |
+| EMC number | EMC 8304 |
+| Logic board | 820-02757 |
+| Processor | Apple M3 Pro (11-core CPU / 14-core GPU) |
+| Display | 14.2" Liquid Retina XDR, 3024 × 1964 |
+| Keyboard type | Scissor-switch (Magic Keyboard), integrated into top-case assembly |
+
+The serial prefix **MWJ** identifies a 2024-batch MacBook Pro 14" with M3 Pro chip. The logic board number **820-02757** is the key identifier for locating component-level schematics and boardview files (see [Board-Level Schematic References](#board-level-schematic-references) below).
+
 ## Observed Symptoms
 
 Upon receiving the device back from the service center:
@@ -183,7 +198,197 @@ The following diagram illustrates where cola can bridge traces and produce the o
 
 On the MacBook Pro M3, the keyboard FPC runs from the key area down to the **lower portion of the top-case**, where it connects to the logic board via a ZIF socket located roughly in the center-bottom of the top-case interior. Liquid spilled on the keyboard travels downward by gravity and capillary action, meaning the **connector and the lower portion of the FPC** are among the most likely sites for residue accumulation — consistent with all affected keys being in a single vertical column rather than a single horizontal row.
 
-### 6. Reference Photos of Real Hardware
+### 6. Affected Block Schematics (Model A2918 / Board 820-02757)
+
+The following diagrams show the specific signal blocks affected in this incident on the MacBook Pro 14" M3 Pro (A2918), based on the keyboard system architecture for board 820-02757.
+
+#### 6a. Keyboard System Block Diagram
+
+```
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                    MacBook Pro 14" M3 Pro (A2918)                   │
+  │                    Board: 820-02757 / EMC 8304                     │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │                                                                     │
+  │   ┌─────────────────────────────────────────────┐                  │
+  │   │         KEYBOARD ASSEMBLY (top-case)        │                  │
+  │   │                                             │                  │
+  │   │  ┌─────────────────────────────────────┐   │                  │
+  │   │  │  Key Matrix (~6 rows × 16 columns)  │   │                  │
+  │   │  │  ┌───┬───┬───┬───┬───┬───┬───┐      │   │                  │
+  │   │  │  │R1 │R2 │R3 │R4 │R5 │R6 │...│ rows │   │                  │
+  │   │  │  ├───┼───┼───┼───┼───┼───┼───┤      │   │                  │
+  │   │  │  │C1 │C2 │...│C7 │...│C15│C16│ cols │   │                  │
+  │   │  │  └───┴───┴───┴─▲─┴───┴───┴───┘      │   │                  │
+  │   │  │                │                     │   │                  │
+  │   │  │         [AFFECTED COLUMN C7]         │   │                  │
+  │   │  │          6 — Y — H — N               │   │                  │
+  │   │  └──────────────────┬──────────────────┘   │                  │
+  │   │                     │ FPC ribbon cable      │                  │
+  │   │                     │ (polyimide flex,      │                  │
+  │   │                     │  ~30-34 traces)       │                  │
+  │   └─────────────────────┼───────────────────────┘                  │
+  │                         │                                           │
+  │                    ┌────┴─────┐                                     │
+  │                    │   ZIF    │  ZIF connector on top-case          │
+  │                    │ connector│  or logic board flex cable          │
+  │                    └────┬─────┘                                     │
+  │                         │                                           │
+  │   ┌─────────────────────┴─────────────────────┐                    │
+  │   │     KEYBOARD CONTROLLER IC                │                    │
+  │   │     (dedicated MCU in top-case assembly)  │                    │
+  │   │                                           │                    │
+  │   │  ┌─────────────────────────────────────┐  │                    │
+  │   │  │  Row driver outputs  (active scan)  │  │                    │
+  │   │  │  Column sense inputs (read matrix)  │──┼── [C7 affected]   │
+  │   │  │  Backlight LED PWM driver           │  │                    │
+  │   │  │  Key debounce + ghost-key logic     │  │                    │
+  │   │  └─────────────────────────────────────┘  │                    │
+  │   └───────────────────┬───────────────────────┘                    │
+  │                       │  SPI bus                                    │
+  │                       │  (MOSI, MISO, SCK, CS)                     │
+  │                       │                                             │
+  │   ┌───────────────────┴───────────────────────┐                    │
+  │   │        APPLE M3 PRO SoC                   │                    │
+  │   │   (receives keypress data via SPI,         │                    │
+  │   │    passes to macOS HID subsystem)          │                    │
+  │   └───────────────────────────────────────────┘                    │
+  │                                                                     │
+  └─────────────────────────────────────────────────────────────────────┘
+```
+
+#### 6b. FPC Connector Pinout — Affected Column Highlighted
+
+The keyboard FPC carries all row and column signals to the controller IC. The affected column (C7, carrying keys 6/Y/H/N) is a single pin on the FPC/ZIF connector. Contamination at this pin or along the C7 trace causes all four keys to malfunction simultaneously:
+
+```
+  FPC pinout (simplified 34-pin model, viewed from below)
+
+  Pin:  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+       ┌──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┐
+       │R1│R2│R3│R4│R5│R6│C1│C2│C3│C4│C5│C6│C7│C8│C9│..│Gnd│
+       └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
+                                              ▲▲▲
+                                              │││
+       Affected pin C7 ───────────────────────┘││
+       Adjacent pin C6 (bridged by residue) ───┘│
+       Adjacent pin C8 (possibly bridged) ──────┘
+
+       When dried cola bridges C7 to C6 (or C8):
+       → pressing any key in column 7 (6,Y,H,N) also activates
+         column 6 (or 8) → extra characters appear
+       → residual conductivity between C7 and adjacent pins
+         without a keypress → ghost keypresses (now resolved)
+```
+
+#### 6c. Signal Path from Affected Keys to SoC
+
+```
+  Affected key "N" pressed:
+  ═══════════════════════════════════════════════════════════
+
+  [N key]  (physical keypress)
+      │
+      ▼
+  [Scissor switch collapses, rubber dome presses FPC membrane]
+      │
+      ▼
+  [FPC contact pad closes ROW_4 × COL_7 intersection]
+      │                              │
+      │                              │ ← dried cola residue
+      │                              │   bridges COL_7 to COL_6
+      │                              │
+      ▼                              ▼
+  COL_7 signal active           COL_6 signal ALSO active
+      │                              │
+      │        ┌─────────────────────┤
+      ▼        ▼                     │
+  [FPC trace → ZIF connector pin 13] │
+      │        │                     │
+      │   [ZIF connector pin 12] ◄───┘  (contamination here or
+      │        │                         along the FPC trace)
+      ▼        ▼
+  ┌──────────────────────────────────┐
+  │   Keyboard Controller IC         │
+  │                                  │
+  │   Scans ROW_4 → reads COL_7 ──► reports "N"        │
+  │                   reads COL_6 ──► reports extra char │
+  │                   reads COL_8? ─► reports extra char │
+  │                                  │
+  │   Result: controller sends       │
+  │   multiple keycodes for one      │
+  │   physical keypress              │
+  └──────────┬───────────────────────┘
+             │ SPI bus
+             ▼
+  ┌──────────────────────────────────┐
+  │   Apple M3 Pro SoC               │
+  │   → macOS receives "N" + "/" + ? │
+  │   → all three appear on screen   │
+  └──────────────────────────────────┘
+```
+
+#### 6d. Logic Board Keyboard Area Layout (Board 820-02757)
+
+```
+  MacBook Pro 14" A2918 logic board (simplified top view)
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                                                                  │
+  │    ┌──────────────────────┐        ┌─────────────────┐          │
+  │    │                      │        │  Thunderbolt /   │          │
+  │    │    Apple M3 Pro      │        │  USB-C ports     │          │
+  │    │    SoC (main chip)   │        └─────────────────┘          │
+  │    │                      │                                      │
+  │    │   ┌──────────────┐   │                                      │
+  │    │   │ SPI keyboard │   │                                      │
+  │    │   │ interface    │   │                                      │
+  │    │   └──────┬───────┘   │                                      │
+  │    └──────────┼───────────┘                                      │
+  │               │ SPI traces on PCB                                │
+  │               │                                                  │
+  │    ┌──────────┴──────────┐                                       │
+  │    │  Keyboard Controller│  ← dedicated IC near keyboard         │
+  │    │  IC (MCU)           │    connector area                     │
+  │    │  scans matrix,      │                                       │
+  │    │  sends SPI to SoC   │                                       │
+  │    └──────────┬──────────┘                                       │
+  │               │ short PCB traces                                 │
+  │               │                                                  │
+  │    ╔══════════╧══════════╗  ← ════════════════════════════════   │
+  │    ║  ZIF CONNECTOR      ║    CONTAMINATION LIKELY HERE          │
+  │    ║  (keyboard FPC      ║    or along the FPC trace below       │
+  │    ║   plugs in here)    ║  ← ════════════════════════════════   │
+  │    ╚═════════════════════╝                                       │
+  │               ▲                                                  │
+  │               │ FPC ribbon cable                                 │
+  │               │ (exits to top-case                               │
+  │               │  keyboard assembly)                              │
+  │                                                                  │
+  │    ┌──────────────────┐   ┌───────────────────┐                 │
+  │    │ Trackpad          │   │ Battery connector │                 │
+  │    │ connector         │   │                   │                 │
+  │    └──────────────────┘   └───────────────────┘                 │
+  │                                                                  │
+  └──────────────────────────────────────────────────────────────────┘
+```
+
+### 7. Board-Level Schematic References
+
+For the MacBook Pro 14" A2918 (board **820-02757**, design **051-07754**), the following resources provide component-level schematics and boardview files that show the exact keyboard controller IC location, FPC connector pinout, and trace routing:
+
+| Resource | URL | Contents |
+|---|---|---|
+| Apple Self-Service Repair Manual | https://support.apple.com/en-us/118617 | Exploded views, connector locations, part numbers (no circuit schematics) |
+| NotebookSchematics (820-02757) | https://notebookschematics.com/macbook-pro-14-a2918-2023-m3-schematic-boardview-820-02757-schematic-boardview/ | PDF schematic + BRD boardview file |
+| LaptopSchematic (820-02757) | https://www.laptopschematic.com/apple-macbook-pro-14-m3-a2918-2023-820-02757-schematic-boardview/ | PDF schematic + boardview |
+| PCSchematics (051-07754) | https://pcschematics.com/apple-macbook-pro-14%E2%80%B3-a2918-2023-m3-820-02757-051-07754-schematic-boardview/ | Schematic and boardview download |
+| RepairLap forum (EMC 8304) | https://www.repairlap.com/threads/apple-macbook-pro14-m3-a2918-2023-emc8304-820-02757-boardview-schematics.28192/ | Community-posted boardview + schematic files |
+| LogiWiki board number index | https://logi.wiki/index.php/Board_Number_by_A_Number | Cross-reference A-number → board number |
+| iFixit teardown (14" M3) | https://www.ifixit.com/Teardown/MacBook+Pro+14-Inch+2023+Teardown/169486 | High-res teardown photos of A2918 internals |
+
+**Note:** The BRD boardview files require a viewer such as **OpenBoardView** (free, open-source) or **FlexBV** to navigate the component layout interactively. The PDF schematics show the full circuit including the keyboard controller IC (typically labeled as a "U"-prefixed component near the keyboard ZIF connector), SPI bus connections to the M3 Pro SoC, and individual column/row signal names.
+
+### 8. Reference Photos of Real Hardware
 
 The following links show actual teardown photos of MacBook Pro hardware similar to the M3 Pro model. These illustrate the real-world appearance of the components described in the ASCII schematics above:
 

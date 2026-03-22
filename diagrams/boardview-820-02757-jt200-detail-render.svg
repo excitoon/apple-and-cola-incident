@@ -1,0 +1,492 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <!-- Cola residue gradient -->
+    <linearGradient id="colaResidue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B4513" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#A0522D" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8B4513" stop-opacity="0.15"/>
+    </linearGradient>
+    <!-- Warning zone glow -->
+    <radialGradient id="warningGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ccaa44" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ccaa44" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Pin pad gradient -->
+    <linearGradient id="pinPadGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8860b"/>
+      <stop offset="50%" stop-color="#daa520"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <!-- FPC cable gradient -->
+    <linearGradient id="fpcCable" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#c97a30"/>
+      <stop offset="100%" stop-color="#d4a060"/>
+    </linearGradient>
+    <!-- Board surface -->
+    <linearGradient id="boardSurface" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a3a1a"/>
+      <stop offset="100%" stop-color="#0f2e0f"/>
+    </linearGradient>
+    <!-- ZIF body gradient -->
+    <linearGradient id="zifBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="50%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <!-- Connector housing -->
+    <linearGradient id="connHousing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#333"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    text { font-family: 'SF Mono','Menlo','Consolas',monospace; fill: #e0e0e0; }
+    .title { font-size: 14px; font-weight: bold; fill: #ffffff; }
+    .subtitle { font-size: 11px; fill: #aabbcc; }
+    .pin-label { font-size: 7.5px; fill: #d0d0d0; }
+    .pin-num { font-size: 7px; fill: #ffffff; font-weight: bold; }
+    .annotation { font-size: 9px; fill: #ccaa44; font-style: italic; }
+    .coord-label { font-size: 8px; fill: #888888; }
+    .section-label { font-size: 10px; font-weight: bold; }
+    .sense-color { fill: #4488cc; }
+    .drive-color { fill: #cc4444; }
+    .gnd-color { fill: #888888; }
+    .power-color { fill: #999999; }
+    .ctrl-color { fill: #44cc44; }
+    .warning-text { font-size: 8px; fill: #ccaa44; font-weight: bold; }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="1000" fill="#1a1a2e" rx="4"/>
+
+  <!-- Title block -->
+  <text x="400" y="28" text-anchor="middle" class="title">820-02757 — JT200 KEYBOARD FPC CONNECTOR DETAIL</text>
+  <text x="400" y="44" text-anchor="middle" class="subtitle">36-Pin ZIF · Board Coordinates X=4119–4253, Y=6111–6806 · Cola Spill Contamination Map</text>
+  <line x1="40" y1="52" x2="760" y2="52" stroke="#334455" stroke-width="1"/>
+
+  <!-- Board surface area -->
+  <rect x="60" y="65" width="680" height="870" rx="6" fill="url(#boardSurface)" stroke="#2a4a2a" stroke-width="1.5"/>
+  <!-- PCB texture lines (solder mask) -->
+  <g opacity="0.08" stroke="#44aa44" stroke-width="0.5">
+    <line x1="60" y1="100" x2="740" y2="100"/>
+    <line x1="60" y1="200" x2="740" y2="200"/>
+    <line x1="60" y1="300" x2="740" y2="300"/>
+    <line x1="60" y1="400" x2="740" y2="400"/>
+    <line x1="60" y1="500" x2="740" y2="500"/>
+    <line x1="60" y1="600" x2="740" y2="600"/>
+    <line x1="60" y1="700" x2="740" y2="700"/>
+    <line x1="60" y1="800" x2="740" y2="800"/>
+    <line x1="60" y1="900" x2="740" y2="900"/>
+  </g>
+
+  <!-- ==================== FPC CABLE (going up to keyboard) ==================== -->
+  <g>
+    <!-- FPC cable body -->
+    <rect x="240" y="65" width="120" height="90" fill="url(#fpcCable)" opacity="0.85" rx="2"/>
+    <!-- Trace lines on FPC -->
+    <g stroke-width="0.8" opacity="0.6">
+      <line x1="255" y1="65" x2="255" y2="155" stroke="#4488cc"/>
+      <line x1="261" y1="65" x2="261" y2="155" stroke="#cc4444"/>
+      <line x1="267" y1="65" x2="267" y2="155" stroke="#4488cc"/>
+      <line x1="273" y1="65" x2="273" y2="155" stroke="#cc4444"/>
+      <line x1="279" y1="65" x2="279" y2="155" stroke="#4488cc"/>
+      <line x1="285" y1="65" x2="285" y2="155" stroke="#cc4444"/>
+      <line x1="291" y1="65" x2="291" y2="155" stroke="#4488cc"/>
+      <line x1="297" y1="65" x2="297" y2="155" stroke="#cc4444"/>
+      <line x1="303" y1="65" x2="303" y2="155" stroke="#4488cc"/>
+      <line x1="309" y1="65" x2="309" y2="155" stroke="#cc4444"/>
+      <line x1="315" y1="65" x2="315" y2="155" stroke="#4488cc"/>
+      <line x1="321" y1="65" x2="321" y2="155" stroke="#cc4444"/>
+      <line x1="327" y1="65" x2="327" y2="155" stroke="#4488cc"/>
+      <line x1="333" y1="65" x2="333" y2="155" stroke="#cc4444"/>
+      <line x1="339" y1="65" x2="339" y2="155" stroke="#4488cc"/>
+      <line x1="345" y1="65" x2="345" y2="155" stroke="#cc4444"/>
+    </g>
+    <!-- Arrow indicating direction -->
+    <polygon points="300,72 294,82 306,82" fill="#ffffff" opacity="0.7"/>
+    <text x="370" y="90" class="pin-label" fill="#d4a060">← FPC to keyboard module</text>
+    <text x="370" y="102" class="pin-label" fill="#888">(25 interleaved DRIVE/SENSE traces)</text>
+  </g>
+
+  <!-- ==================== ZIF LATCH MECHANISM ==================== -->
+  <g>
+    <!-- Latch body (open position shown) -->
+    <rect x="190" y="148" width="220" height="16" rx="2" fill="#4a4a4a" stroke="#666" stroke-width="1"/>
+    <rect x="195" y="150" width="210" height="5" rx="1" fill="#5a5a5a"/>
+    <!-- Latch hinge -->
+    <rect x="190" y="162" width="220" height="3" rx="1" fill="#3a3a3a" stroke="#555" stroke-width="0.5"/>
+    <!-- Latch label -->
+    <text x="300" y="145" text-anchor="middle" font-size="7" fill="#ccaa44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">▲ LIFT TO RELEASE FPC ▲</text>
+    <!-- Latch arrows -->
+    <path d="M195,158 L195,140 M195,140 L191,145 M195,140 L199,145" stroke="#ccaa44" stroke-width="0.8" fill="none"/>
+    <path d="M405,158 L405,140 M405,140 L401,145 M405,140 L409,145" stroke="#ccaa44" stroke-width="0.8" fill="none"/>
+  </g>
+
+  <!-- ==================== JT200 CONNECTOR BODY ==================== -->
+  <g>
+    <!-- Connector housing outline -->
+    <rect x="185" y="165" width="230" height="640" rx="3" fill="url(#zifBody)" stroke="#555" stroke-width="1.5"/>
+    <!-- Inner cavity -->
+    <rect x="195" y="170" width="210" height="630" rx="2" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+
+    <!-- Connector label -->
+    <text x="300" y="186" text-anchor="middle" class="section-label" fill="#ffffff">JT200 — 36-pin ZIF</text>
+    <text x="300" y="198" text-anchor="middle" class="coord-label">X=4119–4253 · Y=6111–6806</text>
+
+    <!-- GND shield pins (right side) -->
+    <rect x="390" y="208" width="18" height="8" rx="1" fill="#666" stroke="#888" stroke-width="0.5"/>
+    <text x="413" y="215" class="pin-label" fill="#888">GND (4253,6111)</text>
+    <rect x="390" y="790" width="18" height="8" rx="1" fill="#666" stroke="#888" stroke-width="0.5"/>
+    <text x="413" y="797" class="pin-label" fill="#888">GND (4253,6806)</text>
+
+    <!-- ==================== COLA RESIDUE OVERLAY ==================== -->
+    <!-- Main contamination zone covering pin area -->
+    <rect x="197" y="210" width="195" height="590" rx="2" fill="url(#colaResidue)"/>
+    <!-- Heavier deposit areas (between bridging boundaries) -->
+    <ellipse cx="260" cy="380" rx="50" ry="30" fill="#8B4513" opacity="0.2"/>
+    <ellipse cx="280" cy="520" rx="55" ry="25" fill="#8B4513" opacity="0.25"/>
+    <ellipse cx="265" cy="650" rx="45" ry="20" fill="#8B4513" opacity="0.18"/>
+
+    <!-- ==================== PIN PADS (36 pins) ==================== -->
+    <!-- Pin row at X=4119 (left side of connector) -->
+    <!-- Pin spacing: ~16.2 units mapped to ~16.2px vertical spacing -->
+    <!-- Y range 6134-6783 mapped to ~210-795 in SVG coords -->
+
+    <!-- Pin 1: KBD_RIGHT_SHIFT_KEY — Control (green) -->
+    <rect x="205" y="210" width="40" height="6" rx="1" fill="#44cc44" opacity="0.85"/>
+    <text x="200" y="215" text-anchor="end" class="pin-num">1</text>
+    <text x="250" y="214" class="pin-label" fill="#44cc44">KBD_RIGHT_SHIFT_KEY</text>
+
+    <!-- Pin 2: PP1V825_S2_HOLD_KBD_ISNS — Power (gray) -->
+    <rect x="205" y="226" width="40" height="6" rx="1" fill="#999" opacity="0.85"/>
+    <text x="200" y="231" text-anchor="end" class="pin-num">2</text>
+    <text x="250" y="230" class="pin-label" fill="#999">PP1V825_S2_HOLD_KBD_ISNS</text>
+
+    <!-- Pin 3: KBD_ID1 — Control (green) -->
+    <rect x="205" y="242" width="40" height="6" rx="1" fill="#44cc44" opacity="0.85"/>
+    <text x="200" y="247" text-anchor="end" class="pin-num">3</text>
+    <text x="250" y="246" class="pin-label" fill="#44cc44">KBD_ID1</text>
+
+    <!-- Pin 4: GND -->
+    <rect x="205" y="258" width="40" height="6" rx="1" fill="#666" opacity="0.85"/>
+    <text x="200" y="263" text-anchor="end" class="pin-num">4</text>
+    <text x="250" y="262" class="pin-label" fill="#888">GND</text>
+
+    <!-- Pin 5: KBD_ID2 — Control (green) -->
+    <rect x="205" y="274" width="40" height="6" rx="1" fill="#44cc44" opacity="0.85"/>
+    <text x="200" y="279" text-anchor="end" class="pin-num">5</text>
+    <text x="250" y="278" class="pin-label" fill="#44cc44">KBD_ID2</text>
+
+    <!-- ===== SENSE GROUP A (Pins 6-9) ===== -->
+    <!-- Pin 6: KBD_SENSE_X7 — Sense (blue) -->
+    <rect x="205" y="294" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="299" text-anchor="end" class="pin-num">6</text>
+    <text x="250" y="298" class="pin-label" fill="#4488cc">KBD_SENSE_X7</text>
+
+    <!-- Pin 7: KBD_SENSE_X11 — Sense (blue) -->
+    <rect x="205" y="310" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="315" text-anchor="end" class="pin-num">7</text>
+    <text x="250" y="314" class="pin-label" fill="#4488cc">KBD_SENSE_X11</text>
+
+    <!-- Pin 8: KBD_SENSE_X6 — Sense (blue) -->
+    <rect x="205" y="326" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="331" text-anchor="end" class="pin-num">8</text>
+    <text x="250" y="330" class="pin-label" fill="#4488cc">KBD_SENSE_X6</text>
+
+    <!-- Pin 9: KBD_SENSE_X9 — Sense (blue) -->
+    <rect x="205" y="342" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="347" text-anchor="end" class="pin-num">9</text>
+    <text x="250" y="346" class="pin-label" fill="#4488cc">KBD_SENSE_X9</text>
+
+    <!-- ===== BRIDGING BOUNDARY 1: Pin 9↔10 ===== -->
+    <rect x="200" y="349" width="190" height="12" rx="1" fill="#ccaa44" opacity="0.15"/>
+    <line x1="200" y1="349" x2="390" y2="349" stroke="#ccaa44" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
+    <line x1="200" y1="361" x2="390" y2="361" stroke="#ccaa44" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
+    <!-- Warning triangle -->
+    <polygon points="430,348 438,360 422,360" fill="#ccaa44" stroke="#ffcc00" stroke-width="0.5"/>
+    <text x="433" y="358" text-anchor="middle" font-size="8" fill="#1a1a2e" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">!</text>
+    <text x="444" y="353" class="warning-text">BRIDGE RISK 1</text>
+    <text x="444" y="363" font-size="6.5" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">SENSE↔DRIVE · 20 units</text>
+
+    <!-- ===== DRIVE GROUP A (Pins 10-14) ===== -->
+    <!-- Pin 10: KBD_DRIVE_Y0 — Drive (red) -->
+    <rect x="205" y="362" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="367" text-anchor="end" class="pin-num">10</text>
+    <text x="250" y="366" class="pin-label" fill="#cc4444">KBD_DRIVE_Y0</text>
+
+    <!-- Pin 11: KBD_DRIVE_Y10 — Drive (red) -->
+    <rect x="205" y="378" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="383" text-anchor="end" class="pin-num">11</text>
+    <text x="250" y="382" class="pin-label" fill="#cc4444">KBD_DRIVE_Y10</text>
+
+    <!-- Pin 12: KBD_DRIVE_Y2 — Drive (red) -->
+    <rect x="205" y="394" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="399" text-anchor="end" class="pin-num">12</text>
+    <text x="250" y="398" class="pin-label" fill="#cc4444">KBD_DRIVE_Y2</text>
+
+    <!-- Pin 13: KBD_DRIVE_Y8 — Drive (red) -->
+    <rect x="205" y="410" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="415" text-anchor="end" class="pin-num">13</text>
+    <text x="250" y="414" class="pin-label" fill="#cc4444">KBD_DRIVE_Y8</text>
+
+    <!-- Pin 14: KBD_DRIVE_Y1 — Drive (red) -->
+    <rect x="205" y="426" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="431" text-anchor="end" class="pin-num">14</text>
+    <text x="250" y="430" class="pin-label" fill="#cc4444">KBD_DRIVE_Y1</text>
+
+    <!-- ===== BRIDGING BOUNDARY 2: Pin 14↔15 ===== -->
+    <rect x="200" y="433" width="190" height="12" rx="1" fill="#ccaa44" opacity="0.15"/>
+    <line x1="200" y1="433" x2="390" y2="433" stroke="#ccaa44" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
+    <line x1="200" y1="445" x2="390" y2="445" stroke="#ccaa44" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
+    <polygon points="430,432 438,444 422,444" fill="#ccaa44" stroke="#ffcc00" stroke-width="0.5"/>
+    <text x="433" y="442" text-anchor="middle" font-size="8" fill="#1a1a2e" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">!</text>
+    <text x="444" y="437" class="warning-text">BRIDGE RISK 2</text>
+    <text x="444" y="447" font-size="6.5" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">DRIVE↔SENSE · 19 units</text>
+
+    <!-- ===== SENSE GROUP B (Pins 15-23) ===== -->
+    <!-- Pin 15: KBD_SENSE_X8 — Sense (blue) -->
+    <rect x="205" y="446" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="451" text-anchor="end" class="pin-num">15</text>
+    <text x="250" y="450" class="pin-label" fill="#4488cc">KBD_SENSE_X8</text>
+
+    <!-- Pin 16: KBD_SENSE_X12 — Sense (blue) -->
+    <rect x="205" y="462" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="467" text-anchor="end" class="pin-num">16</text>
+    <text x="250" y="466" class="pin-label" fill="#4488cc">KBD_SENSE_X12</text>
+
+    <!-- Pin 17: KBD_SENSE_X10 — Sense (blue) -->
+    <rect x="205" y="478" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="483" text-anchor="end" class="pin-num">17</text>
+    <text x="250" y="482" class="pin-label" fill="#4488cc">KBD_SENSE_X10</text>
+
+    <!-- Pin 18: KBD_SENSE_X5 — Sense (blue) -->
+    <rect x="205" y="494" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="499" text-anchor="end" class="pin-num">18</text>
+    <text x="250" y="498" class="pin-label" fill="#4488cc">KBD_SENSE_X5</text>
+
+    <!-- Pin 19: KBD_SENSE_X4 — Sense (blue) -->
+    <rect x="205" y="510" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="515" text-anchor="end" class="pin-num">19</text>
+    <text x="250" y="514" class="pin-label" fill="#4488cc">KBD_SENSE_X4</text>
+
+    <!-- Pin 20: KBD_SENSE_X3 — Sense (blue) -->
+    <rect x="205" y="526" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="531" text-anchor="end" class="pin-num">20</text>
+    <text x="250" y="530" class="pin-label" fill="#4488cc">KBD_SENSE_X3</text>
+
+    <!-- Pin 21: KBD_SENSE_X1 — Sense (blue) -->
+    <rect x="205" y="542" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="547" text-anchor="end" class="pin-num">21</text>
+    <text x="250" y="546" class="pin-label" fill="#4488cc">KBD_SENSE_X1</text>
+
+    <!-- Pin 22: KBD_SENSE_X2 — Sense (blue) -->
+    <rect x="205" y="558" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="563" text-anchor="end" class="pin-num">22</text>
+    <text x="250" y="562" class="pin-label" fill="#4488cc">KBD_SENSE_X2</text>
+
+    <!-- Pin 23: KBD_SENSE_X0 — Sense (blue) -->
+    <rect x="205" y="574" width="40" height="6" rx="1" fill="#4488cc" opacity="0.85"/>
+    <text x="200" y="579" text-anchor="end" class="pin-num">23</text>
+    <text x="250" y="578" class="pin-label" fill="#4488cc">KBD_SENSE_X0</text>
+
+    <!-- ===== BRIDGING BOUNDARY 3: Pin 23↔24 ===== -->
+    <rect x="200" y="581" width="190" height="12" rx="1" fill="#ccaa44" opacity="0.15"/>
+    <line x1="200" y1="581" x2="390" y2="581" stroke="#ccaa44" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
+    <line x1="200" y1="593" x2="390" y2="593" stroke="#ccaa44" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
+    <polygon points="430,580 438,592 422,592" fill="#ccaa44" stroke="#ffcc00" stroke-width="0.5"/>
+    <text x="433" y="590" text-anchor="middle" font-size="8" fill="#1a1a2e" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">!</text>
+    <text x="444" y="585" class="warning-text">BRIDGE RISK 3</text>
+    <text x="444" y="595" font-size="6.5" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">SENSE↔DRIVE · 20 units</text>
+
+    <!-- ===== DRIVE GROUP B (Pins 24-30) ===== -->
+    <!-- Pin 24: KBD_DRIVE_Y11 — Drive (red) -->
+    <rect x="205" y="594" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="599" text-anchor="end" class="pin-num">24</text>
+    <text x="250" y="598" class="pin-label" fill="#cc4444">KBD_DRIVE_Y11</text>
+
+    <!-- Pin 25: KBD_DRIVE_Y9 — Drive (red) -->
+    <rect x="205" y="610" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="615" text-anchor="end" class="pin-num">25</text>
+    <text x="250" y="614" class="pin-label" fill="#cc4444">KBD_DRIVE_Y9</text>
+
+    <!-- Pin 26: KBD_DRIVE_Y3 — Drive (red) -->
+    <rect x="205" y="626" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="631" text-anchor="end" class="pin-num">26</text>
+    <text x="250" y="630" class="pin-label" fill="#cc4444">KBD_DRIVE_Y3</text>
+
+    <!-- Pin 27: KBD_DRIVE_Y4 — Drive (red) -->
+    <rect x="205" y="642" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="647" text-anchor="end" class="pin-num">27</text>
+    <text x="250" y="646" class="pin-label" fill="#cc4444">KBD_DRIVE_Y4</text>
+
+    <!-- Pin 28: KBD_DRIVE_Y5 — Drive (red) -->
+    <rect x="205" y="658" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="663" text-anchor="end" class="pin-num">28</text>
+    <text x="250" y="662" class="pin-label" fill="#cc4444">KBD_DRIVE_Y5</text>
+
+    <!-- Pin 29: KBD_DRIVE_Y7 — Drive (red) -->
+    <rect x="205" y="674" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="679" text-anchor="end" class="pin-num">29</text>
+    <text x="250" y="678" class="pin-label" fill="#cc4444">KBD_DRIVE_Y7</text>
+
+    <!-- Pin 30: KBD_DRIVE_Y6 — Drive (red) -->
+    <rect x="205" y="690" width="40" height="6" rx="1" fill="#cc4444" opacity="0.85"/>
+    <text x="200" y="695" text-anchor="end" class="pin-num">30</text>
+    <text x="250" y="694" class="pin-label" fill="#cc4444">KBD_DRIVE_Y6</text>
+
+    <!-- ===== BOTTOM PINS (31-34) ===== -->
+    <!-- Pin 31: KBD_CAP_CATHODE — Control (green) -->
+    <rect x="205" y="714" width="40" height="6" rx="1" fill="#44cc44" opacity="0.85"/>
+    <text x="200" y="719" text-anchor="end" class="pin-num">31</text>
+    <text x="250" y="718" class="pin-label" fill="#44cc44">KBD_CAP_CATHODE</text>
+
+    <!-- Pin 32: PP3V3_AON_KBD_CONN — Power (gray) -->
+    <rect x="205" y="730" width="40" height="6" rx="1" fill="#999" opacity="0.85"/>
+    <text x="200" y="735" text-anchor="end" class="pin-num">32</text>
+    <text x="250" y="734" class="pin-label" fill="#999">PP3V3_AON_KBD_CONN</text>
+
+    <!-- Pin 33: KBD_LEFT_OPTION_KEY — Control (green) -->
+    <rect x="205" y="746" width="40" height="6" rx="1" fill="#44cc44" opacity="0.85"/>
+    <text x="200" y="751" text-anchor="end" class="pin-num">33</text>
+    <text x="250" y="750" class="pin-label" fill="#44cc44">KBD_LEFT_OPTION_KEY</text>
+
+    <!-- Pin 34: KBD_CONTROL_KEY — Control (green) -->
+    <rect x="205" y="762" width="40" height="6" rx="1" fill="#44cc44" opacity="0.85"/>
+    <text x="200" y="767" text-anchor="end" class="pin-num">34</text>
+    <text x="250" y="766" class="pin-label" fill="#44cc44">KBD_CONTROL_KEY</text>
+
+    <!-- Pins 35-36 (unused/reserved) -->
+    <rect x="205" y="778" width="40" height="6" rx="1" fill="#444" opacity="0.6"/>
+    <text x="200" y="783" text-anchor="end" class="pin-num" fill="#888">35</text>
+    <text x="250" y="782" class="pin-label" fill="#666">RESERVED</text>
+
+    <rect x="205" y="794" width="40" height="6" rx="1" fill="#444" opacity="0.6"/>
+    <text x="200" y="799" text-anchor="end" class="pin-num" fill="#888">36</text>
+    <text x="250" y="798" class="pin-label" fill="#666">RESERVED</text>
+  </g>
+
+  <!-- Group brackets for pin groups -->
+  <g stroke-width="1" fill="none" opacity="0.5">
+    <!-- SENSE GROUP A bracket -->
+    <path d="M195,294 L189,294 L189,348 L195,348" stroke="#4488cc"/>
+    <text x="186" y="324" text-anchor="end" font-size="6" fill="#4488cc" transform="rotate(-90,186,324)" font-family="'SF Mono','Menlo','Consolas',monospace">SENSE A</text>
+
+    <!-- DRIVE GROUP A bracket -->
+    <path d="M195,362 L189,362 L189,432 L195,432" stroke="#cc4444"/>
+    <text x="186" y="400" text-anchor="end" font-size="6" fill="#cc4444" transform="rotate(-90,186,400)" font-family="'SF Mono','Menlo','Consolas',monospace">DRIVE A</text>
+
+    <!-- SENSE GROUP B bracket -->
+    <path d="M195,446 L189,446 L189,580 L195,580" stroke="#4488cc"/>
+    <text x="186" y="516" text-anchor="end" font-size="6" fill="#4488cc" transform="rotate(-90,186,516)" font-family="'SF Mono','Menlo','Consolas',monospace">SENSE B</text>
+
+    <!-- DRIVE GROUP B bracket -->
+    <path d="M195,594 L189,594 L189,696 L195,696" stroke="#cc4444"/>
+    <text x="186" y="648" text-anchor="end" font-size="6" fill="#cc4444" transform="rotate(-90,186,648)" font-family="'SF Mono','Menlo','Consolas',monospace">DRIVE B</text>
+  </g>
+
+  <!-- ==================== IPA SWAB ACCESS ANNOTATION ==================== -->
+  <g>
+    <!-- Swab tool icon -->
+    <line x1="115" y1="340" x2="180" y2="420" stroke="#e0e0e0" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="108" cy="332" rx="12" ry="8" fill="#f0f0f0" opacity="0.7" transform="rotate(-50,108,332)"/>
+    <text x="80" y="310" text-anchor="middle" font-size="8" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">IPA SWAB</text>
+    <text x="80" y="322" text-anchor="middle" font-size="7" fill="#44cc44" font-family="'SF Mono','Menlo','Consolas',monospace">ACCESS →</text>
+    <!-- Arrow pointing to pin area -->
+    <path d="M140,380 L190,380" stroke="#44cc44" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowGreen)"/>
+  </g>
+  <!-- Arrow marker definitions -->
+  <defs>
+    <marker id="arrowGreen" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#44cc44"/>
+    </marker>
+  </defs>
+
+  <!-- ==================== JT220 BACKLIGHT CONNECTOR (below JT200) ==================== -->
+  <g>
+    <!-- Gap indicator -->
+    <text x="300" y="820" text-anchor="middle" class="coord-label">↕ ~93 units (~2mm gap)</text>
+
+    <!-- Connector housing -->
+    <rect x="220" y="830" width="160" height="80" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+    <rect x="228" y="835" width="144" height="70" rx="2" fill="#1a1a1a" stroke="#444" stroke-width="0.5"/>
+
+    <!-- 12 pins -->
+    <g>
+      <rect x="238" y="845" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="238" y="853" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="238" y="861" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="238" y="869" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="238" y="877" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="238" y="885" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="278" y="845" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="278" y="853" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="278" y="861" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="278" y="869" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="278" y="877" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+      <rect x="278" y="885" width="30" height="5" rx="1" fill="#666" opacity="0.7"/>
+    </g>
+
+    <!-- Status label -->
+    <text x="300" y="842" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">JT220 — 12-pin</text>
+    <rect x="315" y="893" width="8" height="8" rx="4" fill="#44cc44"/>
+    <text x="330" y="900" font-size="9" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">BACKLIGHT — WORKING ✓</text>
+    <text x="300" y="918" text-anchor="middle" class="coord-label">X=4119–4253 · Y=6899–7121</text>
+  </g>
+
+  <!-- ==================== ANNOTATIONS ==================== -->
+  <!-- Pin pitch annotation -->
+  <g>
+    <rect x="440" y="610" width="310" height="42" rx="4" fill="#1a1a2e" stroke="#ccaa44" stroke-width="1" opacity="0.95"/>
+    <text x="595" y="626" text-anchor="middle" class="annotation">~0.5mm pin pitch — capillary gap traps liquid</text>
+    <text x="595" y="640" text-anchor="middle" font-size="7.5" fill="#aaa" font-family="'SF Mono','Menlo','Consolas',monospace">Surface tension holds cola residue between pads</text>
+  </g>
+
+  <!-- Cola residue danger annotation -->
+  <g>
+    <rect x="440" y="660" width="310" height="52" rx="4" fill="#2a1a0a" stroke="#8B4513" stroke-width="1" opacity="0.95"/>
+    <text x="448" y="676" font-size="9" fill="#d4a060" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">⚠ COLA RESIDUE DETECTED</text>
+    <text x="448" y="690" font-size="7.5" fill="#b08050" font-family="'SF Mono','Menlo','Consolas',monospace">Sugar + phosphoric acid residue creates</text>
+    <text x="448" y="702" font-size="7.5" fill="#b08050" font-family="'SF Mono','Menlo','Consolas',monospace">conductive film between adjacent pads</text>
+  </g>
+
+  <!-- Legend -->
+  <g>
+    <rect x="440" y="72" width="300" height="110" rx="4" fill="#111122" stroke="#334455" stroke-width="1"/>
+    <text x="590" y="90" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">PIN TYPE LEGEND</text>
+
+    <rect x="455" y="98" width="14" height="8" rx="2" fill="#4488cc"/>
+    <text x="475" y="106" font-size="8" fill="#4488cc" font-family="'SF Mono','Menlo','Consolas',monospace">SENSE (KBD_SENSE_Xn)</text>
+
+    <rect x="455" y="112" width="14" height="8" rx="2" fill="#cc4444"/>
+    <text x="475" y="120" font-size="8" fill="#cc4444" font-family="'SF Mono','Menlo','Consolas',monospace">DRIVE (KBD_DRIVE_Yn)</text>
+
+    <rect x="455" y="126" width="14" height="8" rx="2" fill="#44cc44"/>
+    <text x="475" y="134" font-size="8" fill="#44cc44" font-family="'SF Mono','Menlo','Consolas',monospace">CONTROL (KEY/ID/CAP)</text>
+
+    <rect x="455" y="140" width="14" height="8" rx="2" fill="#999"/>
+    <text x="475" y="148" font-size="8" fill="#999" font-family="'SF Mono','Menlo','Consolas',monospace">POWER / GND</text>
+
+    <rect x="455" y="154" width="14" height="8" rx="2" fill="#ccaa44" opacity="0.5"/>
+    <text x="475" y="162" font-size="8" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">⚠ BRIDGING RISK ZONE</text>
+  </g>
+
+  <!-- Board coordinate reference markers -->
+  <text x="70" y="80" class="coord-label">Y=6111 ↑</text>
+  <text x="70" y="810" class="coord-label">Y=6806 ↓</text>
+  <text x="250" y="940" text-anchor="middle" class="coord-label">X=4119 (signal)</text>
+  <text x="420" y="940" text-anchor="middle" class="coord-label">X=4253 (shield)</text>
+
+  <!-- Footer -->
+  <line x1="40" y1="960" x2="760" y2="960" stroke="#334455" stroke-width="1"/>
+  <text x="400" y="978" text-anchor="middle" font-size="8" fill="#556677" font-family="'SF Mono','Menlo','Consolas',monospace">820-02757-06 Logic Board · JT200 Detail Render · Cola Spill Incident Documentation</text>
+  <text x="400" y="992" text-anchor="middle" font-size="7" fill="#445566" font-family="'SF Mono','Menlo','Consolas',monospace">Coordinates from decoded boardview data · Not to absolute scale</text>
+</svg>

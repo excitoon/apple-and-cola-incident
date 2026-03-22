@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="'Helvetica Neue', Arial, sans-serif">
+  <title>Spill Area Serviceability Map — MacBook Pro 14" A2918 (Board 820-02757)</title>
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#1a1a2e" rx="8"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">Spill Area Serviceability Map — Board 820-02757</text>
+  <text x="450" y="50" text-anchor="middle" fill="#8899aa" font-size="11">Disassembly depth &amp; problem-area assessment for each contamination zone</text>
+
+  <!-- Depth legend -->
+  <rect x="20" y="70" width="860" height="28" fill="#0d1117" rx="4" stroke="#333" stroke-width="1"/>
+  <text x="30" y="88" fill="#58a6ff" font-size="11" font-weight="bold">DEPTH 1: Bottom case removed (6× P5 Pentalobe screws + clips, ~5 min)</text>
+  <text x="700" y="88" fill="#3fb950" font-size="11" font-weight="bold">ALL ZONES HERE ✅</text>
+
+  <!-- Board outline -->
+  <rect x="60" y="110" width="780" height="380" fill="#0d1117" rx="6" stroke="#30363d" stroke-width="2"/>
+  <text x="450" y="135" text-anchor="middle" fill="#484f58" font-size="10">Logic Board 820-02757 (top surface visible after bottom case removal)</text>
+
+  <!-- SoC area -->
+  <rect x="340" y="240" width="160" height="100" fill="#161b22" rx="4" stroke="#484f58" stroke-width="1"/>
+  <text x="420" y="295" text-anchor="middle" fill="#484f58" font-size="12" font-weight="bold">U0600</text>
+  <text x="420" y="310" text-anchor="middle" fill="#484f58" font-size="9">M3 Pro SoC</text>
+
+  <!-- Zone 1: JT200 (PRIMARY) -->
+  <rect x="280" y="145" width="180" height="60" fill="rgba(63,185,80,0.15)" rx="4" stroke="#3fb950" stroke-width="2" stroke-dasharray="none"/>
+  <text x="370" y="162" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="bold">ZONE 1 ★ PRIMARY</text>
+  <text x="370" y="176" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">JT200 — Keyboard FPC ZIF</text>
+  <text x="370" y="190" text-anchor="middle" fill="#8b949e" font-size="9">36 pins • 0.5mm pitch • ZIF latch</text>
+  <text x="370" y="201" text-anchor="middle" fill="#3fb950" font-size="9">✅ Manual IPA clean • 10-15 min</text>
+
+  <!-- Zone 1 annotation -->
+  <rect x="570" y="140" width="250" height="75" fill="rgba(63,185,80,0.08)" rx="4" stroke="#3fb950" stroke-width="1"/>
+  <text x="695" y="155" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="bold">Most likely problem area</text>
+  <text x="695" y="168" text-anchor="middle" fill="#c9d1d9" font-size="9">• DRIVE/SENSE interleaving confirmed</text>
+  <text x="695" y="180" text-anchor="middle" fill="#c9d1d9" font-size="9">• 3 bridging boundaries (pins 10↔11, 15↔16, 24↔25)</text>
+  <text x="695" y="192" text-anchor="middle" fill="#c9d1d9" font-size="9">• Gravity pools cola here first</text>
+  <text x="695" y="204" text-anchor="middle" fill="#c9d1d9" font-size="9">• 1 component to detach (bottom case)</text>
+  <line x1="460" y1="175" x2="570" y2="175" stroke="#3fb950" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- JT220 (NOT a problem - backlight working) -->
+  <rect x="280" y="207" width="180" height="32" fill="rgba(110,118,129,0.1)" rx="4" stroke="#484f58" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="370" y="221" text-anchor="middle" fill="#484f58" font-size="9">JT220 — Backlight (12 pins)</text>
+  <text x="370" y="233" text-anchor="middle" fill="#484f58" font-size="8">❌ Not a problem — backlight is working</text>
+
+  <!-- JT400 (IPD connector - not a problem) -->
+  <rect x="100" y="200" width="160" height="55" fill="rgba(110,118,129,0.1)" rx="4" stroke="#484f58" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="180" y="217" text-anchor="middle" fill="#484f58" font-size="10">JT400 — IPD Connector</text>
+  <text x="180" y="230" text-anchor="middle" fill="#484f58" font-size="9">50 pins • I²C KBD bus + trackpad</text>
+  <text x="180" y="244" text-anchor="middle" fill="#484f58" font-size="8">❌ Not a problem — would cause</text>
+  <text x="180" y="253" text-anchor="middle" fill="#484f58" font-size="8">total keyboard failure, not column bridging</text>
+
+  <!-- Zone 2: FPC ribbon cable -->
+  <rect x="300" y="355" width="200" height="55" fill="rgba(210,153,34,0.12)" rx="4" stroke="#d29922" stroke-width="1.5"/>
+  <text x="400" y="370" text-anchor="middle" fill="#d29922" font-size="10" font-weight="bold">ZONE 2 — FPC Ribbon Cable</text>
+  <text x="400" y="383" text-anchor="middle" fill="#c9d1d9" font-size="9">25 interleaved DRIVE/SENSE traces</text>
+  <text x="400" y="396" text-anchor="middle" fill="#d29922" font-size="9">⚠️ Ultrasonic only • 3-7 day service</text>
+  <text x="400" y="407" text-anchor="middle" fill="#8b949e" font-size="8">Possible secondary site</text>
+
+  <!-- FPC cable visual (from JT200 upward to keys) -->
+  <line x1="370" y1="205" x2="370" y2="260" stroke="#d29922" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <line x1="370" y1="280" x2="380" y2="355" stroke="#d29922" stroke-width="2" stroke-dasharray="6,3"/>
+
+  <!-- Zone 3: Key switch bodies -->
+  <rect x="140" y="415" width="240" height="55" fill="rgba(210,153,34,0.08)" rx="4" stroke="#d29922" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="260" y="430" text-anchor="middle" fill="#d29922" font-size="10" font-weight="bold">ZONE 3 — Sealed Key Switch Bodies</text>
+  <text x="260" y="443" text-anchor="middle" fill="#c9d1d9" font-size="9">6, Y, H, N keys • sub-0.3mm capillary gaps</text>
+  <text x="260" y="456" text-anchor="middle" fill="#d29922" font-size="9">⚠️ Ultrasonic only • cannot open manually</text>
+  <text x="260" y="467" text-anchor="middle" fill="#8b949e" font-size="8">Unlikely primary site (can't cause column-wide bridging)</text>
+
+  <!-- Arrow from FPC to keys -->
+  <line x1="350" y1="410" x2="300" y2="415" stroke="#d29922" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Summary box -->
+  <rect x="60" y="500" width="780" height="105" fill="#0d1117" rx="6" stroke="#30363d" stroke-width="1"/>
+  <text x="450" y="520" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Serviceability Summary</text>
+
+  <text x="80" y="540" fill="#3fb950" font-size="10">★ Zone 1 (JT200):</text>
+  <text x="200" y="540" fill="#c9d1d9" font-size="10">Manual clean — 1 component to remove, 10-15 min, most likely fix</text>
+
+  <text x="80" y="558" fill="#d29922" font-size="10">⚠ Zone 2 (FPC):</text>
+  <text x="200" y="558" fill="#c9d1d9" font-size="10">Ultrasonic — 1 component to remove, 3-7 day turnaround, if Zone 1 clean fails</text>
+
+  <text x="80" y="576" fill="#d29922" font-size="10">⚠ Zone 3 (Keys):</text>
+  <text x="200" y="576" fill="#c9d1d9" font-size="10">Ultrasonic — 1 component to remove, 3-7 day turnaround, secondary contribution only</text>
+
+  <text x="80" y="596" fill="#484f58" font-size="10">❌ JT220/JT400:</text>
+  <text x="200" y="596" fill="#484f58" font-size="10">Not problem areas (backlight works; I²C bus would cause total failure, not column bridging)</text>
+</svg>

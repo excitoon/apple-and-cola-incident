@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -80 1050 2450" font-family="'SF Mono','Menlo','Consolas',monospace" font-size="11">
+  <title>Board 820-02757 — Component Map (decoded from .brd)</title>
+  <defs>
+    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#F44336" stroke="none"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="-50" y="-80" width="1050" height="2450" fill="#0d1117"/>
+
+  <!-- Title -->
+  <text x="475" y="-45" fill="#e0e0e0" font-size="18" font-weight="bold" text-anchor="middle">Board 820-02757 — Component Map</text>
+  <text x="475" y="-25" fill="#888" font-size="11" text-anchor="middle">Decoded from 820-02757-06-boardview.brd · Coordinates scaled 1:5 · North = left edge of board</text>
+
+  <!-- Board outline (scaled: x/5, y/5) -->
+  <!-- Board is 4766 x 11398 units → scaled to ~953 x 2280 -->
+  <rect x="0" y="0" width="953" height="2280" rx="10" fill="#111827" stroke="#30363d" stroke-width="2"/>
+
+  <!-- U0600 — M3 Pro SoC (center of board) -->
+  <rect x="366" y="1052" width="160" height="160" rx="4" fill="#1e293b" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="446" y="1140" fill="#93c5fd" font-size="14" font-weight="bold" text-anchor="middle">U0600</text>
+  <text x="446" y="1156" fill="#60a5fa" font-size="9" text-anchor="middle">M3 Pro SoC</text>
+
+  <!-- JT200 — Keyboard FPC connector -->
+  <rect x="790" y="1200" width="50" height="140" rx="3" fill="#1a2332" stroke="#F44336" stroke-width="2"/>
+  <text x="815" y="1262" fill="#ef9a9a" font-size="10" font-weight="bold" text-anchor="middle" transform="rotate(90,815,1262)">JT200</text>
+  <text x="780" y="1195" fill="#F44336" font-size="9" text-anchor="end">Keyboard FPC</text>
+  <text x="780" y="1207" fill="#ef9a9a" font-size="8" text-anchor="end">36 pins · DRIVE+SENSE</text>
+
+  <!-- JT220 — Keyboard backlight connector -->
+  <rect x="793" y="1360" width="50" height="60" rx="3" fill="#1a2332" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="818" y="1395" fill="#FFE0B2" font-size="10" font-weight="bold" text-anchor="middle" transform="rotate(90,818,1395)">JT220</text>
+  <text x="780" y="1370" fill="#FF9800" font-size="9" text-anchor="end">KBD Backlight</text>
+  <text x="780" y="1382" fill="#FFE0B2" font-size="8" text-anchor="end">12 pins</text>
+
+  <!-- JT400 — Trackpad connector -->
+  <rect x="798" y="1062" width="50" height="90" rx="3" fill="#1a2332" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="823" y="1112" fill="#C8E6C9" font-size="10" font-weight="bold" text-anchor="middle" transform="rotate(90,823,1112)">JT400</text>
+  <text x="788" y="1072" fill="#4CAF50" font-size="9" text-anchor="end">Trackpad FPC</text>
+  <text x="788" y="1084" fill="#C8E6C9" font-size="8" text-anchor="end">50 pins</text>
+
+  <!-- JK600 — MagSafe / DC-in (right edge top area) -->
+  <rect x="300" y="38" width="90" height="40" rx="3" fill="#1a2332" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="345" y="63" fill="#E1BEE7" font-size="10" font-weight="bold" text-anchor="middle">JK600</text>
+  <text x="345" y="30" fill="#9C27B0" font-size="9" text-anchor="middle">MagSafe / DC-in</text>
+
+  <!-- JT500 — display / lid connector (left side near top) -->
+  <rect x="10" y="116" width="50" height="80" rx="3" fill="#1a2332" stroke="#00BCD4" stroke-width="1.5"/>
+  <text x="35" y="162" fill="#B2EBF2" font-size="10" font-weight="bold" text-anchor="middle" transform="rotate(90,35,162)">JT500</text>
+  <text x="70" y="130" fill="#00BCD4" font-size="9">Display / Lid</text>
+
+  <!-- JH500 — fan connector (left top) -->
+  <rect x="80" y="0" width="50" height="35" rx="3" fill="#1a2332" stroke="#607D8B" stroke-width="1"/>
+  <text x="105" y="22" fill="#B0BEC5" font-size="9" text-anchor="middle">JH500</text>
+
+  <!-- USB-C / Thunderbolt connectors (along top/bottom edges) -->
+  <!-- JE700 — left USB-C -->
+  <rect x="221" y="2223" width="80" height="40" rx="3" fill="#1a2332" stroke="#FF5722" stroke-width="1.5"/>
+  <text x="261" y="2248" fill="#FFCCBC" font-size="10" font-weight="bold" text-anchor="middle">JE700</text>
+  <text x="261" y="2218" fill="#FF5722" font-size="8" text-anchor="middle">USB-C / TB</text>
+
+  <!-- JE701 — right USB-C -->
+  <rect x="338" y="2223" width="80" height="40" rx="3" fill="#1a2332" stroke="#FF5722" stroke-width="1.5"/>
+  <text x="378" y="2248" fill="#FFCCBC" font-size="10" font-weight="bold" text-anchor="middle">JE701</text>
+  <text x="378" y="2218" fill="#FF5722" font-size="8" text-anchor="middle">USB-C / TB</text>
+
+  <!-- I²C keyboard bus test points -->
+  <circle cx="898" cy="1097" r="5" fill="none" stroke="#FFEB3B" stroke-width="1.5"/>
+  <circle cx="907" cy="1102" r="5" fill="none" stroke="#FFEB3B" stroke-width="1.5"/>
+  <circle cx="907" cy="1109" r="5" fill="none" stroke="#FFEB3B" stroke-width="1.5"/>
+  <text x="920" y="1100" fill="#FFEB3B" font-size="8">I2C_KBD_SCL</text>
+  <text x="920" y="1110" fill="#FFEB3B" font-size="8">I2C_KBD_SDA</text>
+  <text x="920" y="1120" fill="#FFEB3B" font-size="8">KBD_INT_L</text>
+
+  <!-- Keyboard signal path arrow -->
+  <line x1="780" y1="1270" x2="620" y2="1200" stroke="#F44336" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowR)"/>
+  <text x="680" y="1220" fill="#F44336" font-size="8" text-anchor="middle">KBD matrix</text>
+  <text x="680" y="1230" fill="#F44336" font-size="8" text-anchor="middle">signals</text>
+
+  <!-- Memory (UN000, UN100) -->
+  <rect x="650" y="1550" width="80" height="50" rx="3" fill="#1a2332" stroke="#78909C" stroke-width="1"/>
+  <text x="690" y="1580" fill="#B0BEC5" font-size="10" text-anchor="middle">UN000</text>
+  <rect x="740" y="1550" width="80" height="50" rx="3" fill="#1a2332" stroke="#78909C" stroke-width="1"/>
+  <text x="780" y="1580" fill="#B0BEC5" font-size="10" text-anchor="middle">UN100</text>
+  <text x="735" y="1545" fill="#78909C" font-size="8" text-anchor="middle">LPDDR5</text>
+
+  <!-- Contamination zone highlight -->
+  <rect x="770" y="1180" width="100" height="260" rx="8" fill="none" stroke="#F44336" stroke-width="2" stroke-dasharray="6,3" opacity="0.6"/>
+  <text x="820" y="1468" fill="#F44336" font-size="9" font-weight="bold" text-anchor="middle">CONTAMINATION</text>
+  <text x="820" y="1480" fill="#F44336" font-size="9" font-weight="bold" text-anchor="middle">RISK ZONE</text>
+
+  <!-- Legend -->
+  <rect x="10" y="2290" width="930" height="120" rx="5" fill="#111827" stroke="#30363d" stroke-width="1"/>
+  <text x="475" y="2310" fill="#e0e0e0" font-size="11" font-weight="bold" text-anchor="middle">Component Map Legend</text>
+  <rect x="30" y="2320" width="12" height="12" fill="#F44336" opacity="0.5" rx="2"/>
+  <text x="48" y="2331" fill="#ef9a9a" font-size="9">Keyboard FPC (JT200) — 36-pin ZIF, DRIVE/SENSE interleaved, contamination target</text>
+  <rect x="30" y="2338" width="12" height="12" fill="#FF9800" opacity="0.5" rx="2"/>
+  <text x="48" y="2349" fill="#FFE0B2" font-size="9">Keyboard backlight (JT220) — 12-pin, KBDLED cathodes + PPVOUT power</text>
+  <rect x="30" y="2356" width="12" height="12" fill="#4CAF50" opacity="0.5" rx="2"/>
+  <text x="48" y="2367" fill="#C8E6C9" font-size="9">Trackpad FPC (JT400) — 50-pin, adjacent to keyboard connector</text>
+  <rect x="30" y="2374" width="12" height="12" fill="#60a5fa" opacity="0.5" rx="2"/>
+  <text x="48" y="2385" fill="#93c5fd" font-size="9">M3 Pro SoC (U0600) — main processor, I²C keyboard bus master</text>
+  <text x="30" y="2401" fill="#888" font-size="8">Source: diagrams/820-02757-06-boardview.brd decoded via ~((b>>6)|(b&lt;&lt;2)) per OpenBoardView format</text>
+  <text x="30" y="2413" fill="#888" font-size="8">5,298 components · 16,676 pin records · 1,222 test points · 2,528 unique nets</text>
+</svg>

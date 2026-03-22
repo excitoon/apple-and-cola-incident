@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <defs>
+    <!-- FPC body gradient (polyimide amber) -->
+    <linearGradient id="fpcAmber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a06820"/>
+      <stop offset="50%" stop-color="#c48a40"/>
+      <stop offset="100%" stop-color="#a06820"/>
+    </linearGradient>
+    <!-- Contamination gradient -->
+    <linearGradient id="contamGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B4513" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#8B4513" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#8B4513" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#8B4513" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Polyimide layer gradient -->
+    <linearGradient id="polyimide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b07828"/>
+      <stop offset="100%" stop-color="#c49040"/>
+    </linearGradient>
+    <!-- Copper trace gradient -->
+    <linearGradient id="copperTrace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b87333"/>
+      <stop offset="50%" stop-color="#d4954a"/>
+      <stop offset="100%" stop-color="#b87333"/>
+    </linearGradient>
+    <!-- Adhesive layer -->
+    <linearGradient id="adhesive" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e0d0a0"/>
+      <stop offset="100%" stop-color="#d0c090"/>
+    </linearGradient>
+    <!-- Board surface -->
+    <linearGradient id="boardSurf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a3a1a"/>
+      <stop offset="100%" stop-color="#0f2e0f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowWhite" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#e0e0e0"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#ccaa44"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: 'SF Mono','Menlo','Consolas',monospace; fill: #e0e0e0; }
+    .title { font-size: 14px; font-weight: bold; fill: #ffffff; }
+    .subtitle { font-size: 11px; fill: #aabbcc; }
+    .label { font-size: 9px; }
+    .small-label { font-size: 7.5px; fill: #aaa; }
+    .section { font-size: 11px; font-weight: bold; fill: #ffffff; }
+    .annotation { font-size: 8.5px; fill: #ccaa44; font-style: italic; }
+    .sense-txt { fill: #4488cc; }
+    .drive-txt { fill: #cc4444; }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="900" fill="#1a1a2e" rx="4"/>
+
+  <!-- Title -->
+  <text x="400" y="28" text-anchor="middle" class="title">820-02757 — FPC CABLE RUN: JT200 → KEYBOARD MODULE</text>
+  <text x="400" y="44" text-anchor="middle" class="subtitle">25 Interleaved DRIVE/SENSE Traces · Contamination Pathway Analysis</text>
+  <line x1="30" y1="52" x2="770" y2="52" stroke="#334455" stroke-width="1"/>
+
+  <!-- ==================== KEYBOARD MODULE (top) ==================== -->
+  <g>
+    <rect x="200" y="68" width="400" height="55" rx="6" fill="#222" stroke="#555" stroke-width="1.5"/>
+    <rect x="210" y="73" width="380" height="20" rx="3" fill="#181818" stroke="#444" stroke-width="0.5"/>
+    <!-- Key caps representation -->
+    <g opacity="0.4">
+      <rect x="218" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="240" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="262" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="284" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="306" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="328" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="350" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="372" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="394" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="416" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="438" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="460" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="482" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="504" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="526" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="548" y="76" width="18" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+      <rect x="570" y="76" width="12" height="14" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+    </g>
+    <!-- Keyboard matrix flex tail -->
+    <rect x="370" y="96" width="60" height="27" rx="2" fill="url(#fpcAmber)" opacity="0.6"/>
+    <text x="400" y="110" text-anchor="middle" font-size="7" fill="#1a1a1a" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">MATRIX</text>
+    <text x="400" y="84" text-anchor="middle" class="section">KEYBOARD MODULE (Scissor Switch Assembly)</text>
+    <text x="400" y="118" text-anchor="middle" class="small-label" fill="#888">13×12 keyboard scan matrix</text>
+  </g>
+
+  <!-- ==================== FPC CABLE (main body) ==================== -->
+  <g>
+    <!-- Cable segment label: under keyboard module -->
+    <rect x="100" y="130" width="170" height="34" rx="3" fill="#1a1a2e" stroke="#666" stroke-width="1"/>
+    <text x="185" y="146" text-anchor="middle" font-size="8" fill="#ff8888" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">UNDER KEYBOARD MODULE</text>
+    <text x="185" y="158" text-anchor="middle" font-size="7" fill="#aa6666" font-family="'SF Mono','Menlo','Consolas',monospace">Not accessible without removal</text>
+    <line x1="270" y1="147" x2="340" y2="180" stroke="#666" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+    <!-- FPC cable body (long run) -->
+    <rect x="340" y="128" width="120" height="430" rx="3" fill="url(#fpcAmber)" opacity="0.8" stroke="#8B6914" stroke-width="0.8"/>
+
+    <!-- Trace interleaving pattern on FPC -->
+    <g opacity="0.6">
+      <!-- SENSE traces (blue) and DRIVE traces (red), interleaved -->
+      <line x1="350" y1="128" x2="350" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="355" y1="128" x2="355" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="360" y1="128" x2="360" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="365" y1="128" x2="365" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="370" y1="128" x2="370" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="375" y1="128" x2="375" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="380" y1="128" x2="380" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="385" y1="128" x2="385" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="390" y1="128" x2="390" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="395" y1="128" x2="395" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="400" y1="128" x2="400" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="405" y1="128" x2="405" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="410" y1="128" x2="410" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="415" y1="128" x2="415" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="420" y1="128" x2="420" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="425" y1="128" x2="425" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="430" y1="128" x2="430" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="435" y1="128" x2="435" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="440" y1="128" x2="440" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+      <line x1="445" y1="128" x2="445" y2="558" stroke="#cc4444" stroke-width="1.5"/>
+      <line x1="450" y1="128" x2="450" y2="558" stroke="#4488cc" stroke-width="1.5"/>
+    </g>
+
+    <!-- Contamination zone overlay -->
+    <rect x="340" y="210" width="120" height="200" rx="2" fill="url(#contamGrad)"/>
+    <!-- Contamination wicking indicators -->
+    <g opacity="0.35">
+      <ellipse cx="400" cy="260" rx="45" ry="20" fill="#6B3000"/>
+      <ellipse cx="395" cy="310" rx="50" ry="30" fill="#5B2500"/>
+      <ellipse cx="405" cy="360" rx="40" ry="15" fill="#6B3000"/>
+    </g>
+
+    <!-- Contamination zone label -->
+    <rect x="470" y="255" width="220" height="65" rx="4" fill="#2a1a0a" stroke="#8B4513" stroke-width="1"/>
+    <text x="580" y="272" text-anchor="middle" font-size="9" fill="#d4a060" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">⚠ CONTAMINATION ZONE</text>
+    <text x="580" y="286" text-anchor="middle" font-size="7.5" fill="#b08050" font-family="'SF Mono','Menlo','Consolas',monospace">Cola wicks between polyimide layers</text>
+    <text x="580" y="298" text-anchor="middle" font-size="7.5" fill="#b08050" font-family="'SF Mono','Menlo','Consolas',monospace">via capillary action along trace gaps</text>
+    <text x="580" y="310" text-anchor="middle" font-size="7.5" fill="#b08050" font-family="'SF Mono','Menlo','Consolas',monospace">~0.1mm gaps trap sugar residue</text>
+    <line x1="460" y1="290" x2="470" y2="290" stroke="#8B4513" stroke-width="1"/>
+
+    <!-- Accessible section label -->
+    <rect x="100" y="420" width="170" height="34" rx="3" fill="#1a1a2e" stroke="#44cc44" stroke-width="1"/>
+    <text x="185" y="436" text-anchor="middle" font-size="8" fill="#44cc44" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">ACCESSIBLE SECTION</text>
+    <text x="185" y="448" text-anchor="middle" font-size="7" fill="#339933" font-family="'SF Mono','Menlo','Consolas',monospace">Below battery — can reach</text>
+    <line x1="270" y1="437" x2="340" y2="480" stroke="#44cc44" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+    <!-- Trace pitch annotation -->
+    <g>
+      <line x1="350" y1="565" x2="355" y2="565" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="350" y1="563" x2="350" y2="567" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="355" y1="563" x2="355" y2="567" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="360" y="568" font-size="6.5" fill="#aaa" font-family="'SF Mono','Menlo','Consolas',monospace">~0.3mm pitch · ~0.1mm gap</text>
+    </g>
+
+    <!-- Trace type labels -->
+    <rect x="345" y="572" width="12" height="4" rx="1" fill="#4488cc" opacity="0.8"/>
+    <text x="362" y="576" font-size="6.5" fill="#4488cc" font-family="'SF Mono','Menlo','Consolas',monospace">SENSE</text>
+    <rect x="395" y="572" width="12" height="4" rx="1" fill="#cc4444" opacity="0.8"/>
+    <text x="412" y="576" font-size="6.5" fill="#cc4444" font-family="'SF Mono','Menlo','Consolas',monospace">DRIVE</text>
+  </g>
+
+  <!-- ==================== CROSS-SECTION VIEW ==================== -->
+  <g>
+    <rect x="65" y="590" width="670" height="220" rx="6" fill="#111122" stroke="#334455" stroke-width="1"/>
+    <text x="400" y="610" text-anchor="middle" class="section">FPC CABLE CROSS-SECTION (Not to Scale)</text>
+    <text x="400" y="622" text-anchor="middle" class="small-label">Polyimide-Copper-Polyimide sandwich construction</text>
+
+    <!-- Cross section layers -->
+    <!-- Top coverlay (polyimide) -->
+    <rect x="150" y="640" width="500" height="20" rx="2" fill="#b07828" stroke="#8B6914" stroke-width="1"/>
+    <text x="400" y="654" text-anchor="middle" font-size="8" fill="#1a1a1a" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">POLYIMIDE COVER LAYER (25μm Kapton)</text>
+
+    <!-- Adhesive layer 1 -->
+    <rect x="150" y="660" width="500" height="8" rx="0" fill="#e0d0a0" opacity="0.6"/>
+    <text x="660" y="668" font-size="6.5" fill="#c0b080" font-family="'SF Mono','Menlo','Consolas',monospace">← Adhesive</text>
+
+    <!-- Copper trace layer -->
+    <rect x="150" y="668" width="500" height="24" rx="0" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+    <!-- Individual copper traces -->
+    <g>
+      <rect x="165" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="186" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="195" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="216" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="225" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="246" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="255" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="276" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="285" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="306" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="315" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="336" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="345" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="366" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="375" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="396" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="405" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="426" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="435" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="456" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="465" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="486" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="495" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="516" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="525" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="546" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="555" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="576" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="585" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+      <rect x="606" y="672" width="4" height="16" fill="#1a1a1a"/>
+      <rect x="615" y="672" width="16" height="16" rx="1" fill="#d4954a" stroke="#b87333" stroke-width="0.5"/>
+    </g>
+    <!-- Trace type color indicators -->
+    <rect x="165" y="690" width="3" height="3" fill="#4488cc"/>
+    <rect x="195" y="690" width="3" height="3" fill="#cc4444"/>
+    <rect x="225" y="690" width="3" height="3" fill="#4488cc"/>
+    <rect x="255" y="690" width="3" height="3" fill="#cc4444"/>
+    <rect x="285" y="690" width="3" height="3" fill="#4488cc"/>
+    <rect x="315" y="690" width="3" height="3" fill="#cc4444"/>
+    <rect x="345" y="690" width="3" height="3" fill="#4488cc"/>
+    <rect x="375" y="690" width="3" height="3" fill="#cc4444"/>
+    <rect x="405" y="690" width="3" height="3" fill="#4488cc"/>
+    <rect x="435" y="690" width="3" height="3" fill="#cc4444"/>
+    <rect x="465" y="690" width="3" height="3" fill="#4488cc"/>
+    <rect x="495" y="690" width="3" height="3" fill="#cc4444"/>
+    <rect x="525" y="690" width="3" height="3" fill="#4488cc"/>
+    <text x="400" y="685" text-anchor="middle" font-size="7" fill="#e0c080" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">COPPER TRACES (18μm Cu, 25 traces @ ~0.3mm pitch)</text>
+
+    <!-- Cola contamination in gaps -->
+    <g opacity="0.6">
+      <rect x="186" y="674" width="4" height="12" fill="#8B4513" opacity="0.5"/>
+      <rect x="216" y="674" width="4" height="12" fill="#8B4513" opacity="0.3"/>
+      <rect x="276" y="674" width="4" height="12" fill="#8B4513" opacity="0.4"/>
+      <rect x="336" y="674" width="4" height="12" fill="#8B4513" opacity="0.5"/>
+      <rect x="396" y="674" width="4" height="12" fill="#8B4513" opacity="0.3"/>
+      <rect x="456" y="674" width="4" height="12" fill="#8B4513" opacity="0.4"/>
+    </g>
+    <!-- Contamination label in cross section -->
+    <line x1="190" y1="698" x2="190" y2="710" stroke="#ccaa44" stroke-width="0.5"/>
+    <text x="195" y="708" font-size="6" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">↑ Cola residue in trace gaps</text>
+
+    <!-- Adhesive layer 2 -->
+    <rect x="150" y="692" width="500" height="8" rx="0" fill="#e0d0a0" opacity="0.6"/>
+    <text x="660" y="700" font-size="6.5" fill="#c0b080" font-family="'SF Mono','Menlo','Consolas',monospace">← Adhesive</text>
+
+    <!-- Bottom base (polyimide) -->
+    <rect x="150" y="700" width="500" height="20" rx="2" fill="#b07828" stroke="#8B6914" stroke-width="1"/>
+    <text x="400" y="714" text-anchor="middle" font-size="8" fill="#1a1a1a" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">POLYIMIDE BASE LAYER (50μm Kapton)</text>
+
+    <!-- Dimension annotations -->
+    <!-- Overall thickness -->
+    <line x1="130" y1="640" x2="130" y2="720" stroke="#888" stroke-width="0.5"/>
+    <line x1="126" y1="640" x2="134" y2="640" stroke="#888" stroke-width="0.5"/>
+    <line x1="126" y1="720" x2="134" y2="720" stroke="#888" stroke-width="0.5"/>
+    <text x="125" y="683" text-anchor="end" font-size="7" fill="#888" font-family="'SF Mono','Menlo','Consolas',monospace">~0.12mm</text>
+    <text x="125" y="693" text-anchor="end" font-size="7" fill="#888" font-family="'SF Mono','Menlo','Consolas',monospace">total</text>
+
+    <!-- Trace pitch dimension -->
+    <line x1="165" y1="728" x2="195" y2="728" stroke="#aaa" stroke-width="0.5"/>
+    <line x1="165" y1="725" x2="165" y2="731" stroke="#aaa" stroke-width="0.5"/>
+    <line x1="195" y1="725" x2="195" y2="731" stroke="#aaa" stroke-width="0.5"/>
+    <text x="180" y="738" text-anchor="middle" font-size="6.5" fill="#aaa" font-family="'SF Mono','Menlo','Consolas',monospace">0.3mm pitch</text>
+
+    <!-- Gap dimension -->
+    <line x1="181" y1="746" x2="194" y2="746" stroke="#ccaa44" stroke-width="0.5"/>
+    <line x1="181" y1="743" x2="181" y2="749" stroke="#ccaa44" stroke-width="0.5"/>
+    <line x1="194" y1="743" x2="194" y2="749" stroke="#ccaa44" stroke-width="0.5"/>
+    <text x="188" y="756" text-anchor="middle" font-size="6.5" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">~0.1mm gap</text>
+
+    <!-- Layer legend -->
+    <g>
+      <rect x="490" y="730" width="10" height="6" fill="#b07828"/>
+      <text x="505" y="736" font-size="6.5" fill="#c49040" font-family="'SF Mono','Menlo','Consolas',monospace">Polyimide (Kapton)</text>
+
+      <rect x="490" y="740" width="10" height="6" fill="#d4954a"/>
+      <text x="505" y="746" font-size="6.5" fill="#d4954a" font-family="'SF Mono','Menlo','Consolas',monospace">Copper traces</text>
+
+      <rect x="490" y="750" width="10" height="6" fill="#e0d0a0" opacity="0.6"/>
+      <text x="505" y="756" font-size="6.5" fill="#d0c090" font-family="'SF Mono','Menlo','Consolas',monospace">Adhesive layer</text>
+
+      <rect x="490" y="760" width="10" height="6" fill="#8B4513" opacity="0.5"/>
+      <text x="505" y="766" font-size="6.5" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">Cola residue</text>
+    </g>
+  </g>
+
+  <!-- ==================== JT200 CONNECTOR (bottom) ==================== -->
+  <g>
+    <rect x="340" y="558" width="120" height="50" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1.5"/>
+    <text x="400" y="576" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">JT200 — 36-pin ZIF</text>
+    <text x="400" y="588" text-anchor="middle" font-size="6.5" fill="#888" font-family="'SF Mono','Menlo','Consolas',monospace">X=4119–4253 · Y=6111–6806</text>
+    <!-- ZIF latch -->
+    <rect x="345" y="555" width="110" height="6" rx="1" fill="#4a4a4a" stroke="#666" stroke-width="0.5"/>
+    <text x="400" y="553" text-anchor="middle" font-size="5.5" fill="#ccaa44" font-family="'SF Mono','Menlo','Consolas',monospace">ZIF LATCH</text>
+    <!-- Pin indicators -->
+    <g opacity="0.7">
+      <rect x="344" y="565" width="5" height="3" fill="#4488cc"/>
+      <rect x="344" y="570" width="5" height="3" fill="#cc4444"/>
+      <rect x="344" y="575" width="5" height="3" fill="#4488cc"/>
+      <rect x="344" y="580" width="5" height="3" fill="#cc4444"/>
+      <rect x="344" y="585" width="5" height="3" fill="#4488cc"/>
+      <rect x="344" y="590" width="5" height="3" fill="#cc4444"/>
+      <rect x="344" y="595" width="5" height="3" fill="#44cc44"/>
+    </g>
+
+    <!-- Board surface indicator -->
+    <rect x="280" y="608" width="240" height="24" rx="2" fill="url(#boardSurf)" stroke="#2a4a2a" stroke-width="0.8"/>
+    <text x="400" y="624" text-anchor="middle" font-size="7" fill="#4a8a4a" font-family="'SF Mono','Menlo','Consolas',monospace">820-02757 PCB SURFACE</text>
+  </g>
+
+  <!-- ==================== ULTRASONIC CLEANING ANNOTATION ==================== -->
+  <g>
+    <rect x="65" y="820" width="670" height="48" rx="4" fill="#111a2e" stroke="#4488cc" stroke-width="1"/>
+    <text x="80" y="838" font-size="9" fill="#4488cc" font-weight="bold" font-family="'SF Mono','Menlo','Consolas',monospace">🔊 ULTRASONIC CLEANING NOTE</text>
+    <text x="80" y="852" font-size="8" fill="#88aacc" font-family="'SF Mono','Menlo','Consolas',monospace">Ultrasonic bath (40 kHz) can reach internal FPC trace gaps via micro-cavitation.</text>
+    <text x="80" y="864" font-size="8" fill="#88aacc" font-family="'SF Mono','Menlo','Consolas',monospace">However, FPC must be disconnected first. Internal contamination may persist despite surface cleaning.</text>
+  </g>
+
+  <!-- Footer -->
+  <line x1="30" y1="878" x2="770" y2="878" stroke="#334455" stroke-width="1"/>
+  <text x="400" y="893" text-anchor="middle" font-size="8" fill="#556677" font-family="'SF Mono','Menlo','Consolas',monospace">820-02757-06 Logic Board · FPC Cable Render · Cola Spill Incident Documentation</text>
+</svg>

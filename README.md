@@ -448,6 +448,7 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Boardview 820-02757 data file | | [BRD](diagrams/820-02757-06-boardview.brd) | OpenBoardView-compatible boardview data file for board 820-02757-06 |
 | Boardview 820-02757 decoded text export | | [TXT](diagrams/820-02757-06-boardview-decoded.txt) | Readable text export decoded from the committed `.brd` file, preserving the boardview sections and records |
 | JT200 keyboard FPC connector pinout | [SVG](diagrams/boardview-820-02757-jt200-pinout.svg) | | Complete 36-pin JT200 connector pinout decoded from the boardview, showing DRIVE/SENSE interleaving and bridging risk boundaries |
+| Board 820-02757 — component map | [SVG](diagrams/boardview-820-02757-component-map.svg) | | Board-level map with real component positions decoded from the boardview, showing keyboard / trackpad / SoC neighborhoods and contamination risk zone |
 
 ### 9. Boardview Screenshots (Board 820-02757)
 
@@ -487,6 +488,8 @@ From the committed `.brd` boardview file, we decoded three categories of useful 
 
 The decoded export contains **522 outline points**, **5,298 component records**, **16,676 pin/net records**, and **1,222 test-point (nail) records** across **2,528 unique net names**. The keyboard neighborhood alone includes **82 unique keyboard-related nets** spanning matrix signals, power rails, I²C bus, backlight control, and current sensing. The I²C keyboard bus (`I2C_KBD_SCL`, `I2C_KBD_SDA`, `KBD_INT_L`) connects through test points at coordinates (4490–4536, 5486–5542) — physically separate from the matrix signals at JT200, confirming that the keyboard controller communicates with the SoC via I²C while the matrix scanning happens locally within the keyboard module.
 
+The adjacent **JT220** connector (component #3589, 12 pins) handles the keyboard backlight: `KBDLED_CATHODE1`, `KBDLED_CATHODE2`, `PPVOUT_KBDLED_CONN`, and multiple GND pins. Its physical position at board coordinates (4119–4253, 6899–7121) places it immediately below JT200 (6111–6806), meaning contamination spreading downward from the keyboard FPC area could also reach the backlight connector — consistent with backlight being a secondary failure risk after matrix contamination.
+
 This repository now also includes a **high-quality vector board render** derived from the boardview material for documentation and future annotation work:
 
 ![Board 820-02757 — high-quality vector render](diagrams/boardview-820-02757-render.svg)
@@ -494,6 +497,10 @@ This repository now also includes a **high-quality vector board render** derived
 And an additional **boardview-derived illustration map** showing the main zones that can be expanded into further diagrams:
 
 ![Board 820-02757 — illustration zones](diagrams/boardview-820-02757-illustration-zones.svg)
+
+And a **board-level component map** using the real positions decoded from the boardview data, showing the keyboard/trackpad/SoC spatial relationships and contamination risk zone:
+
+![Board 820-02757 — component map](diagrams/boardview-820-02757-component-map.svg)
 
 This repository now also includes a **detail sheet for the highlighted zones**, using the decoded board data to label the most relevant board neighborhoods:
 

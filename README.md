@@ -752,14 +752,14 @@ These keys are in the same rows as the affected keys but in different columns. I
 
 | Key | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
 |-----|----------|-------------------|-------------------|-------|------------|-------|
-| 5   | `5`      |                   |                   |       |            |       |
-| 7   | `7`      |                   |                   |       |            |       |
-| T   | `t`      |                   |                   |       |            |       |
-| U   | `u`      |                   |                   |       |            |       |
-| G   | `g`      |                   |                   |       |            |       |
-| J   | `j`      |                   |                   |       |            |       |
-| B   | `b`      |                   |                   |       |            |       |
-| M   | `m`      |                   |                   |       |            |       |
+| 5   | `5`      | `5`               | `5`               |       |            | ✅ Normal |
+| 7   | `7`      | `7`               | `7`               |       |            | ✅ Normal |
+| T   | `t`      | `t`               | `t`               |       |            | ✅ Normal |
+| U   | `u`      | `u`               | `u`               |       |            | ✅ Normal |
+| G   | `g`      | `g`               | `g`               |       |            | ✅ Normal |
+| J   | `j`      | `j`               | `j`               |       |            | ✅ Normal |
+| B   | `b`      | `b`               | `b`               |       |            | ✅ Normal |
+| M   | `m`      | `m`               | `m`               |       |            | ✅ Normal |
 
 #### Group B2 — Keys from the newly identified bridged columns
 
@@ -782,10 +782,10 @@ These keys are far from the spill area and should be completely unaffected.
 
 | Key | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
 |-----|----------|-------------------|-------------------|-------|------------|-------|
-| A   | `a`      |                   |                   |       |            |       |
-| S   | `s`      |                   |                   |       |            |       |
-| L   | `l`      |                   |                   |       |            |       |
-| P   | `p`      |                   |                   |       |            |       |
+| A   | `a`      | `a`               | `a`               |       |            | ✅ Normal |
+| S   | `s`      | `s`               | `s`               |       |            | ✅ Normal |
+| L   | `l`      | `l`               | `l`               |       |            | ✅ Normal |
+| P   | `p`      | `p`               | `p`               |       |            | ✅ Normal |
 
 #### Group D — Space bar (additional finding)
 
@@ -844,6 +844,8 @@ The extra characters form **two complete, consistent columns** on the keyboard:
 4. **Space bar is also affected.** Space producing `'` means the Space bar's electrical column is bridged to the `'` key's column on the FPC. Since `'` is physically adjacent to `;` (which is part of the +4 bridged column), the Space bar's FPC trace is likely near the same contamination zone. This extends the known damage scope beyond the originally identified 6/Y/H/N column.
 
 5. **H1 is strongly confirmed.** The perfectly consistent column pattern — where every affected key produces extras from the same two other columns — is exactly the signature of a single contamination site bridging adjacent FPC/ZIF pins. If there were multiple independent corrosion sites (H3), different keys would show different extra characters. If the controller IC were damaged (H4), the pattern would not map cleanly to keyboard matrix columns.
+
+6. **Control group and baseline keys are 100% normal.** Group B (5, 7, T, U, G, J, B, M — physically adjacent to the affected column) and Group C (A, S, L, P — distant keys) all produce only their correct single character with no extras. This conclusively confirms the damage is **column-specific**, not row-related or widespread. The physically adjacent keys 5/T/G/B and 7/U/J/M being unaffected also independently confirms finding #2: these keys are on different, non-adjacent FPC pins despite being physically next to the affected column.
 
 #### Revised contamination model
 

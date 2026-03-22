@@ -1426,15 +1426,15 @@ Repeat each combination **3 times**.
 
 | # | Keys pressed as chord | Expected (healthy keyboard) | Actual (press 1) | Actual (press 2) | Actual (press 3) | Notes |
 |---|-----------------------|-----------------------------|------------------|------------------|------------------|-------|
-| E1 | `A` + `K` | `ak` (or `ka`) | | | | Baseline: two distant unaffected keys |
-| E2 | `T` + `U` | `tu` (or `ut`) | | | | Two adjacent unaffected keys in the same row as `Y` |
-| E3 | `U` + `Y` | `uy` (or `yu`) | | | | Adjacent unaffected + affected key (top letter row) |
-| E4 | `J` + `H` | `jh` (or `hj`) | | | | Adjacent unaffected + affected key (home row) |
-| E5 | `A` + `Y` | `ay` (or `ya`) | | | | Distant unaffected + affected key — does `A` pick up ghost chars? |
-| E6 | `Y` + `O` | `yo` (or `oy`) | | | | Affected key + its own ghost key — does ghost `o` double or get suppressed? |
-| E7 | `H` + `L` | `hl` (or `lh`) | | | | Affected key + its own ghost key (home row) |
-| E8 | `6` + `9` | `69` (or `96`) | | | | Affected key + its own ghost key (number row) |
-| E9 | `Y` + `H` | `yh` (or `hy`) | | | | Two affected-column keys simultaneously |
+| E1 | `A` + `K` | `ak` (or `ka`) | `akakkaa…` | `akakkaa…` | | ✅ Baseline clean — just `a` and `k` alternating, no ghosts |
+| E2 | `T` + `U` | `tu` (or `ut`) | `ututut…` | `ututut…` | | ✅ Baseline clean — just `u` and `t` alternating, no ghosts |
+| E3 | `U` + `Y` | `uy` (or `yu`) | `yuopyopu…` | `yuopyopu…` | | Y produces ghosts (`o`,`p`); **U is clean** — no ghost spread to unaffected key |
+| E4 | `J` + `H` | `jh` (or `hj`) | `hjl;hjl;jhl;…` | `hjl;hjl;jhl;…` | | H produces ghosts (`l`,`;`); **J is clean** — no ghost spread to unaffected key |
+| E5 | `A` + `Y` | `ay` (or `ya`) | `yopayopa…` | `yopayopa…` | | Y produces ghosts (`o`,`p`); **A is clean** — no spread even to distant key |
+| E6 | `Y` + `O` | `yo` (or `oy`) | `yopoypyopyopy…` | `yopoypyopyopy…` | | Ghost `o` NOT suppressed — real `O` and bridge phantom `o` both produce output |
+| E7 | `H` + `L` | `hl` (or `lh`) | `hl;lh;lh;…` | `hl;lh;lh;…` | | Ghost `l` NOT suppressed — real `L` and bridge phantom `l` both active |
+| E8 | `6` + `9` | `69` (or `96`) | `960960690…` | `960960690…` | | Ghost `9` NOT suppressed — real `9` and bridge phantom `9` both active |
+| E9 | `Y` + `H` | `yh` (or `hy`) | `hl;yopyop…` | `hl;yopyop…` | | Both keys produce their full ghost sets (`yop` + `hl;`) |
 
 #### Group F — Rapid sequential presses (fast-typing simulation)
 
@@ -1442,13 +1442,13 @@ Hold key 1 down, then while it is still held press and release key 2, then relea
 
 | # | Hold → tap | Expected (healthy keyboard) | Actual (press 1) | Actual (press 2) | Actual (press 3) | Notes |
 |---|------------|-----------------------------|------------------|------------------|------------------|-------|
-| F1 | Hold `A` → tap `K` | `ak` | | | | Baseline: two unaffected keys with overlapping hold |
-| F2 | Hold `T` → tap `U` | `tu` | | | | Same row, both unaffected — simulates fast adjacent typing |
-| F3 | Hold `U` → tap `Y` | `uy` | | | | Unaffected held while affected key is tapped |
-| F4 | Hold `J` → tap `H` | `jh` | | | | Unaffected held while affected key is tapped (home row) |
-| F5 | Hold `Y` → tap `A` | `ya` | | | | Affected held — does `A` acquire ghost characters from the active bridge? |
-| F6 | Hold `H` → tap `J` | `hj` | | | | Affected held while adjacent unaffected key is tapped |
-| F7 | Hold `Y` → tap `H` | `yh` | | | | Two affected-column keys with overlapping hold |
+| F1 | Hold `A` → tap `K` | `ak` | `akaaa…k` | `akaaa…k` | | ✅ Baseline clean — A auto-repeats, K appears at end |
+| F2 | Hold `T` → tap `U` | `tu` | `tuuutttt…` | `tuuutttt…` | | ✅ Baseline clean — mixed auto-repeat, no ghosts |
+| F3 | Hold `U` → tap `Y` | `uy` | `uyop` | `uyop` | | Y tap produces ghosts (`o`,`p`); U is clean |
+| F4 | Hold `J` → tap `H` | `jh` | `jhl;` | `jhl;` | | H tap produces ghosts (`l`,`;`); J is clean |
+| F5 | Hold `Y` → tap `A` | `ya` | `yopayopa` | `yopayopa` | | ✅ **A does NOT acquire ghosts** — bridge doesn't spread to unaffected key |
+| F6 | Hold `H` → tap `J` | `hj` | `hl;j` | `hl;j` | | ✅ **J does NOT acquire ghosts** — bridge doesn't spread to unaffected key |
+| F7 | Hold `Y` → tap `H` | `yh` | `yoppppp…` | `yoppppp…` | | Y ghosts (`o`,`p`) appear, then `p` auto-repeats endlessly; **H's ghosts (`l`,`;`) completely absent** |
 
 #### What to look for in the results
 
@@ -1459,6 +1459,37 @@ Hold key 1 down, then while it is still held press and release key 2, then relea
 | E6/E7/E8 — pressing affected key + its ghost key produces *more* characters than single-key press | Ghost doubling; controller counts both the phantom and the real key press separately |
 | F5/F6 — holding affected key causes subsequently tapped unaffected key to gain extra characters | Scan-cycle overlap allows bridge drive voltage to remain on Cy/Cz when the second key's row is sampled; direct evidence for the fast-typing glitch |
 | E1/E2/E3/E4/E5/F1/F2/F3/F4 — all combinations involving only unaffected keys (or unaffected + affected) produce no extra characters on the unaffected key | Bridge effect is strictly limited to the affected column's own scan slot; fast-typing glitch affecting unaffected keys has a different cause |
+
+#### Results analysis
+
+Four findings from the Groups E/F data:
+
+1. **No ghost spread to unaffected keys.** In every combination tested (E1–E5, F1–F6), unaffected keys (`A`, `K`, `T`, `U`, `J`) **never** acquired ghost characters. This matches the last row of the interpretation table: the bridge effect is strictly confined to the affected column's own scan slot. The fast-typing glitch on unaffected keys — if it is real and reproducible — must have a different cause than bridge leakage propagating across scan windows.
+
+2. **Ghost doubling, not suppression.** E6 (`Y`+`O`), E7 (`H`+`L`), and E8 (`6`+`9`) all show the ghost key characters appearing alongside the real key press with no reduction. The controller does **not** de-duplicate the real key press against the bridge phantom. For example, `Y`+`O` produces `yopoypyopyopy…` — the `o` from the bridge and the `o` from the real key both register.
+
+3. **F7 bridge dominance.** Holding `Y` then tapping `H` produces `yop` followed by `pppp…` (Y's second ghost `p` auto-repeating). H's own ghosts (`l`, `;`) are **completely absent**. This suggests the first affected key's bridge signal "captures" the shared column scan channel: since Y's bridge is already driving columns Cy/Cz when H is pressed, H's bridge signal is masked. The `p` auto-repeat (rather than `o` or both) may indicate the scan reaches column Cz (the `p`/`;`/`0`/`/` column) last, leaving it as the "held" signal.
+
+4. **Auto-repeat blocking between affected-column keys.** The user reports that pressing `N`+`H` or `Y`+`H` simultaneously and **holding** them causes **neither key to auto-repeat**. This is distinct from E9 (a brief chord that did produce output for both keys). The keyboard controller's anti-ghosting algorithm likely detects multiple simultaneous activations in column C7 and suppresses sustained output as a safety measure, while still allowing the initial registration. Group G below investigates this further.
+
+#### Group G — Auto-repeat blocking and N-key combinations
+
+The user observed that holding two affected-column keys simultaneously (e.g. `N`+`H`, `Y`+`H`) causes **neither** key to auto-repeat. This section tests all affected-column pairs to map the blocking pattern, and adds `N`-key combinations that were absent from Groups E/F.
+
+**Test procedure:** same as Group E (chord), but **hold both keys down for at least 3 seconds** to test auto-repeat behavior. Record: (a) what characters appear on initial press, (b) whether auto-repeat engages, (c) which key(s) auto-repeat if any.
+
+| # | Keys held as chord (3 s) | Expected (healthy keyboard) | Actual — initial chars | Actual — auto-repeat? | Notes |
+|---|--------------------------|----------------------------|------------------------|----------------------|-------|
+| G1 | `N` + `M` | `nm` + one auto-repeats | | | Affected + adjacent unaffected — does N produce ghosts (`.`,`/`)? Does M stay clean? |
+| G2 | `N` + `.` | `n.` + one auto-repeats | | | Affected + its ghost key — same pattern as E6/E7/E8 but for N |
+| G3 | `N` + `H` (hold 3 s) | Both auto-repeat | | | ⭐ Two affected-column keys — user already observed: **neither auto-repeats**. Confirm and record initial chars. |
+| G4 | `N` + `Y` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — does blocking also occur for N+Y? |
+| G5 | `6` + `Y` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — top two rows |
+| G6 | `6` + `H` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — number row + home row |
+| G7 | `6` + `N` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — maximum row distance in column C7 |
+| G8 | Hold `H` → tap `Y` | `hy` | | | Reverse of F7: does H's bridge dominate instead? Or is `p`-repeat still present? |
+| G9 | Hold `N` → tap `A` | `na` | | | N held + distant unaffected tapped — does A acquire ghosts? |
+| G10 | `Y` + `H` + `N` three-key chord (hold 3 s) | All three auto-repeat | | | Three affected-column keys simultaneously — maximal bridge stress; does blocking still apply? |
 
 ### Why the Bridge Is Unidirectional
 

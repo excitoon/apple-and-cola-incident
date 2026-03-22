@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-auto">
+      <path d="M0,0 L10,3.5 L0,7 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">Ohm's Law Analysis: Why Both Directions Are NOT Equal</text>
+  <text x="450" y="48" text-anchor="middle" font-size="12" fill="#555">Same residue, same Ohm's law — different effective resistance due to non-uniform drying</text>
+
+  <!-- ===== TOP: The actual physical situation ===== -->
+  <rect x="30" y="65" width="840" height="175" rx="10" fill="#f8f4f0" stroke="#8a7040" stroke-width="1.5"/>
+  <text x="450" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#654321">Physical Reality: Residue is NOT uniform</text>
+
+  <!-- 3D-ish FPC pins -->
+  <rect x="120" y="120" width="60" height="40" rx="4" fill="#daa520" stroke="#8a6500" stroke-width="2"/>
+  <text x="150" y="144" text-anchor="middle" font-size="14" font-weight="bold">Cx</text>
+  <text x="150" y="109" text-anchor="middle" font-size="10" fill="#333">6/Y/H/N</text>
+
+  <rect x="350" y="120" width="60" height="40" rx="4" fill="#daa520" stroke="#8a6500" stroke-width="2"/>
+  <text x="380" y="144" text-anchor="middle" font-size="14" font-weight="bold">Cy</text>
+  <text x="380" y="109" text-anchor="middle" font-size="10" fill="#333">9/O/L/.</text>
+
+  <rect x="580" y="120" width="60" height="40" rx="4" fill="#daa520" stroke="#8a6500" stroke-width="2"/>
+  <text x="610" y="144" text-anchor="middle" font-size="14" font-weight="bold">Cz</text>
+  <text x="610" y="109" text-anchor="middle" font-size="10" fill="#333">0/P/;/​/</text>
+
+  <!-- Residue path with taper showing -->
+  <!-- Thick part between Cx and Cy -->
+  <path d="M180,130 C220,118 280,118 350,135" fill="none" stroke="#654321" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <path d="M180,145 C220,155 280,155 350,145" fill="none" stroke="#654321" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <!-- Fill area -->
+  <path d="M180,130 C220,118 280,118 350,135 L350,145 C280,155 220,155 180,145 Z" fill="rgba(101,67,33,0.35)" stroke="none"/>
+
+  <!-- Thin part between Cy and Cz -->
+  <path d="M410,133 C450,128 520,128 580,137" fill="none" stroke="#654321" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <path d="M410,147 C450,150 520,150 580,147" fill="none" stroke="#654321" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <path d="M410,133 C450,128 520,128 580,137 L580,147 C520,150 450,150 410,147 Z" fill="rgba(101,67,33,0.2)" stroke="none"/>
+
+  <!-- Labels -->
+  <text x="265" y="115" text-anchor="middle" font-size="11" font-weight="bold" fill="#654321">THICK residue</text>
+  <text x="265" y="172" text-anchor="middle" font-size="10" fill="#654321">≈ 30 kΩ effective</text>
+  <text x="495" y="122" text-anchor="middle" font-size="11" fill="#654321">THIN film</text>
+  <text x="495" y="172" text-anchor="middle" font-size="10" fill="#654321">≈ 70 kΩ effective</text>
+
+  <!-- Spill origin marker -->
+  <text x="150" y="180" text-anchor="middle" font-size="10" fill="#c00">↑ spill origin</text>
+  <text x="150" y="192" text-anchor="middle" font-size="9" fill="#c00">(cola pooled here)</text>
+
+  <!-- Flow arrow -->
+  <line x1="190" y1="210" x2="590" y2="210" stroke="#654321" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+  <text x="390" y="228" text-anchor="middle" font-size="10" fill="#654321">liquid spread direction → residue thins out</text>
+
+  <!-- ===== BOTTOM LEFT: Forward calculation ===== -->
+  <rect x="30" y="250" width="410" height="260" rx="10" fill="#eaf7ea" stroke="#2a7a2a" stroke-width="2"/>
+  <text x="235" y="275" text-anchor="middle" font-size="14" font-weight="bold" fill="#2a7a2a">Forward: Press "6" (Cx driven to 3.3 V)</text>
+
+  <!-- Calculation steps -->
+  <text x="50" y="300" font-size="12" fill="#333">Ohm's law voltage divider on Cy:</text>
+  <text x="50" y="322" font-size="13" fill="#333" font-family="monospace">V_Cy = V_drive × R_pull / (R_bridge_fwd + R_pull)</text>
+  <text x="50" y="344" font-size="13" fill="#333" font-family="monospace">V_Cy = 3.3 V × 47kΩ / (30kΩ + 47kΩ)</text>
+  <text x="50" y="366" font-size="13" fill="#333" font-family="monospace">V_Cy = 3.3 × 0.610</text>
+  <text x="50" y="390" font-size="16" font-weight="bold" fill="#2a7a2a" font-family="monospace">V_Cy = 2.01 V</text>
+
+  <!-- Threshold comparison -->
+  <rect x="50" y="405" width="370" height="44" rx="6" fill="#d4edda" stroke="#2a7a2a" stroke-width="1.5"/>
+  <text x="235" y="423" text-anchor="middle" font-size="12" fill="#2a7a2a">2.01 V &gt; 1.2 V threshold</text>
+  <text x="235" y="441" text-anchor="middle" font-size="14" font-weight="bold" fill="#2a7a2a">✓ Ghost keypress on Cy DETECTED → "9" appears</text>
+
+  <!-- Current flow note -->
+  <text x="50" y="475" font-size="11" fill="#555">Current through bridge: I = (3.3 − 2.01) / 30000 = <tspan font-weight="bold">43 μA</tspan></text>
+  <text x="50" y="492" font-size="11" fill="#555">Current through R_pull: I = 2.01 / 47000 = <tspan font-weight="bold">43 μA</tspan> ✓ (Kirchhoff check)</text>
+
+  <!-- ===== BOTTOM RIGHT: Reverse calculation ===== -->
+  <rect x="460" y="250" width="410" height="260" rx="10" fill="#fde8e8" stroke="#c00" stroke-width="2"/>
+  <text x="665" y="275" text-anchor="middle" font-size="14" font-weight="bold" fill="#c00">Reverse: Press "9" (Cy driven to 3.3 V)</text>
+
+  <!-- Calculation steps -->
+  <text x="480" y="300" font-size="12" fill="#333">Ohm's law voltage divider on Cx:</text>
+  <text x="480" y="322" font-size="13" fill="#333" font-family="monospace">V_Cx = V_drive × R_pull / (R_bridge_rev + R_pull)</text>
+  <text x="480" y="344" font-size="13" fill="#333" font-family="monospace">V_Cx = 3.3 V × 47kΩ / (70kΩ + 47kΩ)</text>
+  <text x="480" y="366" font-size="13" fill="#333" font-family="monospace">V_Cx = 3.3 × 0.402</text>
+  <text x="480" y="390" font-size="16" font-weight="bold" fill="#c00" font-family="monospace">V_Cx = 1.33 V</text>
+
+  <!-- Threshold comparison -->
+  <rect x="480" y="405" width="370" height="44" rx="6" fill="#f8d7da" stroke="#c00" stroke-width="1.5"/>
+  <text x="665" y="423" text-anchor="middle" font-size="12" fill="#c00">1.33 V ≈ 1.2 V threshold (just barely above, or below with noise)</text>
+  <text x="665" y="441" text-anchor="middle" font-size="14" font-weight="bold" fill="#c00">✗ Ghost keypress on Cx NOT reliably detected → "6" does NOT appear</text>
+
+  <!-- Current flow note -->
+  <text x="480" y="475" font-size="11" fill="#555">Current through bridge: I = (3.3 − 1.33) / 70000 = <tspan font-weight="bold">28 μA</tspan></text>
+  <text x="480" y="492" font-size="11" fill="#555">Current through R_pull: I = 1.33 / 47000 = <tspan font-weight="bold">28 μA</tspan> ✓ (Kirchhoff check)</text>
+</svg>

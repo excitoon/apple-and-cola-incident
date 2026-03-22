@@ -430,6 +430,8 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | FPC liquid damage | [SVG](diagrams/fpc-liquid-damage.svg) | [PNG](diagrams/fpc-liquid-damage.png) | Before/after comparison showing how dried cola bridges column traces C7→C6/C8 |
 | Scissor-switch cross-section | [SVG](diagrams/scissor-switch-cross-section.svg) | [PNG](diagrams/scissor-switch-cross-section.png) | Side view of the non-serviceable key block: keycap → scissor arms → rubber dome → FPC membrane |
 | Butterfly vs scissor comparison | [SVG](diagrams/butterfly-vs-scissor.svg) | [PNG](diagrams/butterfly-vs-scissor.png) | Side-by-side comparison of the two Apple keyboard mechanisms |
+| Bridge unidirectional circuit model | [SVG](diagrams/bridge-unidirectional-circuit.svg) | — | Circuit diagram showing why dried cola residue bridge appears unidirectional: forward direction crosses detection threshold, reverse does not |
+| Ohm's law voltage divider analysis | [SVG](diagrams/ohms-law-voltage-divider.svg) | — | Side-by-side Ohm's law calculations for forward (2.01 V, detected) vs reverse (1.33 V, not detected) bridge directions |
 
 ### 9. Reference Photos of Real Hardware (external links)
 
@@ -917,72 +919,134 @@ All three recommended follow-up tests have been completed. Results:
 
 ### Why the Bridge Is Unidirectional
 
-A question arises: how can dried Coca-Cola residue — a passive film of sugar, phosphoric acid, and mineral salts — produce a **unidirectional** bridge? A simple resistor obeys Ohm's law symmetrically: current flows equally in both directions. The answer is that the **residue itself is not a diode** — the unidirectionality emerges from the interaction between the bridge's moderate resistance and the keyboard matrix scanning circuit.
+A natural question: how can dried Coca-Cola residue — a passive film of sugar, phosphoric acid, and mineral salts — produce a **unidirectional** bridge? Isn't a puddle of dried cola just a resistor, and shouldn't current flow equally in both directions?
 
-#### The circuit model
+**The short answer: yes, the residue is just a resistor. It is NOT a diode. Ohm's law holds perfectly — current does flow in both directions.** The "unidirectionality" is an illusion created by the keyboard's digital detection threshold. The residue leaks signal in both directions, but only one direction leaks *enough* to be detected.
 
-When a key is pressed, the keyboard controller detects it through a voltage divider formed by the key switch, column pull resistor, and (in our case) the residue bridge:
+See the [circuit model diagram](diagrams/bridge-unidirectional-circuit.svg) and [Ohm's law calculations](diagrams/ohms-law-voltage-divider.svg) for visual illustration.
 
-```
-  Normal keypress (no contamination):
+#### Does the "thickness gradient" create a diode? No.
 
-  ROW driver ──── [key switch: ~1 Ω] ──── COL_Cx ──── [R_pull: ~47 kΩ] ──── GND
-                                            │
-                                         sense input
-                                         (threshold ~1.2 V)
+A diode is a semiconductor junction that physically blocks current in one direction. The dried cola residue is nothing like that — it is an amorphous film of sugar and mineral salts that conducts through ionic/hygroscopic mechanisms. It obeys Ohm's law: V = I × R, current flows in both directions.
 
-  → Switch closes, COL_Cx pulled to ROW voltage (≈3.3 V)
-  → Well above threshold → key detected ✓
-
-
-  With residue bridge between Cx and Cy:
-
-  ROW driver ── [key switch] ── COL_Cx ── [R_pull_x] ── GND
-                                  │
-                             [R_bridge: ~20–80 kΩ]  ← dried cola residue
-                                  │
-                               COL_Cy ── [R_pull_y] ── GND
-                                  │
-                               sense input
-                               (threshold ~1.2 V)
-
-  → Key in Cx column pressed: Cx driven to ~3.3 V through ~1 Ω switch
-  → Voltage divider: V_Cy = 3.3 V × R_pull_y / (R_bridge + R_pull_y)
-  → If R_bridge ≈ 50 kΩ and R_pull_y ≈ 47 kΩ:
-     V_Cy = 3.3 × 47k / (50k + 47k) = 3.3 × 0.485 ≈ 1.6 V
-  → Above 1.2 V threshold → ghost keypress on Cy detected ✓
-```
-
-The same circuit applies in reverse — pressing a key in column Cy should also leak signal to Cx through the same resistor. In a perfectly symmetric circuit, the bridge would be bidirectional. So why isn't it?
-
-#### Three mechanisms that break symmetry
-
-**1. Asymmetric residue resistance (most likely).** The cola did not dry as a uniform film across all three pins. Liquid flows directionally along the FPC surface, pools unevenly, and dries with a **thickness gradient** — thicker at the origin (Cx pin area), tapering thinner toward Cy and Cz. The thicker deposit has lower sheet resistance (more conductive material per unit area); the thinner edge has higher resistance. This creates:
+However, the residue did **not** dry as a uniform film. Cola is a liquid — when it pooled on the FPC connector, it flowed from the spill origin (near pin Cx) outward toward Cy and Cz. As it dried, it left a **non-uniform deposit**:
 
 ```
-  FPC connector pins (cross-section through residue):
+  Physical reality: cola pooled near Cx pin and spread outward
 
-  ──┬──────┬──────┬──────┬──
-    │  Cx  │  Cy  │  Cz  │
-  ──┴──────┴──────┴──────┴──
-       ▓▓▓▓▓▓▒▒▒▒░░░
-       thick → thin  (residue taper)
+  TOP VIEW of three adjacent FPC/ZIF connector pads:
 
-  R(Cx→Cy) ≈ 30 kΩ  (through thick part of film)
-  R(Cy→Cx) ≈ 70 kΩ  (through thin part + contact resistance at edge)
+  ┌────────────┐    ┌────────────┐    ┌────────────┐
+  │            │    │            │    │            │
+  │     Cx     │    │     Cy     │    │     Cz     │
+  │  (6/Y/H/N) │    │  (9/O/L/.) │    │ (0/P/;/​/) │
+  │            │    │            │    │            │
+  └────────────┘    └────────────┘    └────────────┘
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░
+  ◄── thick residue ──►◄── medium ──►◄── thin ──►
+
+  CROSS-SECTION (side view):
+
+  residue         ▓▓▓▓▓▓
+  thickness:   ▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒░░░░░
+              ─────────┬─────────┬─────────┬─────────
+              │   Cx   │   Cy   │   Cz   │
+              ─────────┴─────────┴─────────┴─────────
+                        FPC substrate
+
+  ↑ spill origin         → liquid spread direction
+  (cola pooled here)
 ```
 
-If the bridge resistance is **near the detection threshold**, even a 2:1 asymmetry in effective resistance is enough to make the voltage divider cross threshold in one direction but not the other.
+The thick part near Cx has more conductive material per unit area (lower resistance). The thin edge near Cz has less material (higher resistance). The result is that the **effective bridge resistance depends on which direction you measure from**:
 
-**2. Near-threshold operation.** The test data shows the bridge is not a dead short — if it were, the leaked signal would be near 3.3 V in both directions, making the bridge obviously bidirectional. Instead, the bridge operates in the regime where V_leaked ≈ V_threshold (roughly 1.0–1.6 V). In this marginal zone, small asymmetries in resistance, trace impedance, or input threshold voltage across different column pins are amplified into a binary detected/not-detected outcome. The bridge from Cx→Cy produces ~1.6 V (just above threshold); the reverse Cy→Cx produces ~1.0 V (just below threshold). Both are close to the edge, but they fall on opposite sides.
+- **Cx→Cy path**: signal travels from the thick deposit through well-wetted residue — effective resistance ≈ **30 kΩ**
+- **Cy→Cx path**: signal travels from the thin edge through poorly-wetted residue — effective resistance ≈ **70 kΩ**
 
-**3. Scan-order timing effects (secondary).** If the keyboard controller scans columns sequentially (Cx, then Cy, then Cz), there is a brief moment after Cx is driven when its signal is still decaying on the bridge capacitance. Cy, scanned immediately after Cx, sees this residual charge added to any bridge leakage — pushing it further above threshold. When Cy is the source and Cx was scanned earlier (and has since been discharged), the reverse leakage arrives at Cx after it has already been read and cleared. The character ordering `690` (not `096` or `960`) is consistent with this scan-order effect: Cx is scanned first, then Cy, then Cz.
+**This is still Ohm's law.** The resistor just has different values depending on where the source and destination are in the non-uniform film. Think of it like a mountain trail: walking downhill (thick→thin) is "easier" than walking uphill (thin→thick), but the trail exists in both directions.
+
+#### How this interacts with the keyboard circuit: the voltage divider
+
+The keyboard controller detects keypresses using a **voltage divider**. When a key is pressed, it pulls a column line to 3.3 V. The controller senses this voltage and compares it against a **detection threshold** (approximately 1.2 V). If the voltage is above threshold, the key is registered; below threshold, it is ignored.
+
+The residue bridge creates a parasitic voltage divider between the source column (driven to 3.3 V) and the victim column (connected to ground through a ~47 kΩ pull resistor):
+
+```
+  Ohm's law voltage divider — the SAME formula in both directions:
+
+  V_victim = V_drive × R_pull / (R_bridge + R_pull)
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │                                                                 │
+  │  FORWARD (press "6" → does "9" also appear?):                   │
+  │                                                                 │
+  │  V_Cy = 3.3 V × 47 kΩ / (30 kΩ + 47 kΩ)                       │
+  │  V_Cy = 3.3 × 0.610                                            │
+  │  V_Cy = 2.01 V                                                 │
+  │                                                                 │
+  │  2.01 V  >  1.2 V threshold  →  ✅ DETECTED (ghost "9")        │
+  │                                                                 │
+  ├─────────────────────────────────────────────────────────────────┤
+  │                                                                 │
+  │  REVERSE (press "9" → does "6" also appear?):                   │
+  │                                                                 │
+  │  V_Cx = 3.3 V × 47 kΩ / (70 kΩ + 47 kΩ)                       │
+  │  V_Cx = 3.3 × 0.402                                            │
+  │  V_Cx = 1.33 V                                                 │
+  │                                                                 │
+  │  1.33 V  ≈  1.2 V threshold  →  ❌ NOT DETECTED (marginal)     │
+  │                                                                 │
+  └─────────────────────────────────────────────────────────────────┘
+
+  Same Ohm's law. Same resistor (just different effective R).
+  Different outcome — purely because of the detection threshold.
+```
+
+**The "diode" effect is the threshold comparison, not the resistor.** The controller's digital threshold (above = detected, below = ignored) turns a small analog resistance asymmetry (30 kΩ vs 70 kΩ) into a sharp binary directional cutoff. Current flows in both directions — 43 μA forward, 28 μA reverse — but only the forward direction produces enough voltage to cross the threshold.
+
+See the [full circuit diagram with both directions](diagrams/bridge-unidirectional-circuit.svg) and [detailed Ohm's law calculations](diagrams/ohms-law-voltage-divider.svg) for complete visual analysis.
+
+#### Why doesn't the reverse direction cross the threshold?
+
+The reverse voltage (1.33 V) is very close to the threshold (1.2 V). In practice, several factors push it below:
+
+1. **Input hysteresis** — the controller likely uses Schmitt-trigger inputs, which require the voltage to rise above ~1.4 V (not just 1.2 V) to register a keypress. This pushes the effective threshold above 1.33 V.
+2. **Noise margin** — the controller applies debouncing and noise filtering. A signal hovering right at threshold gets filtered out as noise, while a signal well above threshold (2.0 V) passes cleanly.
+3. **Scan-order timing** — the controller scans columns sequentially. When Cx is driven first, its signal is still decaying on the bridge when Cy is sampled next (additive). When Cy is driven, Cx was already sampled and cleared (no boost). The character ordering `690` (not `096` or `960`) confirms Cx is scanned first, then Cy, then Cz.
+
+#### The full picture: circuit diagram
+
+```
+  FORWARD direction (key "6" pressed):
+
+  3.3V ──[switch ~1Ω]── Cx ──[R_bridge ≈ 30kΩ]── Cy ──[R_pull ≈ 47kΩ]── GND
+                          │                         │
+                          │                      V_Cy = 2.01 V
+                          │                      > 1.2V threshold
+                          │                      → ghost "9" detected ✓
+                          │
+                       V_Cx ≈ 3.3 V
+                       → normal "6" detected ✓
+
+  REVERSE direction (key "9" pressed):
+
+  3.3V ──[switch ~1Ω]── Cy ──[R_bridge ≈ 70kΩ]── Cx ──[R_pull ≈ 47kΩ]── GND
+                          │                         │
+                          │                      V_Cx = 1.33 V
+                          │                      ≈ 1.2V threshold
+                          │                      → ghost "6" NOT detected ✗
+                          │
+                       V_Cy ≈ 3.3 V
+                       → normal "9" detected ✓
+```
+
+Note that `R_bridge` is different in each direction — not because the resistor "knows" which way current is flowing (Ohm's law is symmetric), but because the non-uniform residue deposit provides a lower-resistance path from the thick end (Cx) to the thin end (Cy) than from the thin end back.
 
 #### What this tells us about the residue
 
 The unidirectionality is actually **good news** for cleaning:
 
-- It confirms the bridge is a **moderate-resistance conductive film** (~20–80 kΩ range), not a metallic short circuit. A metallic short (from copper migration or solder bridging) would have resistance <1 kΩ and would be strongly bidirectional. The moderate resistance points to a **dissolvable dried sugar/acid film** that should clean off with IPA or ultrasonic solvent.
+- It confirms the bridge is a **moderate-resistance conductive film** (~30–70 kΩ range), not a metallic short circuit. A metallic short (from copper migration or solder bridging) would have resistance <1 kΩ and would be strongly bidirectional. The moderate resistance points to a **dissolvable dried sugar/acid film** that should clean off with IPA or ultrasonic solvent.
 - The asymmetry confirms the residue has a **directional deposition pattern** — it flowed from one pin toward the adjacent ones. This means it is a surface deposit that can be reached by cleaning, not an internal trace defect.
 - The near-threshold behavior means even **partial cleaning** that increases the bridge resistance by 2–3× would likely eliminate the ghost keypresses entirely (pushing the leaked voltage below threshold in both directions).
 
@@ -1072,6 +1136,8 @@ See the [`diagrams/`](diagrams/) directory for technical illustrations (availabl
 - [ZIF connector detail](diagrams/zif-connector-detail.png)
 - [FPC liquid damage before/after](diagrams/fpc-liquid-damage.png)
 - [Scissor-switch cross-section](diagrams/scissor-switch-cross-section.png)
+- [Bridge unidirectional circuit model](diagrams/bridge-unidirectional-circuit.svg) — why the dried cola bridge appears unidirectional
+- [Ohm's law voltage divider analysis](diagrams/ohms-law-voltage-divider.svg) — forward vs reverse calculations
 
 ## Summary
 

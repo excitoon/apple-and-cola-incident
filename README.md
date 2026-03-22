@@ -531,6 +531,8 @@ The spill chemistry matters here because **Coca-Cola Zero is still chemically da
 | Sodium Citrate | Na₃C₆H₅O₇ | < 0.05% |
 | Natural Flavors | Proprietary mixture | < 0.05% |
 
+*Percentages are approximate, calculated by mass assuming ~355 mL (12 oz) serving at ~1 g/mL density.*
+
 The key damaging components from an electronics perspective are:
 
 - **Phosphoric acid (H₃PO₄)** — lowers pH to ~2.5–3.2, drives copper/tin corrosion.
@@ -722,7 +724,7 @@ The following table summarizes approximate timescales for each chemical process 
 | **SAC305 solder dissolution (Sn attack)** | ~1–2 min | Continuous; rate ~0.5–2 μm/h in dilute acid | Sn is anodic to Cu/Au — dissolves preferentially |
 | **Bulk liquid evaporation** | Immediate | Most surface liquid gone in 10–30 min | Depends on volume, airflow, temperature |
 | **Acid concentration peak** | ~10–30 min | Lasts until residue reaches hygroscopic equilibrium | H₃PO₄ concentration increases 100–1000× as water evaporates |
-| **Residue film deposition** | ~15–45 min | Fully deposited when visibly dry (~1–2 h) | Film thickness ~1–10 μm; contains all non-volatile components |
+| **Residue film deposition** | ~15–45 min (initial film visible) | Fully deposited when visibly dry (~1–2 h) | Film thickness ~1–10 μm; contains all non-volatile components |
 | **Capillary retention in tight gaps** | Immediate | Liquid persists 1–4 h in gaps < 0.3 mm | Scissor-switch clearances and ZIF slot dry last |
 | **Dendrite nucleation (electrochemical migration)** | ~30 min – 2 h | Can grow to bridging length in 2–24 h under bias | Requires bias voltage (~3.3 V) and thinning electrolyte |
 | **Hygroscopic moisture reabsorption** | After visual drying (~1–2 h) | Cyclical; varies with RH | H₃PO₄ residue absorbs moisture at >30–40% RH |

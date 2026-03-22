@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="monospace" font-size="12">
+  <title>Butterfly vs Scissor Key Mechanism Comparison</title>
+  <rect width="800" height="420" fill="#fafafa" stroke="#ccc"/>
+
+  <!-- Title -->
+  <text x="400" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Apple Keyboard Mechanisms: Butterfly vs Scissor</text>
+
+  <!-- BUTTERFLY side -->
+  <rect x="20" y="40" width="370" height="370" rx="8" fill="#ffebee" stroke="#e53935" stroke-width="1.5"/>
+  <text x="205" y="62" text-anchor="middle" font-size="13" font-weight="bold" fill="#b71c1c">Butterfly Mechanism (2015–2019)</text>
+  <text x="205" y="78" text-anchor="middle" font-size="10" fill="#c62828">MacBook 12", Pro 2016–2019</text>
+
+  <!-- Butterfly keycap -->
+  <rect x="80" y="100" width="250" height="24" rx="4" fill="#ffcdd2" stroke="#e53935" stroke-width="1.5"/>
+  <text x="205" y="116" text-anchor="middle" font-size="11" fill="#b71c1c">KEYCAP</text>
+
+  <!-- Butterfly wings (V-shape opening outward) -->
+  <line x1="140" y1="124" x2="205" y2="190" stroke="#e53935" stroke-width="2.5"/>
+  <line x1="270" y1="124" x2="205" y2="190" stroke="#e53935" stroke-width="2.5"/>
+  <!-- The "wings" that fold -->
+  <line x1="140" y1="124" x2="100" y2="190" stroke="#e53935" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="270" y1="124" x2="310" y2="190" stroke="#e53935" stroke-width="2" stroke-dasharray="4,2"/>
+
+  <text x="105" y="165" font-size="9" fill="#c62828" transform="rotate(-45 105 165)">wing A</text>
+  <text x="290" y="160" font-size="9" fill="#c62828" transform="rotate(45 290 160)">wing B</text>
+
+  <!-- Butterfly pivot -->
+  <circle cx="205" cy="190" r="4" fill="#fff" stroke="#e53935" stroke-width="2"/>
+  <text x="225" y="195" font-size="9" fill="#c62828">single pivot</text>
+
+  <!-- Rubber dome -->
+  <ellipse cx="205" cy="220" rx="30" ry="15" fill="#e0e0e0" stroke="#757575"/>
+  <text x="205" y="224" text-anchor="middle" font-size="9" fill="#424242">dome</text>
+
+  <!-- Base -->
+  <rect x="80" y="245" width="250" height="14" fill="#c8e6c9" stroke="#388e3c"/>
+  <text x="205" y="256" text-anchor="middle" font-size="9" fill="#1b5e20">FPC membrane</text>
+
+  <!-- Butterfly characteristics -->
+  <text x="40" y="285" font-size="10" fill="#b71c1c">✗ Very thin (~0.55 mm travel)</text>
+  <text x="40" y="300" font-size="10" fill="#b71c1c">✗ Dust/debris causes key failure</text>
+  <text x="40" y="315" font-size="10" fill="#b71c1c">✗ Recalled — free repair program</text>
+  <text x="40" y="330" font-size="10" fill="#b71c1c">✗ V-shaped wings flex at center</text>
+  <text x="40" y="345" font-size="10" fill="#333">• Thinner profile for slim laptops</text>
+  <text x="40" y="360" font-size="10" fill="#333">• Single central pivot point</text>
+  <text x="40" y="375" font-size="10" fill="#333">• Discontinued after 2019</text>
+  <text x="40" y="395" font-size="10" font-weight="bold" fill="#b71c1c">NOT your MacBook's mechanism</text>
+
+  <!-- SCISSOR side -->
+  <rect x="410" y="40" width="370" height="370" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="595" y="62" text-anchor="middle" font-size="13" font-weight="bold" fill="#1b5e20">Scissor Mechanism (2019–present)</text>
+  <text x="595" y="78" text-anchor="middle" font-size="10" fill="#2e7d32">MacBook Pro M1/M2/M3, MacBook Air M1+</text>
+
+  <!-- Scissor keycap -->
+  <rect x="470" y="100" width="250" height="24" rx="4" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="595" y="116" text-anchor="middle" font-size="11" fill="#1b5e20">KEYCAP</text>
+
+  <!-- Scissor arms (X-shape) -->
+  <line x1="510" y1="124" x2="680" y2="200" stroke="#1565c0" stroke-width="2.5"/>
+  <line x1="680" y1="124" x2="510" y2="200" stroke="#c62828" stroke-width="2.5"/>
+
+  <!-- Scissor pivot -->
+  <circle cx="595" cy="162" r="4" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="612" y="158" font-size="9" fill="#333">X-pivot</text>
+
+  <!-- Clips -->
+  <circle cx="510" cy="124" r="3" fill="#ff9800"/>
+  <circle cx="680" cy="124" r="3" fill="#ff9800"/>
+  <circle cx="510" cy="200" r="3" fill="#ff9800"/>
+  <circle cx="680" cy="200" r="3" fill="#ff9800"/>
+  <text x="690" y="130" font-size="8" fill="#e65100">clips</text>
+
+  <!-- Rubber dome -->
+  <ellipse cx="595" cy="220" rx="30" ry="15" fill="#e0e0e0" stroke="#757575"/>
+  <text x="595" y="224" text-anchor="middle" font-size="9" fill="#424242">dome</text>
+
+  <!-- Base -->
+  <rect x="470" y="245" width="250" height="14" fill="#c8e6c9" stroke="#388e3c"/>
+  <text x="595" y="256" text-anchor="middle" font-size="9" fill="#1b5e20">FPC membrane</text>
+
+  <!-- Scissor characteristics -->
+  <text x="430" y="285" font-size="10" fill="#2e7d32">✓ More key travel (~1 mm)</text>
+  <text x="430" y="300" font-size="10" fill="#2e7d32">✓ More reliable than butterfly</text>
+  <text x="430" y="315" font-size="10" fill="#2e7d32">✓ X-shaped arms = stable motion</text>
+  <text x="430" y="330" font-size="10" fill="#2e7d32">✓ Four pivot clips (not one)</text>
+  <text x="430" y="345" font-size="10" fill="#333">• Still sealed — non-serviceable</text>
+  <text x="430" y="360" font-size="10" fill="#333">• Cola residue still gets trapped</text>
+  <text x="430" y="375" font-size="10" fill="#333">• Integrated into top-case assembly</text>
+  <text x="430" y="395" font-size="10" font-weight="bold" fill="#1b5e20">✓ YOUR MacBook's mechanism</text>
+</svg>

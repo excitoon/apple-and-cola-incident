@@ -31,6 +31,36 @@ Upon receiving the device back from the service center:
 - **N** was producing incorrect characters (a **/** symbol and other unintended characters) instead of or in addition to `N`.
 - Extra symbols were appearing spontaneously from the keyboard without any keys being pressed.
 - Over the following days the picture evolved: **N** now produces 3 different symbols (including `N` itself), and similar multi-character behavior is present for the other keys in the affected column.
+- **Ghost keypresses subsequently disappeared** — spontaneous phantom key events stopped after the residue dried and stabilised.
+- **Partial improvement after rest period** (updated March 22): after 2 days of non-use (internal keyboard disabled via Karabiner Elements while using an external keyboard), the affected keys now produce **correct symbols plus two incorrect ones** (previously, correct symbols were intermittent or absent). This suggests the contamination may be partially dissipating or redistributing during periods without thermal cycling from laptop use.
+
+## Keyboard Mechanisms: Butterfly vs Scissor
+
+Before diving into the electronics, it is worth clarifying the two keyboard mechanism types Apple has used, since the service center discussion references "non-serviceable key blocks":
+
+### Butterfly mechanism (2015–2019, now discontinued)
+
+The **butterfly mechanism** was Apple's ultra-thin key switch design used in the MacBook 12" (2015–2017) and MacBook Pro 13"/15" (2016–2019). It uses a **V-shaped pair of interlocking wings** (resembling a butterfly) that pivot at a single central point. When the keycap is pressed, the wings fold flat; when released, they spring back.
+
+Key characteristics:
+- **Extremely thin** — only ~0.55 mm key travel, enabling very slim laptop designs.
+- **Fragile** — notorious for failures caused by dust, crumbs, or debris getting trapped under the mechanism, causing stuck or unresponsive keys.
+- **Recalled** — Apple acknowledged the reliability problems and offered a free keyboard repair program for affected models.
+- **Discontinued** — replaced by the scissor mechanism starting with the MacBook Pro 16" in late 2019.
+
+> ⚠️ **Your MacBook (M3 Pro, 2023) does NOT use the butterfly mechanism.** It uses the scissor mechanism described below.
+
+### Scissor mechanism (2019–present, your MacBook)
+
+The **scissor mechanism** (marketed as "Magic Keyboard") is Apple's current keyboard design, used in all MacBooks since late 2019 including the M1, M2, and M3 generations. It uses an **X-shaped pair of interlocking plastic arms** (resembling scissors) that cross and pivot at the center. The arms clip into the keycap above and a base plate below, providing a stable, guided vertical motion.
+
+Key characteristics:
+- **More key travel** — approximately 1 mm, which feels more tactile than the butterfly design.
+- **More reliable** — the X-shaped mechanism is less susceptible to dust and debris failures.
+- **Still sealed** — the scissor arms, rubber dome, and FPC membrane layer form a sealed unit. Once liquid enters the sub-0.3 mm capillary gaps, it cannot be removed by manual cleaning — only by ultrasonic cavitation.
+- **Integrated into the top-case** — the keyboard, battery, and palm rest are a single assembly. Replacing the keyboard means replacing the entire top-case.
+
+See the [butterfly vs scissor comparison diagram](diagrams/butterfly-vs-scissor.svg) and [scissor-switch cross-section](diagrams/scissor-switch-cross-section.svg) for visual details.
 
 ## Keyboard Electronics: Schematics and Layout
 
@@ -388,7 +418,20 @@ For the MacBook Pro 14" A2918 (board **820-02757**, design **051-07754**), the f
 
 **Note:** The BRD boardview files require a viewer such as **OpenBoardView** (free, open-source) or **FlexBV** to navigate the component layout interactively. The PDF schematics show the full circuit including the keyboard controller IC (typically labeled as a "U"-prefixed component near the keyboard ZIF connector), SPI bus connections to the M3 Pro SoC, and individual column/row signal names.
 
-### 8. Reference Photos of Real Hardware
+### 8. Diagrams (uploaded as files)
+
+The following SVG diagrams are included in this repository in the [`diagrams/`](diagrams/) directory:
+
+| Diagram | File | Description |
+|---|---|---|
+| Keyboard matrix with affected column | [keyboard-matrix-affected-column.svg](diagrams/keyboard-matrix-affected-column.svg) | Row/column matrix layout showing keys 6, Y, H, N sharing column C7 (highlighted in red) |
+| Keyboard system block diagram | [keyboard-system-block-diagram.svg](diagrams/keyboard-system-block-diagram.svg) | Full signal chain: key matrix → FPC ribbon → ZIF connector → keyboard controller IC → SPI → M3 Pro SoC |
+| ZIF connector detail (3 views) | [zif-connector-detail.svg](diagrams/zif-connector-detail.svg) | Top view (latch open), top view (latch closed), and side cross-section showing FPC pads contacting spring contacts |
+| FPC liquid damage | [fpc-liquid-damage.svg](diagrams/fpc-liquid-damage.svg) | Before/after comparison showing how dried cola bridges column traces C7→C6/C8 |
+| Scissor-switch cross-section | [scissor-switch-cross-section.svg](diagrams/scissor-switch-cross-section.svg) | Side view of the non-serviceable key block: keycap → scissor arms → rubber dome → FPC membrane |
+| Butterfly vs scissor comparison | [butterfly-vs-scissor.svg](diagrams/butterfly-vs-scissor.svg) | Side-by-side comparison of the two Apple keyboard mechanisms |
+
+### 9. Reference Photos of Real Hardware (external links)
 
 The following links show actual teardown photos of MacBook Pro hardware similar to the M3 Pro model. These illustrate the real-world appearance of the components described in the ASCII schematics above:
 
@@ -500,6 +543,21 @@ Ghost keypresses require a *floating* or *intermittent* short — a conductive p
 
 The disappearance of ghost presses suggests the residue has settled into a stable state rather than continuing to spread. This is slightly better news for cleaning: contamination that is no longer migrating is more likely to be localised and addressable. The column symptoms (multi-character output from H/Y/6/N) persist because a stable conductive bridge remains between column traces, just no longer with enough free conductivity to cause floating triggers.
 
+### Partial improvement observed after 2-day rest period
+
+An important update (March 22): after the laptop was returned from the service center, ghost keypresses made it unusable, so an external keyboard was connected and the internal keyboard was disabled using **Karabiner Elements**. The laptop was used this way for approximately 2 days without the internal keyboard being active.
+
+After re-enabling the internal keyboard, the affected keys now **produce the correct character plus two incorrect ones** — whereas previously the correct character was intermittent or absent entirely. This is a meaningful improvement.
+
+This observation is diagnostically significant for several reasons:
+
+1. **Reduced thermal cycling** — with the laptop still being used (so the SoC and battery were generating heat), but the keyboard controller not actively scanning the matrix, the thermal profile around the keyboard area would have been slightly lower. This may have slowed ongoing corrosion somewhat.
+2. **No mechanical actuation** — without keys being pressed for 2 days, the physical pressure on the rubber dome → FPC membrane contact points was absent. This means no repeated compression of the contaminated contact area, which could otherwise spread or redistribute residue.
+3. **Continued drying** — the 2-day rest period allowed further evaporation of any remaining moisture in the FPC/connector area. As moisture decreases, the conductive path weakens — consistent with the improvement from "no correct character" to "correct character plus extras."
+4. **Positive signal for cleaning** — this improvement suggests the contamination is conductive residue (dried sugar/acid) rather than irreversible copper corrosion through the trace. If the traces were physically etched through by phosphoric acid, a rest period would not improve the symptoms. The fact that it did improve suggests **ultrasonic cleaning has a good chance of resolving the problem**.
+
+This supports the recommendation to pursue ultrasonic cleaning as the first step before considering top-case replacement.
+
 ## Hypotheses
 
 ### Hypothesis 1: Residual liquid causing short circuits (most likely)
@@ -560,8 +618,9 @@ The most probable explanation is a **combination of Hypotheses 1, 3, and 5**: th
 
 1. The affected keys forming a clean column pattern.
 2. Multiple symbols being generated by a single keypress.
-3. Spontaneous keypresses.
+3. Spontaneous keypresses (now resolved as residue dried).
 4. Symptoms worsening over time as residue dried and corrosion progressed.
+5. **Partial improvement after a 2-day rest period** — the fact that symptoms improved (correct characters returned) during a period of non-use strongly suggests the primary cause is conductive residue rather than irreversible trace damage. This is a positive indicator for cleaning.
 
 The connector misalignment (Hypothesis 2) may have introduced additional artifacts but is unlikely to be the primary cause since reseating the connector did not resolve the issue.
 

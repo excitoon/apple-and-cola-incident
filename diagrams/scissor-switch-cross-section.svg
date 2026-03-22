@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="monospace" font-size="12">
+  <title>Scissor-Switch Key Mechanism — Cross-Section (Side View)</title>
+  <rect width="600" height="400" fill="#fafafa" stroke="#ccc"/>
+
+  <!-- Title -->
+  <text x="300" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Scissor-Switch Key Mechanism — Cross-Section</text>
+
+  <!-- Base plate / FPC layer -->
+  <rect x="80" y="310" width="440" height="20" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="300" y="324" text-anchor="middle" font-size="11" fill="#1b5e20">FPC membrane layer (row + column traces)</text>
+
+  <!-- Contact pad on FPC -->
+  <rect x="260" y="300" width="80" height="10" fill="#ffd54f" stroke="#f57f17" stroke-width="1"/>
+  <text x="300" y="296" text-anchor="middle" font-size="9" fill="#e65100">contact pad</text>
+
+  <!-- Rubber dome -->
+  <ellipse cx="300" cy="268" rx="40" ry="22" fill="#e0e0e0" stroke="#757575" stroke-width="1.5"/>
+  <text x="300" y="272" text-anchor="middle" font-size="10" fill="#424242">rubber dome</text>
+
+  <!-- Scissor arm left -->
+  <line x1="160" y1="310" x2="300" y2="220" stroke="#1565c0" stroke-width="2.5"/>
+  <line x1="300" y1="220" x2="440" y2="310" stroke="#1565c0" stroke-width="2.5" stroke-dasharray="none"/>
+
+  <!-- Scissor arm right (crosses the left) -->
+  <line x1="160" y1="220" x2="300" y2="310" stroke="#c62828" stroke-width="2.5"/>
+  <line x1="300" y1="310" x2="440" y2="220" stroke="#c62828" stroke-width="2.5"/>
+
+  <!-- Pivot point -->
+  <circle cx="300" cy="265" r="5" fill="#fff" stroke="#333" stroke-width="2"/>
+
+  <!-- Keycap -->
+  <rect x="120" y="180" width="360" height="30" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="300" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d47a1">K E Y C A P</text>
+
+  <!-- Clip points -->
+  <circle cx="160" cy="210" r="4" fill="#ff9800" stroke="#e65100"/>
+  <circle cx="440" cy="210" r="4" fill="#ff9800" stroke="#e65100"/>
+  <circle cx="160" cy="310" r="4" fill="#ff9800" stroke="#e65100"/>
+  <circle cx="440" cy="310" r="4" fill="#ff9800" stroke="#e65100"/>
+
+  <!-- Labels -->
+  <text x="90" y="218" font-size="9" fill="#e65100">clip</text>
+  <text x="452" y="218" font-size="9" fill="#e65100">clip</text>
+
+  <!-- Arm labels -->
+  <text x="175" y="255" font-size="10" fill="#1565c0" transform="rotate(-35 175 255)">scissor arm A</text>
+  <text x="385" y="255" font-size="10" fill="#c62828" transform="rotate(35 385 255)">scissor arm B</text>
+
+  <!-- Capillary gap annotation -->
+  <line x1="500" y1="300" x2="500" y2="340" stroke="#d32f2f" stroke-width="1"/>
+  <line x1="490" y1="300" x2="510" y2="300" stroke="#d32f2f" stroke-width="1"/>
+  <line x1="490" y1="340" x2="510" y2="340" stroke="#d32f2f" stroke-width="1"/>
+  <text x="530" y="315" font-size="9" fill="#d32f2f">&lt; 0.3 mm</text>
+  <text x="530" y="328" font-size="9" fill="#d32f2f">capillary gap</text>
+
+  <!-- Liquid ingress path -->
+  <path d="M 120 210 Q 100 260 120 310" fill="none" stroke="#d32f2f" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="42" y="260" font-size="9" fill="#d32f2f">liquid</text>
+  <text x="42" y="272" font-size="9" fill="#d32f2f">ingress</text>
+  <text x="42" y="284" font-size="9" fill="#d32f2f">path ↓</text>
+
+  <!-- Legend -->
+  <rect x="80" y="355" width="440" height="35" rx="4" fill="#fff3e0" stroke="#ff9800"/>
+  <text x="300" y="370" text-anchor="middle" font-size="10" fill="#bf360c">Non-serviceable: capillary gaps &lt; 0.3 mm, fragile plastic arms break on disassembly.</text>
+  <text x="300" y="383" text-anchor="middle" font-size="10" fill="#bf360c">Trapped liquid can only be removed by ultrasonic cavitation.</text>
+</svg>

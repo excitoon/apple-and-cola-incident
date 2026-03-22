@@ -1395,6 +1395,71 @@ All three recommended follow-up tests have been completed. Results:
 
 3. **`'` key reverse test** ✅ — Pressing `'` produces only `'`, no space. **The Space→`'` bridge is also unidirectional**, consistent with the main Cx→Cy/Cz bridge behavior.
 
+### Simultaneous Multi-Key Press Test
+
+**Motivation**: the single-key tests above (Groups A–D) establish what each key produces when pressed in isolation. A separate question arises when several keys are pressed at the same time, as occurs naturally during fast typing. The reported symptom — glitches on normally-unaffected keys when typing quickly — cannot be explained by the single-key tests alone because those tests never put two column lines under electrical stress simultaneously. This test is designed to check whether concurrent key presses interact with the conductive bridge and spread artifacts to keys that are individually clean.
+
+**Background — three phenomena to watch for:**
+
+1. **Bridge-activated phantom during rollover.** When an affected key (e.g. `Y`) is held while a second key is pressed, the bridge between Cx, Cy, and Cz remains active throughout the overlapping scan cycles. If the second key happens to be in the same row as one of the bridged columns, the combination may register a phantom third key (the classic keyboard-matrix "ghost" caused by the Cx–Cy–Cz triangle acting as a missing-diode rectangle).
+
+2. **Ghost suppression by deliberate co-press.** If `Y` and `O` are pressed together (where `O` is one of `Y`'s known ghost outputs), the controller already sees column Cy as intentionally driven. Depending on the controller's de-duplication logic, the ghost `o` may be absorbed into the real `O` press — so `Y`+`O` might produce `yop` or only `yp`, rather than the `yo op` that naïve doubling would predict. Either result confirms the bridge channel.
+
+3. **Bridge leakage propagating into adjacent key's scan window.** In the rapid-sequential ("hold one, tap the other") group, the bridge is still conducting when the controller scans the second key's column. If the bridge resistance is low enough, the residual drive voltage from Cx may still be present on Cy/Cz when the second key's row is sampled, causing the second key to acquire ghost characters even though it is physically unaffected. This is the most likely explanation for the "fast typing glitch on unaffected keys" symptom.
+
+#### Test Setup
+
+Same as the [single-key test setup](#test-setup):
+
+1. Open **Terminal.app** and run `cat`, or open **TextEdit** in plain-text mode with all autocorrect and text-replacement disabled.
+2. Disable **Karabiner Elements** or any other key-remapping software.
+3. Ensure the **internal keyboard** is the only active input device.
+4. Set the input source to **U.S.**
+
+For **Group E** (true simultaneous): press both keys as a chord — aim for less than 20 ms between them (a single two-finger tap). Hold for ~100 ms, release both together. Record every character that appears.
+
+For **Group F** (fast sequential): press and hold key 1 fully, then while key 1 is still held press and release key 2 (this is the natural "rolling" motion of fast typing). Release key 1. Record every character.
+
+Repeat each combination **3 times**.
+
+#### Group E — True simultaneous two-key presses
+
+| # | Keys pressed as chord | Expected (healthy keyboard) | Actual (press 1) | Actual (press 2) | Actual (press 3) | Notes |
+|---|-----------------------|-----------------------------|------------------|------------------|------------------|-------|
+| E1 | `A` + `K` | `ak` (or `ka`) | | | | Baseline: two distant unaffected keys |
+| E2 | `T` + `U` | `tu` (or `ut`) | | | | Two adjacent unaffected keys in the same row as `Y` |
+| E3 | `U` + `Y` | `uy` (or `yu`) | | | | Adjacent unaffected + affected key (top letter row) |
+| E4 | `J` + `H` | `jh` (or `hj`) | | | | Adjacent unaffected + affected key (home row) |
+| E5 | `A` + `Y` | `ay` (or `ya`) | | | | Distant unaffected + affected key — does `A` pick up ghost chars? |
+| E6 | `Y` + `O` | `yo` (or `oy`) | | | | Affected key + its own ghost key — does ghost `o` double or get suppressed? |
+| E7 | `H` + `L` | `hl` (or `lh`) | | | | Affected key + its own ghost key (home row) |
+| E8 | `6` + `9` | `69` (or `96`) | | | | Affected key + its own ghost key (number row) |
+| E9 | `Y` + `H` | `yh` (or `hy`) | | | | Two affected-column keys simultaneously |
+
+#### Group F — Rapid sequential presses (fast-typing simulation)
+
+Hold key 1 down, then while it is still held press and release key 2, then release key 1.
+
+| # | Hold → tap | Expected (healthy keyboard) | Actual (press 1) | Actual (press 2) | Actual (press 3) | Notes |
+|---|------------|-----------------------------|------------------|------------------|------------------|-------|
+| F1 | Hold `A` → tap `K` | `ak` | | | | Baseline: two unaffected keys with overlapping hold |
+| F2 | Hold `T` → tap `U` | `tu` | | | | Same row, both unaffected — simulates fast adjacent typing |
+| F3 | Hold `U` → tap `Y` | `uy` | | | | Unaffected held while affected key is tapped |
+| F4 | Hold `J` → tap `H` | `jh` | | | | Unaffected held while affected key is tapped (home row) |
+| F5 | Hold `Y` → tap `A` | `ya` | | | | Affected held — does `A` acquire ghost characters from the active bridge? |
+| F6 | Hold `H` → tap `J` | `hj` | | | | Affected held while adjacent unaffected key is tapped |
+| F7 | Hold `Y` → tap `H` | `yh` | | | | Two affected-column keys with overlapping hold |
+
+#### What to look for in the results
+
+| Result pattern | Interpretation |
+|----------------|----------------|
+| E3/E4 or F3/F4 — unaffected key produces ghost chars when pressed with affected key | Bridge leakage persists across the shared scan window; confirms fast-typing glitch mechanism |
+| E6/E7/E8 — pressing affected key + its ghost key produces *fewer* extra chars than single-key press | Ghost suppression confirmed; controller de-duplicates the real key press against the bridge phantom |
+| E6/E7/E8 — pressing affected key + its ghost key produces *more* characters than single-key press | Ghost doubling; controller counts both the phantom and the real key press separately |
+| F5/F6 — holding affected key causes subsequently tapped unaffected key to gain extra characters | Scan-cycle overlap allows bridge drive voltage to remain on Cy/Cz when the second key's row is sampled; direct evidence for the fast-typing glitch |
+| E1/E2/E3/E4/E5/F1/F2/F3/F4 — all combinations involving only unaffected keys (or unaffected + affected) produce no extra characters on the unaffected key | Bridge effect is strictly limited to the affected column's own scan slot; fast-typing glitch affecting unaffected keys has a different cause |
+
 ### Why the Bridge Is Unidirectional
 
 A natural question: how can dried Coca-Cola residue — a passive film of sugar, phosphoric acid, and mineral salts — produce a **unidirectional** bridge? Isn't a puddle of dried cola just a resistor, and shouldn't current flow equally in both directions?

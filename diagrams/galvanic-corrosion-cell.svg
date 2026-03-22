@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" font-family="monospace" font-size="12">
+  <title>Galvanic Corrosion Cell at FPC Bimetallic Junction</title>
+  <rect width="700" height="480" fill="#fafafa" stroke="#ccc"/>
+
+  <defs>
+    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#c62828"/>
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1565c0"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2e7d32"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Galvanic Corrosion Cell — Cola Electrolyte at Bimetallic Junction</text>
+  <text x="350" y="42" text-anchor="middle" font-size="10" fill="#666">Where solder (Sn) meets copper pad (Cu) or gold plating (Au)</text>
+
+  <!-- ═══ MAIN DIAGRAM ═══ -->
+
+  <!-- Cola electrolyte layer -->
+  <rect x="80" y="100" width="540" height="80" rx="8" fill="#795548" fill-opacity="0.15" stroke="#4e342e" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="350" y="95" text-anchor="middle" font-size="10" fill="#4e342e" font-weight="bold">Cola electrolyte (H₃PO₄ + H₂CO₃ + K⁺ + dissolved O₂)</text>
+
+  <!-- Dissolved O₂ bubbles -->
+  <circle cx="200" cy="120" r="5" fill="#e3f2fd" stroke="#42a5f5" stroke-width="0.8"/>
+  <text x="200" y="123" text-anchor="middle" font-size="6" fill="#1565c0">O₂</text>
+  <circle cx="350" cy="115" r="5" fill="#e3f2fd" stroke="#42a5f5" stroke-width="0.8"/>
+  <text x="350" y="118" text-anchor="middle" font-size="6" fill="#1565c0">O₂</text>
+  <circle cx="500" cy="125" r="5" fill="#e3f2fd" stroke="#42a5f5" stroke-width="0.8"/>
+  <text x="500" y="128" text-anchor="middle" font-size="6" fill="#1565c0">O₂</text>
+
+  <!-- Ion movement in electrolyte -->
+  <text x="250" y="145" text-anchor="middle" font-size="8" fill="#795548">Sn²⁺ ions migrate →</text>
+  <line x1="195" y1="155" x2="305" y2="155" stroke="#ef6c00" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowR)"/>
+
+  <!-- ANODE (left side) — Tin/Solder -->
+  <rect x="80" y="180" width="200" height="100" rx="4" fill="#e0e0e0" stroke="#757575" stroke-width="2"/>
+  <text x="180" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="#424242">SAC305 Solder</text>
+  <text x="180" y="222" text-anchor="middle" font-size="10" fill="#616161">(96.5% Sn, 3% Ag, 0.5% Cu)</text>
+
+  <!-- Anode label -->
+  <rect x="100" y="250" width="160" height="20" rx="3" fill="#ffcdd2" stroke="#c62828"/>
+  <text x="180" y="264" text-anchor="middle" font-size="10" font-weight="bold" fill="#b71c1c">ANODE (−) dissolves</text>
+
+  <!-- Anode reaction -->
+  <rect x="60" y="290" width="240" height="50" rx="4" fill="#ffebee" stroke="#ef9a9a"/>
+  <text x="180" y="310" text-anchor="middle" font-size="10" fill="#c62828" font-weight="bold">Sn → Sn²⁺ + 2e⁻</text>
+  <text x="180" y="330" text-anchor="middle" font-size="9" fill="#795548">Tin dissolves, weakening joint</text>
+
+  <!-- CATHODE (right side) — Gold/Copper -->
+  <rect x="420" y="180" width="200" height="100" rx="4" fill="#ffd54f" stroke="#f57f17" stroke-width="2"/>
+  <text x="520" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">Au (ENIG) / Cu Pad</text>
+  <text x="520" y="222" text-anchor="middle" font-size="10" fill="#795548">(more noble metal)</text>
+
+  <!-- Cathode label -->
+  <rect x="440" y="250" width="160" height="20" rx="3" fill="#c8e6c9" stroke="#2e7d32"/>
+  <text x="520" y="264" text-anchor="middle" font-size="10" font-weight="bold" fill="#1b5e20">CATHODE (+) protected</text>
+
+  <!-- Cathode reaction -->
+  <rect x="400" y="290" width="240" height="50" rx="4" fill="#e8f5e9" stroke="#a5d6a7"/>
+  <text x="520" y="310" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="bold">O₂ + 2H₂O + 4e⁻ → 4OH⁻</text>
+  <text x="520" y="330" text-anchor="middle" font-size="9" fill="#795548">Oxygen reduced at surface</text>
+
+  <!-- Electron flow arrow (through metal) -->
+  <line x1="280" y1="230" x2="420" y2="230" stroke="#1565c0" stroke-width="2" marker-end="url(#arrowB)"/>
+  <text x="350" y="225" text-anchor="middle" font-size="9" fill="#1565c0" font-weight="bold">e⁻ flow through metal →</text>
+
+  <!-- Junction boundary -->
+  <line x1="350" y1="180" x2="350" y2="280" stroke="#333" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="350" y="175" text-anchor="middle" font-size="8" fill="#333">junction</text>
+
+  <!-- ═══ GALVANIC SERIES TABLE ═══ -->
+  <rect x="60" y="360" width="580" height="105" rx="5" fill="#f5f5f5" stroke="#bdbdbd"/>
+  <text x="350" y="380" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Galvanic Series in Acidic Cola Electrolyte (simplified)</text>
+
+  <!-- Table header -->
+  <text x="100" y="400" font-size="9" fill="#333" font-weight="bold">More noble (cathode) ←</text>
+  <text x="540" y="400" text-anchor="end" font-size="9" fill="#333" font-weight="bold">→ Less noble (anode)</text>
+
+  <!-- Series bar -->
+  <rect x="80" y="410" width="540" height="20" rx="3" fill="#e0e0e0" stroke="#9e9e9e"/>
+
+  <!-- Metal markers -->
+  <rect x="90" y="412" width="50" height="16" rx="2" fill="#ffd54f" stroke="#f57f17"/>
+  <text x="115" y="424" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Au</text>
+
+  <rect x="180" y="412" width="50" height="16" rx="2" fill="#ef6c00" stroke="#bf360c"/>
+  <text x="205" y="424" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Cu</text>
+
+  <rect x="280" y="412" width="50" height="16" rx="2" fill="#b0bec5" stroke="#546e7a"/>
+  <text x="305" y="424" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">Ni</text>
+
+  <rect x="380" y="412" width="80" height="16" rx="2" fill="#cfd8dc" stroke="#78909c"/>
+  <text x="420" y="424" text-anchor="middle" font-size="9" font-weight="bold" fill="#37474f">Sn (solder)</text>
+
+  <rect x="500" y="412" width="50" height="16" rx="2" fill="#90a4ae" stroke="#546e7a"/>
+  <text x="525" y="424" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Zn</text>
+
+  <!-- Explanation -->
+  <text x="350" y="450" text-anchor="middle" font-size="9" fill="#616161">The less noble metal dissolves preferentially when connected through an electrolyte.</text>
+  <text x="350" y="462" text-anchor="middle" font-size="9" fill="#c62828" font-weight="bold">→ SAC305 solder joints corrode first at Cu/Au pad boundaries under cola.</text>
+</svg>

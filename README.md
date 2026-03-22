@@ -430,6 +430,11 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | FPC liquid damage | [SVG](diagrams/fpc-liquid-damage.svg) | [PNG](diagrams/fpc-liquid-damage.png) | Before/after comparison showing how dried cola bridges column traces C7→C6/C8 |
 | Scissor-switch cross-section | [SVG](diagrams/scissor-switch-cross-section.svg) | [PNG](diagrams/scissor-switch-cross-section.png) | Side view of the non-serviceable key block: keycap → scissor arms → rubber dome → FPC membrane |
 | Butterfly vs scissor comparison | [SVG](diagrams/butterfly-vs-scissor.svg) | [PNG](diagrams/butterfly-vs-scissor.png) | Side-by-side comparison of the two Apple keyboard mechanisms |
+| Chemical attack cross-section | [SVG](diagrams/chemical-attack-cross-section.svg) | | FPC layer stack showing protected vs exposed zones and four chemical attack vectors (pinhole undermining, ionic bridging, osmotic blistering, copper dissolution) |
+| Chemical timeline — three phases | [SVG](diagrams/chemical-timeline-phases.svg) | | Wet → drying → dried residue phases with key reactions, plus corrosion rate vs time graph showing peak during drying |
+| Galvanic corrosion cell | [SVG](diagrams/galvanic-corrosion-cell.svg) | | Electrochemical cell at a solder/copper/gold bimetallic junction in cola electrolyte, with galvanic series table |
+| Dendrite / electrochemical migration | [SVG](diagrams/dendrite-electrochemical-migration.svg) | | Three-step process: Cu dissolution at anode → ion migration → Cu deposition and dendrite growth at cathode, leading to permanent trace bridge |
+| Connector chemical vulnerability | [SVG](diagrams/connector-chemical-vulnerability.svg) | | ZIF connector cross-section annotated with all six overlapping chemical vulnerability factors |
 
 ### 9. Reference Photos of Real Hardware (external links)
 
@@ -549,6 +554,13 @@ That is why a spill can leave the majority of the flex cable visually intact yet
 ### Detailed Chemical Process: Coca-Cola Zero Exposure on Film, PCBs, and Traces
 
 This section describes the step-by-step chemical processes that occur when Coca-Cola Zero contacts the materials found in a MacBook keyboard assembly — polyimide flex film, copper traces, solder joints, nickel/gold plating, and FR-4 or flex-PCB substrates. The reactions are grouped by material and by time phase.
+
+See the accompanying diagrams for visual illustrations:
+- [Chemical attack cross-section](diagrams/chemical-attack-cross-section.svg) — FPC layer stack with attack zones
+- [Chemical timeline — three phases](diagrams/chemical-timeline-phases.svg) — reaction summary and corrosion rate graph
+- [Galvanic corrosion cell](diagrams/galvanic-corrosion-cell.svg) — electrochemical cell at bimetallic junctions
+- [Dendrite / electrochemical migration](diagrams/dendrite-electrochemical-migration.svg) — how permanent trace bridges form
+- [Connector chemical vulnerability](diagrams/connector-chemical-vulnerability.svg) — why the ZIF area is worst-case
 
 #### 1. Immediate contact (seconds to minutes) — the wet phase
 

@@ -420,16 +420,16 @@ For the MacBook Pro 14" A2918 (board **820-02757**, design **051-07754**), the f
 
 ### 8. Diagrams (uploaded as files)
 
-The following SVG diagrams are included in this repository in the [`diagrams/`](diagrams/) directory:
+The following diagrams are included in this repository in the [`diagrams/`](diagrams/) directory, available in both SVG (vector, scalable) and PNG (raster, 1200px wide) formats:
 
-| Diagram | File | Description |
-|---|---|---|
-| Keyboard matrix with affected column | [keyboard-matrix-affected-column.svg](diagrams/keyboard-matrix-affected-column.svg) | Row/column matrix layout showing keys 6, Y, H, N sharing column C7 (highlighted in red) |
-| Keyboard system block diagram | [keyboard-system-block-diagram.svg](diagrams/keyboard-system-block-diagram.svg) | Full signal chain: key matrix → FPC ribbon → ZIF connector → keyboard controller IC → SPI → M3 Pro SoC |
-| ZIF connector detail (3 views) | [zif-connector-detail.svg](diagrams/zif-connector-detail.svg) | Top view (latch open), top view (latch closed), and side cross-section showing FPC pads contacting spring contacts |
-| FPC liquid damage | [fpc-liquid-damage.svg](diagrams/fpc-liquid-damage.svg) | Before/after comparison showing how dried cola bridges column traces C7→C6/C8 |
-| Scissor-switch cross-section | [scissor-switch-cross-section.svg](diagrams/scissor-switch-cross-section.svg) | Side view of the non-serviceable key block: keycap → scissor arms → rubber dome → FPC membrane |
-| Butterfly vs scissor comparison | [butterfly-vs-scissor.svg](diagrams/butterfly-vs-scissor.svg) | Side-by-side comparison of the two Apple keyboard mechanisms |
+| Diagram | SVG | PNG | Description |
+|---|---|---|---|
+| Keyboard matrix with affected column | [SVG](diagrams/keyboard-matrix-affected-column.svg) | [PNG](diagrams/keyboard-matrix-affected-column.png) | Row/column matrix layout showing keys 6, Y, H, N sharing column C7 (highlighted in red) |
+| Keyboard system block diagram | [SVG](diagrams/keyboard-system-block-diagram.svg) | [PNG](diagrams/keyboard-system-block-diagram.png) | Full signal chain: key matrix → FPC ribbon → ZIF connector → keyboard controller IC → SPI → M3 Pro SoC |
+| ZIF connector detail (3 views) | [SVG](diagrams/zif-connector-detail.svg) | [PNG](diagrams/zif-connector-detail.png) | Top view (latch open), top view (latch closed), and side cross-section showing FPC pads contacting spring contacts |
+| FPC liquid damage | [SVG](diagrams/fpc-liquid-damage.svg) | [PNG](diagrams/fpc-liquid-damage.png) | Before/after comparison showing how dried cola bridges column traces C7→C6/C8 |
+| Scissor-switch cross-section | [SVG](diagrams/scissor-switch-cross-section.svg) | [PNG](diagrams/scissor-switch-cross-section.png) | Side view of the non-serviceable key block: keycap → scissor arms → rubber dome → FPC membrane |
+| Butterfly vs scissor comparison | [SVG](diagrams/butterfly-vs-scissor.svg) | [PNG](diagrams/butterfly-vs-scissor.png) | Side-by-side comparison of the two Apple keyboard mechanisms |
 
 ### 9. Reference Photos of Real Hardware (external links)
 
@@ -711,3 +711,56 @@ The connector misalignment (Hypothesis 2) may have introduced additional artifac
 2. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges — ideally performed as part of or after the ultrasonic process.
 3. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is still present after cleaning.
 4. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
+
+## Note for the Ultrasonic Cleaning Lab
+
+This section summarises the key technical details for the technicians performing ultrasonic cleaning on this device.
+
+### Device
+
+- **MacBook Pro 14" (M3 Pro, November 2023)**, model A2918, serial MWJPXQ4VC4
+- **Logic board:** 820-02757
+- **Keyboard type:** Scissor-switch (Magic Keyboard), integrated into top-case assembly
+- **Spill substance:** Coca-Cola Zero (contains phosphoric acid, sugars, mineral salts)
+
+### What to look for
+
+The contamination is localised to **keyboard matrix column C7**, which is the shared electrical trace for keys **6, Y, H, N**. The most probable contamination sites, in order of priority:
+
+1. **ZIF connector area** — dried cola residue on or around pin C7 and bridging to adjacent pins C6/C8. This is an open junction point where liquid pools and is the most likely primary site.
+2. **FPC ribbon cable** — residue wicked along the column C7 trace where it runs parallel and close (~0.1 mm) to C6/C8. Capillary action draws liquid into this gap.
+3. **Under the sealed key switch bodies** for 6, Y, H, N — cola entered through sub-0.3 mm capillary gaps between the keycap, scissor arms, rubber dome, and FPC membrane.
+
+### Why the "non-serviceable key blocks" diagnosis is incomplete
+
+The service center correctly notes that individual scissor-switch key bodies are sealed and cannot be manually cleaned. However, the symptom pattern — **an entire column** (6/Y/H/N) affected simultaneously, not individual scattered keys — indicates the primary contamination is on the **shared column trace** in the FPC ribbon and/or ZIF connector, not solely inside individual key mechanisms. Contamination only inside key bodies would produce independent per-key failures, not a clean column pattern. Ultrasonic cleaning addresses all three contamination sites.
+
+### Positive indicators for cleaning success
+
+- **Ghost keypresses have stopped** — this means the residue has dried and stabilised, no longer actively migrating. Contamination is localised.
+- **Partial symptom improvement after a 2-day rest period** — correct characters returned alongside incorrect ones when the keyboard was left unused for 2 days (powered off, internal keyboard disabled via Karabiner Elements). If traces were irreversibly corroded through, rest would not improve symptoms. This strongly suggests the primary mechanism is still **reversible conductive residue** rather than permanent copper trace damage.
+- **Coca-Cola Zero residue** (dried sugar/acid film) is soluble in water and isopropyl alcohol — ultrasonic cavitation in an appropriate solvent should be able to dissolve and remove it even from sub-0.3 mm capillary spaces.
+
+### Suggested cleaning focus areas
+
+- Thoroughly clean the **ZIF connector** and the corresponding section of the **FPC ribbon cable** — this is where the column trace C7 connects and is most accessible.
+- Ensure ultrasonic bath exposure is sufficient to reach the **FPC trace gaps** (~0.1 mm between polyimide layers) and the **sealed key switch bodies** (sub-0.3 mm capillary spaces).
+- After cleaning, a **resistance measurement** between pin C7 and adjacent pins C6/C8 on the ZIF connector would confirm whether the conductive bridge has been removed.
+
+### Diagrams
+
+See the [`diagrams/`](diagrams/) directory for technical illustrations (available in both SVG and PNG formats):
+
+- [Keyboard matrix with affected column C7](diagrams/keyboard-matrix-affected-column.png)
+- [Keyboard system block diagram](diagrams/keyboard-system-block-diagram.png)
+- [ZIF connector detail](diagrams/zif-connector-detail.png)
+- [FPC liquid damage before/after](diagrams/fpc-liquid-damage.png)
+- [Scissor-switch cross-section](diagrams/scissor-switch-cross-section.png)
+
+## Summary
+
+A Coca-Cola Zero spill on a MacBook Pro 14" M3 Pro (serial MWJPXQ4VC4, model A2918, board 820-02757) resulted in keyboard column C7 (keys 6, Y, H, N) producing multiple incorrect characters per keypress, initial ghost keypresses (since resolved), and progressive symptom worsening over days.
+
+The root cause is **dried conductive cola residue** shorting the shared column C7 trace on the keyboard FPC ribbon cable and/or ZIF connector, combined with **ongoing phosphoric acid corrosion** accelerated by thermal cycling during use. The service center's characterisation of this as a "mechanical issue" is **inaccurate** — the symptoms are electrical/chemical in nature, and the whole-column pattern points to shared trace contamination rather than individual key mechanism failures.
+
+**Recommended action:** Ultrasonic cleaning (already offered by the service center at 1/3 the cost of replacement, 3–7 days). The partial improvement observed during a 2-day rest period confirms the contamination is still predominantly reversible conductive residue rather than permanent trace damage, making cleaning the correct first step before considering keyboard/top-case replacement.

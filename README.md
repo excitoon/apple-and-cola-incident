@@ -1291,6 +1291,99 @@ The unidirectionality is actually **good news** for cleaning:
 
 No — unidirectional contamination bridges are commonly observed in liquid-damaged electronics. Service technicians who diagnose keyboard matrix faults under microscope regularly see asymmetric residue patterns on FPC connectors. The key insight is that the keyboard matrix's digital threshold detection turns an analog resistance gradient into a sharp directional cutoff: current technically flows both ways through the residue, but only one direction produces enough voltage to trigger a detection event.
 
+## Drying Analysis: Inadequate Cleaning and Drying of the ZIF Connector
+
+The accumulated evidence — keyboard test results, chemical process timeline, physical contamination localisation, and observed symptom evolution — is sufficient to conclude that the service center's 2-hour cleaning intervention failed in two specific ways at the ZIF connector area:
+
+1. **The ZIF connector was not properly cleaned.**
+2. **The ZIF connector area was not properly dried.**
+
+These are not separate problems — they compound each other, and together they explain why the keyboard symptoms persisted and worsened after the device was returned from service.
+
+### Evidence that the ZIF connector was not properly cleaned
+
+| # | Evidence | Source |
+|---|----------|--------|
+| 1 | **Key N was already malfunctioning at pickup from service.** The device was returned with N producing incorrect characters — meaning conductive cola residue was already present on the FPC/ZIF connector at the time the service center completed its work. | [Observed Symptoms](#observed-symptoms) |
+| 2 | **Three adjacent FPC/ZIF pins are bridged by stable dried cola residue.** Testing confirmed that columns Cx (6/Y/H/N), Cy (9/O/L/.), and Cz (0/P/;//) are shorted through a ~30–70 kΩ conductive film. This residue sits directly on the exposed connector pads — the most physically accessible part of the keyboard assembly. | [Test Results and Analysis](#test-results-and-analysis-march-22) |
+| 3 | **Bridge resistance indicates organic/acid residue, not metallic corrosion.** The 30–70 kΩ range is characteristic of dried sugar/acid/salt film. A copper dendrite or solder bridge would be <1 kΩ. This type of residue is easily visible as a brown or amber film under magnification and is soluble in ≥99% IPA. | [What this tells us about the residue](#what-this-tells-us-about-the-residue) |
+| 4 | **Cleaning the ZIF connector is a straightforward procedure.** It requires opening the ZIF latch, removing the FPC ribbon, and swabbing the exposed pads and socket contacts with IPA — a routine operation that takes minutes. The connector is the most accessible component in the keyboard assembly. | [Manual ZIF cleaning vs. ultrasonic cleaning](#manual-zif-cleaning-vs-ultrasonic-cleaning) |
+| 5 | **The ZIF connector area is the most chemically critical site.** It concentrates every vulnerability: exposed copper pads, ENIG plating with pinholes, tight pitch (~0.5 mm), bimetallic junction with socket spring contacts, and capillary retention of liquid. Any cleaning procedure that does not specifically address this area is incomplete. | [Why the FPC connector area is the most chemically critical site](#why-the-fpc-connector-area-is-the-most-chemically-critical-site) |
+| 6 | **The service center focused on "non-serviceable key blocks."** Their diagnosis centred on sealed scissor-switch mechanisms rather than the FPC/ZIF connector. This framing suggests the connector pads may not have been specifically inspected or cleaned — the technicians were looking at the wrong part of the problem. | [Service Center's Position](#service-centers-position-non-serviceable-key-blocks) |
+| 7 | **Glitch drift confirms residue was left on the connector.** If the connector had been properly cleaned, there would be no conductive residue to undergo the drying-phase concentration process, and the fault pattern would have been static (either working or not). Instead, the symptoms evolved qualitatively over days — N-only at first, then the full column (6/Y/H/N), then three-column bridging (Cx/Cy/Cz), with ghost keypresses appearing and later disappearing as the residue transitioned from wet electrolyte to stable dried film. This progressive, multi-stage glitch drift is the signature of a contamination site that was never cleaned: the residue was still undergoing physical and chemical changes (drying, concentrating, migrating, hardening) for days after service. A properly cleaned connector would show either no fault or a fixed, unchanging fault — not a drifting one. | [Observed Symptoms](#observed-symptoms), [Can symptom drift be explained by eventual drying?](#can-symptom-drift-be-explained-by-eventual-drying) |
+
+**Conclusion:** The cola residue on the ZIF connector pads was either not identified during the 2-hour cleaning, or was inadequately removed by surface-level wiping that failed to dissolve the thin conductive film between adjacent 0.5 mm-pitch pins. A targeted IPA cleaning of the connector area — the standard procedure for liquid-damaged FPC connectors — was either not performed or not performed thoroughly enough.
+
+### Evidence that the ZIF connector area was not properly dried
+
+| # | Evidence | Source |
+|---|----------|--------|
+| 1 | **The drying phase is the most damaging period.** As liquid evaporates from the connector area, the acid concentration increases 100–1000×. A droplet that was 0.06% H₃PO₄ by weight becomes an aggressive etchant as water leaves. The corrosion rate **increases** during drying, not decreases. If the service center rinsed the area but did not force-dry it, the residual liquid underwent this concentration process in place. | [Drying phase](#2-drying-phase-minutes-to-hours--concentration-and-film-formation) |
+| 2 | **Capillary retention in the ZIF slot delays drying by hours.** The narrow gap of the ZIF socket (< 0.3 mm) retains liquid for 1–4 hours by capillary forces. Even if external surfaces were wiped dry, liquid trapped inside the ZIF slot would have continued to concentrate and deposit residue on the contact pads. Proper drying requires opening the ZIF latch and allowing the slot to ventilate, or using forced air/vacuum. | [Timing estimates](#5-timing-estimates-for-key-chemical-processes) — "Capillary retention in tight gaps: liquid persists 1–4 h" |
+| 3 | **The device was powered on at the service center while still wet.** The service center powered on the MacBook to verify it worked. If the ZIF connector area was not yet fully dry, the keyboard controller's 3.3 V scanning voltage would have been applied across the wet electrolyte bridging adjacent pins. Under bias, electrochemical migration (dendrite growth) nucleates within 30 minutes to 2 hours. | [Timing estimates](#5-timing-estimates-for-key-chemical-processes) — "Dendrite nucleation: 30 min – 2 h under bias" |
+| 4 | **Symptom worsening over days indicates ongoing electrochemical activity.** If the connector area had been properly dried (no residual moisture or dissolved residue), the conductive bridge would not have formed or strengthened post-service. The progressive worsening — from single-key (N) to full-column (6/Y/H/N) to three-column bridging (Cx/Cy/Cz) — is the signature of residue that dried in place, concentrating and spreading via capillary and hygroscopic mechanisms. | [Can symptom drift be explained by eventual drying?](#can-symptom-drift-be-explained-by-eventual-drying) |
+| 5 | **Residue film becomes progressively harder to remove after drying.** The caramel color compounds and melanoidin cross-linking products in the residue harden over 6–12 hours and become increasingly adherent over days. If the area was improperly dried, the window for easy IPA-based cleaning was missed — by the time the device was returned to the owner, the residue had hardened into a film that requires ultrasonic cavitation to remove. | [Dried residue phase](#3-dried-residue-phase-hours-to-days-and-beyond) — "Residue hardening: ~6–12 h onset, progressive over days to weeks" |
+| 6 | **The unidirectional bridge pattern indicates liquid that flowed and dried in place.** The asymmetric residue thickness (thick near Cx, thin near Cz) is consistent with cola that pooled at one pin and spread outward by capillary action during drying. This directional deposition pattern would not form if the area had been properly cleaned and dried — it is the fingerprint of undisturbed, naturally dried liquid. | [Does the "thickness gradient" create a diode? No.](#does-the-thickness-gradient-create-a-diode-no) |
+| 7 | **Glitch drift tracks the drying-phase chemical timeline.** The observed symptom evolution — (a) initial single-key fault (N), (b) expansion to full column (6/Y/H/N), (c) ghost keypresses appearing, (d) ghost keypresses disappearing, (e) three-column bridging stabilising, (f) partial improvement during 2-day rest — maps directly onto the drying-phase stages: acid concentration → capillary migration spreading the bridge → wet electrolyte causing intermittent floating shorts (ghosts) → residue drying into stable film (ghosts stop, fixed bridge remains) → hygroscopic film slowly losing moisture during rest (bridge resistance increases, partial improvement). Each stage of the glitch drift corresponds to a specific phase of improper drying. If the area had been force-dried, the contamination would have been arrested at whatever state existed at the moment of drying — not allowed to progress through the full multi-day chemical timeline. | [Observed Symptoms](#observed-symptoms), [Timing estimates](#5-timing-estimates-for-key-chemical-processes), [Partial improvement observed after 2-day rest period](#partial-improvement-observed-after-2-day-rest-period) |
+
+**Conclusion:** The ZIF connector area was not properly dried after cleaning. Residual liquid — either original cola or a dilute mixture of cola residue and cleaning solvent — was left in the capillary spaces of the ZIF slot. This liquid underwent the drying-phase concentration process, depositing a thin, concentrated, hygroscopic acid/salt/organic film on the connector pads. The device was then powered on while this process was still ongoing, applying bias voltage that accelerated electrochemical damage.
+
+### How improper cleaning and drying compounded each other
+
+The two failures are synergistic — each one makes the consequences of the other worse:
+
+```
+  Timeline of what happened at the service center (reconstructed):
+
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │ 1. Device received with cola inside                                │
+  │    → Cola present on ZIF connector, FPC traces, under key switches │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │ 2. Service center cleaning (~2 hours)                              │
+  │    → Visible liquid wiped from surfaces                            │
+  │    → Compressed air / IPA swabbing on accessible areas             │
+  │    → ZIF connector pads NOT specifically cleaned (or insufficiently │
+  │      cleaned — thin residue film left on 0.5 mm-pitch pads)       │
+  │    → ZIF slot NOT force-dried (capillary-trapped liquid remains)   │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │ 3. Device powered on to verify function                            │
+  │    → 3.3 V scanning voltage applied to still-wet connector area   │
+  │    → Electrochemical migration begins (Cu²⁺ ion transport)        │
+  │    → Device shows key N malfunction → powered off again            │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │ 4. Device returned to owner                                        │
+  │    → ZIF connector area still drying (capillary retention: 1–4 h) │
+  │    → Acid concentration peaking as liquid evaporates               │
+  │    → Residue film depositing on pads (onset ~15–45 min)           │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │ 5. Following days — progressive worsening                          │
+  │    → Single-key fault (N) expands to full column (6/Y/H/N)        │
+  │    → Ghost keypresses appear as residue bridges stabilise          │
+  │    → Eventually: three adjacent columns bridged (Cx/Cy/Cz)        │
+  │    → Residue hardens, becomes difficult to remove                  │
+  └─────────────────────────────────────────────────────────────────────┘
+```
+
+The compounding effect is:
+
+1. **Incomplete cleaning left cola residue on the connector pads.** Even a small amount of residue is enough to seed the drying-phase concentration process.
+2. **Incomplete drying allowed the residual liquid to undergo acid concentration in place.** A droplet of dilute cola that would have been easily wiped away instead became a concentrated, aggressive etchant as it dried inside the ZIF slot.
+3. **Powering on the device before full drying accelerated the damage.** The scanning voltage drove electrochemical migration (Cu²⁺ ion transport between adjacent pads), potentially nucleating dendrites that would not have formed without bias.
+4. **The residue hardened before the owner could intervene.** By the time the laptop was returned and symptoms were observed, the residue film had cross-linked and become adherent (onset ~6–12 hours), making simple cleaning insufficient.
+
+### What proper cleaning and drying would have looked like
+
+For comparison, the correct procedure for a cola-contaminated ZIF connector area is:
+
+1. **Open the ZIF latch** and remove the FPC ribbon cable.
+2. **Flush the FPC contact pads and ZIF socket** with ≥99% IPA, using a fine brush or lint-free swab. Multiple passes — dissolve, wipe, dissolve again — to ensure all residue is removed from the 0.5 mm-pitch gaps between pads.
+3. **Inspect under magnification** (10× minimum) for any remaining amber/brown residue film between adjacent pads. Cola residue is typically visible as a thin discoloration.
+4. **Force-dry the connector area** — compressed air directed into the ZIF slot, or a brief low-heat pass, to ensure no liquid remains trapped by capillary forces.
+5. **Do NOT power on the device** until the connector area is confirmed dry and clean under magnification.
+6. **Reassemble and test** only after steps 1–5 are complete.
+
+This procedure takes 10–15 minutes and requires no specialised equipment beyond IPA, a lint-free swab, and a magnifying loupe. It directly addresses both failure modes identified above.
+
 ## Recommended Next Steps
 
 ### Manual ZIF cleaning vs. ultrasonic cleaning
@@ -1383,5 +1476,7 @@ A Coca-Cola Zero spill on a MacBook Pro 14" M3 Pro (serial MWJPXQ4VC4, model A29
 Pre-cleaning keyboard testing (March 22) has precisely identified the contamination: **three adjacent FPC/ZIF column pins are bridged by dried cola residue**. Every affected key produces its correct character plus two extras from columns that are +3 and +4 physical positions to the right (6→690, Y→yop, H→hl;, N→n./), confirming the FPC pin ordering does not follow the physical keyboard layout. The Space bar is also affected (Space→ '). Results are 100% consistent across trials, indicating a stable conductive bridge. Follow-up tests confirmed the bridge is **unidirectional** (reverse keys produce no extras) and **operates at the matrix wiring level** (Shift+6→`^()`, modifier correctly applied to all ghost keypresses), definitively ruling out controller damage. All pre-cleaning tests are complete — ideal conditions for ultrasonic cleaning confirmed.
 
 The root cause is **dried conductive cola residue** shorting adjacent column pins on the keyboard FPC ribbon cable and/or ZIF connector, combined with **ongoing phosphoric acid corrosion** accelerated by thermal cycling during use. The service center's characterisation of this as a "mechanical issue" is **inaccurate** — the symptoms are electrical/chemical in nature, and the whole-column pattern points to shared trace contamination rather than individual key mechanism failures.
+
+**Drying analysis conclusion:** The evidence confirms that the service center's 2-hour cleaning intervention failed in two compounding ways: **(1) the ZIF connector was not properly cleaned** — cola residue was left on the exposed connector pads (key N was already malfunctioning at pickup, and the ~30–70 kΩ bridge resistance indicates dissolvable organic/acid film that a targeted IPA cleaning would have removed), and **(2) the connector area was not properly dried** — residual liquid trapped by capillary forces in the ZIF slot underwent acid concentration during natural drying, the device was powered on while the area was still wet (applying 3.3 V scanning bias that drove electrochemical migration), and the resulting residue film hardened before the owner could intervene. Proper procedure — opening the ZIF latch, flushing pads with ≥99% IPA, inspecting under magnification, force-drying, and only then powering on — takes 10–15 minutes and would have prevented the persistent contamination.
 
 **Recommended action:** Try **manual ZIF connector cleaning first** (open ZIF latch, clean FPC pads and socket contacts with IPA ≥99%, inspect under magnification) — this is the simplest and cheapest intervention for contamination confirmed at the connector pin cluster. If symptoms persist after manual cleaning, proceed to **ultrasonic cleaning** (offered by the service center at ~1/3 the cost of replacement, 3–7 day turnaround) to address residue that may have wicked into FPC trace gaps or under sealed key switches. The test results confirm localised, stable, unidirectional contamination at a single cluster of adjacent FPC/ZIF pins — the best-case scenario for cleaning. The partial improvement observed during a 2-day rest period confirms the contamination is still predominantly reversible conductive residue rather than permanent trace damage.

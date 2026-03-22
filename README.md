@@ -1480,16 +1480,38 @@ The user observed that holding two affected-column keys simultaneously (e.g. `N`
 
 | # | Keys held as chord (3 s) | Expected (healthy keyboard) | Actual — initial chars | Actual — auto-repeat? | Notes |
 |---|--------------------------|----------------------------|------------------------|----------------------|-------|
-| G1 | `N` + `M` | `nm` + one auto-repeats | | | Affected + adjacent unaffected — does N produce ghosts (`.`,`/`)? Does M stay clean? |
-| G2 | `N` + `.` | `n.` + one auto-repeats | | | Affected + its ghost key — same pattern as E6/E7/E8 but for N |
-| G3 | `N` + `H` (hold 3 s) | Both auto-repeat | | | ⭐ Two affected-column keys — user already observed: **neither auto-repeats**. Confirm and record initial chars. |
-| G4 | `N` + `Y` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — does blocking also occur for N+Y? |
-| G5 | `6` + `Y` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — top two rows |
-| G6 | `6` + `H` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — number row + home row |
-| G7 | `6` + `N` (hold 3 s) | Both auto-repeat | | | Two affected-column keys — maximum row distance in column C7 |
+| G1 | `N` + `M` | `nm` + one auto-repeats | `mn./nm./…mn./…n./mmmmmm…` | `/` auto-repeats, then `m` when N released | ✅ N produces ghosts `.`/`/` as expected. M stays clean — no ghost spread. M auto-repeats only after N is released. |
+| G2 | `N` + `.` | `n.` + one auto-repeats | `n./n./…` | `/` auto-repeats | ✅ Ghost doubling confirmed for N: both real `.` and ghost `.` register, plus `/` (Cz ghost). Same pattern as E6/E7/E8. |
+| G3 | `N` + `H` (hold 3 s) | Both auto-repeat | (nothing) | ❌ Neither auto-repeats | ✅ **Auto-repeat blocking confirmed.** Neither N nor H produces any output when both are held. |
+| G4 | `N` + `Y` (hold 3 s) | Both auto-repeat | (nothing) | ❌ Neither auto-repeats | ✅ Blocking also applies to N+Y pair. |
+| G5 | `6` + `Y` (hold 3 s) | Both auto-repeat | (nothing) | ❌ Neither auto-repeats | ✅ Blocking applies to all affected-column pairs. |
+| G6 | `6` + `H` (hold 3 s) | Both auto-repeat | (nothing) | ❌ Neither auto-repeats | ✅ Blocking applies across rows. |
+| G7 | `6` + `N` (hold 3 s) | Both auto-repeat | (nothing) | ❌ Neither auto-repeats | ✅ Maximum row distance — still blocked. |
 | G8 | Hold `H` → tap `Y` | `hy` | | | Reverse of F7: does H's bridge dominate instead? Or is `p`-repeat still present? |
 | G9 | Hold `N` → tap `A` | `na` | | | N held + distant unaffected tapped — does A acquire ghosts? |
 | G10 | `Y` + `H` + `N` three-key chord (hold 3 s) | All three auto-repeat | | | Three affected-column keys simultaneously — maximal bridge stress; does blocking still apply? |
+
+##### Group G results analysis
+
+**Key findings from G1–G7:**
+
+5. **N-key ghosts confirmed.** G1 shows N produces ghost `.` (Cy) and `/` (Cz), exactly matching the pattern of Y→`o`/`p`, H→`l`/`;`, and 6→`9`/`0`. All four affected-column keys produce the same two-ghost pattern, confirming a single contamination site bridging three adjacent FPC pins. M (unaffected) stays completely clean — no ghost spread, consistent with E/F findings.
+
+6. **Universal auto-repeat blocking.** G3–G7 confirm that **every** pair of affected-column keys (N+H, N+Y, 6+Y, 6+H, 6+N) exhibits auto-repeat blocking when held simultaneously. No pair produces any output at all after initial registration. This is not specific to certain row combinations — it applies universally across column C7. The controller's anti-ghosting algorithm detects multiple simultaneous activations in the same column and completely suppresses sustained output.
+
+7. **Ghost-suppression-via-O discovery.** The user made an additional exploratory finding: when H is held alone, the ghost `;` (from Cz) auto-repeats continuously. Pressing additional keys while H is held produces different effects:
+   - Pressing `L` (Cy, same row as H) → does **NOT** stop the `;` auto-repeat
+   - Pressing `.` (Cy, bottom row) → does **NOT** stop the `;` auto-repeat
+   - Pressing `O` (Cy, top letter row — same row as Y) → **DOES** stop the `;` auto-repeat
+
+   This is remarkable because L, `.`, and O are all on the same column (Cy), yet only O suppresses the ghost. The distinguishing factor is that O occupies the same matrix row as Y — the key whose bridge signal was shown to be dominant in F7 (`yoppppp…` with H's ghosts absent). When O activates Cy in the Y-row scan slot, the reverse current through the bridge's thickest residue section (near pin Cx) may create enough counter-voltage to suppress the forward ghost on Cz during that scan window. This is the first evidence of **cross-column ghost suppression** from the ghost-column side.
+
+   Raw data:
+   ```
+   H held alone:                hl;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; (`;` auto-repeats)
+   H held, then O pressed:     hl;;;;;;;;;;;;;;;;oo                    (`;` stops when O pressed)
+   H held, then L or . pressed: hl;hl;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; (`;` continues)
+   ```
 
 #### Group H — Reverse bridge stress test (can multiple keys break unidirectionality?)
 

@@ -1491,6 +1491,59 @@ The user observed that holding two affected-column keys simultaneously (e.g. `N`
 | G9 | Hold `N` → tap `A` | `na` | | | N held + distant unaffected tapped — does A acquire ghosts? |
 | G10 | `Y` + `H` + `N` three-key chord (hold 3 s) | All three auto-repeat | | | Three affected-column keys simultaneously — maximal bridge stress; does blocking still apply? |
 
+#### Group H — Reverse bridge stress test (can multiple keys break unidirectionality?)
+
+Group B2 proved the bridge is unidirectional: pressing a single ghost-column key (e.g. `O`) does NOT produce the corresponding affected-column key (`Y`) in reverse. But the reverse voltage (1.33 V) is tantalizingly close to the detection threshold (~1.2–1.4 V). Can pressing **multiple** ghost-column keys simultaneously create parallel current paths that boost the reverse voltage above the threshold?
+
+**Circuit theory — why this might work:**
+
+The residue is a continuous 2D film spreading from Cx outward to Cy and Cz. When a single ghost-column key is pressed (e.g. `O` on column Cy), the reverse path is:
+
+```
+  Single reverse (Group B2 — O pressed alone):
+
+  3.3V ──[O switch]── Cy ──[R_reverse ≈ 70kΩ]── Cx ──[R_pull ≈ 47kΩ]── GND
+                                                   │
+                                                V_Cx = 1.33V → ❌ below threshold
+```
+
+When BOTH ghost-column keys in the same row are pressed simultaneously (`O` on Cy + `P` on Cz), the controller drives that row HIGH and both columns become active. If the residue film provides a direct Cz→Cx path (not only through Cy), two parallel reverse paths exist:
+
+```
+  Parallel reverse (O + P pressed together in same row):
+
+  3.3V ──[O switch]── Cy ──[R_Cy→Cx ≈ 70kΩ]──┐
+                                                ├── Cx ──[R_pull ≈ 47kΩ]── GND
+  3.3V ──[P switch]── Cz ──[R_Cz→Cx ≈ 140kΩ]─┘
+                                                   │
+                                      R_eff = 70k ∥ 140k ≈ 47kΩ
+                                      V_Cx = 3.3 × 47/(47+47) = 1.65V → ✅ above threshold?
+```
+
+The Cz→Cx direct path is estimated at ~140 kΩ (higher than Cy→Cx because the film is thinner near Cz, but it exists because the residue is a continuous film, not a chain of discrete resistors). With both paths active, the effective reverse resistance drops from 70 kΩ to ~47 kΩ, potentially pushing V_Cx from 1.33 V to ~1.65 V — above even a Schmitt-trigger threshold.
+
+**Test procedure:** same as Group E (chord press). Press all listed keys simultaneously, hold briefly, record every character that appears. Repeat 3 times. The critical question is: **do any characters from the affected column (6, Y, H, N) appear?**
+
+| # | Keys pressed as chord | Theory | Actual (press 1) | Actual (press 2) | Actual (press 3) | What to watch for |
+|---|----------------------|--------|------------------|------------------|------------------|-------------------|
+| H1 | `O` + `P` | Cy+Cz parallel reverse in top letter row | | | | Does ghost `y` appear? |
+| H2 | `L` + `;` | Cy+Cz parallel reverse in home row | | | | Does ghost `h` appear? |
+| H3 | `9` + `0` | Cy+Cz parallel reverse in number row | | | | Does ghost `6` appear? |
+| H4 | `.` + `/` | Cy+Cz parallel reverse in bottom row | | | | Does ghost `n` appear? |
+| H5 | `9` + `O` + `L` + `.` | All four Cy keys — bridge stressed every scan cycle | | | | Does any ghost `6`/`Y`/`H`/`N` appear? |
+| H6 | `0` + `P` + `;` + `/` | All four Cz keys — bridge stressed every scan cycle | | | | Does any ghost `6`/`Y`/`H`/`N` appear? |
+| H7 | `O` + `P` + `L` + `;` | Cy+Cz in two rows — parallel paths + multi-row stress | | | | Does ghost `y` or `h` appear? |
+| H8 | `9`+`0`+`O`+`P`+`L`+`;`+`.`+`/` (all 8 ghost keys) | Maximum reverse stress — every ghost-column key active | | | | Does **any** character from column Cx (6/Y/H/N) appear? |
+
+#### What Group H results would tell us
+
+| Result pattern | Interpretation |
+|----------------|----------------|
+| H1–H4 produce ghosts from Cx column | ✅ Parallel reverse paths through continuous residue film DO boost voltage above threshold. The bridge is "bidirectional under load" — unidirectionality is only valid for single-key presses. |
+| H5/H6 produce ghosts but H1–H4 don't | Scan-cycle persistence matters: residual charge on the bridge from previous row scans accumulates, and multiple rows being active in sequence pushes the bridge past threshold. |
+| H8 produces ghosts but nothing else does | Maximum cumulative stress from all 8 ghost keys overwhelms the threshold margin. The reverse voltage is very close to threshold and needs every possible boost. |
+| Nothing produces any Cx ghosts | The reverse bridge resistance is genuinely too high (~70–140 kΩ) for any practical number of simultaneous keys to overcome. The ~2:1 resistance asymmetry creates a robust unidirectional cutoff that cannot be defeated by parallel loading. This would confirm the bridge is effectively "one-way" under all realistic typing conditions. |
+
 ### Why the Bridge Is Unidirectional
 
 A natural question: how can dried Coca-Cola residue — a passive film of sugar, phosphoric acid, and mineral salts — produce a **unidirectional** bridge? Isn't a puddle of dried cola just a resistor, and shouldn't current flow equally in both directions?

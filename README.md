@@ -657,13 +657,13 @@ Polyimide (chemical formula approximation: repeating unit of PMDA-ODA, poly(4,4�
 
 Where copper is not protected by coverlay (ZIF connector fingers, dome-switch contact lands, vias, FPC edge pads), the following reactions begin immediately:
 
-1. **Dissolution of the native oxide layer.** Copper in air always carries a thin Cu₂O film (~2–5 nm). Phosphoric acid dissolves this:
+1. **Dissolution of the native oxide layer.** Copper in air always carries a thin Cu₂O film (~2–5 nm). Phosphoric acid dissolves this oxide directly:
 
    ```
-   Cu₂O + 2 H₃PO₄ → 2 Cu(H₂PO₄)₂ + H₂O
+   Cu₂O + 2 H₃PO₄ → 2 CuH₂PO₄ + H₂O     (Cu⁺ dihydrogen phosphate)
    ```
 
-   This strips the passivation layer within seconds, exposing bare metallic copper.
+   In the presence of dissolved oxygen, the Cu⁺ product is quickly oxidised to Cu²⁺, so the net practical result is loss of the passivation layer within seconds, exposing bare metallic copper to further attack.
 
 2. **Acidic corrosion of copper.** With dissolved oxygen present in the cola (especially immediately after pouring, when CO₂ is still outgassing and entraining air), copper oxidises and dissolves:
 
@@ -697,10 +697,10 @@ ZIF connector pads and some switch contacts use **ENIG (Electroless Nickel Immer
 
 - Gold is essentially inert to phosphoric acid at these concentrations. The gold layer itself is not attacked.
 - However, the gold layer on ENIG is extremely thin and porous at the microscopic level. Cola can seep through **pinholes** in the gold to reach the nickel underneath.
-- Nickel dissolves in phosphoric acid:
+- Nickel dissolves in the acidic electrolyte via oxygen-depolarized corrosion (nickel is not reactive enough to displace hydrogen from dilute phosphoric acid at room temperature):
 
   ```
-  Ni + 2 H₃PO₄ → Ni(H₂PO₄)₂ + H₂↑
+  2 Ni + O₂ + 4 H₃PO₄ → 2 Ni(H₂PO₄)₂ + 2 H₂O
   ```
 
   This undermines the gold from below, a process known as **"black pad" corrosion** in electronics manufacturing (though the classic black-pad failure involves hypophosphite-rich nickel, the same undercut mechanism applies here at a slower rate).
@@ -709,10 +709,10 @@ ZIF connector pads and some switch contacts use **ENIG (Electroless Nickel Immer
 
 Modern MacBook boards use lead-free solder, primarily SAC305 (96.5% Sn, 3.0% Ag, 0.5% Cu). Cola exposure:
 
-- Tin, being the majority component and less noble than copper or gold, is the primary corrosion target:
+- Tin, being the majority component and less noble than copper or gold, is the primary corrosion target. Like nickel, tin corrosion in dilute cola proceeds via dissolved oxygen rather than direct hydrogen displacement:
 
   ```
-  Sn + 2 H₃PO₄ → Sn(H₂PO₄)₂ + H₂↑
+  2 Sn + O₂ + 4 H₃PO₄ → 2 Sn(H₂PO₄)₂ + 2 H₂O
   ```
 
 - The silver and copper in the alloy are more resistant but can dissolve slowly at grain boundaries, weakening the solder joint mechanically.
@@ -746,7 +746,7 @@ Once visibly dry, the surface appears clean but is not:
 2. **Continued slow corrosion under the film.** The concentrated acid film — now essentially a paste — maintains an electrochemical environment on the metal surface. Copper continues to corrode at a slow but nonzero rate:
 
    ```
-   Cu + H₃PO₄ (concentrated) + ½O₂ → Cu(H₂PO₄)₂
+   2 Cu + O₂ + 4 H₃PO₄ (concentrated) → 2 Cu(H₂PO₄)₂ + 2 H₂O
    ```
 
    Over days, this can thin a trace enough to increase its resistance or open it entirely. It can also widen the corroded zone laterally, extending the bridge between adjacent traces.

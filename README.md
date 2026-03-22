@@ -705,12 +705,118 @@ The most probable explanation is a **combination of Hypotheses 1, 3, and 5**: th
 
 The connector misalignment (Hypothesis 2) may have introduced additional artifacts but is unlikely to be the primary cause since reseating the connector did not resolve the issue.
 
+## Pre-Cleaning Keyboard Behavior Tests
+
+Before sending the device for ultrasonic cleaning, recording the exact keyboard reactions to individual keypresses provides a precise baseline for:
+
+1. **Hypothesis confirmation** — identifying which extra characters appear for each affected key reveals which adjacent column traces are being bridged, directly confirming or refuting the contamination model.
+2. **Cleaning verification** — comparing before/after results gives an objective measure of cleaning effectiveness.
+3. **Damage scope assessment** — testing keys outside the suspected affected column checks whether contamination has spread further than the 6/Y/H/N column.
+
+### Test Setup
+
+1. Open **Terminal.app** and run `cat` (which echoes typed characters to the screen with no buffering or interpretation). Alternatively, open **TextEdit** in plain-text mode (`Format → Make Plain Text`) with autocorrect, smart quotes, and text replacement all disabled (`Edit → Substitutions → uncheck all`).
+2. Disable **Karabiner Elements** or any other key-remapping software so that the raw hardware output is captured.
+3. Ensure the **internal keyboard** is the active input device (disconnect any external keyboard).
+4. Set the input source to **U.S.** (or another simple ASCII layout) to avoid locale-specific key mappings.
+5. Wait 60 seconds with the text field focused and no keys pressed. Record whether any ghost keypresses appear during this period.
+
+### Test Procedure
+
+For each key listed in the test matrix below:
+
+1. Press and release the key **once**, firmly but briefly.
+2. Record **all characters** that appear on screen (expected character plus any extras).
+3. Repeat the same keypress **3 times** to check for consistency or intermittent behavior.
+4. Then hold **Shift** and press the key once — record the output.
+5. Then hold **Option (⌥)** and press the key once — record the output.
+
+### Test Matrix
+
+The matrix is divided into three groups: (A) the affected column, (B) adjacent keys that share a row with the affected keys (control group — should be unaffected if the problem is column-specific), and (C) distant keys (baseline — should be completely normal).
+
+#### Group A — Affected column (6, Y, H, N)
+
+These keys share column trace C7. If Hypothesis 1 is correct, each should produce its correct character plus one or two extra characters from columns C6 and/or C8.
+
+| Key | Expected | Actual (press 1) | Actual (press 2) | Actual (press 3) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------------------|-------|------------|-------|
+| 6   | `6`      |                   |                   |                   |       |            |       |
+| Y   | `y`      |                   |                   |                   |       |            |       |
+| H   | `h`      |                   |                   |                   |       |            |       |
+| N   | `n`      |                   |                   |                   |       |            |       |
+
+#### Group B — Adjacent keys (control group)
+
+These keys are in the same rows as the affected keys but in different columns. If the problem is purely a column C7 issue, these should all work correctly.
+
+| Key | Expected | Actual (press 1) | Actual (press 2) | Actual (press 3) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------------------|-------|------------|-------|
+| 5   | `5`      |                   |                   |                   |       |            |       |
+| 7   | `7`      |                   |                   |                   |       |            |       |
+| T   | `t`      |                   |                   |                   |       |            |       |
+| U   | `u`      |                   |                   |                   |       |            |       |
+| G   | `g`      |                   |                   |                   |       |            |       |
+| J   | `j`      |                   |                   |                   |       |            |       |
+| B   | `b`      |                   |                   |                   |       |            |       |
+| M   | `m`      |                   |                   |                   |       |            |       |
+
+#### Group C — Distant keys (baseline)
+
+These keys are far from the spill area and should be completely unaffected.
+
+| Key | Expected | Actual (press 1) | Actual (press 2) | Actual (press 3) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------------------|-------|------------|-------|
+| A   | `a`      |                   |                   |                   |       |            |       |
+| S   | `s`      |                   |                   |                   |       |            |       |
+| L   | `l`      |                   |                   |                   |       |            |       |
+| P   | `p`      |                   |                   |                   |       |            |       |
+
+#### Ghost keypress observation
+
+| Condition | Duration | Characters observed | Notes |
+|-----------|----------|---------------------|-------|
+| No keys pressed, laptop idle | 60 s |  |  |
+| No keys pressed, after typing on affected keys for 30 s | 60 s |  |  |
+
+### Interpreting Results
+
+The test results map directly to the existing hypotheses:
+
+| Observation | Supports | Explanation |
+|-------------|----------|-------------|
+| All Group A keys produce the **same set** of extra characters (from the same adjacent column) | **H1** (conductive residue on column trace) | A single bridge between C7 and one adjacent column would add the same extra column's character to every key in the affected column |
+| Group A keys produce **different** extra characters from each other | **H3** (multiple corrosion sites on FPC) | Multiple independent bridges at different points along the traces, rather than a single contamination site |
+| Group B keys also produce extra characters | Column contamination has **spread beyond C7** | The damage scope is wider than initially assessed; may affect cleaning prognosis |
+| Group B keys are completely normal | **H1** confirmed as column-specific | Contamination is localised to the C7 trace path, not spreading to row traces |
+| Extra characters are **consistent** across all 3 presses | Stable conductive bridge (dried residue) | The short circuit has a fixed resistance; good candidate for cleaning |
+| Extra characters are **inconsistent** (different extras each time) | Intermittent/marginal bridge | The residue conductivity is near the detection threshold; may indicate partial drying or borderline contact |
+| Ghost keypresses observed during idle period | **H1** with residual floating conductivity | The residue is still conductive enough to trigger false matrix intersections without mechanical pressure |
+| No ghost keypresses during idle period | Residue has stabilised | Consistent with the earlier observation that ghost presses stopped after the initial drying period |
+| Shift+key produces shifted version of the **extra** characters too | Bridge is on the **column** trace (pre-controller) | Confirms the short is in the matrix wiring, not in the controller IC (H4) |
+| Shift+key produces shifted version of only the **correct** character | Bridge may be in the **controller** or post-matrix | Would point toward H4 (controller damage) rather than H1 (trace contamination) |
+
+### Identifying the Bridged Column from Extra Characters
+
+If the extra characters are consistent across all Group A keys, they reveal exactly which adjacent column is bridged. Use this lookup table (based on the standard MacBook keyboard matrix — column assignments are approximate and may vary slightly by firmware version):
+
+| Extra character produced alongside Group A key | Likely bridged column | Bridged to |
+|---|---|---|
+| `5` / `T` / `G` / `B` (when pressing `6` / `Y` / `H` / `N`) | C6 (left neighbor of C7) | C7 → C6 bridge |
+| `7` / `U` / `J` / `M` (when pressing `6` / `Y` / `H` / `N`) | C8 (right neighbor of C7) | C7 → C8 bridge |
+| Both left and right neighbor characters appear | C6 **and** C8 | C7 bridged to both adjacent columns |
+| Characters from a non-adjacent column | Contamination at the **ZIF connector** where pin spacing is tighter | May indicate a wider residue spread at the connector rather than along the FPC |
+
+This directly identifies the contamination geometry and helps the ultrasonic cleaning lab focus on the correct trace pair.
+
 ## Recommended Next Steps
 
-1. **Ultrasonic cleaning (recommended first step)** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. With ghost presses already resolved and symptoms stabilized, the window for effective cleaning is still open.
-2. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges — ideally performed as part of or after the ultrasonic process.
-3. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is still present after cleaning.
-4. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
+1. **Record pre-cleaning keyboard behavior** using the test matrix above — this captures the exact baseline before any cleaning intervention. The results will confirm the contamination model and provide a clear before/after comparison.
+2. **Ultrasonic cleaning** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. With ghost presses already resolved and symptoms stabilized, the window for effective cleaning is still open.
+3. **Re-run the same keyboard tests after cleaning** — compare against the pre-cleaning baseline to objectively measure improvement.
+4. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges — ideally performed as part of or after the ultrasonic process.
+5. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is still present after cleaning.
+6. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
 
 ## Note for the Ultrasonic Cleaning Lab
 

@@ -438,6 +438,9 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Boardview 820-02757 — overview | | [PNG](diagrams/boardview-820-02757-overview.png) | PCSchematics boardview: full board layout showing M3 Pro SoC (U0600), keyboard controller area, and connector locations |
 | Boardview 820-02757 — detail 1 | | [PNG](diagrams/boardview-820-02757-detail-1.png) | PCSchematics boardview: zoomed detail view of board area |
 | Boardview 820-02757 — detail 2 | | [PNG](diagrams/boardview-820-02757-detail-2.png) | PCSchematics boardview: zoomed detail view of board area |
+| Boardview 820-02757 — capture 1 | | [PNG](diagrams/boardview-820-02757-capture1.png) | Original PCSchematics screenshot from archive |
+| Boardview 820-02757 — capture 2 | | [PNG](diagrams/boardview-820-02757-capture2.png) | Original PCSchematics screenshot from archive |
+| Boardview 820-02757 data file | | [BRD](diagrams/820-02757-06-boardview.brd) | OpenBoardView-compatible boardview data file for board 820-02757-06 |
 
 ### 9. Boardview Screenshots (Board 820-02757)
 
@@ -448,6 +451,14 @@ The following screenshots were captured from the **PCSchematics** boardview for 
 ![Board 820-02757 — boardview detail 1](diagrams/boardview-820-02757-detail-1.png)
 
 ![Board 820-02757 — boardview detail 2](diagrams/boardview-820-02757-detail-2.png)
+
+The following additional screenshots and the boardview data file were provided in [Archive.zip](https://github.com/user-attachments/files/26164995/Archive.zip):
+
+![Board 820-02757 — capture 1](diagrams/boardview-820-02757-capture1.png)
+
+![Board 820-02757 — capture 2](diagrams/boardview-820-02757-capture2.png)
+
+The boardview data file [`820-02757-06-boardview.brd`](diagrams/820-02757-06-boardview.brd) can be opened in [OpenBoardView](https://github.com/OpenBoardView/OpenBoardView) or similar boardview software for interactive component lookup.
 
 ### 10. Reference Photos of Real Hardware (external links)
 

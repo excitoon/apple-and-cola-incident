@@ -612,6 +612,87 @@ When the MacBook is in use, the internal temperature rises (CPU/GPU heat dissipa
 
 This could explain why symptoms worsened progressively during the days after the spill — each use session would have produced thermal cycling that accelerated trace degradation.
 
+### Hypothesis Ranking Summary
+
+| Rank | Hypothesis | Likelihood | Status | Key Evidence |
+|------|-----------|------------|--------|-------------|
+| **1** | **H1: Conductive residue** (dried cola shorting column trace) | **★★★★★ Primary** | ✅ Active | Clean column pattern (6/Y/H/N); multi-character output; improvement during rest period proves residue not permanent damage |
+| **2** | **H5: Insufficient initial cleaning** | **★★★★☆ Primary** | ✅ Active | N was already faulty at pickup; 2-hour surface clean cannot reach sub-0.3 mm gaps; cola requires solvent flushing, not wiping |
+| **3** | **H3: FPC trace corrosion** | **★★★★☆ Primary** | ⚠️ Partial | Progressive worsening over days; phosphoric acid attacks copper continuously; but rest-period improvement suggests traces not yet destroyed |
+| **4** | **H6: Thermal cycling accelerator** | **★★★☆☆ Contributing** | ✅ Active | Worsening during use, improvement during 2-day powered-off rest; heat accelerates corrosion ~2× per 10°C |
+| **5** | **H2: Connector misalignment** | **★★☆☆☆ Ruled out as sole cause** | ❌ Tested | Reseating connector did not resolve symptoms; may have been a minor contributor |
+| **6** | **H4: Keyboard controller IC damage** | **★☆☆☆☆ Unlikely** | ❓ Not tested | Would affect more than one column; clean column pattern points to trace-level issue instead |
+
+**Winner: H1 + H5 + H3**, with **H6** as accelerator. The primary cause is conductive cola residue on the shared column C7 trace, left behind by insufficient initial cleaning, with ongoing phosphoric acid corrosion worsening damage over time. The rest-period improvement confirms the dominant mechanism is still reversible contamination (H1) rather than irreversible corrosion (H3), making ultrasonic cleaning the correct first step.
+
+## Physical Localization of the Damage
+
+Based on the symptom pattern and electrical analysis, the contamination can be physically localized to a specific area:
+
+### Where the damage is
+
+```
+    ┌─────────────────────────────────────────────────────┐
+    │                   TOP CASE (interior view)          │
+    │                                                     │
+    │   Key matrix layer (FPC membrane)                   │
+    │   ┌───────────────────────────────────────────┐     │
+    │   │  ...  5   6   7  ...                      │     │
+    │   │  ...  T  [Y]  U  ...     ← Affected keys  │     │
+    │   │  ...  G  [H]  J  ...       are in column   │     │
+    │   │  ...  B  [N]  M  ...       C7 (bracketed)  │     │
+    │   └───────────┬───────────────────────────────┘     │
+    │               │                                     │
+    │    ══════════ FPC ribbon cable ══════════            │
+    │               │                                     │
+    │        ┌──────┴──────┐                              │
+    │        │ ZIF connector│ ◄── CONTAMINATION SITE #1   │
+    │        │  (30+ pins)  │     Cola residue on pin C7  │
+    │        └──────┬──────┘     and bridges to C6/C8     │
+    │               │                                     │
+    │        ┌──────┴──────┐                              │
+    │        │  Keyboard    │                              │
+    │        │ Controller IC│ ◄── Unlikely damage site     │
+    │        └──────┬──────┘                              │
+    │               │ SPI bus                              │
+    │        ┌──────┴──────┐                              │
+    │        │  M3 Pro SoC │                              │
+    │        └─────────────┘                              │
+    └─────────────────────────────────────────────────────┘
+
+    CONTAMINATION SITE #2: Along the FPC ribbon cable itself,
+    where cola wicked between the column C7 trace and adjacent
+    traces C6/C8 via capillary action in the ~0.1 mm gap between
+    polyimide substrate layers.
+
+    CONTAMINATION SITE #3: Under the sealed scissor-switch key
+    bodies for 6, Y, H, N — where cola entered through < 0.3 mm
+    capillary gaps and cannot be manually extracted.
+```
+
+### Three specific contamination zones
+
+1. **ZIF connector area** (most accessible) — dried cola residue on or around pin C7 and bridging to adjacent pins C6/C8. This is the most likely primary site because: (a) the connector is an open junction point where liquid pools, (b) it explains the clean column pattern, and (c) it is the first component the service center would have accessed during cleaning (and may not have cleaned thoroughly enough).
+
+2. **FPC ribbon cable traces** (moderately accessible) — residue wicked along the column C7 trace where it runs parallel to C6/C8 within the ribbon. The ~0.1 mm gap between traces inside the FPC acts as a capillary channel that draws liquid in and is very difficult to clean without ultrasonic treatment.
+
+3. **Under sealed key switch bodies** (non-serviceable) — the scissor-switch assemblies for 6, Y, H, N. The service center is correct that these cannot be manually opened or cleaned without breaking the mechanism. However, this is likely a **secondary** contamination site rather than the primary one, because contamination only inside individual key bodies would not explain the entire column being affected simultaneously.
+
+### Are the service guys right about "mechanical" nature?
+
+**Partly right, partly wrong:**
+
+| Aspect | Service center says | Actual assessment |
+|--------|-------------------|-------------------|
+| Key blocks are non-serviceable | ✅ **Correct** — scissor mechanisms cannot be manually opened or cleaned | Confirmed: capillary gaps < 0.3 mm, arms break on disassembly |
+| The issue is "mechanical" | ❌ **Inaccurate** — the cause is electrical/chemical (conductive residue + acid corrosion) | Ghost keypresses and multi-character output are purely electrical phenomena |
+| Keyboard replacement is needed | ⚠️ **Premature** — ultrasonic cleaning should be tried first | Rest-period improvement proves contamination is still reversible |
+| The primary damage location | ⚠️ **Incomplete** — they focus on sealed key blocks | Column pattern points to FPC/ZIF connector contamination, not just key bodies |
+
+The service center is technically right that **some** contamination is in non-serviceable locations (under key switches), but they are wrong to characterize the issue as "mechanical" and may be overlooking the primary contamination site (ZIF connector and FPC traces). The column-wide symptom pattern cannot be explained by contamination inside individual key bodies alone — it requires a shared trace-level short, which is on the FPC or at the connector.
+
+**Bottom line:** The issue is physically localized to the column C7 trace path — primarily at the ZIF connector junction and along the FPC ribbon, with secondary contamination under the key switch bodies. Ultrasonic cleaning can reach all three sites and should be attempted before committing to a full keyboard/top-case replacement.
+
 ## Most Probable Root Cause
 
 The most probable explanation is a **combination of Hypotheses 1, 3, and 5**: the initial service-center cleaning was insufficient to remove cola residue from the keyboard FPC traces and sealed key switch bodies. Sticky, conductive residue (dried cola) remained on the keyboard flex cable, creating persistent shorts across a single keyboard matrix column (H, Y, 6, N). Ongoing corrosion from phosphoric acid, accelerated by thermal cycling during normal use (Hypothesis 6), caused progressive worsening. This accounts for:

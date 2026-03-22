@@ -453,6 +453,9 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Board 820-02757 — component map | [SVG](diagrams/boardview-820-02757-component-map.svg) | | Board-level map with real component positions decoded from the boardview, showing keyboard / trackpad / SoC neighborhoods and contamination risk zone |
 | Board 820-02757 — keyboard signal architecture | [SVG](diagrams/boardview-820-02757-kbd-signal-architecture.svg) | | Complete signal architecture showing SoC → IPD connector → JT200 keyboard FPC → matrix signals, with power rails, I²C bus, and bridging boundaries identified from decoded data |
 | Board 820-02757 — serviceability map | [SVG](diagrams/boardview-820-02757-serviceability.svg) | | Disassembly depth map showing all spill zones at Depth 1 (bottom case only), with problem-area assessment and components-to-detach count for each zone |
+| JT200 connector zone — detail render | [SVG](diagrams/boardview-820-02757-jt200-detail-render.svg) | | Close-up render of JT200 36-pin ZIF connector with color-coded pins (SENSE/DRIVE/control/GND), bridging risk boundaries, cola residue zone, ZIF latch, and JT220 below |
+| FPC cable run — detail render | [SVG](diagrams/boardview-820-02757-fpc-cable-render.svg) | | FPC ribbon cable render showing 25 interleaved DRIVE/SENSE traces, polyimide cross-section, contamination wicking zones, and ultrasonic cleaning annotation |
+| Cleaning access — board service map | [SVG](diagrams/boardview-820-02757-cleaning-access-render.svg) | | Full board cleaning access overview with connector zones, IPA swab workflow, and reachable=cleanable principle for each contamination zone |
 
 ### 9. Boardview Screenshots (Board 820-02757)
 
@@ -1128,6 +1131,47 @@ The boardview data, combined with the symptom pattern, strongly localizes the fa
 5. **No board-level trace repair is needed.** The 25 DRIVE/SENSE matrix lines exist only within the keyboard FPC — they never run as exposed traces on the main logic board.
 
 **Conclusion: the spill areas are in serviceable places, all at the shallowest possible disassembly depth.** The primary damage site (JT200 ZIF connector) is a standard FPC connector accessible by removing 6 screws and lifting the bottom case — a routine 5-minute procedure. An engineer needs to detach only **1 component** (the bottom case) to inspect and clean the primary contamination site. The secondary sites (FPC traces, key bodies) are reachable by ultrasonic cleaning if manual ZIF cleaning alone does not fully resolve the symptoms.
+
+#### Reachable = cleanable: why access depth determines serviceability
+
+A critical point for the repair assessment: **if an engineer can physically reach a component, that component is also cleanable.** This is not a coincidence — it follows from the connector and cable design:
+
+| Component | Why reachable = cleanable | Cleaning method |
+|-----------|--------------------------|-----------------|
+| **JT200 ZIF connector** | ZIF (Zero Insertion Force) connectors are **designed for repeated disconnect/reconnect**. The latch lifts, the FPC slides out freely, exposing both the connector pads and the FPC contact fingers. Both surfaces are flat, exposed copper/gold — directly accessible to a swab. | IPA-soaked lint-free swab under magnification. Wipe connector pads, wipe FPC fingers, dry, reseat. |
+| **JT220 backlight connector** | Same ZIF design as JT200, same access procedure. Only ~2 mm away — cleaned in the same pass. | Same as JT200 (included in same cleaning step). |
+| **JT400 IPD connector** | Same ZIF design, same edge of board. Accessible after bottom case removal. | Same IPA swab procedure, though this connector is not a problem area. |
+| **FPC cable traces** | The FPC is a flat ribbon — once disconnected from JT200, the entire cable surface is exposed. However, **internal** traces (between polyimide layers) cannot be reached by surface wiping. | Surface: IPA wipe. Internal: requires ultrasonic bath (IPA or specialized solvent) to reach sub-0.1 mm gaps between polyimide layers. |
+| **Key switch bodies** | Scissor mechanisms have sealed capillary gaps (sub-0.3 mm). Cannot be opened without breaking the mechanism. | Ultrasonic cavitation only — the sound waves create micro-bubbles that penetrate gaps too small for liquid flow. |
+
+The key insight is that **ZIF connectors are field-serviceable by design** — they exist specifically so that cables can be disconnected, inspected, and reconnected during manufacturing and repair. The latch mechanism ensures no soldering is needed. This means the gap between "I can see the connector" and "I can clean the connector" is exactly **one latch flip** — there is no additional disassembly required to go from inspection to cleaning.
+
+For the FPC cable and key bodies, the gap between "reachable" and "cleanable" is wider — surface contamination can be wiped, but internal contamination between layers requires ultrasonic cleaning. This is why the recommended service order is:
+1. **First**: Clean JT200 connector (manual, 10–15 min) — fixes the problem if the bridge is at the connector pads
+2. **Second**: Inspect and surface-clean the FPC cable (manual, 5 min) — catches visible residue on the cable surface
+3. **Third**: Ultrasonic bath for FPC + key bodies (professional service, 3–7 day turnaround) — only if steps 1–2 don't resolve the issue
+
+#### Detailed renders of contamination zones
+
+The following detailed renders show each contamination zone at high magnification, with color-coded signal types and cleaning access annotations:
+
+**JT200 Connector Zone — Close-up Detail:**
+
+![JT200 connector detail render](diagrams/boardview-820-02757-jt200-detail-render.svg)
+
+This render shows the full 36-pin JT200 ZIF connector with each pin color-coded by signal type (SENSE = blue, DRIVE = red, control = green, GND = gray). The three DRIVE↔SENSE bridging risk boundaries are marked with warning indicators — these are the exact physical locations where a conductive residue bridge between adjacent ~0.5 mm-pitch traces produces the observed ghost keypresses. The JT220 backlight connector is shown below, confirmed working (green checkmark). The cola residue danger zone indicates where gravity-driven liquid pools at the connector junction.
+
+**FPC Cable Run — Trace Interleaving and Cross-Section:**
+
+![FPC cable render](diagrams/boardview-820-02757-fpc-cable-render.svg)
+
+This render shows the FPC ribbon cable running from JT200 to the keyboard module, with the 25 interleaved DRIVE/SENSE traces visible in cross-section. The polyimide-copper-polyimide sandwich structure has ~0.1 mm internal gaps where cola can wick by capillary action and become trapped — unreachable by surface wiping but accessible by ultrasonic cleaning.
+
+**Cleaning Access Overview — Complete Board Service Map:**
+
+![Cleaning access render](diagrams/boardview-820-02757-cleaning-access-render.svg)
+
+This render shows the full board from the bottom (case removed) with all three connector zones highlighted, the cleaning workflow for JT200, and the "REACHABLE = CLEANABLE" principle applied to each zone. The recommended service sequence follows the path of least resistance: start at JT200 (most likely fault site, easiest to clean), then inspect the FPC cable, then ultrasonic clean only if manual cleaning doesn't resolve the issue.
 
 ## Most Probable Root Cause
 

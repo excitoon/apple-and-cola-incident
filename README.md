@@ -917,11 +917,35 @@ All three recommended follow-up tests have been completed. Results:
 
 ## Recommended Next Steps
 
-1. **Ultrasonic cleaning** — All pre-cleaning tests are complete. The test data confirms the contamination is a stable, localised, unidirectional residue bridge at a single cluster of adjacent FPC/ZIF pins — ideal conditions for cleaning. The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround.
-2. **Re-run the same keyboard tests after cleaning** — compare against the pre-cleaning baseline documented above to objectively measure improvement. All Group A keys should produce only their correct single character; Space should produce only a space.
-3. **Visual inspection under magnification** of the FPC traces and ZIF connector pins — the contamination site is the cluster of pins carrying columns Cx/Cy/Cz (6/Y/H/N column and the 9/O/L/. and 0/P/;/ columns). Look for visible dried residue bridging these adjacent pins.
-4. **Resistance measurement** between the three identified column pins (Cx, Cy, Cz) and the Space/`'` pin pair on the ZIF connector to confirm whether the conductive bridges have been removed after cleaning.
-5. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
+### Manual ZIF cleaning vs. ultrasonic cleaning
+
+Since the test data confirms the contamination is at the **FPC/ZIF connector pin cluster** (not scattered along the FPC or inside individual key switches), a reasonable question is whether **simple manual cleaning** of the ZIF connector area would be sufficient, avoiding the cost and turnaround of ultrasonic cleaning.
+
+**Manual ZIF connector cleaning** (what a service technician can do):
+1. Open the ZIF latch, remove the FPC ribbon cable
+2. Clean the exposed FPC contact pads and ZIF socket spring contacts with isopropyl alcohol (IPA ≥99%) and a lint-free swab or fine brush
+3. Inspect under magnification for visible dried residue bridging adjacent pads
+4. Reassemble and test
+
+**This may be sufficient** if the contamination is limited to the exposed contact surfaces at the ZIF junction. The test data supports this being the primary site — the ZIF connector is an open junction point where spilled liquid pools and dries, and the clean column-specific pattern is consistent with adjacent pins being bridged at a single location.
+
+**However, there are risks that manual cleaning alone may not be enough:**
+- If residue has **wicked along the FPC traces** between the polyimide layers (~0.1 mm gap acts as a capillary channel), it cannot be reached by surface swabbing — only ultrasonic cavitation can dissolve residue inside these narrow channels.
+- If residue has entered the **sealed key switch bodies** (sub-0.3 mm capillary spaces under keycaps), manual cleaning cannot reach it.
+- The ZIF connector has **~0.5 mm pitch pins** — residue between adjacent pins can be difficult to fully remove with manual methods, especially if it has formed a thin conductive film in the gap between pads.
+
+**Recommended approach: try manual ZIF cleaning first.** It is the simplest and cheapest intervention. If the service center can open and clean the ZIF connector area with IPA, re-run the Group A tests (`6`, `Y`, `H`, `N`, Space) immediately after reassembly. If the extra characters are gone, the problem is solved. If symptoms persist or partially improve, proceed to ultrasonic cleaning to address residue in less accessible locations (FPC trace gaps, under key switches).
+
+### Step-by-step plan
+
+1. **Ask the service center to try manual ZIF connector cleaning first** — open the ZIF latch, clean FPC pads and socket contacts with IPA (≥99%), inspect under magnification for visible residue on the cluster of adjacent pins carrying columns Cx/Cy/Cz and the Space/`'` pin pair.
+2. **Re-run keyboard tests after manual cleaning** — test Group A keys (`6`, `Y`, `H`, `N`, Space) and compare against the pre-cleaning baseline. All keys should produce only their correct single character.
+3. **If manual cleaning resolves the issue** — done. No ultrasonic cleaning needed.
+4. **If symptoms persist** — proceed to **ultrasonic cleaning**. The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. The contamination is then in the FPC trace gaps or under key switches, which only ultrasonic cavitation can reach.
+5. **Re-run keyboard tests after ultrasonic cleaning** — compare against pre-cleaning baseline to objectively measure improvement.
+6. **Visual inspection under magnification** of the FPC traces and ZIF connector pins after cleaning — look for any remaining dried residue.
+7. **Resistance measurement** between the three identified column pins (Cx, Cy, Cz) and the Space/`'` pin pair on the ZIF connector to confirm the conductive bridges have been removed.
+8. If neither cleaning method resolves the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
 
 ## Note for the Ultrasonic Cleaning Lab
 

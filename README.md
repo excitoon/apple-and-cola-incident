@@ -965,14 +965,41 @@ This could explain why symptoms worsened progressively during the days after the
 
 | Rank | Hypothesis | Likelihood | Status | Key Evidence |
 |------|-----------|------------|--------|-------------|
-| **1** | **H1: Conductive residue** (dried cola shorting column trace) | **★★★★★ Primary — structural proof** | ✅ Active | Clean column pattern (6/Y/H/N); multi-character output; improvement during rest period; **boardview confirms DRIVE/SENSE interleaving on JT200 with 3 bridging boundaries** |
+| **1** | **H1: Conductive residue** (dried cola shorting column trace) | **★★★★★ Primary — quantitative proof** | ✅ Confirmed | Clean column pattern; **multi-key tests quantify bridge: ~30 kΩ forward, ~70 kΩ reverse, continuous 2D film**; parallel-path reverse ghosts (H1–H4) match voltage divider calculations exactly; scan-cycle persistence explains fast-typing glitch; 100% reproducible across 36+ tests |
 | **2** | **H5: Insufficient initial cleaning** | **★★★★☆ Primary** | ✅ Active | N was already faulty at pickup; 2-hour surface clean cannot reach sub-0.3 mm gaps; **boardview shows ~0.5mm FPC pin pitch at JT200** |
-| **3** | **H3: FPC trace corrosion** | **★★★★☆ Primary** | ⚠️ Partial | Progressive worsening over days; phosphoric acid attacks copper; **boardview shows INA current monitors could detect leakage**; rest-period improvement suggests traces not yet destroyed |
-| **4** | **H6: Thermal cycling accelerator** | **★★★☆☆ Contributing** | ✅ Active | Worsening during use, improvement during 2-day powered-off rest; heat accelerates corrosion ~2× per 10°C |
+| **3** | **H3: FPC trace corrosion** | **★★★☆☆ Contributing — reduced** | ⚠️ Slowed | Progressive worsening over days (historical); **but multi-key tests show perfectly stable bridge resistance — no drift across the entire testing session**; rest-period improvement; system has reached quasi-equilibrium (see corrosion status below) |
+| **4** | **H6: Thermal cycling accelerator** | **★★☆☆☆ Contributing — diminished** | ⚠️ Slowed | Historical worsening during use; but current stability of bridge parameters suggests thermal cycling is no longer significantly changing the residue film |
 | **5** | **H2: Connector misalignment** | **★★☆☆☆ Ruled out as sole cause** | ❌ Tested | Reseating connector did not resolve symptoms; **boardview shows GND shield pins at both ends would shift all signals — doesn't match clean column pattern** |
 | **6** | **H4: Keyboard controller IC damage** | **☆☆☆☆☆ Ruled out** | ❌ Eliminated | **Boardview proves keyboard controller is inside the keyboard module, communicates only via I²C through IPD connector (3590) — matrix scanning happens locally, not on main board** |
 
-**Winner: H1 + H5 + H3**, with **H6** as accelerator. The primary cause is conductive cola residue on the shared column C7 trace, left behind by insufficient initial cleaning, with ongoing phosphoric acid corrosion worsening damage over time. The rest-period improvement confirms the dominant mechanism is still reversible contamination (H1) rather than irreversible corrosion (H3), making ultrasonic cleaning the correct first step. **The decoded boardview now provides structural proof**: the actual JT200 connector on this board has the exact DRIVE/SENSE interleaving topology needed to produce the observed unidirectional ghost keypresses, and the keyboard controller architecture (I²C-only via IPD connector 3590) definitively rules out main-board IC damage as a possible cause.
+#### What changed after multi-key testing (Groups E–H)
+
+The multi-key tests produced **quantitative confirmation** of the residue bridge model that significantly sharpens the hypothesis ranking:
+
+- **H1 upgraded from "structural proof" to "quantitative proof."** The single-key tests showed the bridge existed; the multi-key tests measured its electrical properties. The ~30/70 kΩ forward/reverse resistance values, the voltage divider thresholds (2.01 V forward → detected, 1.33 V reverse → not detected, 1.65 V parallel → detected), the scan-channel locking behavior (F7/G8), and the scan-cycle persistence in cross-row reverse ghosts (P+L→`phl`) all match a single continuous resistive film model. Every test — all 36+ combinations across Groups E through H — produced results exactly consistent with one contamination site. No anomalies, no inconsistencies.
+
+- **H3 downgraded from ★★★★☆ to ★★★☆☆.** The bridge resistance is perfectly stable: identical behavior across tests performed over the entire session, with no measurable drift. If active corrosion were significantly progressing, we would expect changing resistance values (worsening ghost characters, or conversely improving as corrosion products build up insulating layers). The stability indicates the system has reached equilibrium — corrosion has largely stopped (see below).
+
+- **H6 downgraded from ★★★☆☆ to ★★☆☆☆.** With the bridge parameters stabilized, thermal cycling is no longer a significant accelerator. Its role was historical (during the active worsening phase).
+
+#### Corrosion status — has it stopped?
+
+**Largely yes.** The evidence points to the corrosion process having reached a quasi-equilibrium:
+
+1. **Bridge resistance is perfectly stable.** Across 36+ test combinations in Groups E–H (spanning different key pairs, hold durations, and activation patterns), the bridge produces identical, 100% reproducible results. If phosphoric acid were still actively dissolving copper, the resistance would be changing — either increasing (as corrosion products accumulate) or decreasing (as traces thin and leakage paths widen). Neither is happening.
+
+2. **No new symptoms.** The affected column set (Cx/Cy/Cz + Space/') has not expanded. No previously unaffected keys have acquired ghost characters during the testing period. Active corrosion would eventually bridge additional traces.
+
+3. **The acid has been consumed.** Phosphoric acid in dried cola residue is a finite reagent. At the concentrations present in a single spill droplet (~0.06% H₃PO₄ by weight in liquid, concentrated ~100–1000× during drying), the total amount of acid is small — on the order of micrograms. After several days of reacting with copper, tin, and nickel on the FPC pads, much of the acid has been neutralized by forming metal phosphate salts (which are themselves part of the conductive residue film, but the corrosive agent is depleted).
+
+4. **Hygroscopic equilibrium.** The dried film has reached moisture equilibrium with ambient humidity. The electrochemical corrosion rate in a dried, equilibrated film is orders of magnitude slower than during the active drying phase (when acid concentration was peaking). The "dangerous period" described in the chemical timeline — the drying phase at 10 min – 2 hours — is long past.
+
+**What this means for cleaning:** The stabilization is actually **good news**. It means:
+- The damage is **not getting worse** — there is no urgency to clean immediately to prevent further corrosion.
+- The residue film is **fixed and localized** — it won't migrate or spread to new pins.
+- The bridge is **still conductive residue, not permanent trace damage** — the rest-period improvement and the stable (not increasing) resistance both confirm the traces are intact underneath. Cleaning should restore full function.
+
+**Winner: H1 + H5**, with **H3** as historical contributor now largely spent. The primary cause is conductive cola residue forming a stable resistive film on the shared column C7 trace cluster, left behind by insufficient initial cleaning. The corrosion from phosphoric acid contributed to the historical worsening but has now reached equilibrium — the acid is largely consumed, the film is stable, and the traces appear intact. **The multi-key tests provide quantitative proof**: the actual bridge resistance values, voltage thresholds, parallel-path behavior, scan-channel locking, and scan-cycle persistence all match the single-contamination-site model with no anomalies across 36+ test combinations. Cleaning prognosis remains excellent.
 
 ## Physical Localization of the Damage
 

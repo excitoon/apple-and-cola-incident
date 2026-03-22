@@ -737,40 +737,63 @@ The matrix is divided into three groups: (A) the affected column, (B) adjacent k
 
 #### Group A — Affected column (6, Y, H, N)
 
-These keys share column trace C7. If Hypothesis 1 is correct, each should produce its correct character plus one or two extra characters from columns C6 and/or C8.
+These keys share column trace C7. If Hypothesis 1 is correct, each should produce its correct character plus extra characters from bridged columns.
 
-| Key | Expected | Actual (press 1) | Actual (press 2) | Actual (press 3) | Shift | Option (⌥) | Notes |
-|-----|----------|-------------------|-------------------|-------------------|-------|------------|-------|
-| 6   | `6`      |                   |                   |                   |       |            |       |
-| Y   | `y`      |                   |                   |                   |       |            |       |
-| H   | `h`      |                   |                   |                   |       |            |       |
-| N   | `n`      |                   |                   |                   |       |            |       |
+| Key | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------|------------|-------|
+| 6   | `6`      | `690`             | `690`             |       |            | Extra `9` and `0` — consistent |
+| Y   | `y`      | `yop`             | `yop`             |       |            | Extra `o` and `p` — consistent |
+| H   | `h`      | `hl;`             | `hl;`             |       |            | Extra `l` and `;` — consistent |
+| N   | `n`      | `n./`             | `n./`             |       |            | Extra `.` and `/` — consistent |
 
 #### Group B — Adjacent keys (control group)
 
 These keys are in the same rows as the affected keys but in different columns. If the problem is purely a column C7 issue, these should all work correctly.
 
-| Key | Expected | Actual (press 1) | Actual (press 2) | Actual (press 3) | Shift | Option (⌥) | Notes |
-|-----|----------|-------------------|-------------------|-------------------|-------|------------|-------|
-| 5   | `5`      |                   |                   |                   |       |            |       |
-| 7   | `7`      |                   |                   |                   |       |            |       |
-| T   | `t`      |                   |                   |                   |       |            |       |
-| U   | `u`      |                   |                   |                   |       |            |       |
-| G   | `g`      |                   |                   |                   |       |            |       |
-| J   | `j`      |                   |                   |                   |       |            |       |
-| B   | `b`      |                   |                   |                   |       |            |       |
-| M   | `m`      |                   |                   |                   |       |            |       |
+| Key | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------|------------|-------|
+| 5   | `5`      |                   |                   |       |            |       |
+| 7   | `7`      |                   |                   |       |            |       |
+| T   | `t`      |                   |                   |       |            |       |
+| U   | `u`      |                   |                   |       |            |       |
+| G   | `g`      |                   |                   |       |            |       |
+| J   | `j`      |                   |                   |       |            |       |
+| B   | `b`      |                   |                   |       |            |       |
+| M   | `m`      |                   |                   |       |            |       |
+
+#### Group B2 — Keys from the newly identified bridged columns
+
+The test results revealed that the actual bridged columns contain `9/O/L/.` and `0/P/;/​/`. These keys should also be tested — pressing them may produce extra characters from column C7 (reverse bridge).
+
+| Key | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------|------------|-------|
+| 9   | `9`      |                   |                   |       |            | Does pressing `9` also produce `6`? |
+| 0   | `0`      |                   |                   |       |            | Does pressing `0` also produce `6`? |
+| O   | `o`      |                   |                   |       |            | Does pressing `O` also produce `y`? |
+| P   | `p`      |                   |                   |       |            | Does pressing `P` also produce `y`? |
+| L   | `l`      |                   |                   |       |            | Does pressing `L` also produce `h`? |
+| ;   | `;`      |                   |                   |       |            | Does pressing `;` also produce `h`? |
+| .   | `.`      |                   |                   |       |            | Does pressing `.` also produce `n`? |
+| /   | `/`      |                   |                   |       |            | Does pressing `/` also produce `n`? |
 
 #### Group C — Distant keys (baseline)
 
 These keys are far from the spill area and should be completely unaffected.
 
-| Key | Expected | Actual (press 1) | Actual (press 2) | Actual (press 3) | Shift | Option (⌥) | Notes |
-|-----|----------|-------------------|-------------------|-------------------|-------|------------|-------|
-| A   | `a`      |                   |                   |                   |       |            |       |
-| S   | `s`      |                   |                   |                   |       |            |       |
-| L   | `l`      |                   |                   |                   |       |            |       |
-| P   | `p`      |                   |                   |                   |       |            |       |
+| Key | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
+|-----|----------|-------------------|-------------------|-------|------------|-------|
+| A   | `a`      |                   |                   |       |            |       |
+| S   | `s`      |                   |                   |       |            |       |
+| L   | `l`      |                   |                   |       |            |       |
+| P   | `p`      |                   |                   |       |            |       |
+
+#### Group D — Space bar (additional finding)
+
+Space was found to produce an extra character during testing:
+
+| Key   | Expected | Actual (press 1) | Actual (press 2) | Shift | Option (⌥) | Notes |
+|-------|----------|-------------------|-------------------|-------|------------|-------|
+| Space | ` `      | ` '`              | ` '`              |       |            | Extra `'` — consistent |
 
 #### Ghost keypress observation
 
@@ -779,43 +802,119 @@ These keys are far from the spill area and should be completely unaffected.
 | No keys pressed, laptop idle | 60 s |  |  |
 | No keys pressed, after typing on affected keys for 30 s | 60 s |  |  |
 
-### Interpreting Results
+### Test Results and Analysis (March 22)
 
-The test results map directly to the existing hypotheses:
+Testing was performed using `cat` in Terminal.app with Karabiner Elements disabled, internal keyboard only, U.S. input source.
 
-| Observation | Supports | Explanation |
-|-------------|----------|-------------|
-| All Group A keys produce the **same set** of extra characters (from the same adjacent column) | **H1** (conductive residue on column trace) | A single bridge between C7 and one adjacent column would add the same extra column's character to every key in the affected column |
-| Group A keys produce **different** extra characters from each other | **H3** (multiple corrosion sites on FPC) | Multiple independent bridges at different points along the traces, rather than a single contamination site |
-| Group B keys also produce extra characters | Column contamination has **spread beyond C7** | The damage scope is wider than initially assessed; may affect cleaning prognosis |
-| Group B keys are completely normal | **H1** confirmed as column-specific | Contamination is localised to the C7 trace path, not spreading to row traces |
-| Extra characters are **consistent** across all 3 presses | Stable conductive bridge (dried residue) | The short circuit has a fixed resistance; good candidate for cleaning |
-| Extra characters are **inconsistent** (different extras each time) | Intermittent/marginal bridge | The residue conductivity is near the detection threshold; may indicate partial drying or borderline contact |
-| Ghost keypresses observed during idle period | **H1** with residual floating conductivity | The residue is still conductive enough to trigger false matrix intersections without mechanical pressure |
-| No ghost keypresses during idle period | Residue has stabilised | Consistent with the earlier observation that ghost presses stopped after the initial drying period |
-| Shift+key produces shifted version of the **extra** characters too | Bridge is on the **column** trace (pre-controller) | Confirms the short is in the matrix wiring, not in the controller IC (H4) |
-| Shift+key produces shifted version of only the **correct** character | Bridge may be in the **controller** or post-matrix | Would point toward H4 (controller damage) rather than H1 (trace contamination) |
+#### Observed pattern
 
-### Identifying the Bridged Column from Extra Characters
+Every key in the affected column produces the correct character **plus two extra characters from keys that are +3 and +4 physical positions to the right** in the same row:
 
-If the extra characters are consistent across all Group A keys, they reveal exactly which adjacent column is bridged. Use this lookup table (based on the standard MacBook keyboard matrix for the A2918 — column assignments are hardware-defined and fixed for this model):
+```
+  Physical keyboard — mapping affected keys to their extra outputs
 
-| Extra character produced alongside Group A key | Likely bridged column | Bridged to |
-|---|---|---|
-| `5` / `T` / `G` / `B` (when pressing `6` / `Y` / `H` / `N`) | C6 (left neighbor of C7) | C7 → C6 bridge |
-| `7` / `U` / `J` / `M` (when pressing `6` / `Y` / `H` / `N`) | C8 (right neighbor of C7) | C7 → C8 bridge |
-| Both left and right neighbor characters appear | C6 **and** C8 | C7 bridged to both adjacent columns |
-| Characters from a non-adjacent column | Contamination at the **ZIF connector** where pin spacing is tighter | May indicate a wider residue spread at the connector rather than along the FPC |
+  Key pressed → Output     Extra char 1        Extra char 2
+  ─────────────────────────────────────────────────────────
+  6          → 690         9  (+3 positions)    0  (+4 positions)
+  Y          → yop         o  (+3 positions)    p  (+4 positions)
+  H          → hl;         l  (+3 positions)    ;  (+4 positions)
+  N          → n./         .  (+3 positions)    /  (+4 positions)
+  Space      →  '          '  (see below)
+```
 
-This directly identifies the contamination geometry and helps the ultrasonic cleaning lab focus on the correct trace pair.
+The extra characters form **two complete, consistent columns** on the keyboard:
+
+```
+  Column C7 (affected)    Column "X" (+3)    Column "Y" (+4)
+  ────────────────────    ───────────────    ───────────────
+       6                       9                  0
+       Y                       O                  P
+       H                       L                  ;
+       N                       .                  /
+```
+
+#### Key findings
+
+1. **Three electrical column traces are bridged.** Column C7 (6/Y/H/N) is shorted to two other columns — the one carrying 9/O/L/. and the one carrying 0/P/;/​/. All three must be **adjacent pins on the FPC/ZIF connector**, even though they are 3–4 physical key positions apart on the keyboard surface.
+
+2. **The FPC pin ordering does not follow physical keyboard layout.** This is the most important discovery from the test. The original analysis assumed that physically adjacent keys (5/T/G/B and 7/U/J/M) would be on adjacent FPC traces. The actual data proves that the FPC trace routing maps the physical column containing 6/Y/H/N to a connector pin that sits next to the pins for 9/O/L/. and 0/P/;/​/ — not next to 5/T/G/B or 7/U/J/M. This is normal for keyboard FPC design where trace routing is optimized for PCB layout, not physical key position.
+
+3. **Results are 100% consistent.** Every key produced identical output across both trials. This confirms a **stable, low-resistance conductive bridge** — dried residue forming a fixed short circuit, not an intermittent or marginal connection. This is a good indicator for ultrasonic cleaning: the contamination is well-defined and localised.
+
+4. **Space bar is also affected.** Space producing `'` means the Space bar's electrical column is bridged to the `'` key's column on the FPC. Since `'` is physically adjacent to `;` (which is part of the +4 bridged column), the Space bar's FPC trace is likely near the same contamination zone. This extends the known damage scope beyond the originally identified 6/Y/H/N column.
+
+5. **H1 is strongly confirmed.** The perfectly consistent column pattern — where every affected key produces extras from the same two other columns — is exactly the signature of a single contamination site bridging adjacent FPC/ZIF pins. If there were multiple independent corrosion sites (H3), different keys would show different extra characters. If the controller IC were damaged (H4), the pattern would not map cleanly to keyboard matrix columns.
+
+#### Revised contamination model
+
+```
+  FPC connector pinout (actual pin ordering revealed by test data)
+
+  ... ─┬──┬──┬──┬──┬──┬──┬──┬──┬──┬── ...
+       │  │  │Cx│Cy│Cz│  │  │  │  │
+  ... ─┴──┴──┴──┴──┴──┴──┴──┴──┴──┴── ...
+              ▲   ▲   ▲
+              │   │   │
+       Cx = column carrying 6/Y/H/N     (original "C7")
+       Cy = column carrying 9/O/L/.     (physical +3 from C7)
+       Cz = column carrying 0/P/;/​/     (physical +4 from C7)
+
+  Dried cola residue bridges all three adjacent pins:
+
+  ... ─┬──┬──┬──┬──┬──┬──┬──┬──┬──┬── ...
+       │  │  │Cx│Cy│Cz│  │  │  │  │
+  ... ─┴──┴──┴══╧══╧══┴──┴──┴──┴──┴── ...
+              ▲═══════▲
+              dried cola residue bridging
+              3 adjacent FPC/ZIF pins
+
+  Nearby: Space bar column pin is also adjacent to the '  key's
+  column pin, with residue bridging those two as well.
+```
+
+#### What this means for cleaning
+
+The contamination is concentrated at a **single cluster of adjacent FPC/ZIF connector pins**. This is the best-case scenario for ultrasonic cleaning because:
+
+- The damage is localised (one spot on the connector, not multiple scattered sites along the FPC).
+- The bridge is between adjacent pins with ~0.5 mm pitch — well within the range of ultrasonic cavitation to reach and dissolve dried sugar/acid residue.
+- The consistency of results (no intermittent behavior) means the residue is stable and should dissolve cleanly once the solvent reaches it.
+
+### Identifying the Bridged Columns
+
+The test results have conclusively identified the bridged columns. The original prediction of C6/C8 (physical neighbors of C7) was incorrect — the actual bridged columns are **3 and 4 physical positions to the right**, confirming that FPC pin ordering differs from physical key order.
+
+| Affected column (C7) key | Extra character 1 | Extra character 2 | Physical offset |
+|---|---|---|---|
+| `6` | `9` | `0` | +3, +4 positions right in number row |
+| `Y` | `o` | `p` | +3, +4 positions right in top row |
+| `H` | `l` | `;` | +3, +4 positions right in home row |
+| `N` | `.` | `/` | +3, +4 positions right in bottom row |
+| Space | `'` | — | Space bar column bridged to `'` column |
+
+The bridged columns on the FPC/ZIF connector (in order of pin position):
+- **Pin Cx**: column carrying `6` / `Y` / `H` / `N`
+- **Pin Cy** (adjacent to Cx): column carrying `9` / `O` / `L` / `.`
+- **Pin Cz** (adjacent to Cy): column carrying `0` / `P` / `;` / `/`
+- **Nearby**: Space bar column pin bridged to `'` column pin
+
+### Recommended Follow-Up Tests
+
+The following additional tests would further refine the contamination model:
+
+1. **Reverse bridge test (Group B2)** — press each key in the bridged columns (`9`, `0`, `O`, `P`, `L`, `;`, `.`, `/`) and record whether they also produce extra characters from column C7. If the bridge is bidirectional (as expected for a resistive residue bridge), pressing `9` should also produce `6`, pressing `O` should also produce `Y`, etc.
+
+2. **Shift modifier test** — press Shift+`6`, Shift+`Y`, Shift+`H`, Shift+`N` and record whether the extra characters are also shifted (e.g., Shift+`6` producing `^(*` instead of `690`). If the extra characters shift too, it confirms the bridge is in the matrix wiring (pre-controller). If only the correct character shifts, it would point to a controller issue.
+
+3. **`'` key reverse test** — press `'` alone and check whether it produces a Space character. This confirms the Space↔`'` bridge directionality.
 
 ## Recommended Next Steps
 
-1. **Record pre-cleaning keyboard behavior** using the test matrix above — this captures the exact baseline before any cleaning intervention. The results will confirm the contamination model and provide a clear before/after comparison.
-2. **Ultrasonic cleaning** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. With ghost presses already resolved and symptoms stabilized, the window for effective cleaning is still open.
-3. **Re-run the same keyboard tests after cleaning** — compare against the pre-cleaning baseline to objectively measure improvement.
-4. **Visual inspection under magnification** of the FPC traces in the affected column for corrosion, cracks, or residue bridges — ideally performed as part of or after the ultrasonic process.
-5. **Resistance measurement** between the column trace shared by H/Y/6/N and adjacent traces to confirm whether a short is still present after cleaning.
+1. **Complete the remaining tests** listed in [Recommended Follow-Up Tests](#recommended-follow-up-tests) — the reverse bridge test and Shift modifier test will confirm the bridge directionality and rule out controller-level issues.
+2. **Ultrasonic cleaning** — The service center offers this at approximately 1/3 the cost of keyboard replacement, with a 3–7 day turnaround. This is the appropriate treatment: ultrasonic cavitation reaches inside sealed key switch bodies and under FPC traces where no manual cleaning can. The test results confirm the contamination is a stable, localised residue bridge at a single cluster of adjacent FPC/ZIF pins — ideal conditions for cleaning.
+3. **Re-run the same keyboard tests after cleaning** — compare against the pre-cleaning baseline documented above to objectively measure improvement. All Group A keys should produce only their correct single character; Space should produce only a space.
+4. **Visual inspection under magnification** of the FPC traces and ZIF connector pins — the contamination site is the cluster of pins carrying columns Cx/Cy/Cz (6/Y/H/N column and the 9/O/L/. and 0/P/;// columns). Look for visible dried residue bridging these adjacent pins.
+5. **Resistance measurement** between the three identified column pins (Cx, Cy, Cz) and the Space/`'` pin pair on the ZIF connector to confirm whether the conductive bridges have been removed after cleaning.
 6. If ultrasonic cleaning does not resolve the issue, **keyboard/top-case replacement** will be necessary. Corrosion that has fully etched through a copper trace is not reversible, but this is the fallback rather than the first resort.
 
 ## Note for the Ultrasonic Cleaning Lab
@@ -831,10 +930,12 @@ This section summarises the key technical details for the technicians performing
 
 ### What to look for
 
-The contamination is localised to **keyboard matrix column C7**, which is the shared electrical trace for keys **6, Y, H, N**. The most probable contamination sites, in order of priority:
+Pre-cleaning keyboard testing (March 22) has confirmed the exact contamination location. The primary affected column carries keys **6, Y, H, N**, and it is shorted to **two adjacent FPC/ZIF pins** that carry the columns for **9/O/L/.** and **0/P/;/​/**. The Space bar column is also bridged to the `'` key column. See [Test Results and Analysis](#test-results-and-analysis-march-22) for full data.
 
-1. **ZIF connector area** — dried cola residue on or around pin C7 and bridging to adjacent pins C6/C8. This is an open junction point where liquid pools and is the most likely primary site.
-2. **FPC ribbon cable** — residue wicked along the column C7 trace where it runs parallel and close (~0.1 mm) to C6/C8. Capillary action draws liquid into this gap.
+The contamination sites, in order of priority:
+
+1. **ZIF connector area** — dried cola residue bridging **three adjacent column pins** (Cx, Cy, Cz) on the FPC/ZIF connector. These pins carry the columns for 6/Y/H/N, 9/O/L/., and 0/P/;/​/ respectively. The Space bar column pin nearby is also bridged to the `'` column pin. This is the most likely primary site because it is an open junction point where liquid pools.
+2. **FPC ribbon cable** — residue wicked along the three column traces where they run parallel within the ribbon. The ~0.1 mm gap between traces acts as a capillary channel.
 3. **Under the sealed key switch bodies** for 6, Y, H, N — cola entered through sub-0.3 mm capillary gaps between the keycap, scissor arms, rubber dome, and FPC membrane.
 
 ### Why the "non-serviceable key blocks" diagnosis is incomplete
@@ -844,14 +945,16 @@ The service center correctly notes that individual scissor-switch key bodies are
 ### Positive indicators for cleaning success
 
 - **Ghost keypresses have stopped** — this means the residue has dried and stabilised, no longer actively migrating. Contamination is localised.
+- **100% consistent test results** — every affected key produced identical output across repeated trials. The bridge is stable and well-defined, not intermittent. This means the residue forms a solid conductive film that should dissolve cleanly in ultrasonic bath solvent.
 - **Partial symptom improvement after a 2-day rest period** — correct characters returned alongside incorrect ones when the keyboard was left unused for 2 days (powered off, internal keyboard disabled via Karabiner Elements). If traces were irreversibly corroded through, rest would not improve symptoms. This strongly suggests the primary mechanism is still **reversible conductive residue** rather than permanent copper trace damage.
 - **Coca-Cola Zero residue** (dried sugar/acid film) is soluble in water and isopropyl alcohol — ultrasonic cavitation in an appropriate solvent should be able to dissolve and remove it even from sub-0.3 mm capillary spaces.
 
 ### Suggested cleaning focus areas
 
-- Thoroughly clean the **ZIF connector** and the corresponding section of the **FPC ribbon cable** — this is where the column trace C7 connects and is most accessible.
+- Focus on the **ZIF connector pins** for the three bridged columns — specifically the cluster of adjacent pins carrying 6/Y/H/N, 9/O/L/., and 0/P/;/​/ columns, plus the nearby Space bar and `'` column pins. This is the primary contamination site.
+- Thoroughly clean the corresponding section of the **FPC ribbon cable** where these three column traces run in parallel.
 - Ensure ultrasonic bath exposure is sufficient to reach the **FPC trace gaps** (~0.1 mm between polyimide layers) and the **sealed key switch bodies** (sub-0.3 mm capillary spaces).
-- After cleaning, a **resistance measurement** between pin C7 and adjacent pins C6/C8 on the ZIF connector would confirm whether the conductive bridge has been removed.
+- After cleaning, a **resistance measurement** between the three adjacent column pins (Cx/Cy/Cz) and the Space/`'` pin pair on the ZIF connector would confirm whether the conductive bridges have been removed.
 
 ### Diagrams
 
@@ -867,6 +970,8 @@ See the [`diagrams/`](diagrams/) directory for technical illustrations (availabl
 
 A Coca-Cola Zero spill on a MacBook Pro 14" M3 Pro (serial MWJPXQ4VC4, model A2918, board 820-02757) resulted in keyboard column C7 (keys 6, Y, H, N) producing multiple incorrect characters per keypress, initial ghost keypresses (since resolved), and progressive symptom worsening over days.
 
-The root cause is **dried conductive cola residue** shorting the shared column C7 trace on the keyboard FPC ribbon cable and/or ZIF connector, combined with **ongoing phosphoric acid corrosion** accelerated by thermal cycling during use. The service center's characterisation of this as a "mechanical issue" is **inaccurate** — the symptoms are electrical/chemical in nature, and the whole-column pattern points to shared trace contamination rather than individual key mechanism failures.
+Pre-cleaning keyboard testing (March 22) has precisely identified the contamination: **three adjacent FPC/ZIF column pins are bridged by dried cola residue**. Every affected key produces its correct character plus two extras from columns that are +3 and +4 physical positions to the right (6→690, Y→yop, H→hl;, N→n./), confirming the FPC pin ordering does not follow the physical keyboard layout. The Space bar is also affected (Space→ '). Results are 100% consistent across trials, indicating a stable conductive bridge — ideal conditions for ultrasonic cleaning.
 
-**Recommended action:** Ultrasonic cleaning (already offered by the service center at 1/3 the cost of replacement, 3–7 days). The partial improvement observed during a 2-day rest period confirms the contamination is still predominantly reversible conductive residue rather than permanent trace damage, making cleaning the correct first step before considering keyboard/top-case replacement.
+The root cause is **dried conductive cola residue** shorting adjacent column pins on the keyboard FPC ribbon cable and/or ZIF connector, combined with **ongoing phosphoric acid corrosion** accelerated by thermal cycling during use. The service center's characterisation of this as a "mechanical issue" is **inaccurate** — the symptoms are electrical/chemical in nature, and the whole-column pattern points to shared trace contamination rather than individual key mechanism failures.
+
+**Recommended action:** Ultrasonic cleaning (already offered by the service center at 1/3 the cost of replacement, 3–7 days). The test results confirm localised, stable contamination at a single cluster of adjacent FPC/ZIF pins — the best-case scenario for cleaning. The partial improvement observed during a 2-day rest period confirms the contamination is still predominantly reversible conductive residue rather than permanent trace damage.

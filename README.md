@@ -1548,23 +1548,55 @@ The Cz→Cx direct path is estimated at ~140 kΩ (higher than Cy→Cx because th
 
 | # | Keys pressed as chord | Theory | Actual (press 1) | Actual (press 2) | Actual (press 3) | What to watch for |
 |---|----------------------|--------|------------------|------------------|------------------|-------------------|
-| H1 | `O` + `P` | Cy+Cz parallel reverse in top letter row | | | | Does ghost `y` appear? |
-| H2 | `L` + `;` | Cy+Cz parallel reverse in home row | | | | Does ghost `h` appear? |
-| H3 | `9` + `0` | Cy+Cz parallel reverse in number row | | | | Does ghost `6` appear? |
-| H4 | `.` + `/` | Cy+Cz parallel reverse in bottom row | | | | Does ghost `n` appear? |
-| H5 | `9` + `O` + `L` + `.` | All four Cy keys — bridge stressed every scan cycle | | | | Does any ghost `6`/`Y`/`H`/`N` appear? |
-| H6 | `0` + `P` + `;` + `/` | All four Cz keys — bridge stressed every scan cycle | | | | Does any ghost `6`/`Y`/`H`/`N` appear? |
-| H7 | `O` + `P` + `L` + `;` | Cy+Cz in two rows — parallel paths + multi-row stress | | | | Does ghost `y` or `h` appear? |
-| H8 | `9`+`0`+`O`+`P`+`L`+`;`+`.`+`/` (all 8 ghost keys) | Maximum reverse stress — every ghost-column key active | | | | Does **any** character from column Cx (6/Y/H/N) appear? |
+| H1 | `O` + `P` | Cy+Cz parallel reverse in top letter row | `oyp yopyopy…` | (same) | (same) | ✅ **Ghost `y` appears!** Reverse bridge broken. |
+| H2 | `L` + `;` | Cy+Cz parallel reverse in home row | `lh; hl;hl;…` | (same) | (same) | ✅ **Ghost `h` appears!** |
+| H3 | `9` + `0` | Cy+Cz parallel reverse in number row | `960 069069…` | (same) | (same) | ✅ **Ghost `6` appears!** |
+| H4 | `.` + `/` | Cy+Cz parallel reverse in bottom row | `n./ n./n./…` | (same) | (same) | ✅ **Ghost `n` appears!** |
+| H5 | `9` + `O` + `L` + `.` | All four Cy keys — bridge stressed every scan cycle | `.lo9 l.o9 .lo9…` | (same) | (same) | ❌ No Cx ghosts. Cy-only path insufficient. |
+| H6 | `0` + `P` + `;` + `/` | All four Cz keys — bridge stressed every scan cycle | `/p;0 /;p0 ;/p0…` | (same) | (same) | ❌ No Cx ghosts. Cz-only path insufficient. |
+| H7 | `O` + `P` + `L` + `;` | Cy+Cz in two rows — parallel paths + multi-row stress | `;loooo… /ppppp… ;p/;0///` | (same) | — | ❌ No Cx ghosts. Anti-ghosting suppresses 4-key chord. |
+| H8 | `9`+`0`+`O`+`P`+`L`+`;`+`.`+`/` (all 8 ghost keys) | Maximum reverse stress — every ghost-column key active | (not tested separately — likely merged with H7) | | | See H7: 4+ simultaneous ghost keys → anti-ghosting blocks. |
 
-#### What Group H results would tell us
+#### What Group H results tell us
+
+**The bridge IS bidirectional under parallel load.** H1–H4 all produce ghost characters from the affected column Cx, confirming the predicted parallel reverse path mechanism. The interpretation table result that matched:
 
 | Result pattern | Interpretation |
 |----------------|----------------|
-| H1–H4 produce ghosts from Cx column | ✅ Parallel reverse paths through continuous residue film DO boost voltage above threshold. The bridge is "bidirectional under load" — unidirectionality is only valid for single-key presses. |
-| H5/H6 produce ghosts but H1–H4 don't | Scan-cycle persistence matters: residual charge on the bridge from previous row scans accumulates, and multiple rows being active in sequence pushes the bridge past threshold. |
-| H8 produces ghosts but nothing else does | Maximum cumulative stress from all 8 ghost keys overwhelms the threshold margin. The reverse voltage is very close to threshold and needs every possible boost. |
-| Nothing produces any Cx ghosts | The reverse bridge resistance is genuinely too high (~70–140 kΩ) for any practical number of simultaneous keys to overcome. The ~2:1 resistance asymmetry creates a robust unidirectional cutoff that cannot be defeated by parallel loading. This would confirm the bridge is effectively "one-way" under all realistic typing conditions. |
+| ✅ **H1–H4 produce ghosts from Cx column** | **Parallel reverse paths through continuous residue film DO boost voltage above threshold.** The bridge is "bidirectional under load" — unidirectionality is only valid for single-key presses. When both Cy and Cz are activated in the same scan row, the effective reverse resistance drops from ~70 kΩ to ~47 kΩ (parallel combination), pushing V_Cx from 1.33 V to ~1.65 V — above the detection threshold. |
+| H5/H6 — single column, no ghosts | Pressing all 4 keys on the same column (Cy-only or Cz-only) does NOT create parallel paths because there's only one bridge arm active. Multiple rows on the same column don't help — the controller scans rows sequentially, so only one key's current flows at a time. |
+| H7 — both columns but 4 keys, no ghosts | With 4+ simultaneous ghost-column keys, the controller's anti-ghosting algorithm likely detects an implausible activation pattern and suppresses the output entirely — similar to the auto-repeat blocking observed in G3–G7 for affected-column key pairs. |
+
+**Critical additional finding — cross-row reverse ghosts (P+L, ;+.):**
+
+The user discovered that pressing ghost-column keys from **different rows** also produces reverse ghosts:
+- `P` (Cz, top letter row) + `L` (Cy, home row) → `phl` — ghost `h` (Cx, home row) appears
+- `;` (Cz, home row) + `.` (Cy, bottom row) → ghosts also appear
+
+This was NOT predicted by the simple same-row parallel path model, which assumed both columns must be simultaneously active within a single row scan. In different rows, Cy and Cz are activated during different scan cycles (L activates Cy when the home row is scanned; P activates Cz when the top letter row is scanned).
+
+**Scan-cycle persistence hypothesis:** The residue film has enough capacitance to retain charge between consecutive row scans. When P's row is scanned, Cz charges through P. Before this charge fully dissipates (~RC time constant of the residue film ≈ 70 kΩ × stray capacitance), L's row is scanned and Cy charges through L. The residual Cz voltage combines with the fresh Cy voltage to create a parallel path to Cx — even though the two columns were never simultaneously driven in the same scan cycle. The scan cycle period (~100 μs per row for a typical 1 kHz full-scan rate) is short enough relative to the RC discharge time that significant charge persists.
+
+This means the reverse bridge can be activated by **any** Cy+Cz pair, not just same-row pairs. This is a stronger result than H1–H4 alone and has practical implications: during fast typing, pressing any two ghost-column keys in quick succession can inject reverse ghosts from the affected column.
+
+Raw data:
+```
+H1-H4 (all same-row pairs, run sequentially):
+oypyopyopyopyopyopyopyoplh;hl;hl;hl;hl;hl;l;hlh;lh;hl;960069069069069069069n.//n./n./n./n./n./n./n./n./n./n./n./n.
+
+H5 (all Cy keys: 9+O+L+.):
+.lo9l.o9.lo9.ol9l.o9.9oll.o9l.9ol.9o.lo9.l9o.lo9lo.9.lo9lo9.lo9.....l9olo.9.ol9.l.l9ol9o.lo9.l9o.l9o.lo9.
+
+H6 (all Cz keys: 0+P+;+/):
+/p;0/;p0;/p0;/0p;/0ppppppppp;0p/;/p0;p0/;0p/;p0//////////////p;000000000000/p;0000000
+
+H7 (O+P+L+;, 4 keys):
+;loooooooooo/pppppp;p/;0///////
+
+Cross-row pairs (user-discovered):
+P+L → phl
+;+. → ghosts also appear
+```
 
 ### Why the Bridge Is Unidirectional
 

@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1180" font-family="monospace" font-size="12">
+  <title>Board 820-02757 — Zone Detail Sheet Derived from Decoded Boardview Data</title>
+  <rect width="1600" height="1180" fill="#fafafa" stroke="#ccc"/>
+
+  <text x="800" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Board 820-02757 — Zone Detail Sheet</text>
+  <text x="800" y="48" text-anchor="middle" font-size="11" fill="#666">Five focused boardview-derived zoom panels using the decoded `.brd` data for the highlighted regions</text>
+
+  <rect x="36" y="66" width="1528" height="66" rx="8" fill="#fff" stroke="#c7c7c7"/>
+  <text x="56" y="90" font-size="11" font-weight="bold" fill="#333">Decoded boardview facts used here</text>
+  <text x="56" y="110" font-size="10" fill="#444">Readable export derived from the committed `820-02757-06-boardview.brd`: 522 outline points, 5,298 parts, 16,676 pins, 1,222 nails/test points.</text>
+  <text x="56" y="126" font-size="10" fill="#444">Most incident-relevant decoded labels include JT200 (keyboard connector), JT220 (keyboard backlight connector), UT101/UT102 (keyboard scan / I/O devices), and SPI/IPD touchpad nets.</text>
+
+  <!-- Panel A -->
+  <g transform="translate(40 160)">
+    <rect width="480" height="290" rx="10" fill="#101010" stroke="#2b2b2b" stroke-width="2"/>
+    <text x="18" y="24" font-size="12" font-weight="bold" fill="#fafafa">A. Upper-left boot / config cluster</text>
+    <text x="18" y="42" font-size="10" fill="#cfcfcf">Decoded pins here expose boot straps and SPI ROM neighborhood nets.</text>
+
+    <rect x="230" y="92" width="92" height="92" fill="#8f8f8f" stroke="#dfdfdf"/>
+    <text x="276" y="144" text-anchor="middle" font-size="22" fill="#efefef">U8100</text>
+
+    <rect x="110" y="40" width="70" height="20" fill="#232323" stroke="#bdbdbd"/>
+    <text x="145" y="54" text-anchor="middle" font-size="12" fill="#efefef">J1200</text>
+    <rect x="185" y="52" width="50" height="18" fill="#232323" stroke="#bdbdbd"/>
+    <text x="210" y="65" text-anchor="middle" font-size="10" fill="#efefef">JT400</text>
+    <rect x="240" y="30" width="56" height="18" fill="#232323" stroke="#bdbdbd"/>
+    <text x="268" y="43" text-anchor="middle" font-size="10" fill="#efefef">JT500</text>
+
+    <g fill="#d7d7d7">
+      <rect x="212" y="202" width="16" height="5"/>
+      <rect x="232" y="202" width="16" height="5"/>
+      <rect x="252" y="202" width="16" height="5"/>
+      <rect x="272" y="202" width="16" height="5"/>
+      <rect x="292" y="202" width="16" height="5"/>
+    </g>
+    <g fill="#00bcd4">
+      <circle cx="201" cy="90" r="2"/>
+      <circle cx="210" cy="99" r="2"/>
+      <circle cx="334" cy="94" r="2"/>
+      <circle cx="344" cy="104" r="2"/>
+    </g>
+
+    <rect x="24" y="212" width="430" height="54" rx="6" fill="#fff8e1" stroke="#f9a825"/>
+    <text x="40" y="232" font-size="10" font-weight="bold" fill="#5d4037">Representative decoded nets</text>
+    <text x="40" y="248" font-size="9" fill="#5d4037">`BOOT_CONFIG0..2`, `BOARD_ID0..4`, `BOARD_REV0..3`, `SPI_SOCROM_*`</text>
+    <text x="40" y="262" font-size="9" fill="#5d4037">This zone is valuable for identity / boot-path illustrations, not for keyboard fault localisation.</text>
+  </g>
+
+  <!-- Panel B -->
+  <g transform="translate(560 160)">
+    <rect width="480" height="290" rx="10" fill="#101010" stroke="#2b2b2b" stroke-width="2"/>
+    <text x="18" y="24" font-size="12" font-weight="bold" fill="#fafafa">B. Central compute / support cluster</text>
+    <text x="18" y="42" font-size="10" fill="#cfcfcf">The boardview makes the main compute island and nearby support packages easy to map.</text>
+
+    <rect x="188" y="84" width="112" height="112" fill="#8f8f8f" stroke="#dfdfdf"/>
+    <text x="244" y="144" text-anchor="middle" font-size="24" fill="#f0f0f0">U0600</text>
+    <line x1="244" y1="70" x2="244" y2="210" stroke="#ff8a80" stroke-width="1.8" opacity="0.6"/>
+    <line x1="170" y1="140" x2="318" y2="140" stroke="#ff8a80" stroke-width="1.8" opacity="0.6"/>
+
+    <rect x="328" y="112" width="60" height="60" fill="#8a8a8a" stroke="#dfdfdf"/>
+    <rect x="114" y="58" width="60" height="60" fill="#8a8a8a" stroke="#dfdfdf"/>
+    <rect x="338" y="208" width="72" height="46" fill="#8a8a8a" stroke="#dfdfdf"/>
+
+    <g fill="#d7d7d7">
+      <rect x="134" y="132" width="18" height="4"/>
+      <rect x="134" y="142" width="18" height="4"/>
+      <rect x="134" y="152" width="18" height="4"/>
+      <rect x="354" y="84" width="18" height="4"/>
+      <rect x="354" y="94" width="18" height="4"/>
+      <rect x="354" y="104" width="18" height="4"/>
+    </g>
+
+    <rect x="24" y="214" width="430" height="52" rx="6" fill="#fff3e0" stroke="#fb8c00"/>
+    <text x="40" y="234" font-size="10" font-weight="bold" fill="#6d4c41">Illustration value</text>
+    <text x="40" y="250" font-size="9" fill="#6d4c41">Best for SoC placement, rail islands, storage/support-package relationships, and “where is the main logic?” views.</text>
+    <text x="40" y="264" font-size="9" fill="#6d4c41">Helpful context, but not the keyboard-specific evidence center.</text>
+  </g>
+
+  <!-- Panel C -->
+  <g transform="translate(1080 160)">
+    <rect width="480" height="290" rx="10" fill="#101010" stroke="#2b2b2b" stroke-width="2"/>
+    <text x="18" y="24" font-size="12" font-weight="bold" fill="#fafafa">C. Right-edge connector-rich zone</text>
+    <text x="18" y="42" font-size="10" fill="#cfcfcf">A dense edge full of board connectors and support parts for future connector maps.</text>
+
+    <rect x="374" y="60" width="44" height="170" fill="#181818" stroke="#00c853" stroke-width="2"/>
+    <text x="398" y="152" text-anchor="middle" font-size="24" transform="rotate(90 398 152)" fill="#7ee082">JX600</text>
+
+    <rect x="170" y="110" width="52" height="84" fill="#8a8a8a" stroke="#dfdfdf"/>
+    <rect x="244" y="110" width="52" height="84" fill="#8a8a8a" stroke="#dfdfdf"/>
+    <text x="196" y="156" text-anchor="middle" font-size="12" fill="#efefef">UN000</text>
+    <text x="270" y="156" text-anchor="middle" font-size="12" fill="#efefef">UN100</text>
+
+    <g fill="#d7d7d7">
+      <rect x="92" y="96" width="26" height="5"/>
+      <rect x="92" y="112" width="26" height="5"/>
+      <rect x="92" y="128" width="26" height="5"/>
+      <rect x="92" y="144" width="26" height="5"/>
+      <rect x="92" y="160" width="26" height="5"/>
+      <rect x="328" y="84" width="18" height="5"/>
+      <rect x="328" y="100" width="18" height="5"/>
+      <rect x="328" y="116" width="18" height="5"/>
+    </g>
+    <g fill="#00bcd4">
+      <circle cx="342" cy="220" r="2"/>
+      <circle cx="350" cy="210" r="2"/>
+      <circle cx="360" cy="200" r="2"/>
+    </g>
+
+    <rect x="24" y="214" width="430" height="52" rx="6" fill="#ede7f6" stroke="#7e57c2"/>
+    <text x="40" y="234" font-size="10" font-weight="bold" fill="#4527a0">Illustration value</text>
+    <text x="40" y="250" font-size="9" fill="#4527a0">Useful for future connector-neighborhood diagrams: display, side I/O, board-edge maps, and service-reference callouts.</text>
+    <text x="40" y="264" font-size="9" fill="#4527a0">Again: rich placement data, but not by itself a schematic explanation.</text>
+  </g>
+
+  <!-- Panel D -->
+  <g transform="translate(40 492)">
+    <rect width="760" height="314" rx="10" fill="#101010" stroke="#2b2b2b" stroke-width="2"/>
+    <text x="18" y="24" font-size="12" font-weight="bold" fill="#fafafa">D. Keyboard / backlight zone — the most incident-relevant decoded region</text>
+    <text x="18" y="42" font-size="10" fill="#cfcfcf">This panel is the key outcome of decoding the board file: the keyboard neighborhood is explicitly named in the `.brd` records.</text>
+
+    <rect x="70" y="88" width="108" height="176" fill="#1d1d1d" stroke="#ff7043" stroke-width="2"/>
+    <text x="124" y="110" text-anchor="middle" font-size="16" fill="#ffe0b2">JT200</text>
+    <text x="124" y="128" text-anchor="middle" font-size="10" fill="#ffe0b2">keyboard connector</text>
+
+    <rect x="242" y="96" width="116" height="92" fill="#8b8b8b" stroke="#dfdfdf"/>
+    <text x="300" y="122" text-anchor="middle" font-size="16" fill="#f0f0f0">UT101</text>
+    <text x="300" y="140" text-anchor="middle" font-size="10" fill="#f0f0f0">drive-side device</text>
+
+    <rect x="242" y="196" width="116" height="92" fill="#8b8b8b" stroke="#dfdfdf"/>
+    <text x="300" y="222" text-anchor="middle" font-size="16" fill="#f0f0f0">UT102</text>
+    <text x="300" y="240" text-anchor="middle" font-size="10" fill="#f0f0f0">sense / utility device</text>
+
+    <rect x="424" y="92" width="104" height="84" fill="#8b8b8b" stroke="#dfdfdf"/>
+    <text x="476" y="118" text-anchor="middle" font-size="16" fill="#f0f0f0">UT000</text>
+    <text x="476" y="136" text-anchor="middle" font-size="10" fill="#f0f0f0">backlight driver</text>
+
+    <rect x="424" y="192" width="104" height="62" fill="#8b8b8b" stroke="#dfdfdf"/>
+    <text x="476" y="218" text-anchor="middle" font-size="16" fill="#f0f0f0">UT001</text>
+    <text x="476" y="236" text-anchor="middle" font-size="10" fill="#f0f0f0">support / bias</text>
+
+    <rect x="584" y="112" width="86" height="128" fill="#1d1d1d" stroke="#64b5f6" stroke-width="2"/>
+    <text x="627" y="136" text-anchor="middle" font-size="16" fill="#bbdefb">JT220</text>
+    <text x="627" y="154" text-anchor="middle" font-size="10" fill="#bbdefb">backlight conn</text>
+
+    <line x1="178" y1="140" x2="242" y2="138" stroke="#ff7043" stroke-width="2"/>
+    <line x1="178" y1="208" x2="242" y2="232" stroke="#ff7043" stroke-width="2"/>
+    <line x1="528" y1="132" x2="584" y2="144" stroke="#64b5f6" stroke-width="2"/>
+
+    <rect x="42" y="270" width="686" height="26" rx="5" fill="#263238" stroke="#546e7a"/>
+    <text x="56" y="287" font-size="9" fill="#eceff1">JT200 decoded pins include `KBD_DRIVE_Y0..Y11`, `KBD_SENSE_X0..X12`, `KBD_ID1/2`, `PP3V3_AON_KBD_CONN`, `KBD_LEFT_OPTION_KEY`, `KBD_CONTROL_KEY`, `KBD_RIGHT_SHIFT_KEY`.</text>
+
+    <rect x="554" y="58" width="180" height="38" rx="6" fill="#e8f5e9" stroke="#2e7d32"/>
+    <text x="568" y="78" font-size="10" font-weight="bold" fill="#1b5e20">Why this matters</text>
+    <text x="568" y="92" font-size="9" fill="#1b5e20">Static board data now anchors the matrix-side path.</text>
+  </g>
+
+  <!-- Panel E -->
+  <g transform="translate(840 492)">
+    <rect width="720" height="314" rx="10" fill="#101010" stroke="#2b2b2b" stroke-width="2"/>
+    <text x="18" y="24" font-size="12" font-weight="bold" fill="#fafafa">E. Trackpad / touchpad zone</text>
+    <text x="18" y="42" font-size="10" fill="#cfcfcf">Decoded labels here identify the IPD/trackpad neighborhood and help separate it from the keyboard path.</text>
+
+    <rect x="96" y="96" width="102" height="82" fill="#8b8b8b" stroke="#dfdfdf"/>
+    <text x="147" y="122" text-anchor="middle" font-size="16" fill="#f0f0f0">IPD</text>
+    <text x="147" y="140" text-anchor="middle" font-size="10" fill="#f0f0f0">touch controller</text>
+
+    <rect x="262" y="90" width="118" height="98" fill="#1d1d1d" stroke="#4db6ac" stroke-width="2"/>
+    <text x="321" y="116" text-anchor="middle" font-size="16" fill="#b2dfdb">TPAD</text>
+    <text x="321" y="134" text-anchor="middle" font-size="10" fill="#b2dfdb">power / sense cluster</text>
+
+    <rect x="454" y="108" width="120" height="60" fill="#8b8b8b" stroke="#dfdfdf"/>
+    <text x="514" y="134" text-anchor="middle" font-size="14" fill="#f0f0f0">SPI bridge</text>
+
+    <g stroke-width="2" fill="none">
+      <line x1="198" y1="126" x2="262" y2="126" stroke="#4db6ac"/>
+      <line x1="380" y1="126" x2="454" y2="126" stroke="#4db6ac"/>
+      <line x1="198" y1="150" x2="454" y2="150" stroke="#64b5f6"/>
+    </g>
+
+    <rect x="60" y="214" width="620" height="66" rx="6" fill="#e0f7fa" stroke="#00838f"/>
+    <text x="76" y="236" font-size="10" font-weight="bold" fill="#006064">Representative decoded nets</text>
+    <text x="76" y="252" font-size="9" fill="#006064">`SPI_IPD_TOUCH_CS_*`, `SPI_IPD_MISO`, `SPI_IPD_CLK_CONN*`, `IPD_MCU_INT_L`, `TPAD_5V_ISENSE`, `TPAD_3V3_ISENSE`</text>
+    <text x="76" y="268" font-size="9" fill="#006064">Useful contrast zone: it shows another dense low-speed flex neighborhood, but separate named nets from the keyboard cluster.</text>
+  </g>
+
+  <!-- Bottom notes -->
+  <rect x="40" y="844" width="1520" height="292" rx="10" fill="#fff" stroke="#c7c7c7"/>
+  <text x="800" y="872" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Interpretation notes</text>
+  <text x="64" y="900" font-size="10" fill="#333">1. This sheet is derived from the decoded `.brd` data, not from an independent PDF schematic; it is meant to turn the highlighted regions into readable documentation figures.</text>
+  <text x="64" y="920" font-size="10" fill="#333">2. The biggest new evidentiary change is in panel D: the board file itself names the keyboard connector JT200 and exposes both `KBD_DRIVE_Y*` and `KBD_SENSE_X*` lines plus local I²C / interrupt nets.</text>
+  <text x="64" y="940" font-size="10" fill="#333">3. That strengthens the physical “matrix / connector-path” hypothesis and makes the keyboard neighborhood much less speculative than before.</text>
+  <text x="64" y="960" font-size="10" fill="#333">4. It still does not, by itself, explain the one-way contamination behavior: the `.brd` gives static placement/connectivity labels, but not contamination geometry, resistance asymmetry, or scan-threshold timing.</text>
+  <text x="64" y="980" font-size="10" fill="#333">5. The right-edge, boot/config, SoC, and trackpad panels are still useful because they let future illustrations stay anchored to real component neighborhoods instead of rough visual estimates.</text>
+  <text x="64" y="1010" font-size="10" fill="#333">6. Panels D and E also show why keyboard and trackpad should not be conflated: the boardview decodes them into distinct connector / power / signaling neighborhoods.</text>
+  <text x="64" y="1038" font-size="9" fill="#777">Not to scale. Derived from the committed boardview file `820-02757-06-boardview.brd` and intended as a documentation / annotation aid.</text>
+</svg>

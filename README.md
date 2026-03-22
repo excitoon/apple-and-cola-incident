@@ -418,7 +418,7 @@ For the MacBook Pro 14" A2918 (board **820-02757**, design **051-07754**), the f
 | LogiWiki board number index | https://logi.wiki/index.php/Board_Number_by_A_Number | Cross-reference A-number → board number |
 | iFixit teardown (14" M3) | https://www.ifixit.com/Teardown/MacBook+Pro+14-Inch+2023+Teardown/169486 | High-res teardown photos of A2918 internals |
 
-**Note:** The committed `.brd` file is a **boardview/layout** file, so it is useful for interactive placement lookup, connector neighborhoods, and reference-designator context in a viewer such as **OpenBoardView** (free, open-source) or **FlexBV**. A separate **PDF schematic** is still needed for a directly readable full circuit narrative with named nets, keyboard matrix signal names, and explicit controller-to-SoC connectivity.
+**Note:** The committed `.brd` file is an **OpenBoardView-compatible boardview/layout** file. It can be decoded into readable text records (`Format`, `Pins1`, `Pins2`, `Nails`) and used for interactive placement lookup, connector neighborhoods, reference designators, and many pin/net labels. It is still **not a substitute for the separate PDF schematic / full netlist** when we need the complete circuit narrative and broader signal tracing context.
 
 ### 8. Diagrams (uploaded as files)
 
@@ -444,7 +444,9 @@ The following diagrams are included in this repository in the [`diagrams/`](diag
 | Boardview 820-02757 — capture 2 | | [PNG](diagrams/boardview-820-02757-capture2.png) | Original PCSchematics screenshot from archive |
 | Board 820-02757 — high-quality render | [SVG](diagrams/boardview-820-02757-render.svg) | | Clean vector board render for presentation/annotation use, derived from the boardview overview |
 | Board 820-02757 — illustration zones | [SVG](diagrams/boardview-820-02757-illustration-zones.svg) | | Annotated boardview-derived map of the major board neighborhoods that can be illustrated reliably from the committed board data |
+| Board 820-02757 — zone detail sheet | [SVG](diagrams/boardview-820-02757-zone-detail-sheet.svg) | | Five focused boardview-derived zoom panels for the highlighted zones, including the decoded keyboard / backlight / trackpad neighborhoods |
 | Boardview 820-02757 data file | | [BRD](diagrams/820-02757-06-boardview.brd) | OpenBoardView-compatible boardview data file for board 820-02757-06 |
+| Boardview 820-02757 decoded text export | | [TXT](diagrams/820-02757-06-boardview-decoded.txt) | Readable text export decoded from the committed `.brd` file, preserving the boardview sections and records |
 
 ### 9. Boardview Screenshots (Board 820-02757)
 
@@ -454,9 +456,14 @@ Knowing the exact boardview / schematic set **does help**, but mostly by improvi
 
 It also does **not materially change the hypothesis ranking / chance estimates** yet. At most, it gives a **small confidence boost** to a shared-trace / connector-path explanation over a random controller-IC fault, because the boardview supports cleaner physical localisation of the keyboard signal path. The dominant evidence is still the symptom pattern itself: one affected matrix column, multi-character output, progression over time, and partial improvement after rest.
 
-Likewise, the boardview does **not by itself explain the unidirectional key-mapping behavior**. That one-way behavior is still better explained by a **near-threshold resistive bridge** in the keyboard matrix / FPC path together with **scan timing** and **asymmetric residue geometry**, not by anything visible in the logic-board overview alone. To change that conclusion, we would need more specific keyboard-matrix or top-case trace data, not just the main logic-board boardview.
+Likewise, the boardview does **not by itself explain the unidirectional key-mapping behavior**. That one-way behavior is still better explained by a **near-threshold resistive bridge** in the keyboard matrix / FPC path together with **scan timing** and **asymmetric residue geometry**, not by anything visible in the logic-board overview alone. However, after decoding the committed `.brd` file into readable records, the board data **does** now confirm that the keyboard area is a real scanned matrix neighborhood on this board: the export explicitly includes **JT200** with `KBD_DRIVE_Y0..Y11` and `KBD_SENSE_X0..X12`, nearby **UT101 / UT102** scan / I/O devices, and the `I2C_KBD_SCL`, `I2C_KBD_SDA`, and `KBD_INT_L` nets. So the boardview now gives a **stronger physical anchor** for the matrix / connector-path hypothesis — but it still does **not** by itself explain why the contamination behaves one-way, because the boardview is static placement/connectivity data, not residue geometry or dynamic threshold behavior.
 
-From the committed `.brd` boardview file, we **can** reliably derive **layout-based illustrations** (board outline, major packages, connector neighborhoods, and incident-relevant regions). We **cannot** treat the `.brd` file alone as a clean human-readable schematic source for the full signal story; that still requires the corresponding PDF schematic or explicit netlist data.
+From the committed `.brd` boardview file, we can now derive two kinds of useful artifacts:
+
+1. **A full readable text export** of the boardview data itself — this repository now includes [`820-02757-06-boardview-decoded.txt`](diagrams/820-02757-06-boardview-decoded.txt), decoded from the board file using the same section structure that OpenBoardView parses (`str_length`, `var_data`, `Format`, `Pins1`, `Pins2`, `Nails`).
+2. **Layout-based illustrations** (board outline, major packages, connector neighborhoods, and incident-relevant regions), now including the highlighted-zone detail sheet below.
+
+The decoded export exposes **522 outline points**, **5,298 part records**, **16,676 pin records**, and **1,222 nail / test-point records**. That is enough to identify concrete keyboard-neighborhood labels such as `KBD_DRIVE_Y*`, `KBD_SENSE_X*`, `KBD_ID*`, `KBD_INT_L`, and `I2C_KBD_*`, but it still does **not** replace the corresponding PDF schematic for full circuit-level interpretation.
 
 This repository now also includes a **high-quality vector board render** derived from the boardview material for documentation and future annotation work:
 
@@ -465,6 +472,10 @@ This repository now also includes a **high-quality vector board render** derived
 And an additional **boardview-derived illustration map** showing the main zones that can be expanded into further diagrams:
 
 ![Board 820-02757 — illustration zones](diagrams/boardview-820-02757-illustration-zones.svg)
+
+This repository now also includes a **detail sheet for the highlighted zones**, using the decoded board data to label the most relevant board neighborhoods:
+
+![Board 820-02757 — zone detail sheet](diagrams/boardview-820-02757-zone-detail-sheet.svg)
 
 ![Board 820-02757 — full board overview](diagrams/boardview-820-02757-overview.png)
 
@@ -478,7 +489,7 @@ The following additional screenshots and the boardview data file were provided i
 
 ![Board 820-02757 — capture 2](diagrams/boardview-820-02757-capture2.png)
 
-The boardview data file [`820-02757-06-boardview.brd`](diagrams/820-02757-06-boardview.brd) can be opened in [OpenBoardView](https://github.com/OpenBoardView/OpenBoardView) or similar boardview software for interactive component lookup.
+The boardview data file [`820-02757-06-boardview.brd`](diagrams/820-02757-06-boardview.brd) can be opened in [OpenBoardView](https://github.com/OpenBoardView/OpenBoardView) or similar boardview software for interactive component lookup. A readable decoded export is also included as [`820-02757-06-boardview-decoded.txt`](diagrams/820-02757-06-boardview-decoded.txt).
 
 ### 10. Reference Photos of Real Hardware (external links)
 

@@ -113,6 +113,42 @@ A ZIF (Zero Insertion Force) connector has a row of gold-plated pads on the FPC 
   misalign by one position during re-insertion.
 ```
 
+The following diagrams show what the physical connector looks like — both the socket on the logic board and the FPC ribbon end that plugs into it:
+
+```
+  ZIF socket on logic board (top view, latch open — ready to accept FPC)
+
+        latch (open / raised)
+        ╔═══════════════════════════════════════╗
+        ║                                       ║
+        ╠═══════════════════════════════════════╣  ← hinge line
+        │ · · · · · · · · · · · · · · · · · · · │  ← spring contacts
+        │_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _│  ← FPC insertion slot
+        └───────────────────────────────────────┘
+         ↑ FPC ribbon slides in here, flat side down
+
+  ZIF socket on logic board (top view, latch closed — FPC clamped)
+
+        latch (closed / rotated down, locks FPC)
+        ┌───────────────────────────────────────┐
+        │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  ← latch pressed down
+        │ · · · · · · · · · · · · · · · · · · · │  ← contacts gripping FPC pads
+        │▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔│
+        └───────────────────────────────────────┘
+
+  Side cross-section (latch closed):
+
+          FPC ribbon
+         ┌────────────────────────────────────┐
+         │ polyimide film │▐▌▐▌▐▌▐▌▐▌▐▌ pads  │  ← gold-plated copper pads
+         └────────────────┴──────────────────-┘
+                                 ↕ contact force from latch
+         ┌───────────────────────────────────┐
+         │  spring contacts inside socket    │  ← socket body, soldered to PCB
+         └───────────────────────────────────┘
+              ↑ logic board PCB
+```
+
 ### 4. How Liquid Damage Causes the Observed Symptoms
 
 The following diagram illustrates where cola can bridge traces and produce the observed multi-character and ghost-key behavior:
@@ -150,6 +186,52 @@ On the MacBook Pro M3, the keyboard FPC runs from the key area down to the **low
 ## Service Center's Position: "Non-Serviceable Key Blocks"
 
 The service center has clarified what they mean by "mechanical issue": the individual key switch assemblies on modern MacBook keyboards are sealed units. Once liquid wicks into the tiny capillary space between the keycap, scissor-switch mechanism, and underlying membrane substrate, it cannot be removed by manual cleaning (swabbing, compressed air, or partial disassembly). This is technically accurate — the scissor-switch mechanism sits over a rubber dome on top of the FPC, and the tolerances are so tight that manual access is impossible without destroying the switch.
+
+The diagram below shows what a single scissor-switch key block looks like in cross-section, illustrating why it is considered non-serviceable:
+
+```
+  Single MacBook scissor-switch key (cross-section, side view)
+
+       ┌──────────────────────────────┐
+       │         K E Y C A P          │  ← hard plastic cap, snaps onto scissor arms
+       └────────┬──────────┬──────────┘
+               /            \
+  scissor arm /  (X-shaped   \ scissor arm
+             /   pivot joint) \
+  ┌─────────┴──────────────────┴─────────┐
+  │   scissor mechanism (plastic arms)   │  ← pivot clips into keycap and base plate
+  └──────────────────┬───────────────────┘
+                     │  compresses
+                     ▼
+             ┌───────────┐
+             │ rubber    │  ← silicone dome (~2 mm diameter), acts as spring
+             │  dome     │    AND electrical actuator
+             └─────┬─────┘
+                   │  presses
+                   ▼
+  ┌────────────────────────────────────────┐
+  │           FPC membrane layer           │  ← two conductive layers separated by
+  │  ┌────────────────────────────────┐   │     a thin non-conductive spacer with
+  │  │  row trace ── contact ── col   │   │     a hole; dome press brings them together
+  │  └────────────────────────────────┘   │
+  └────────────────────────────────────────┘
+
+  Why it is "non-serviceable":
+  ┌──────────────────────────────────────────────────────────────┐
+  │  The scissor arms clip tightly into the base plate below and  │
+  │  the keycap above. Capillary gaps between these parts are     │
+  │  typically < 0.3 mm — too small for any swab or tool to       │
+  │  reach. Disassembling the scissor mechanism requires          │
+  │  unclipping the fragile plastic arms, which break easily      │
+  │  and cannot be reassembled to factory spec.                   │
+  │                                                               │
+  │  Liquid path into the switch:                                 │
+  │  spill → between keycap edge and switch body                  │
+  │         → down scissor arm channels (capillary action)        │
+  │         → onto rubber dome and FPC contact area               │
+  │         ← cannot be reversed without ultrasonic cavitation    │
+  └──────────────────────────────────────────────────────────────┘
+```
 
 However, this framing has an important nuance:
 

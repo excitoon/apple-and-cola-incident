@@ -519,11 +519,25 @@ The service center offers ultrasonic cleaning at approximately **1/3 the cost of
 
 The spill chemistry matters here because **Coca-Cola Zero is still chemically damaging to electronic circuits even without sugar**. A typical Coca-Cola Zero / Coke Zero Sugar formulation contains:
 
-- **Water + dissolved CO₂** — the bulk liquid that quickly spreads by gravity and capillary action.
-- **Phosphoric acid** — lowers pH and drives copper/tin corrosion.
-- **Potassium/sodium salts** (such as potassium benzoate or citrate, depending on market formula) — create an ionic electrolyte that increases conductivity.
-- **Artificial sweeteners** (such as aspartame and acesulfame K) — not the main conductor, but part of the organic residue left behind after drying.
-- **Caramel color / flavor residues** — sticky organics that help the dried film adhere to pads, connector fingers, and membrane surfaces.
+| Ingredient | Chemical Formula | Percentage (Estimated/Approx.) |
+|---|---|---|
+| Carbonated Water | H₂O + CO₂ | ~90% |
+| Carbon Dioxide | CO₂ | ~0.5–1% (volume dependent) |
+| Caramel Color | Complex polymers (E150d) | ~0.1–0.2% |
+| Phosphoric Acid | H₃PO₄ | ~0.05–0.07% |
+| Aspartame | C₁₄H₁₈N₂O₅ | ~0.024% (87 mg per 12 oz) |
+| Acesulfame Potassium | C₄H₄KNO₄S | ~0.013% (47 mg per 12 oz) |
+| Caffeine | C₈H₁₀N₄O₂ | ~0.009% (34 mg per 12 oz) |
+| Sodium Citrate | Na₃C₆H₅O₇ | < 0.05% |
+| Natural Flavors | Proprietary mixture | < 0.05% |
+
+The key damaging components from an electronics perspective are:
+
+- **Phosphoric acid (H₃PO₄)** — lowers pH to ~2.5–3.2, drives copper/tin corrosion.
+- **Potassium/sodium salts** (acesulfame K, sodium citrate, potassium benzoate/citrate depending on market) — create an ionic electrolyte that increases conductivity.
+- **Artificial sweeteners** (aspartame, acesulfame K) — not the main conductor, but part of the organic residue left behind after drying.
+- **Caramel color (E150d) / flavor residues** — sticky organics that help the dried film adhere to pads, connector fingers, and membrane surfaces.
+- **Caffeine** — mildly hygroscopic, contributes to residue film.
 
 In other words, the dangerous part is **acidic electrolyte + hygroscopic residue**, not sucrose. Zero-sugar cola can still short adjacent conductors while wet and then leave behind a film that continues to attract moisture from the air and support leakage current after the visible liquid is gone.
 
@@ -694,7 +708,31 @@ Once visibly dry, the surface appears clean but is not:
 | **Rubber dome (silicone)** | Under each key switch | Silicone is chemically inert to cola | Negligible | N/A |
 | **Scissor arms (POM/nylon)** | Key switch mechanism | Resistant to dilute acid | Negligible | N/A |
 
-#### 5. Why the FPC connector area is the most chemically critical site
+#### 5. Timing estimates for key chemical processes
+
+The following table summarizes approximate timescales for each chemical process after a Coca-Cola Zero spill on an FPC keyboard assembly at room temperature (~22 °C, ~50% RH). All times assume a typical spill volume (a few mL reaching the keyboard internals) and no cleaning intervention.
+
+| Process | Onset | Duration / Peak | Notes |
+|---|---|---|---|
+| **Cu₂O passivation stripping** | 0–5 s | Complete within 30–60 s | Native oxide is only ~2–5 nm; dissolves on contact with acid |
+| **Ionic conduction path formation** | Immediate | Persists while liquid is present | Cola is conductive as-poured (~1–5 mS/cm); leakage current begins instantly |
+| **Oxygen-depolarized Cu dissolution** | ~30 s | Continuous; rate ~0.1–1 μm/h in dilute H₃PO₄ | Accelerates as acid concentrates during drying |
+| **Galvanic corrosion at bimetallic junctions** | ~30 s | Continuous while electrolyte bridges junction | Rate depends on potential difference (ΔV ~0.3–0.8 V for Sn/Au or Cu/Au pairs) |
+| **ENIG pinhole undermining (Ni attack)** | ~1–5 min | Hours to days under residue film | Slow because acid must seep through gold pinholes first |
+| **SAC305 solder dissolution (Sn attack)** | ~1–2 min | Continuous; rate ~0.5–2 μm/h in dilute acid | Sn is anodic to Cu/Au — dissolves preferentially |
+| **Bulk liquid evaporation** | Immediate | Most surface liquid gone in 10–30 min | Depends on volume, airflow, temperature |
+| **Acid concentration peak** | ~10–30 min | Lasts until residue reaches hygroscopic equilibrium | H₃PO₄ concentration increases 100–1000× as water evaporates |
+| **Residue film deposition** | ~15–45 min | Fully deposited when visibly dry (~1–2 h) | Film thickness ~1–10 μm; contains all non-volatile components |
+| **Capillary retention in tight gaps** | Immediate | Liquid persists 1–4 h in gaps < 0.3 mm | Scissor-switch clearances and ZIF slot dry last |
+| **Dendrite nucleation (electrochemical migration)** | ~30 min – 2 h | Can grow to bridging length in 2–24 h under bias | Requires bias voltage (~3.3 V) and thinning electrolyte |
+| **Hygroscopic moisture reabsorption** | After visual drying (~1–2 h) | Cyclical; varies with RH | H₃PO₄ residue absorbs moisture at >30–40% RH |
+| **Residue hardening (melanoidin cross-linking)** | ~6–12 h | Progressive over days to weeks | Film becomes increasingly adherent; mild solvents fail after ~24 h |
+| **Copper patina formation (green discoloration)** | ~24–72 h | Continues indefinitely | Cu₃(PO₄)₂ · Cu(OH)₂ buildup visible under magnification |
+| **Adhesive osmotic blistering** | ~24–48 h | Weeks (slow diffusion process) | Permanent delamination if electrolyte reaches adhesive interface |
+
+**Key timing insight:** The most dangerous period is not the initial wet phase but the **drying phase (10 min – 2 h)**, when acid concentration rises sharply and the corrosion rate peaks. A spill that is wiped up within the first 5 minutes causes far less damage than one left to dry naturally. Once the residue film has set (~2+ hours), only professional cleaning (ultrasonic + appropriate solvent) can reliably remove it.
+
+#### 6. Why the FPC connector area is the most chemically critical site
 
 Combining the above, the ZIF connector area is the worst-case scenario for cola damage because it concentrates **all** the vulnerabilities in one place:
 

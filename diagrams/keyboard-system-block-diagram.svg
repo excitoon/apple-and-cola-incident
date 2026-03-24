@@ -59,7 +59,7 @@
   <text x="735" y="97" text-anchor="middle" font-size="11" font-weight="bold" fill="#1b5e20">Apple</text>
   <text x="735" y="112" text-anchor="middle" font-size="11" font-weight="bold" fill="#1b5e20">M3 Pro</text>
   <text x="735" y="128" text-anchor="middle" font-size="9" fill="#2e7d32">SoC</text>
-  <text x="735" y="148" text-anchor="middle" font-size="8" fill="#2e7d32">→ macOS HID</text>
+  <text x="735" y="148" text-anchor="middle" font-size="8" fill="#2e7d32">→ OS X HID</text>
 
   <!-- Signal flow explanation -->
   <rect x="30" y="210" width="750" height="130" rx="6" fill="#fff" stroke="#bdbdbd"/>
@@ -69,7 +69,7 @@
   <text x="50" y="273" font-size="10" fill="#d32f2f">2. Cola residue bridges COL_7 to COL_6 (or COL_8) at ZIF connector</text>
   <text x="50" y="291" font-size="10" fill="#333">3. Controller IC reads ROW_4 active on COL_7 AND COL_6 simultaneously</text>
   <text x="50" y="309" font-size="10" fill="#333">4. Controller reports two keycodes (N + extra character) via SPI to M3 Pro</text>
-  <text x="50" y="327" font-size="10" fill="#333">5. macOS receives both → both characters appear on screen</text>
+  <text x="50" y="327" font-size="10" fill="#333">5. OS X receives both → both characters appear on screen</text>
 
   <!-- Arrowhead marker -->
   <defs>

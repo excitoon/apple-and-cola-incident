@@ -251,7 +251,7 @@ The following diagrams show the specific signal blocks affected in this incident
   │   ┌───────────────────┴───────────────────────┐                    │
   │   │        APPLE M3 PRO SoC                   │                    │
   │   │   (receives keypress data via SPI,         │                    │
-  │   │    passes to macOS HID subsystem)          │                    │
+  │   │    passes to OS X HID subsystem)          │                    │
   │   └───────────────────────────────────────────┘                    │
   │                                                                     │
   └─────────────────────────────────────────────────────────────────────┘
@@ -323,7 +323,7 @@ The keyboard FPC carries all row and column signals to the controller IC. The af
              ▼
   ┌──────────────────────────────────┐
   │   Apple M3 Pro SoC               │
-  │   → macOS receives "N" + "/" + ? │
+  │   → OS X receives "N" + "/" + ? │
   │   → all three appear on screen   │
   └──────────────────────────────────┘
 ```

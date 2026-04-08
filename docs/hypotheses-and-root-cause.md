@@ -50,6 +50,25 @@ This observation is diagnostically significant for several reasons:
 
 This supports the recommendation to pursue ultrasonic cleaning as the first step before considering top-case replacement.
 
+### Humidity-driven effect dynamics — why effects appear and disappear
+
+A further observation (after the 2-day rest period and initial multi-key testing) showed that the bridge's apparent directionality is not fixed: at certain times — particularly at night or in humid conditions — pressing a single Cz-column key (`P`, `;`, `/`) now produces a reverse ghost from the Cx column (`y`, `h`, `n` respectively), even without a simultaneous Cy key. The same effect disappears when ambient conditions change.
+
+**Mechanism:**
+
+The dried cola film is **hygroscopic** — it absorbs water vapour from the air and releases it as conditions dry. The amount of absorbed moisture directly controls the film's ionic conductivity:
+
+- At low humidity (daytime, laptop warm from use): film is relatively dry → R_Cz→Cx ≈ 140 kΩ → V_Cx ≈ 0.83 V → below ~1.4 V Schmitt threshold → no reverse ghost detected.
+- At high humidity (night, cold laptop, humid room): film absorbs moisture → R_Cz→Cx drops toward ~47 kΩ → V_Cx rises to ~1.65 V → crosses the Schmitt threshold → reverse ghost detected.
+
+The same moisture increase also further lowers R_Cy→Cx (originally ~70 kΩ), which was already closer to the threshold; at sufficiently high humidity both the Cy→Cx and Cz→Cx paths cross the detection threshold simultaneously.
+
+**Why the laptop's own heat is relevant:** When the machine is in active use, its SoC generates heat that raises the temperature inside the case, driving moisture out of the hygroscopic film. This is why the effect tends to appear when the laptop is cold and freshly woken from sleep (high local humidity) and then disappears as the machine warms up.
+
+**What this tells us about the contamination:**
+
+The reversibility is actually a positive diagnostic indicator. A permanent metallic bridge (copper dendrite, solder) would not change resistance with humidity — its conductivity is fixed. The fact that the reverse ghost appears and disappears with ambient conditions confirms the bridge is still organic/ionic dried-cola residue, not a permanent metal short. The film retains its hygroscopic character, meaning it is still predominantly dissolved solids rather than a converted metallic deposit. This further supports the conclusion that cleaning should restore full function.
+
 ## Hypotheses
 
 ### Hypothesis 1: Residual liquid causing short circuits (most likely)

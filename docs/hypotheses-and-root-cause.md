@@ -52,7 +52,7 @@ This supports the recommendation to pursue ultrasonic cleaning as the first step
 
 ### Humidity-driven effect dynamics — why effects appear and disappear
 
-A further observation (after the 2-day rest period and initial multi-key testing) showed that the bridge's apparent directionality is not fixed: at certain times — particularly at night or in humid conditions — pressing a single Cz-column key (`P`, `;`, `/`) now produces a reverse ghost from the Cx column (`y`, `h`, `n` respectively), even without a simultaneous Cy key. The same effect disappears when ambient conditions change.
+A further observation (after the 2-day rest period and initial multi-key testing) showed that the bridge's apparent directionality is not fixed: at certain times — particularly at night and during the recent increase in ambient air humidity — pressing a single Cz-column key (`P`, `;`, `/`) now produces a reverse ghost from the Cx column (`y`, `h`, `n` respectively), even without a simultaneous Cy key. The same effect disappears when ambient conditions change.
 
 **Mechanism:**
 

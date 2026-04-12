@@ -423,7 +423,7 @@ P+L → phl
 
 ### Group I — Humidity-driven single-key reverse bridge (new observation)
 
-**Background:** Groups B2 and H established the baseline: the bridge is unidirectional for single key presses (R_Cz→Cx ≈ 140 kΩ → V_Cx ≈ 0.83 V, well below the detection threshold), and bidirectional only under parallel load (H1–H4). A subsequent observation, made under different ambient conditions (notably at night), showed that pressing a single Cz-column key can also produce a Cx reverse ghost without any simultaneous Cy key.
+**Background:** Groups B2 and H established the baseline: the bridge is unidirectional for single key presses (R_Cz→Cx ≈ 140 kΩ → V_Cx ≈ 0.83 V, well below the detection threshold), and bidirectional only under parallel load (H1–H4). A subsequent observation, made at night during a recent rise in ambient air humidity, showed that pressing a single Cz-column key can also produce a Cx reverse ghost without any simultaneous Cy key.
 
 **Observed behavior:**
 

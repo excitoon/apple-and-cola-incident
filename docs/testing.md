@@ -421,6 +421,51 @@ P+L → phl
 ;+. → ghosts also appear
 ```
 
+### Group I — Humidity-driven single-key reverse bridge (new observation)
+
+**Background:** Groups B2 and H established the baseline: the bridge is unidirectional for single key presses (R_Cz→Cx ≈ 140 kΩ → V_Cx ≈ 0.83 V, well below the detection threshold), and bidirectional only under parallel load (H1–H4). A subsequent observation, made at night during a recent rise in ambient air humidity, showed that pressing a single Cz-column key can also produce a Cx reverse ghost without any simultaneous Cy key.
+
+**Observed behavior:**
+
+| Key pressed | Expected | Observed | Notes |
+|-------------|----------|----------|-------|
+| `P`  | `p`  | `yp` | Ghost `y` (Cx, top letter row) plus real `p`   |
+| `;`  | `;`  | `;h` | Real `;` plus ghost `h` (Cx, home row)         |
+| `/`  | `/`  | `/n` | Real `/` plus ghost `n` (Cx, bottom row)        |
+
+The effect is **intermittent**: it appears in certain ambient conditions and disappears on its own.
+
+**Circuit explanation — hygroscopic conductivity:**
+
+The dried cola residue film is hygroscopic: it absorbs water vapour from the surrounding air. As humidity rises, the film swells and its ionic conductivity increases, lowering its effective resistance. At the original Group B2 humidity:
+
+```
+Cz → [R_Cz→Cx ≈ 140 kΩ] → Cx → [R_pull ≈ 47 kΩ] → GND
+V_Cx = 3.3 × 47 / (47 + 140) = 0.83 V  →  ❌ well below ~1.4 V Schmitt threshold
+```
+
+At elevated humidity the film resistance drops. When the effective Cz→Cx path reaches ~47 kΩ:
+
+```
+Cz → [R_Cz→Cx ≈ 47 kΩ] → Cx → [R_pull ≈ 47 kΩ] → GND
+V_Cx = 3.3 × 47 / (47 + 47) = 1.65 V  →  ✅ above detection threshold
+```
+
+At the same humidity the already-shorter Cy→Cx path (originally ~70 kΩ) drops proportionally further, reaching ~23 kΩ and producing an even higher reverse voltage:
+
+```
+Cy → [R_Cy→Cx ≈ 23 kΩ] → Cx → [R_pull ≈ 47 kΩ] → GND
+V_Cx = 3.3 × 47 / (47 + 23) = 2.22 V  →  ✅ clearly above threshold
+```
+
+So at sufficiently high humidity, **both** Cy and Cz single-key reverse bridges become detectable — the Cy→Cx path crosses first (it needs a smaller resistance drop), then Cz→Cx crosses next as humidity rises further.
+
+**Why the effect disappears:** As the laptop is used, its internal temperature rises and drives moisture out of the hygroscopic film. The film dries, its resistance rises, and V_Cx falls back below the detection threshold. Lower ambient humidity during the day has the same effect. The result is an effect that appears at night or in humid rooms and vanishes as conditions dry.
+
+**What this confirms:** The reversible nature of the effect is a positive diagnostic indicator — it proves the bridge is still hygroscopic conductive residue (not a permanent metallic short or copper dendrite). A permanent metallic bridge would be insensitive to humidity. The fact that resistance cycles with ambient humidity means the film is an ionic/organic deposit that retains its hygroscopic character, consistent with dried cola solids. This supports the conclusion that the contamination is still cleanable.
+
+**Output ordering:** Whether the ghost appears before or after the real character depends on where in the scan cycle the key was pressed relative to the Cx sample point. With row scanning (rows driven, columns read), if P's row is driven while Cx is sampled in that same row window, the ghost is detected before P itself (→ `yp`). If the bridge charge propagates to Cx only between scan cycles, the real character is output first and the ghost follows in the subsequent Cx read (→ `;h`, `/n`). The ordering is an artefact of scan timing and residue capacitance, not a property of the bridge direction.
+
 ### Why the Bridge Appears Unidirectional (and When It Isn't)
 
 A natural question: how can dried Coca-Cola residue — a passive film of sugar, phosphoric acid, and mineral salts — produce a **unidirectional** bridge? Isn't a puddle of dried cola just a resistor, and shouldn't current flow equally in both directions?

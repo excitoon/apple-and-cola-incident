@@ -4,30 +4,30 @@
 
 ## Recommended Next Steps
 
-### Update: second service confirmed the connector is clean
+### Update: second service cleaned the connector — issue persists
 
-A second service center has inspected the JT200 ZIF connector and confirmed that **the connector is clean** — no visible residue on the connector pads or FPC contact fingers. This is an important diagnostic update: it rules out the connector pads as the current contamination site and narrows the fault location to the less accessible zones:
+A second service center has cleaned the JT200 ZIF connector (IPA clean of the connector pads and FPC contact fingers) and **the keyboard issue remained unchanged** after cleaning. This is a definitive diagnostic result: it rules out the connector contact surfaces as the contamination site, because cleaning them had no effect. The residue bridge must be located in the less accessible zones that manual connector cleaning cannot reach:
 
 - **Zone 2 — FPC ribbon cable traces** (contamination wicked between the polyimide layers, ~0.1 mm gap, unreachable by surface wiping)
 - **Zone 3 — Sealed key switch bodies** (sub-0.3 mm capillary gaps under the 6/Y/H/N scissor mechanisms)
 
-The recommended service order has therefore changed: **manual ZIF connector cleaning is no longer the first step**, since the connector has already been confirmed clean by inspection. The next intervention is **ultrasonic cleaning**, which is the only method capable of reaching residue trapped inside the FPC trace layers and under sealed key switches.
+The recommended service order has therefore changed: **manual ZIF connector cleaning has been tried and did not resolve the issue**. The next intervention is **ultrasonic cleaning**, which is the only method capable of reaching residue trapped inside the FPC trace layers and under sealed key switches.
 
 ### Manual ZIF cleaning vs. ultrasonic cleaning
 
 ~~Since the test data confirms the contamination is at the **FPC/ZIF connector pin cluster** (not scattered along the FPC or inside individual key switches), a reasonable question is whether **simple manual cleaning** of the ZIF connector area would be sufficient, avoiding the cost and turnaround of ultrasonic cleaning.~~
 
-**Manual ZIF connector cleaning is no longer the first-line recommendation** — the second service has confirmed the connector is clean. This step is already complete.
+**Manual ZIF connector cleaning has been attempted by a second service** — the connector pads and FPC contact fingers were cleaned with IPA, and the keyboard issue remained unchanged afterward. This step is complete and did not resolve the problem.
 
 The remaining contamination is in locations that manual cleaning cannot reach:
 - **FPC ribbon cable traces** — residue wicked between the polyimide layers (~0.1 mm gap acts as a capillary channel) cannot be reached by surface swabbing; only ultrasonic cavitation can dissolve residue inside these narrow channels.
 - **Sealed key switch bodies** — sub-0.3 mm capillary spaces under keycaps cannot be reached by manual cleaning.
 
-**Recommended approach: proceed to ultrasonic cleaning.** The connector has been eliminated as the contamination site. The fault is now localised to the FPC trace gaps or under the sealed key switches, which only ultrasonic cavitation can reach.
+**Recommended approach: proceed to ultrasonic cleaning.** Manual ZIF connector cleaning has been tried and did not resolve the issue, confirming the contamination is not at the connector contact surfaces. The fault is localised to the FPC trace gaps or under the sealed key switches, which only ultrasonic cavitation can reach.
 
 ### Step-by-step plan
 
-1. ~~**Ask the service center to try manual ZIF connector cleaning first**~~ — **already confirmed clean by second service.** No action needed at the connector level.
+1. ~~**Ask the service center to try manual ZIF connector cleaning first**~~ — **already attempted by second service; issue remained.** The connector is not the contamination site.
 2. **Proceed directly to ultrasonic cleaning** — the service center offers this at approximately 1/3 the cost of keyboard replacement, with a **3–7 day turnaround**. The contamination is in the FPC trace gaps or under key switches, which only ultrasonic cavitation can reach.
 3. **Re-run keyboard tests after ultrasonic cleaning** — test Group A keys (`6`, `Y`, `H`, `N`, Space) and compare against the pre-cleaning baseline. All keys should produce only their correct single character.
 4. **Visual inspection under magnification** of the FPC traces after cleaning — look for any remaining dried residue.
@@ -51,7 +51,7 @@ Pre-cleaning keyboard testing (March 22) has confirmed the exact contamination l
 
 The contamination sites, in order of priority:
 
-1. ~~**ZIF connector area**~~ — **confirmed clean by second service.** No residue found on the connector pads or FPC contact fingers.
+1. ~~**ZIF connector area**~~ — **cleaned by second service; issue persisted.** Manual IPA cleaning of the connector pads and FPC contact fingers did not resolve the problem, ruling out the connector contact surfaces as the contamination site.
 2. **FPC ribbon cable** — residue wicked along the three column traces (Cx, Cy, Cz) where they run parallel within the ribbon. The ~0.1 mm gap between traces acts as a capillary channel. This is now the **primary contamination site**.
 3. **Under the sealed key switch bodies** for 6, Y, H, N — cola entered through sub-0.3 mm capillary gaps between the keycap, scissor arms, rubber dome, and FPC membrane.
 
@@ -70,11 +70,11 @@ The service center correctly notes that individual scissor-switch key bodies are
 
 ### Suggested cleaning focus areas
 
-**Important update:** A second service center has confirmed the **JT200 ZIF connector is clean** — no residue on the connector pads or FPC contact fingers. The contamination is therefore located further inside the keyboard assembly, in the less accessible zones:
+**Important update:** A second service center has **cleaned the JT200 ZIF connector** (IPA clean of connector pads and FPC contact fingers) and the **issue remained after cleaning**. This definitively rules out the connector contact surfaces as the contamination site. The contamination is therefore located deeper inside the keyboard assembly, in the less accessible zones:
 
 - **Primary focus: FPC ribbon cable traces** — the three bridged column traces (Cx, Cy, Cz) run in parallel within the FPC ribbon between the ZIF connector and the key matrix. Cola residue has wicked into the ~0.1 mm gap between the polyimide layers. This is unreachable by surface wiping but directly addressable by ultrasonic cavitation. Thoroughly clean the full length of the FPC ribbon, paying particular attention to the section where the Cx/Cy/Cz traces run in parallel.
 - **Secondary focus: sealed key switch bodies** for 6/Y/H/N — ultrasonic bath exposure should be sufficient to reach the sub-0.3 mm capillary gaps within the scissor mechanisms.
-- ~~ZIF connector pins~~ — **already confirmed clean by second service; no action needed at the connector.**
+- ~~ZIF connector pins~~ — **manual cleaning attempted by second service; issue persisted. Not the contamination site.**
 - After cleaning, a **resistance measurement** between the three adjacent column pins (Cx/Cy/Cz) and the Space/`'` pin pair on the ZIF connector would confirm whether the conductive bridges have been removed.
 
 ### Diagrams

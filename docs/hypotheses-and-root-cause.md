@@ -266,7 +266,7 @@ The MacBook Pro 14" A2918 follows Apple's standard disassembly hierarchy. Every 
 
 | Zone | Component | Board position | Disassembly depth | Components to detach | Could this be our problem area? | Serviceable? | Method | Time estimate |
 |------|-----------|----------------|-------------------|---------------------|-------------------------------|--------------|--------|---------------|
-| **1** | **JT200** (keyboard FPC ZIF, 36 pins) | Top edge of board, X 4119–4253, Y 6111–6806 | **Depth 1** — bottom case only | **1** (bottom case) | ✅ **Confirmed clean by second service.** A second service center inspected the connector and found no residue on the pads or FPC contact fingers. The connector is no longer the suspected contamination site. | ✅ **Yes — manually** | Lift ZIF latch, remove FPC, clean both the connector pads and FPC contact fingers with IPA + lint-free swab under magnification | 10–15 min (already done — confirmed clean) |
+| **1** | **JT200** (keyboard FPC ZIF, 36 pins) | Top edge of board, X 4119–4253, Y 6111–6806 | **Depth 1** — bottom case only | **1** (bottom case) | ✅ **Cleaned by second service — issue persisted.** A second service center cleaned the connector pads and FPC contact fingers with IPA; the keyboard symptoms were unchanged afterward. The connector contact surfaces are not the contamination site. | ✅ **Yes — manually** | Lift ZIF latch, remove FPC, clean both the connector pads and FPC contact fingers with IPA + lint-free swab under magnification | 10–15 min (already done — did not resolve issue) |
 | **2** | **FPC ribbon cable** (25 interleaved DRIVE/SENSE traces) | Runs from JT200 upward through top-case toward key matrix | **Depth 1** — bottom case only (cable visible along its run) | **1** (bottom case) | ⚠️ **Yes — now the primary suspect.** The JT200 connector has been confirmed clean by second service, which means the residue bridge must be here or in Zone 3. Cola wicked along the FPC between JT200 and the key matrix; the interleaved DRIVE/SENSE traces (~0.5 mm pitch) have residue in the internal polyimide layers that cannot be reached by surface wiping. | ⚠️ **Yes — ultrasonically** | FPC is enclosed between polyimide layers with ~0.1 mm gaps — surface wiping cannot reach internal traces. Requires ultrasonic bath in IPA/specialized solvent. | 3–7 day turnaround (ultrasonic service) |
 | **3** | **Sealed key switch bodies** (6, Y, H, N keys) | Top-case interior, above FPC membrane | **Depth 1** — bottom case only (keys visible from underside through membrane) | **1** (bottom case) | ⚠️ **Unlikely as primary site.** Contamination inside individual key bodies cannot explain the entire column being affected simultaneously — that requires a shared trace-level short. However, residue under key switches could contribute to intermittent per-key issues and would explain why individual keys sometimes stick or feel gummy. | ⚠️ **Yes — ultrasonically only** | Scissor mechanisms have sub-0.3 mm capillary gaps; cannot be manually opened without breaking. Ultrasonic cavitation is specifically designed for this geometry. | 3–7 day turnaround (ultrasonic service) |
 | **4** | **JT400** (IPD connector, 50 pins) | Top edge of board, X 4104–4225, Y 5571–5949 | **Depth 1** — bottom case only | **1** (bottom case) | ❌ **No — not a problem area.** JT400 carries the keyboard I²C bus (SCL/SDA/INT), trackpad signals, and IPD controller SPI bus. A fault here would cause **total keyboard failure** (no keys working at all) or trackpad issues — not the observed selective column bridging. The matrix DRIVE/SENSE lines never pass through JT400; they exist only within the keyboard module behind JT200. | ✅ **Yes — manually** | Standard ZIF connector, same procedure as JT200. | 10–15 min |
@@ -291,7 +291,7 @@ This is Apple's **shallowest possible service depth** — the same level require
   ║  └─ keyboard surface, ports, display                     ║
   ╠═══════════════════════════════════════════════════════════╣
   ║  DEPTH 1: Bottom case removed (6 screws + clips)    ◄──── ALL SPILL ZONES HERE
-  ║  ├─ JT200 keyboard FPC connector  (Zone 1, confirmed clean) ║
+  ║  ├─ JT200 keyboard FPC connector  (Zone 1, cleaned — no effect) ║
   ║  ├─ JT220 backlight connector     (backlight OK)         ║
   ║  ├─ JT400 IPD connector           (not a problem area)   ║
   ║  ├─ FPC ribbon cable              (Zone 2) ★ PRIMARY    ║
@@ -307,13 +307,13 @@ This is Apple's **shallowest possible service depth** — the same level require
   ╚═══════════════════════════════════════════════════════════╝
 ```
 
-#### Update: second service confirmed JT200 is clean — fault localized to FPC or key bodies
+#### Update: second service cleaned JT200 — issue remained; fault localized to FPC or key bodies
 
-A second service center has inspected the JT200 ZIF connector and confirmed it is clean. This is a significant diagnostic update: it rules out the connector as the current contamination site and shifts the primary suspect to Zone 2 (FPC ribbon traces) or Zone 3 (sealed key switch bodies).
+A second service center has cleaned the JT200 ZIF connector with IPA (connector pads and FPC contact fingers) and the keyboard issue remained unchanged afterward. This is a definitive diagnostic result: manual connector cleaning had no effect, which confirms the contamination is not at the connector contact surfaces. The bridge must originate in the less accessible zones.
 
-The original localization reasoning remains valid — the boardview analysis and symptom pattern still point to shared column trace contamination rather than individual key bodies. However, the contamination is deeper inside the keyboard assembly than the connector surface:
+The original localization reasoning remains valid — the boardview analysis and symptom pattern still point to shared column trace contamination rather than individual key bodies. The contamination is deeper inside the keyboard assembly than the connector surface:
 
-1. **JT200 connector confirmed clean** — second service found no residue on connector pads or FPC contact fingers.
+1. **JT200 connector cleaned — issue persisted** — second service performed manual IPA clean of connector pads and FPC contact fingers; symptoms unchanged.
 
 2. **The decoded JT200 pinout still proves DRIVE/SENSE interleaving** with three specific bridging boundaries — the bridge is real and measurable (~30/70 kΩ), but it originates further along the FPC traces, not at the connector pads.
 
@@ -323,7 +323,7 @@ The original localization reasoning remains valid — the boardview analysis and
 
 5. **No board-level trace repair is needed.** The 25 DRIVE/SENSE matrix lines exist only within the keyboard FPC — they never run as exposed traces on the main logic board.
 
-**Conclusion:** The connector has been ruled out; the fault is in the FPC ribbon traces or key switch bodies. Both remaining zones are reachable by ultrasonic cleaning at the same Depth 1 access level. The contamination requires ultrasonic cleaning to address residue trapped in sub-0.1 mm polyimide gaps and sub-0.3 mm key body capillary spaces. Manual ZIF connector cleaning is no longer needed.
+**Conclusion:** Manual ZIF connector cleaning has been tried and ruled out. The fault is in the FPC ribbon traces or key switch bodies. Both remaining zones are reachable by ultrasonic cleaning at the same Depth 1 access level. The contamination requires ultrasonic cleaning to address residue trapped in sub-0.1 mm polyimide gaps and sub-0.3 mm key body capillary spaces.
 
 #### Reachable = cleanable: why access depth determines serviceability
 
@@ -340,7 +340,7 @@ A critical point for the repair assessment: **if an engineer can physically reac
 The key insight is that **ZIF connectors are field-serviceable by design** — they exist specifically so that cables can be disconnected, inspected, and reconnected during manufacturing and repair. The latch mechanism ensures no soldering is needed. This means the gap between "I can see the connector" and "I can clean the connector" is exactly **one latch flip** — there is no additional disassembly required to go from inspection to cleaning.
 
 For the FPC cable and key bodies, the gap between "reachable" and "cleanable" is wider — surface contamination can be wiped, but internal contamination between layers requires ultrasonic cleaning. This is why the recommended service order is:
-1. ~~**First**: Clean JT200 connector (manual, 10–15 min)~~ — **already confirmed clean by second service; skip this step.**
+1. ~~**First**: Clean JT200 connector (manual, 10–15 min)~~ — **already attempted by second service; issue remained. Not the contamination site.**
 2. ~~**Second**: Inspect and surface-clean the FPC cable (manual, 5 min)~~ — **not needed since ultrasonic cleaning addresses internal traces more thoroughly anyway.**
 3. **Proceed directly to: Ultrasonic bath for FPC + key bodies** (professional service, **3–7 day turnaround**) — this is now the first and primary intervention.
 
@@ -364,13 +364,13 @@ This render shows the FPC ribbon cable running from JT200 to the keyboard module
 
 ![Cleaning access render](../diagrams/boardview-820-02757-cleaning-access-render.svg)
 
-This render shows the full board from the bottom (case removed) with all three connector zones highlighted, the cleaning workflow for JT200, and the "REACHABLE = CLEANABLE" principle applied to each zone. The JT200 connector has been confirmed clean by second service; the recommended service is now ultrasonic cleaning targeting the FPC ribbon traces and sealed key switch bodies.
+This render shows the full board from the bottom (case removed) with all three connector zones highlighted, the cleaning workflow for JT200, and the "REACHABLE = CLEANABLE" principle applied to each zone. The JT200 connector was manually cleaned by a second service center but the issue persisted; the recommended service is now ultrasonic cleaning targeting the FPC ribbon traces and sealed key switch bodies.
 
 ## Most Probable Root Cause
 
 The most probable explanation is a **combination of Hypotheses 1 and 5**: the initial service-center cleaning was insufficient to remove cola residue from the keyboard FPC traces and sealed key switch bodies. Sticky, conductive residue (dried cola) remained on the keyboard flex cable, creating a stable resistive bridge across three adjacent keyboard matrix column pins (Cx/Cy/Cz, carrying columns for 6/Y/H/N, 9/O/L/., and 0/P/;/​/). Historical corrosion from phosphoric acid (H3) contributed to the initial worsening phase, but has now **largely stopped** — the bridge resistance is perfectly stable across 36+ multi-key tests with no measurable drift.
 
-**Update:** A second service center has confirmed the JT200 ZIF connector is clean. The conductive bridge therefore originates in the **FPC ribbon cable traces** (cola wicked between the polyimide layers) and/or **under the sealed key switch bodies**. The connector is not the contamination site.
+**Update:** A second service center has cleaned the JT200 ZIF connector with IPA and the keyboard issue remained unchanged afterward. This definitively rules out the connector contact surfaces as the contamination site. The conductive bridge therefore originates in the **FPC ribbon cable traces** (cola wicked between the polyimide layers) and/or **under the sealed key switch bodies**.
 
 This accounts for:
 

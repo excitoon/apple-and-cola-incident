@@ -159,9 +159,9 @@ For comparison, the correct procedure for a cola-contaminated ZIF connector area
 
 This procedure takes 10–15 minutes and requires no specialised equipment beyond IPA, a lint-free swab, and a magnifying loupe. It directly addresses both failure modes identified above.
 
-## Third Service Center: "Keyboard Not Detachable — Cannot Ultrasonically Clean"
+## Second Service Center: "Keyboard Not Detachable — Cannot Ultrasonically Clean"
 
-A third service center has stated that:
+The second service center (which also attempted the ZIF connector cleaning above) has stated that:
 
 1. They **cannot detach the keyboard from the top case**, therefore they cannot ultrasonically clean it.
 2. Their typical approach is to **tear the keyboard off the top case and mount a replacement keyboard on screws**.
@@ -201,4 +201,4 @@ The proposed repair method — physically tearing the keyboard panel off the top
 | "Therefore we cannot ultrasonically clean it" | ❌ Incorrect | The top case with keyboard attached can be cleaned as a unit, or the FPC ribbon can be cleaned independently |
 | "We tear off the keyboard and fit a replacement on screws" | ⚠️ Possible but non-standard and unauthorized | Destructive to original top case; not an Apple-authorized repair; does not guarantee electrical fault resolution; likely more expensive than ultrasonic cleaning |
 
-**The recommended course of action remains ultrasonic cleaning**, directed at a service center that has the equipment and willingness to clean the top-case assembly (Path A above) or at minimum the FPC ribbon cable (Path B). The third service center's approach does not address the identified root cause and introduces new risks.
+**The recommended course of action remains ultrasonic cleaning**, directed at a service center that has the equipment and willingness to clean the top-case assembly (Path A above) or at minimum the FPC ribbon cable (Path B). The second service center's approach does not address the identified root cause and introduces new risks.

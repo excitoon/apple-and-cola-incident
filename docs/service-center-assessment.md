@@ -175,7 +175,15 @@ On the MacBook Pro 14" (A2918), the scissor-switch keyboard panel is indeed rive
 However, "cannot detach keyboard from top case" does **not** mean the keyboard assembly cannot be ultrasonically cleaned. There are two paths available:
 
 - **Path A — Top-case-level cleaning:** After removing the top case from the MacBook (a standard disassembly step that disconnects the keyboard FPC from the logic board at the ZIF connector), the top case with the keyboard still attached can be placed in an ultrasonic bath. The aluminum top case housing is inert in IPA-based ultrasonic cleaners. The fact that the keyboard is bonded to the case is irrelevant — both parts can be cleaned together as a unit. This is the most complete approach.
-- **Path B — FPC ribbon cleaning only:** If full top-case immersion is not practical, the keyboard FPC ribbon cable can be disconnected at the logic board ZIF connector and cleaned as an isolated flexible circuit. The ribbon is the most probable contamination site (see [Repair Guide — Suggested cleaning focus areas](repair-guide.md#suggested-cleaning-focus-areas)).
+
+  **Prerequisite: components incompatible with IPA submersion must be removed first.** The A2918 top case assembly includes parts that cannot be safely submerged in IPA:
+  - **Battery** — the lithium-ion battery is adhesively bonded to the inside of the top case. It must be removed before any solvent immersion. IPA is flammable and lithium batteries can vent or ignite if their seals are compromised by solvent. Battery removal from the A2918 requires heat to soften the adhesive and careful use of pull-tab / stretch-release strips.
+  - **Trackpad Taptic Engine** — the trackpad and its Taptic Engine (linear electromagnetic actuator) are also part of the top-case assembly. The motor windings and seals may be damaged by extended IPA immersion; the trackpad should either be removed or carefully masked/shielded.
+  - **Speakers** — the left and right speaker assemblies in the top case contain drivers and permanent magnets; IPA exposure can damage the adhesive surrounds and magnets. These should be removed or shielded.
+
+  After those components are removed, the aluminum top-case chassis with the riveted keyboard can be safely immersed in an IPA ultrasonic bath.
+
+- **Path B — FPC ribbon cleaning only:** The keyboard FPC ribbon cable can be disconnected at the logic board ZIF connector and cleaned as an isolated flexible circuit — without immersing the top case at all. The ribbon is the most probable contamination site (see [Repair Guide — Suggested cleaning focus areas](repair-guide.md#suggested-cleaning-focus-areas)), and this approach sidesteps the battery/Taptic Engine concern entirely. It is the simpler and lower-risk option if the tech is not set up for full top-case immersion.
 
 The claim that ultrasonic cleaning is impossible because the keyboard is integrated into the top case conflates **the keyboard being non-separable from the top case** with **the top case being unable to be ultrasonically cleaned**. These are different things. The former is true; the latter is not.
 

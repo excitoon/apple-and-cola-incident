@@ -187,9 +187,11 @@ The proposed repair method — physically tearing the keyboard panel off the top
 
 2. **Screw mounting is non-OEM.** Drilling mounting holes into the top-case chassis and fastening the replacement keyboard with screws is not an Apple-specified repair procedure. The structural tolerances, screw thread depth, and keycap clearance are not guaranteed to match, and the repaired area may flex or rattle in use.
 
-3. **It may not resolve the root cause.** The identified fault is a resistive conductive bridge in the FPC ribbon cable traces or ZIF connector area, not a failure of the physical key switch mechanisms. If the replacement keyboard uses the original FPC ribbon (or a generic replacement that does not match the Apple keyboard matrix wiring), the electrical problem may persist. Only replacing the entire top case assembly — which includes a new FPC ribbon — would guarantee the contaminated traces are eliminated.
+3. **It is not an authorized or official Apple repair.** Apple does not offer standalone keyboard panel replacement for the MacBook Pro 14" (A2918). The keyboard assembly is integrated into the top case, and Apple's official repair path — available through Apple Retail, Apple Authorized Service Providers (AASPs), and Independent Repair Providers (IRPs) — is a **full top-case assembly replacement** using an Apple-supplied part. The "tear off + screws" method is not listed in Apple's service manual, is not performed by authorized service providers, and would likely void any remaining coverage under AppleCare or Apple's Repair Program.
 
-4. **Cost-to-benefit ratio.** Replacing just the keyboard panel (torn off + screws) is almost certainly **more expensive than ultrasonic cleaning** of the top case, and arguably more expensive than a full OEM top-case replacement depending on which part is sourced. Ultrasonic cleaning of the existing assembly costs approximately 1/3 of a full keyboard/top-case replacement and leaves all OEM components intact.
+4. **It may not resolve the root cause.** The identified fault is a resistive conductive bridge in the FPC ribbon cable traces or ZIF connector area, not a failure of the physical key switch mechanisms. If the replacement keyboard uses the original FPC ribbon (or a generic replacement that does not match the Apple keyboard matrix wiring), the electrical problem may persist. Only replacing the entire top case assembly — which includes a new FPC ribbon — would guarantee the contaminated traces are eliminated.
+
+5. **Cost-to-benefit ratio.** Replacing just the keyboard panel (torn off + screws) is almost certainly **more expensive than ultrasonic cleaning** of the top case, and arguably more expensive than a full OEM top-case replacement depending on which part is sourced. Ultrasonic cleaning of the existing assembly costs approximately 1/3 of a full keyboard/top-case replacement and leaves all OEM components intact.
 
 ### Summary
 
@@ -197,6 +199,6 @@ The proposed repair method — physically tearing the keyboard panel off the top
 |---|---|---|
 | "The keyboard cannot be detached from the top case" | ✅ Technically correct | The keyboard panel is riveted/bonded to the top case |
 | "Therefore we cannot ultrasonically clean it" | ❌ Incorrect | The top case with keyboard attached can be cleaned as a unit, or the FPC ribbon can be cleaned independently |
-| "We tear off the keyboard and fit a replacement on screws" | ⚠️ Possible but non-standard | Destructive to original top case; does not guarantee electrical fault resolution; likely more expensive than ultrasonic cleaning |
+| "We tear off the keyboard and fit a replacement on screws" | ⚠️ Possible but non-standard and unauthorized | Destructive to original top case; not an Apple-authorized repair; does not guarantee electrical fault resolution; likely more expensive than ultrasonic cleaning |
 
 **The recommended course of action remains ultrasonic cleaning**, directed at a service center that has the equipment and willingness to clean the top-case assembly (Path A above) or at minimum the FPC ribbon cable (Path B). The third service center's approach does not address the identified root cause and introduces new risks.

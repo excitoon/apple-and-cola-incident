@@ -198,7 +198,7 @@ The proposed repair method — physically tearing the keyboard panel off the top
    | Channel | Approximate cost (part only, USD) | Notes |
    |---|---|---|
    | Third-party / eBay (genuine Apple part) | ~$378 | Genuine Apple part, includes trackpad and battery; pricing and condition vary by seller |
-   | Apple AASP / IRP (out-of-warranty service) | ~$500–$700+ | Includes labour; exact quote varies by provider and region |
+   | Apple Authorized Service Provider (AASP) / Independent Repair Provider (IRP) — out-of-warranty | ~$500–$700+ | Includes labour; exact quote varies by provider and region |
    | AppleCare+ / active Repair Program | Reduced or $0 | If the device is covered; worth checking before any paid repair |
 
    The non-OEM screws-based keyboard swap falls outside these official channels and the total cost (sourcing a keyboard panel + labour for destructive removal + screw fitting) is unlikely to be cheaper than the ~$378 third-party OEM top-case part, while delivering a lower-quality result.

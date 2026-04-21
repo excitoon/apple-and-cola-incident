@@ -158,3 +158,71 @@ For comparison, the correct procedure for a cola-contaminated ZIF connector area
 6. **Reassemble and test** only after steps 1–5 are complete.
 
 This procedure takes 10–15 minutes and requires no specialised equipment beyond IPA, a lint-free swab, and a magnifying loupe. It directly addresses both failure modes identified above.
+
+## Second Service Center: "Keyboard Not Detachable — Cannot Ultrasonically Clean"
+
+The second service center (which also attempted the ZIF connector cleaning above) has stated that:
+
+1. They **cannot detach the keyboard from the top case**, therefore they cannot ultrasonically clean it.
+2. Their typical approach is to **tear the keyboard off the top case and mount a replacement keyboard on screws**.
+
+### Assessment of claim 1: "Cannot detach keyboard from top case"
+
+This statement is **partially accurate but technically misleading** when used as a reason to avoid ultrasonic cleaning.
+
+On the MacBook Pro 14" (A2918), the scissor-switch keyboard panel is indeed riveted and adhesively bonded to the aluminum top-case chassis — it is not designed to be removed without damaging the top case. This is factually correct.
+
+However, "cannot detach keyboard from top case" does **not** mean the keyboard assembly cannot be ultrasonically cleaned. There are two paths available:
+
+- **Path A — Top-case-level cleaning:** After removing the top case from the MacBook (a standard disassembly step that disconnects the keyboard FPC from the logic board at the ZIF connector), the top case with the keyboard still attached can be placed in an ultrasonic bath. The aluminum top case housing is inert in IPA-based ultrasonic cleaners. The fact that the keyboard is bonded to the case is irrelevant — both parts can be cleaned together as a unit. This is the most complete approach.
+
+  **Prerequisite: components incompatible with IPA submersion must be removed first.** The A2918 top case assembly includes parts that cannot be safely submerged in IPA:
+  - **Battery** — the lithium-ion battery is adhesively bonded to the inside of the top case. It must be removed before any solvent immersion. IPA is flammable and lithium batteries can vent or ignite if their seals are compromised by solvent. Battery removal from the A2918 requires heat to soften the adhesive and careful use of pull-tab / stretch-release strips.
+  - **Trackpad Taptic Engine** — the trackpad and its Taptic Engine (linear electromagnetic actuator) are also part of the top-case assembly. The motor windings and seals may be damaged by extended IPA immersion; the trackpad should either be removed or carefully masked/shielded.
+  - **Speakers** — the left and right speaker assemblies in the top case contain drivers and permanent magnets; IPA exposure can damage the adhesive surrounds and magnets. These should be removed or shielded.
+
+  After those components are removed, the aluminum top-case chassis with the riveted keyboard can be safely immersed in an IPA ultrasonic bath.
+
+- **Path B — FPC ribbon cleaning only:** The keyboard FPC ribbon cable has **two ends with very different connectivity**:
+  - The **keyboard end** is permanently bonded to the key matrix PCB inside the keyboard assembly — it is not detachable without destructive disassembly.
+  - The **logic board end** plugs into the JT200 ZIF socket on the logic board — it is easily disconnected by opening the ZIF latch.
+
+  Path B means: disconnect the ribbon at the **logic board ZIF connector only** (the detachable end), leaving the ribbon still attached to the keyboard at the other end. Once disconnected at the ZIF end, the ribbon hangs free on the logic board side and can be cleaned in place — either by manual IPA application with a brush/swab to the exposed trace surfaces, or by carefully dipping just the ribbon portion into an IPA bath while keeping the keyboard assembly end outside the bath. This sidesteps the battery/Taptic Engine concern entirely and directly targets the primary contamination zone. It is the simpler and lower-risk option if the tech is not set up for full top-case immersion. See also [Repair Guide — Suggested cleaning focus areas](repair-guide.md#suggested-cleaning-focus-areas).
+
+**What about submerging the whole assembled laptop?** This is not feasible. The primary blocker is the **display assembly**: the MacBook Pro 14" display contains a mini-LED backlight panel, polarizer films, and optical clear adhesive (OCA) bonding layers — none of which survive IPA exposure. IPA dissolves OCA adhesives and attacks polarizer coatings, which would permanently destroy the display. In addition, the battery must be removed regardless (fire/safety — see Path A prerequisites above). After the level of disassembly required to safely submerge everything else (display removed, battery removed, speakers removed, Taptic Engine removed), the laptop is essentially fully disassembled anyway. Professionals performing ultrasonic cleaning of liquid-damaged MacBooks always work at the component or sub-assembly level — never with the whole device assembled.
+
+The claim that ultrasonic cleaning is impossible because the keyboard is integrated into the top case conflates **the keyboard being non-separable from the top case** with **the top case being unable to be ultrasonically cleaned**. These are different things. The former is true; the latter is not.
+
+### Assessment of claim 2: "Tear off keyboard — replace on screws"
+
+The proposed repair method — physically tearing the keyboard panel off the top-case chassis and refitting a replacement keyboard using screws — raises several concerns:
+
+1. **It is a destructive and non-reversible operation on the top case.** The original keyboard is riveted/bonded to the aluminum. Removing it requires deforming or drilling out the retention rivets and breaking the adhesive bond. The resulting top case may be structurally weakened and visually impaired (rivet holes, adhesive residue).
+
+2. **Screw mounting is non-OEM.** Drilling mounting holes into the top-case chassis and fastening the replacement keyboard with screws is not an Apple-specified repair procedure. The structural tolerances, screw thread depth, and keycap clearance are not guaranteed to match, and the repaired area may flex or rattle in use.
+
+3. **It is not an authorized or official Apple repair.** Apple does not offer standalone keyboard panel replacement for the MacBook Pro 14" (A2918). The keyboard assembly is integrated into the top case, and Apple's official repair path — available through Apple Retail, Apple Authorized Service Providers (AASPs), and Independent Repair Providers (IRPs) — is a **full top-case assembly replacement** using an Apple-supplied part. The "tear off + screws" method is not listed in Apple's service manual, is not performed by authorized service providers, and would likely void any remaining coverage under AppleCare or Apple's Repair Program.
+
+4. **It may not resolve the root cause.** The identified fault is a resistive conductive bridge in the FPC ribbon cable traces or ZIF connector area, not a failure of the physical key switch mechanisms. If the replacement keyboard uses the original FPC ribbon (or a generic replacement that does not match the Apple keyboard matrix wiring), the electrical problem may persist. Only replacing the entire top case assembly — which includes a new FPC ribbon — would guarantee the contaminated traces are eliminated.
+
+5. **Cost-to-benefit ratio.** Replacing just the keyboard panel (torn off + screws) is almost certainly **more expensive than ultrasonic cleaning** of the top case, and arguably more expensive than a full OEM top-case replacement depending on which part is sourced. Ultrasonic cleaning of the existing assembly costs approximately 1/3 of a full keyboard/top-case replacement and leaves all OEM components intact.
+
+   For reference, **OEM top-case assembly pricing** for the MacBook Pro 14" A2918 (M3 Pro, 2023):
+
+   | Channel | Approximate cost (part only, USD) | Notes |
+   |---|---|---|
+   | Third-party / eBay (genuine Apple part) | ~$378 | Genuine Apple part, includes trackpad and battery; pricing and condition vary by seller |
+   | Apple Authorized Service Provider (AASP) / Independent Repair Provider (IRP) — out-of-warranty | ~$500–$700+ | Includes labour; exact quote varies by provider and region |
+   | AppleCare+ / active Repair Program | Reduced or $0 | If the device is covered; worth checking before any paid repair |
+
+   The non-OEM screws-based keyboard swap falls outside these official channels and the total cost (sourcing a keyboard panel + labour for destructive removal + screw fitting) is unlikely to be cheaper than the ~$378 third-party OEM top-case part, while delivering a lower-quality result.
+
+### Summary
+
+| Claim | Accuracy | Implication |
+|---|---|---|
+| "The keyboard cannot be detached from the top case" | ✅ Technically correct | The keyboard panel is riveted/bonded to the top case |
+| "Therefore we cannot ultrasonically clean it" | ❌ Incorrect | The top case with keyboard attached can be cleaned as a unit, or the FPC ribbon can be cleaned independently |
+| "We tear off the keyboard and fit a replacement on screws" | ⚠️ Possible but non-standard and unauthorized | Destructive to original top case; not an Apple-authorized repair; does not guarantee electrical fault resolution; likely more expensive than ultrasonic cleaning |
+
+**The recommended course of action remains ultrasonic cleaning**, directed at a service center that has the equipment and willingness to clean the top-case assembly (Path A above) or at minimum the FPC ribbon cable (Path B). The second service center's approach does not address the identified root cause and introduces new risks.

@@ -158,3 +158,45 @@ For comparison, the correct procedure for a cola-contaminated ZIF connector area
 6. **Reassemble and test** only after steps 1–5 are complete.
 
 This procedure takes 10–15 minutes and requires no specialised equipment beyond IPA, a lint-free swab, and a magnifying loupe. It directly addresses both failure modes identified above.
+
+## Third Service Center: "Keyboard Not Detachable — Cannot Ultrasonically Clean"
+
+A third service center has stated that:
+
+1. They **cannot detach the keyboard from the top case**, therefore they cannot ultrasonically clean it.
+2. Their typical approach is to **tear the keyboard off the top case and mount a replacement keyboard on screws**.
+
+### Assessment of claim 1: "Cannot detach keyboard from top case"
+
+This statement is **partially accurate but technically misleading** when used as a reason to avoid ultrasonic cleaning.
+
+On the MacBook Pro 14" (A2918), the scissor-switch keyboard panel is indeed riveted and adhesively bonded to the aluminum top-case chassis — it is not designed to be removed without damaging the top case. This is factually correct.
+
+However, "cannot detach keyboard from top case" does **not** mean the keyboard assembly cannot be ultrasonically cleaned. There are two paths available:
+
+- **Path A — Top-case-level cleaning:** After removing the top case from the MacBook (a standard disassembly step that disconnects the keyboard FPC from the logic board at the ZIF connector), the top case with the keyboard still attached can be placed in an ultrasonic bath. The aluminum top case housing is inert in IPA-based ultrasonic cleaners. The fact that the keyboard is bonded to the case is irrelevant — both parts can be cleaned together as a unit. This is the most complete approach.
+- **Path B — FPC ribbon cleaning only:** If full top-case immersion is not practical, the keyboard FPC ribbon cable can be disconnected at the logic board ZIF connector and cleaned as an isolated flexible circuit. The ribbon is the most probable contamination site (see [Repair Guide — Suggested cleaning focus areas](repair-guide.md#suggested-cleaning-focus-areas)).
+
+The claim that ultrasonic cleaning is impossible because the keyboard is integrated into the top case conflates **the keyboard being non-separable from the top case** with **the top case being unable to be ultrasonically cleaned**. These are different things. The former is true; the latter is not.
+
+### Assessment of claim 2: "Tear off keyboard — replace on screws"
+
+The proposed repair method — physically tearing the keyboard panel off the top-case chassis and refitting a replacement keyboard using screws — raises several concerns:
+
+1. **It is a destructive and non-reversible operation on the top case.** The original keyboard is riveted/bonded to the aluminum. Removing it requires deforming or drilling out the retention rivets and breaking the adhesive bond. The resulting top case may be structurally weakened and visually impaired (rivet holes, adhesive residue).
+
+2. **Screw mounting is non-OEM.** Drilling mounting holes into the top-case chassis and fastening the replacement keyboard with screws is not an Apple-specified repair procedure. The structural tolerances, screw thread depth, and keycap clearance are not guaranteed to match, and the repaired area may flex or rattle in use.
+
+3. **It may not resolve the root cause.** The identified fault is a resistive conductive bridge in the FPC ribbon cable traces or ZIF connector area, not a failure of the physical key switch mechanisms. If the replacement keyboard uses the original FPC ribbon (or a generic replacement that does not match the Apple keyboard matrix wiring), the electrical problem may persist. Only replacing the entire top case assembly — which includes a new FPC ribbon — would guarantee the contaminated traces are eliminated.
+
+4. **Cost-to-benefit ratio.** Replacing just the keyboard panel (torn off + screws) is almost certainly **more expensive than ultrasonic cleaning** of the top case, and arguably more expensive than a full OEM top-case replacement depending on which part is sourced. Ultrasonic cleaning of the existing assembly costs approximately 1/3 of a full keyboard/top-case replacement and leaves all OEM components intact.
+
+### Summary
+
+| Claim | Accuracy | Implication |
+|---|---|---|
+| "The keyboard cannot be detached from the top case" | ✅ Technically correct | The keyboard panel is riveted/bonded to the top case |
+| "Therefore we cannot ultrasonically clean it" | ❌ Incorrect | The top case with keyboard attached can be cleaned as a unit, or the FPC ribbon can be cleaned independently |
+| "We tear off the keyboard and fit a replacement on screws" | ⚠️ Possible but non-standard | Destructive to original top case; does not guarantee electrical fault resolution; likely more expensive than ultrasonic cleaning |
+
+**The recommended course of action remains ultrasonic cleaning**, directed at a service center that has the equipment and willingness to clean the top-case assembly (Path A above) or at minimum the FPC ribbon cable (Path B). The third service center's approach does not address the identified root cause and introduces new risks.

@@ -193,6 +193,16 @@ The proposed repair method — physically tearing the keyboard panel off the top
 
 5. **Cost-to-benefit ratio.** Replacing just the keyboard panel (torn off + screws) is almost certainly **more expensive than ultrasonic cleaning** of the top case, and arguably more expensive than a full OEM top-case replacement depending on which part is sourced. Ultrasonic cleaning of the existing assembly costs approximately 1/3 of a full keyboard/top-case replacement and leaves all OEM components intact.
 
+   For reference, **OEM top-case assembly pricing** for the MacBook Pro 14" A2918 (M3 Pro, 2023):
+
+   | Channel | Approximate cost (part only, USD) | Notes |
+   |---|---|---|
+   | Third-party / eBay (genuine Apple part) | ~$378 | Genuine Apple part, includes trackpad and battery; pricing and condition vary by seller |
+   | Apple AASP / IRP (out-of-warranty service) | ~$500–$700+ | Includes labour; exact quote varies by provider and region |
+   | AppleCare+ / active Repair Program | Reduced or $0 | If the device is covered; worth checking before any paid repair |
+
+   The non-OEM screws-based keyboard swap falls outside these official channels and the total cost (sourcing a keyboard panel + labour for destructive removal + screw fitting) is unlikely to be cheaper than the ~$378 third-party OEM top-case part, while delivering a lower-quality result.
+
 ### Summary
 
 | Claim | Accuracy | Implication |

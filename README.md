@@ -16,6 +16,7 @@ After waiting, the MacBook did not turn on, so it was taken to a service center.
 | EMC number | EMC 8304 |
 | Logic board | 820-02757 |
 | Processor | Apple M3 Pro (11-core CPU / 14-core GPU) |
+| Color | Space Black |
 | Display | 14.2" Liquid Retina XDR, 3024 × 1964 |
 | Keyboard type | Scissor-switch (Magic Keyboard), integrated into top-case assembly |
 

@@ -40,7 +40,7 @@ This section summarises the key technical details for the technicians performing
 
 ### Device
 
-- **MacBook Pro 14" (M3 Pro, November 2023)**, model A2918, serial MWJPXQ4VC4
+- **MacBook Pro 14" (M3 Pro, November 2023)**, model A2918, serial MWJPXQ4VC4, **Space Black**
 - **Logic board:** 820-02757
 - **Keyboard type:** Scissor-switch (Magic Keyboard), integrated into top-case assembly
 - **Spill substance:** Coca-Cola Zero (contains phosphoric acid, ionic salts/preservatives, artificial sweeteners, caramel-color residue)
